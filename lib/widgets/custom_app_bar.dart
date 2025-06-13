@@ -20,9 +20,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
       width: double.infinity,
       height: 94.0,
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Color(
-            0xFFB3B3B3,
+        border: Border(
+          bottom: BorderSide(
+            width: 1.0,
+            color: Color(
+              0xFFB3B3B3,
+            ).withValues(
+              alpha: 0.3,
+            ),
           ),
         ),
       ),

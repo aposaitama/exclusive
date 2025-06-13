@@ -1,11 +1,10 @@
-import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
 
-class CustomRedButton extends StatelessWidget {
+class CustomTransparentButton extends StatelessWidget {
   final void Function()? onButtonPressed;
   final String buttonTitle;
-  const CustomRedButton(
+  const CustomTransparentButton(
       {super.key, required this.buttonTitle, this.onButtonPressed});
 
   @override
@@ -21,7 +20,13 @@ class CustomRedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             4.0,
           ),
-          color: AppColors.redColor,
+          border: Border.all(
+            width: 1.0,
+            color: Colors.black.withValues(
+              alpha: 0.5,
+            ),
+          ),
+          color: Colors.white,
         ),
         child: Text(
           buttonTitle,

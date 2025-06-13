@@ -1,7 +1,7 @@
 import 'package:exclusive_web/pages/contact_page/%20widgets/contact_form_item.dart';
 import 'package:exclusive_web/pages/contact_page/%20widgets/contact_info_item.dart';
+import 'package:exclusive_web/pages/sections/footer_section.dart';
 import 'package:exclusive_web/widgets/custom_app_bar.dart';
-import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:flutter/material.dart';
 
 class ContactPage extends StatefulWidget {
@@ -24,6 +24,9 @@ class _ContactPageState extends State<ContactPage> {
         child: Column(
           children: [
             CustomAppBar(),
+            SizedBox(
+              height: 80.0,
+            ),
             ConstrainedBox(
               constraints: BoxConstraints(
                 maxWidth: 1170.0,
@@ -45,6 +48,10 @@ class _ContactPageState extends State<ContactPage> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 140.0,
+            ),
+            FooterSection(),
           ],
         ),
       ),

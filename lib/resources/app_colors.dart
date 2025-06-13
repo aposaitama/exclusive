@@ -15,8 +15,8 @@ class AppColors {
   );
   static const Color lightSlider = Color(0xFFB0B4BD);
   static const Color redColor = Color(0xFFDB4444);
+  static const Color gunmetal = Color(0xFFB3B3B3);
 
   static const Color lightGray = Color(0xFFF5F5F5);
-  static const Color charcoal = Color(0xFF32353C);
-  static const Color gunmetal = Color(0xFF4C4C4F);
+  static const Color charcoal = Color(0xFF808080);
 }
