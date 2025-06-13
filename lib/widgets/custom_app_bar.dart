@@ -96,8 +96,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         SizedBox(
                           width: 12.0,
                         ),
-                        SvgPicture.asset(
-                          Assets.icons.cart,
+                        GestureDetector(
+                          onTap: () => context.go(
+                            '/home/cart',
+                          ),
+                          child: SvgPicture.asset(
+                            Assets.icons.cart,
+                          ),
                         ),
                         SizedBox(
                           width: 12.0,

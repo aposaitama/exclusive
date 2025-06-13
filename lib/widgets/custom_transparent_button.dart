@@ -31,7 +31,7 @@ class CustomTransparentButton extends StatelessWidget {
         child: Text(
           buttonTitle,
           style: AppFonts.poppingMedium.copyWith(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 16.0,
           ),
         ),

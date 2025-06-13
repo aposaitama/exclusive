@@ -152,6 +152,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/auth_side.png
+  AssetGenImage get authSide =>
+      const AssetGenImage('assets/images/auth_side.png');
+
   /// File path: assets/images/download_appstore.png
   AssetGenImage get downloadAppstore =>
       const AssetGenImage('assets/images/download_appstore.png');
@@ -173,6 +177,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    authSide,
     downloadAppstore,
     downloadpPlay,
     ourStory,
