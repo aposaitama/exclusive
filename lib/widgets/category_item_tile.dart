@@ -56,11 +56,16 @@ class _CategoryItemTileState extends State<CategoryItemTile> {
           children: [
             SvgPicture.asset(
               Assets.icons.categorySellPhone,
+              colorFilter: ColorFilter.mode(
+                isHover ? Colors.white : Colors.black,
+                BlendMode.srcIn,
+              ),
             ),
             Text(
               widget.categoryTitle,
               style: AppFonts.poppingRegular.copyWith(
                 fontSize: 16.0,
+                color: isHover ? Colors.white : Colors.black,
               ),
             )
           ],

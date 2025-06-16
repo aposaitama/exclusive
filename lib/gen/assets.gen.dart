@@ -51,6 +51,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Icon-secure.svg
   String get iconSecure => 'assets/icons/Icon-secure.svg';
 
+  /// File path: assets/icons/apple_logo.svg
+  String get appleLogo => 'assets/icons/apple_logo.svg';
+
   /// File path: assets/icons/cart.svg
   String get cart => 'assets/icons/cart.svg';
 
@@ -117,12 +120,16 @@ class $AssetsIconsGen {
   /// File path: assets/icons/search.svg
   String get search => 'assets/icons/search.svg';
 
+  /// File path: assets/icons/small_arrow.svg
+  String get smallArrow => 'assets/icons/small_arrow.svg';
+
   /// File path: assets/icons/widhlist.svg
   String get widhlist => 'assets/icons/widhlist.svg';
 
   /// List of all assets
   List<String> get values => [
     iconSecure,
+    appleLogo,
     cart,
     categorySellPhone,
     customer,
@@ -145,12 +152,17 @@ class $AssetsIconsGen {
     quickView,
     sallers,
     search,
+    smallArrow,
     widhlist,
   ];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/apple_logo.png
+  AssetGenImage get appleLogo =>
+      const AssetGenImage('assets/images/apple_logo.png');
 
   /// File path: assets/images/auth_side.png
   AssetGenImage get authSide =>
@@ -164,24 +176,54 @@ class $AssetsImagesGen {
   AssetGenImage get downloadpPlay =>
       const AssetGenImage('assets/images/downloadp_play.png');
 
+  /// File path: assets/images/gucci_promo.png
+  AssetGenImage get gucciPromo =>
+      const AssetGenImage('assets/images/gucci_promo.png');
+
+  /// File path: assets/images/ios_promo.png
+  AssetGenImage get iosPromo =>
+      const AssetGenImage('assets/images/ios_promo.png');
+
+  /// File path: assets/images/jbl.png
+  AssetGenImage get jbl => const AssetGenImage('assets/images/jbl.png');
+
   /// File path: assets/images/our_story.png
   AssetGenImage get ourStory =>
       const AssetGenImage('assets/images/our_story.png');
 
+  /// File path: assets/images/playstation_promo.png
+  AssetGenImage get playstationPromo =>
+      const AssetGenImage('assets/images/playstation_promo.png');
+
+  /// File path: assets/images/speakers_promo.png
+  AssetGenImage get speakersPromo =>
+      const AssetGenImage('assets/images/speakers_promo.png');
+
   /// File path: assets/images/tg_image_1056703926.png
   AssetGenImage get tgImage1056703926 =>
       const AssetGenImage('assets/images/tg_image_1056703926.png');
+
+  /// File path: assets/images/women_promo.png
+  AssetGenImage get womenPromo =>
+      const AssetGenImage('assets/images/women_promo.png');
 
   /// File path: assets/images/xbox.png
   AssetGenImage get xbox => const AssetGenImage('assets/images/xbox.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    appleLogo,
     authSide,
     downloadAppstore,
     downloadpPlay,
+    gucciPromo,
+    iosPromo,
+    jbl,
     ourStory,
+    playstationPromo,
+    speakersPromo,
     tgImage1056703926,
+    womenPromo,
     xbox,
   ];
 }

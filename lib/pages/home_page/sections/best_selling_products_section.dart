@@ -96,7 +96,7 @@ class BestSellingProductsSection extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 70.0,
+            height: 140.0,
           ),
         ],
       ),

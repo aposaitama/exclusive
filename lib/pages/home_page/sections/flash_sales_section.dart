@@ -1,4 +1,5 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/pages/product_details_page/product_details_screen.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/widgets/category_item_tile.dart';
@@ -22,9 +23,6 @@ class FlashSalesSection extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 80.0,
-                  ),
                   Row(
                     children: [
                       Container(
@@ -100,37 +98,29 @@ class FlashSalesSection extends StatelessWidget {
                   SizedBox(
                     height: 40.0,
                   ),
-                  SizedBox(
-                    height: 60.0,
-                  ),
-                  CustomRedButton(
-                    buttonTitle: 'View All Products',
-                  ),
-                  SizedBox(
-                    height: 60.0,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 0.5,
-                    color: Colors.black.withValues(
-                      alpha: 0.3,
-                    ),
-                  )
                 ],
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
+                SizedBox(
                   width: (MediaQuery.of(context).size.width / 2) + 585.0,
                   child: Row(
                     children: [
-                      ProductItemTile(
-                        iconPath: Assets.images.xbox.path,
-                        productName: 'HAVIT HV-G92 Gamepad',
-                        productPrice: 120.0,
-                        productOriginPrice: 160.0,
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ProductDetailsScreen(),
+                          ),
+                        ),
+                        child: ProductItemTile(
+                          iconPath: Assets.images.xbox.path,
+                          productName: 'HAVIT HV-G92 Gamepad',
+                          productPrice: 120.0,
+                          productOriginPrice: 160.0,
+                        ),
                       ),
                       SizedBox(
                         width: 20.0,
@@ -156,6 +146,27 @@ class FlashSalesSection extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 60.0,
+            ),
+            CustomRedButton(
+              buttonTitle: 'View All Products',
+            ),
+            SizedBox(
+              height: 60.0,
+            ),
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 1170.0,
+              ),
+              child: Container(
+                width: double.infinity,
+                height: 0.5,
+                color: Colors.black.withValues(
+                  alpha: 0.3,
+                ),
+              ),
             )
           ],
         ),
