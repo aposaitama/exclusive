@@ -1,4 +1,7 @@
+import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/pages/home_page/widgets/account_popup.dart';
+import 'package:exclusive_web/services/shared_preferences_service/shared_preferences_service.dart';
 import 'package:exclusive_web/widgets/app_bar_text_field.dart';
 import 'package:exclusive_web/widgets/nav_title_item_tile.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,24 @@ class CustomAppBar extends StatefulWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
+  final LayerLink _layerLink = LayerLink();
+  final GlobalKey _avatarKey = GlobalKey();
+  final _sharedPreferencesService = locator<SharedPreferencesService>();
+  bool isAuthenticated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkAuthStatus();
+  }
+
+  Future<void> _checkAuthStatus() async {
+    final userToken = await _sharedPreferencesService.getToken();
+    setState(() {
+      isAuthenticated = userToken != null;
+    });
+  }
+
   final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -107,14 +128,28 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         SizedBox(
                           width: 12.0,
                         ),
-                        GestureDetector(
-                          onTap: () => context.go(
-                            '/home/account',
-                          ),
-                          child: SvgPicture.asset(
-                            Assets.icons.profile,
-                          ),
-                        ),
+                        isAuthenticated
+                            ? CompositedTransformTarget(
+                                link: _layerLink,
+                                child: GestureDetector(
+                                  key: _avatarKey,
+                                  onTap: () => {
+                                    AccountPopup.showProfilePopup(
+                                      context,
+                                      _layerLink,
+                                    )
+                                    // //   context.go(
+                                    // //   '/home/account',
+                                    // // )
+                                    // _sharedPreferencesService.removeToken(),
+                                    // isAuthenticated = false
+                                  },
+                                  child: SvgPicture.asset(
+                                    Assets.icons.profile,
+                                  ),
+                                ),
+                              )
+                            : SizedBox.shrink(),
                       ],
                     )
                   ],

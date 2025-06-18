@@ -1,12 +1,16 @@
-import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 class AuthTextField extends StatefulWidget {
+  final bool isObscure;
   final TextEditingController controller;
   final String hintText;
-  const AuthTextField(
-      {super.key, required this.controller, required this.hintText});
+  const AuthTextField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    this.isObscure = false,
+  });
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();
@@ -16,6 +20,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      obscureText: widget.isObscure,
       style: AppFonts.poppingRegular.copyWith(
         fontSize: 16.0,
         color: Colors.black.withValues(

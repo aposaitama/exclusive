@@ -1,6 +1,6 @@
 import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
-import 'package:exclusive_web/service/navigation_service/navigation_service.dart';
+import 'package:exclusive_web/services/navigation_service/navigation_service.dart';
 import 'package:flutter/widgets.dart';
 
 class NavTitleItemTile extends StatelessWidget {

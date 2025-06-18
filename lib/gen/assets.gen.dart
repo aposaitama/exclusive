@@ -9,6 +9,16 @@
 
 import 'package:flutter/widgets.dart';
 
+class $LibGen {
+  const $LibGen();
+
+  /// File path: lib/api_keys.env
+  String get apiKeys => 'lib/api_keys.env';
+
+  /// List of all assets
+  List<String> get values => [apiKeys];
+}
+
 class $AssetsFontsGen {
   const $AssetsFontsGen();
 
@@ -72,6 +82,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/heart_small.svg
   String get heartSmall => 'assets/icons/heart_small.svg';
 
+  /// File path: assets/icons/icon-Reviews.svg
+  String get iconReviews => 'assets/icons/icon-Reviews.svg';
+
   /// File path: assets/icons/icon-copyright.svg
   String get iconCopyright => 'assets/icons/icon-copyright.svg';
 
@@ -89,6 +102,12 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/icon-linkedin.svg
   String get iconLinkedin => 'assets/icons/icon-linkedin.svg';
+
+  /// File path: assets/icons/icon-logout.svg
+  String get iconLogout => 'assets/icons/icon-logout.svg';
+
+  /// File path: assets/icons/icon-mallbag.svg
+  String get iconMallbag => 'assets/icons/icon-mallbag.svg';
 
   /// File path: assets/icons/icon-twitter.svg
   String get iconTwitter => 'assets/icons/icon-twitter.svg';
@@ -136,12 +155,15 @@ class $AssetsIconsGen {
     exclusiveLogo,
     goals,
     heartSmall,
+    iconReviews,
     iconCopyright,
     iconCustomerService,
     iconDelivery,
     iconFacebook,
     iconInstagram,
     iconLinkedin,
+    iconLogout,
+    iconMallbag,
     iconTwitter,
     iconsArrowLeft,
     iconsMail,
@@ -234,6 +256,7 @@ class Assets {
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $LibGen lib = $LibGen();
 }
 
 class AssetGenImage {

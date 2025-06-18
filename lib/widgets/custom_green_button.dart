@@ -10,24 +10,27 @@ class CustomGreenButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onButtonPressed,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 48.0,
-          vertical: 16.0,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            4.0,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onButtonPressed,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 48.0,
+            vertical: 16.0,
           ),
-          color: AppColors.greenColor,
-        ),
-        child: Text(
-          buttonTitle,
-          style: AppFonts.poppingMedium.copyWith(
-            color: Colors.white,
-            fontSize: 16.0,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              4.0,
+            ),
+            color: AppColors.greenColor,
+          ),
+          child: Text(
+            buttonTitle,
+            style: AppFonts.poppingMedium.copyWith(
+              color: Colors.white,
+              fontSize: 16.0,
+            ),
           ),
         ),
       ),
