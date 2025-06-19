@@ -8,12 +8,14 @@ class ContactFormItem extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController phoneController;
   final TextEditingController messageController;
+  final void Function()? onButtonPressed;
   const ContactFormItem({
     super.key,
     required this.nameController,
     required this.emailController,
     required this.phoneController,
     required this.messageController,
+    this.onButtonPressed,
   });
 
   @override
@@ -60,7 +62,7 @@ class ContactFormItem extends StatelessWidget {
               Expanded(
                 child: CustomTextField(
                   hintText: 'Your Email',
-                  controller: nameController,
+                  controller: emailController,
                 ),
               ),
               SizedBox(
@@ -69,7 +71,7 @@ class ContactFormItem extends StatelessWidget {
               Expanded(
                 child: CustomTextField(
                   hintText: 'Your Phone',
-                  controller: nameController,
+                  controller: phoneController,
                 ),
               )
             ],
@@ -89,6 +91,7 @@ class ContactFormItem extends StatelessWidget {
             child: SizedBox(
               width: 220.0,
               child: CustomRedButton(
+                onButtonPressed: onButtonPressed,
                 buttonTitle: 'Send Massage',
               ),
             ),

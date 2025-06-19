@@ -1,4 +1,3 @@
-import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/pages/home_page/widgets/remaining_time_item_tile.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';

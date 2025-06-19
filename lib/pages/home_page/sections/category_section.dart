@@ -1,12 +1,15 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/models/category_light_model/category_light_model.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
+import 'package:exclusive_web/utils/extensions.dart';
 import 'package:exclusive_web/widgets/category_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CategorySection extends StatelessWidget {
-  const CategorySection({super.key});
+  final List<CategoryLightModel> categories;
+  const CategorySection({super.key, required this.categories});
 
   @override
   Widget build(BuildContext context) {
@@ -94,9 +97,22 @@ class CategorySection extends StatelessWidget {
           SizedBox(
             height: 60.0,
           ),
-          CategoryItemTile(
-            iconPath: Assets.icons.categorySellPhone,
-            categoryTitle: 'Phones',
+          SizedBox(
+            height: 145.0,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              separatorBuilder: (_, __) => SizedBox(
+                width: 30.0,
+              ),
+              itemBuilder: (context, index) {
+                final category = categories[index];
+                return CategoryItemTile(
+                  iconPath: category.categoryIcon.url.toImageUrl(),
+                  categoryTitle: category.categoryName,
+                );
+              },
+            ),
           ),
           SizedBox(
             height: 70.0,

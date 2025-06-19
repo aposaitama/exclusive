@@ -2,7 +2,6 @@ import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/utils/scroll_behavior_helper.dart';
-import 'package:exclusive_web/widgets/custom_green_button.dart';
 import 'package:exclusive_web/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

@@ -1,16 +1,25 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
 import 'package:exclusive_web/pages/product_details_page/product_details_screen.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
-import 'package:exclusive_web/widgets/category_item_tile.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:exclusive_web/widgets/product_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class FlashSalesSection extends StatelessWidget {
-  const FlashSalesSection({super.key});
+class FlashSalesSection extends StatefulWidget {
+  final List<ProductLightModel> flashSalesProducts;
+  const FlashSalesSection({
+    super.key,
+    required this.flashSalesProducts,
+  });
 
+  @override
+  State<FlashSalesSection> createState() => _FlashSalesSectionState();
+}
+
+class _FlashSalesSectionState extends State<FlashSalesSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -105,44 +114,70 @@ class FlashSalesSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SizedBox(
+                  height: 350.0,
                   width: (MediaQuery.of(context).size.width / 2) + 585.0,
-                  child: Row(
-                    children: [
-                      GestureDetector(
+                  child:
+                      // Row(
+                      //   children: [
+                      //     GestureDetector(
+                      //       onTap: () => Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //           builder: (context) => const ProductDetailsScreen(),
+                      //         ),
+                      //       ),
+                      //       child: ProductItemTile(
+                      //         iconPath: Assets.images.xbox.path,
+                      //         productName: 'HAVIT HV-G92 Gamepad',
+                      //         productPrice: 120.0,
+                      //         productOriginPrice: 160.0,
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       width: 20.0,
+                      //     ),
+                      //     ProductItemTile(
+                      //       iconPath: Assets.images.xbox.path,
+                      //       productName: 'HAVIT HV-G92 Gamepad',
+                      //       productPrice: 120.0,
+                      //       productSalePercent: 40.0,
+                      //     ),
+                      //     SizedBox(
+                      //       width: 20.0,
+                      //     ),
+                      //     ProductItemTile(
+                      //       iconPath: Assets.images.xbox.path,
+                      //       productName: 'HAVIT HV-G92 Gamepad',
+                      //       productPrice: 120.0,
+                      //     ),
+                      //     SizedBox(
+                      //       width: 20.0,
+                      //     ),
+                      //   ],
+                      // ),
+                      ListView.separated(
+                    // controller: _scrollController,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.flashSalesProducts.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 20.0),
+                    itemBuilder: (context, index) {
+                      final product = widget.flashSalesProducts[index];
+                      return GestureDetector(
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ProductDetailsScreen(),
+                            builder: (_) => const ProductDetailsScreen(),
                           ),
                         ),
                         child: ProductItemTile(
-                          iconPath: Assets.images.xbox.path,
-                          productName: 'HAVIT HV-G92 Gamepad',
-                          productPrice: 120.0,
-                          productOriginPrice: 160.0,
+                          productColor: product.product_colors,
+                          productName: product.productName,
+                          productPrice: product.productPrice,
+                          productOriginPrice: product.productOriginPrice,
+                          productSalePercent: product.salePercent,
                         ),
-                      ),
-                      SizedBox(
-                        width: 20.0,
-                      ),
-                      ProductItemTile(
-                        iconPath: Assets.images.xbox.path,
-                        productName: 'HAVIT HV-G92 Gamepad',
-                        productPrice: 120.0,
-                        productSalePercent: 40.0,
-                      ),
-                      SizedBox(
-                        width: 20.0,
-                      ),
-                      ProductItemTile(
-                        iconPath: Assets.images.xbox.path,
-                        productName: 'HAVIT HV-G92 Gamepad',
-                        productPrice: 120.0,
-                      ),
-                      SizedBox(
-                        width: 20.0,
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
               ],

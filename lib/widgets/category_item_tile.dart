@@ -54,8 +54,8 @@ class _CategoryItemTileState extends State<CategoryItemTile> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              Assets.icons.categorySellPhone,
+            SvgPicture.network(
+              widget.iconPath,
               colorFilter: ColorFilter.mode(
                 isHover ? Colors.white : Colors.black,
                 BlendMode.srcIn,

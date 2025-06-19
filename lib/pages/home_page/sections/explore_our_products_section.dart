@@ -1,15 +1,26 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
+import 'package:exclusive_web/pages/product_details_page/product_details_screen.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
-import 'package:exclusive_web/widgets/category_item_tile.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:exclusive_web/widgets/product_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ExploreOurProductsSection extends StatelessWidget {
-  const ExploreOurProductsSection({super.key});
+class ExploreOurProductsSection extends StatefulWidget {
+  final List<ProductLightModel> ourProducts;
+  const ExploreOurProductsSection({
+    super.key,
+    required this.ourProducts,
+  });
 
+  @override
+  State<ExploreOurProductsSection> createState() =>
+      _ExploreOurProductsSectionState();
+}
+
+class _ExploreOurProductsSectionState extends State<ExploreOurProductsSection> {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -96,36 +107,71 @@ class ExploreOurProductsSection extends StatelessWidget {
           SizedBox(
             height: 60.0,
           ),
-          Row(
-            children: [
-              ProductItemTile(
-                iconPath: Assets.images.xbox.path,
-                productName: 'HAVIT HV-G92 Gamepad',
-                productPrice: 120.0,
-                productOriginPrice: 160.0,
+          // Row(
+          //   children: [
+          //     ProductItemTile(
+          //       iconPath: Assets.images.xbox.path,
+          //       productName: 'HAVIT HV-G92 Gamepad',
+          //       productPrice: 120.0,
+          //       productOriginPrice: 160.0,
+          //     ),
+          //     SizedBox(
+          //       width: 20.0,
+          //     ),
+          //     ProductItemTile(
+          //       iconPath: Assets.images.xbox.path,
+          //       productName: 'HAVIT HV-G92 Gamepad',
+          //       productPrice: 120.0,
+          //       productSalePercent: 40.0,
+          //     ),
+          //     SizedBox(
+          //       width: 20.0,
+          //     ),
+          //     ProductItemTile(
+          //       iconPath: Assets.images.xbox.path,
+          //       productName: 'HAVIT HV-G92 Gamepad',
+          //       productPrice: 120.0,
+          //     ),
+          //     SizedBox(
+          //       width: 20.0,
+          //     ),
+          //   ],
+          // ),
+          SizedBox(
+            height: 760.0,
+            child: GridView.builder(
+              padding: EdgeInsets.all(
+                0.0,
               ),
-              SizedBox(
-                width: 20.0,
+              scrollDirection: Axis.horizontal,
+              itemCount: widget.ourProducts.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 60.0,
+                crossAxisSpacing: 0.0,
+                childAspectRatio: 350 / 270,
               ),
-              ProductItemTile(
-                iconPath: Assets.images.xbox.path,
-                productName: 'HAVIT HV-G92 Gamepad',
-                productPrice: 120.0,
-                productSalePercent: 40.0,
-              ),
-              SizedBox(
-                width: 20.0,
-              ),
-              ProductItemTile(
-                iconPath: Assets.images.xbox.path,
-                productName: 'HAVIT HV-G92 Gamepad',
-                productPrice: 120.0,
-              ),
-              SizedBox(
-                width: 20.0,
-              ),
-            ],
+              itemBuilder: (context, index) {
+                final product = widget.ourProducts[index];
+                return GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ProductDetailsScreen(),
+                    ),
+                  ),
+                  child: ProductItemTile(
+                    productColor: product.product_colors,
+                    productName: product.productName,
+                    productPrice: product.productPrice,
+                    productOriginPrice: product.productOriginPrice,
+                    productSalePercent: product.salePercent,
+                  ),
+                );
+              },
+            ),
           ),
+
           SizedBox(
             height: 60.0,
           ),

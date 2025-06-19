@@ -1,22 +1,26 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/models/product_color_model/product_color_model.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
+import 'package:exclusive_web/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ProductItemTile extends StatefulWidget {
-  final String iconPath;
+  // final String iconPath;
   final String productName;
   final double productPrice;
   final double? productOriginPrice;
   final double? productSalePercent;
+  final List<ProductColorModel> productColor;
   const ProductItemTile({
     super.key,
-    required this.iconPath,
+    // required this.iconPath,
     required this.productName,
     required this.productPrice,
     this.productOriginPrice,
     this.productSalePercent,
+    required this.productColor,
   });
 
   @override
@@ -33,12 +37,16 @@ class _ProductItemTileState extends State<ProductItemTile> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MouseRegion(
-            onEnter: (event) => setState(() {
-              openCartButton = true;
-            }),
-            onExit: (event) => setState(() {
-              openCartButton = false;
-            }),
+            onEnter: (event) => setState(
+              () {
+                openCartButton = true;
+              },
+            ),
+            onExit: (event) => setState(
+              () {
+                openCartButton = false;
+              },
+            ),
             child: Container(
               decoration: BoxDecoration(
                 color: AppColors.lightGray,
@@ -51,8 +59,14 @@ class _ProductItemTileState extends State<ProductItemTile> {
               child: Stack(
                 children: [
                   Center(
-                    child: Image.asset(
-                      widget.iconPath,
+                    child: SizedBox(
+                      width: 190.0,
+                      height: 180.0,
+                      child: Image.network(
+                        fit: BoxFit.scaleDown,
+                        widget.productColor.first.mainProductImage.url
+                            .toImageUrl(),
+                      ),
                     ),
                   ),
                   Padding(

@@ -4,6 +4,11 @@ import 'package:exclusive_web/navigation/app_router.dart';
 import 'package:exclusive_web/navigation/cubit/navigation_cubit.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/bloc/register_bloc/register_bloc.dart';
+import 'package:exclusive_web/pages/contact_page/bloc/contact_bloc/contact_bloc.dart';
+import 'package:exclusive_web/pages/home_page/bloc/best_selling_bloc/best_selling_bloc.dart';
+import 'package:exclusive_web/pages/home_page/bloc/categories_bloc/categories_bloc.dart';
+import 'package:exclusive_web/pages/home_page/bloc/flash_sales_bloc/flash_sales_bloc.dart';
+import 'package:exclusive_web/pages/home_page/bloc/our_product_bloc/our_product_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -22,6 +27,21 @@ void main() async {
       ),
       BlocProvider(
         create: (context) => LoginBloc(),
+      ),
+      BlocProvider(
+        create: (context) => CategoriesBloc(),
+      ),
+      BlocProvider(
+        create: (context) => FlashSalesBloc(),
+      ),
+      BlocProvider(
+        create: (context) => BestSellingBloc(),
+      ),
+      BlocProvider(
+        create: (context) => OurProductBloc(),
+      ),
+      BlocProvider(
+        create: (context) => ContactBloc(),
       ),
       BlocProvider(
         create: (context) => NavigationCubit(),
