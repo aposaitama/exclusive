@@ -58,6 +58,9 @@ class $AssetsFontsGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Icon-return.svg
+  String get iconReturn => 'assets/icons/Icon-return.svg';
+
   /// File path: assets/icons/Icon-secure.svg
   String get iconSecure => 'assets/icons/Icon-secure.svg';
 
@@ -147,6 +150,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<String> get values => [
+    iconReturn,
     iconSecure,
     appleLogo,
     cart,

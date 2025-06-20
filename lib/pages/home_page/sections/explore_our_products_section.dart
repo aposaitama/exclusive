@@ -157,7 +157,9 @@ class _ExploreOurProductsSectionState extends State<ExploreOurProductsSection> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const ProductDetailsScreen(),
+                      builder: (_) => const ProductDetailsScreen(
+                        productId: '1',
+                      ),
                     ),
                   ),
                   child: ProductItemTile(

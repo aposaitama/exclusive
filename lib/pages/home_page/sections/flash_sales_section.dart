@@ -166,7 +166,9 @@ class _FlashSalesSectionState extends State<FlashSalesSection> {
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const ProductDetailsScreen(),
+                            builder: (_) => const ProductDetailsScreen(
+                              productId: '1',
+                            ),
                           ),
                         ),
                         child: ProductItemTile(

@@ -6,6 +6,7 @@ import 'package:exclusive_web/pages/auth_page/register_page/register_page.dart';
 import 'package:exclusive_web/pages/cart_page/cart_page.dart';
 import 'package:exclusive_web/pages/contact_page/contact_page.dart';
 import 'package:exclusive_web/pages/home_page/home_page.dart';
+import 'package:exclusive_web/pages/product_details_page/product_details_screen.dart';
 import 'package:exclusive_web/pages/root_page/root_page.dart';
 import 'package:exclusive_web/services/navigation_service/navigation_service.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,9 @@ class LoginRoute extends GoRouteData {
           ),
           TypedGoRoute<AccountRoute>(
             path: 'account',
+          ),
+          TypedGoRoute<ProductDetailsRoute>(
+            path: 'product/:id',
           ),
         ]),
       ],
@@ -162,6 +166,17 @@ class SignUpRoute extends GoRouteData {
     GoRouterState state,
   ) =>
       const RegisterPage();
+}
+
+class ProductDetailsRoute extends GoRouteData {
+  final String id;
+
+  const ProductDetailsRoute({required this.id});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return ProductDetailsScreen(productId: id);
+  }
 }
 
 // class ContactRoute extends GoRouteData {

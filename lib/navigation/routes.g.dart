@@ -50,6 +50,10 @@ RouteBase get $rootShellRoute => StatefulShellRouteData.$route(
                   path: 'account',
                   factory: $AccountRouteExtension._fromState,
                 ),
+                GoRouteData.$route(
+                  path: 'product/:id',
+                  factory: $ProductDetailsRouteExtension._fromState,
+                ),
               ],
             ),
           ],
@@ -125,6 +129,26 @@ extension $AccountRouteExtension on AccountRoute {
 
   String get location => GoRouteData.$location(
         '/home/account',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ProductDetailsRouteExtension on ProductDetailsRoute {
+  static ProductDetailsRoute _fromState(GoRouterState state) =>
+      ProductDetailsRoute(
+        id: state.pathParameters['id']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/home/product/${Uri.encodeComponent(id)}',
       );
 
   void go(BuildContext context) => context.go(location);
