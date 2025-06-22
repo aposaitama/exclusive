@@ -5,11 +5,14 @@ import 'package:exclusive_web/pages/auth_page/login_page/login_page.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/register_page.dart';
 import 'package:exclusive_web/pages/cart_page/cart_page.dart';
 import 'package:exclusive_web/pages/contact_page/contact_page.dart';
+import 'package:exclusive_web/pages/favourite_page/favourite_page.dart';
 import 'package:exclusive_web/pages/home_page/home_page.dart';
+import 'package:exclusive_web/pages/product_details_page/bloc/product_details_bloc/product_details_bloc.dart';
 import 'package:exclusive_web/pages/product_details_page/product_details_screen.dart';
 import 'package:exclusive_web/pages/root_page/root_page.dart';
 import 'package:exclusive_web/services/navigation_service/navigation_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 part 'routes.g.dart';
@@ -29,6 +32,16 @@ class LoginRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const LoginPage();
+  }
+}
+
+@TypedGoRoute<FavouriteRoute>(path: '/favourite')
+class FavouriteRoute extends GoRouteData {
+  const FavouriteRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const FavouritePage();
   }
 }
 
@@ -175,7 +188,12 @@ class ProductDetailsRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ProductDetailsScreen(productId: id);
+    return BlocProvider(
+      create: (context) => ProductDetailsBloc(),
+      child: ProductDetailsScreen(
+        productId: id,
+      ),
+    );
   }
 }
 

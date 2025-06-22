@@ -7,6 +7,7 @@ part 'product_color_model.g.dart';
 @freezed
 class ProductColorModel with _$ProductColorModel {
   const factory ProductColorModel({
+    required int id,
     required String colorCode,
     required ImageModel mainProductImage,
     required List<ImageModel> galleryProductImages,

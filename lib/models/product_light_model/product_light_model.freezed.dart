@@ -20,6 +20,8 @@ ProductLightModel _$ProductLightModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductLightModel {
+  int get id => throw _privateConstructorUsedError;
+  String get documentId => throw _privateConstructorUsedError;
   String get productName => throw _privateConstructorUsedError;
   double get productPrice => throw _privateConstructorUsedError;
   double? get productOriginPrice => throw _privateConstructorUsedError;
@@ -47,7 +49,9 @@ abstract class $ProductLightModelCopyWith<$Res> {
       _$ProductLightModelCopyWithImpl<$Res, ProductLightModel>;
   @useResult
   $Res call(
-      {String productName,
+      {int id,
+      String documentId,
+      String productName,
       double productPrice,
       double? productOriginPrice,
       int ratingCount,
@@ -72,6 +76,8 @@ class _$ProductLightModelCopyWithImpl<$Res, $Val extends ProductLightModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? documentId = null,
     Object? productName = null,
     Object? productPrice = null,
     Object? productOriginPrice = freezed,
@@ -82,6 +88,14 @@ class _$ProductLightModelCopyWithImpl<$Res, $Val extends ProductLightModel>
     Object? product_colors = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      documentId: null == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String,
       productName: null == productName
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
@@ -127,7 +141,9 @@ abstract class _$$ProductLightModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String productName,
+      {int id,
+      String documentId,
+      String productName,
       double productPrice,
       double? productOriginPrice,
       int ratingCount,
@@ -150,6 +166,8 @@ class __$$ProductLightModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? documentId = null,
     Object? productName = null,
     Object? productPrice = null,
     Object? productOriginPrice = freezed,
@@ -160,6 +178,14 @@ class __$$ProductLightModelImplCopyWithImpl<$Res>
     Object? product_colors = null,
   }) {
     return _then(_$ProductLightModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      documentId: null == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String,
       productName: null == productName
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
@@ -200,7 +226,9 @@ class __$$ProductLightModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductLightModelImpl implements _ProductLightModel {
   const _$ProductLightModelImpl(
-      {required this.productName,
+      {required this.id,
+      required this.documentId,
+      required this.productName,
       required this.productPrice,
       this.productOriginPrice,
       required this.ratingCount,
@@ -213,6 +241,10 @@ class _$ProductLightModelImpl implements _ProductLightModel {
   factory _$ProductLightModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductLightModelImplFromJson(json);
 
+  @override
+  final int id;
+  @override
+  final String documentId;
   @override
   final String productName;
   @override
@@ -237,7 +269,7 @@ class _$ProductLightModelImpl implements _ProductLightModel {
 
   @override
   String toString() {
-    return 'ProductLightModel(productName: $productName, productPrice: $productPrice, productOriginPrice: $productOriginPrice, ratingCount: $ratingCount, totalRating: $totalRating, salePercent: $salePercent, saleCount: $saleCount, product_colors: $product_colors)';
+    return 'ProductLightModel(id: $id, documentId: $documentId, productName: $productName, productPrice: $productPrice, productOriginPrice: $productOriginPrice, ratingCount: $ratingCount, totalRating: $totalRating, salePercent: $salePercent, saleCount: $saleCount, product_colors: $product_colors)';
   }
 
   @override
@@ -245,6 +277,9 @@ class _$ProductLightModelImpl implements _ProductLightModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductLightModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.documentId, documentId) ||
+                other.documentId == documentId) &&
             (identical(other.productName, productName) ||
                 other.productName == productName) &&
             (identical(other.productPrice, productPrice) ||
@@ -267,6 +302,8 @@ class _$ProductLightModelImpl implements _ProductLightModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
+      documentId,
       productName,
       productPrice,
       productOriginPrice,
@@ -295,7 +332,9 @@ class _$ProductLightModelImpl implements _ProductLightModel {
 
 abstract class _ProductLightModel implements ProductLightModel {
   const factory _ProductLightModel(
-          {required final String productName,
+          {required final int id,
+          required final String documentId,
+          required final String productName,
           required final double productPrice,
           final double? productOriginPrice,
           required final int ratingCount,
@@ -308,6 +347,10 @@ abstract class _ProductLightModel implements ProductLightModel {
   factory _ProductLightModel.fromJson(Map<String, dynamic> json) =
       _$ProductLightModelImpl.fromJson;
 
+  @override
+  int get id;
+  @override
+  String get documentId;
   @override
   String get productName;
   @override

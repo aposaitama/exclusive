@@ -1,23 +1,24 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/models/product_color_model/product_color_model.dart';
+import 'package:exclusive_web/models/product_detailed_model/product_detailed_model.dart';
+import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc.dart';
+import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc_event.dart';
+import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc.dart';
+import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc_state.dart';
+import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_event_bloc.dart';
 import 'package:exclusive_web/pages/product_details_page/sections/product_details_section/widgets/delivery_information_widget.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/utils/extensions.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ProductDetailsSection extends StatefulWidget {
-  final double productPrice;
-  final List<ProductColorModel> productColors;
-  final List<String>? productSizeList;
+  final ProductDetailedModel productDetailedInfo;
 
-  const ProductDetailsSection(
-      {super.key,
-      required this.productColors,
-      this.productSizeList,
-      required this.productPrice});
+  const ProductDetailsSection({super.key, required this.productDetailedInfo});
 
   @override
   State<ProductDetailsSection> createState() => _ProductDetailsSectionState();
@@ -25,14 +26,17 @@ class ProductDetailsSection extends StatefulWidget {
 
 class _ProductDetailsSectionState extends State<ProductDetailsSection> {
   late ProductColorModel selectedColor;
-  late String? selectedSize;
+  String? selectedSize;
   int quantity = 1;
 
   @override
   void initState() {
-    selectedColor = widget.productColors.first;
-    if (widget.productSizeList != null && widget.productSizeList!.isNotEmpty) {
-      selectedSize = widget.productSizeList!.first;
+    if (widget.productDetailedInfo.product_colors.isNotEmpty) {
+      selectedColor = widget.productDetailedInfo.product_colors.first;
+    }
+    if (widget.productDetailedInfo.productSizeList != null &&
+        widget.productDetailedInfo.productSizeList!.isNotEmpty) {
+      selectedSize = widget.productDetailedInfo.productSizeList!.first.size;
     }
     super.initState();
   }
@@ -113,7 +117,7 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Havic HV G-92 Gamepad',
+                                      widget.productDetailedInfo.productName,
                                       style: AppFonts.poppingSemiBold.copyWith(
                                         fontSize: 24.0,
                                       ),
@@ -128,7 +132,7 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                                 height: 16.0,
                               ),
                               Text(
-                                '\$${widget.productPrice.toString()}',
+                                '\$${widget.productDetailedInfo.productPrice.toString()}',
                                 style: AppFonts.poppingRegular.copyWith(
                                   fontSize: 24.0,
                                 ),
@@ -144,7 +148,8 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                                         right: 27.0,
                                       ),
                                       child: Text(
-                                        'PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.',
+                                        widget.productDetailedInfo
+                                            .productDescription,
                                         style: AppFonts.poppingRegular.copyWith(
                                           fontSize: 14.0,
                                         ),
@@ -179,7 +184,8 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                                   SizedBox(
                                     width: 24.0,
                                   ),
-                                  ...widget.productColors.map((color) {
+                                  ...widget.productDetailedInfo.product_colors
+                                      .map((color) {
                                     final isSelected = color == selectedColor;
 
                                     return GestureDetector(
@@ -236,7 +242,8 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                               SizedBox(
                                 height: 30.0,
                               ),
-                              if (widget.productSizeList != null)
+                              if (widget.productDetailedInfo.productSizeList !=
+                                  null)
                                 Row(
                                   children: [
                                     Text(
@@ -248,8 +255,11 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                                     SizedBox(
                                       width: 24.0,
                                     ),
-                                    ...widget.productSizeList!.map(
-                                      (size) {
+                                    ...widget
+                                        .productDetailedInfo.productSizeList!
+                                        .map(
+                                      (productSizeModel) {
+                                        final size = productSizeModel.size;
                                         final isSelected = selectedSize == size;
 
                                         return GestureDetector(
@@ -307,29 +317,69 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                               Row(
                                 children: [
                                   CustomRedButton(
+                                    onButtonPressed: () =>
+                                        context.read<CartBloc>().add(
+                                              AddProductToCartlistEvent(
+                                                widget.productDetailedInfo.id
+                                                    .toString(),
+                                                selectedColor.id.toString(),
+                                                quantity,
+                                              ),
+                                            ),
                                     buttonTitle: 'Buy Now',
                                   ),
                                   SizedBox(
                                     width: 19.0,
                                   ),
-                                  Container(
-                                    width: 40.0,
-                                    height: 40.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                        4.0,
-                                      ),
-                                      border: Border.all(
-                                        width: 1.0,
-                                        color: Colors.black.withValues(
-                                          alpha: 0.5,
+                                  BlocBuilder<FavouriteBloc,
+                                      FavouriteBlocState>(
+                                    builder: (context, state) {
+                                      final isFavourite =
+                                          state.productsList.any(
+                                        (product) =>
+                                            product.id.toString() ==
+                                            widget.productDetailedInfo.id
+                                                .toString(),
+                                      );
+                                      return GestureDetector(
+                                        onTap: () => !isFavourite
+                                            ? context.read<FavouriteBloc>().add(
+                                                  AddProductToWishlistEvent(
+                                                    widget
+                                                        .productDetailedInfo.id
+                                                        .toString(),
+                                                  ),
+                                                )
+                                            : context.read<FavouriteBloc>().add(
+                                                  RemoveProductFromWishlistEvent(
+                                                    widget
+                                                        .productDetailedInfo.id
+                                                        .toString(),
+                                                  ),
+                                                ),
+                                        child: Container(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              4.0,
+                                            ),
+                                            border: Border.all(
+                                              width: 1.0,
+                                              color: Colors.black.withValues(
+                                                alpha: 0.5,
+                                              ),
+                                            ),
+                                          ),
+                                          child: SvgPicture.asset(
+                                            isFavourite
+                                                ? Assets.icons.iconDelete
+                                                : Assets.icons.heartSmall,
+                                            fit: BoxFit.scaleDown,
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    child: SvgPicture.asset(
-                                      Assets.icons.heartSmall,
-                                      fit: BoxFit.scaleDown,
-                                    ),
+                                      );
+                                    },
                                   )
                                 ],
                               )

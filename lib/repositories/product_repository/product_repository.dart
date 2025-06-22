@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:exclusive_web/di/service_locator.dart';
+import 'package:exclusive_web/models/product_detailed_model/product_detailed_model.dart';
 import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
 import 'package:exclusive_web/utils/extensions.dart';
 
@@ -65,6 +66,98 @@ class ProductRepository {
               (json) => ProductLightModel.fromJson(
                 json as Map<String, dynamic>,
               ),
+            )
+            .toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ProductDetailedModel?> fetchDetailedProductInfo(
+    String productId,
+  ) async {
+    try {
+      final url =
+          '/products/$productId?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage';
+
+      final response = await _dio.get(url);
+
+      if (response.isSuccess) {
+        final data = response.data['data'] as Map<String, dynamic>?;
+
+        if (data != null && data.isNotEmpty) {
+          return ProductDetailedModel.fromJson(data);
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ProductLightModel?> fetchConcreteProductById(String productId) async {
+    try {
+      final queryParameters = <String, dynamic>{};
+
+      queryParameters['filters[id][\$in][0]'] = productId;
+
+      queryParameters['populate'] = 'product_colors.mainProductImage';
+      queryParameters['populate[]'] = 'product_colors.galleryProductImages';
+
+      final uri =
+          Uri.parse('/products').replace(queryParameters: queryParameters);
+
+      final response = await _dio.get(uri.toString());
+
+      if (response.isSuccess) {
+        final dataList = response.data['data'] as List;
+
+        if (dataList.isNotEmpty) {
+          return ProductLightModel.fromJson(
+              dataList.first as Map<String, dynamic>);
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductLightModel>> fetchProductsByIds(
+      List<String> productIds) async {
+    if (productIds.isEmpty) return [];
+
+    try {
+      final queryParameters = <String, dynamic>{};
+
+      for (int i = 0; i < productIds.length; i++) {
+        queryParameters['filters[id][\$in][$i]'] = productIds[i];
+      }
+
+      // Додаємо параметри для populate
+      queryParameters['populate'] = 'product_colors.mainProductImage';
+      queryParameters['populate[]'] = 'product_colors.galleryProductImages';
+
+      // Формуємо повний URL з параметрами
+      final uri =
+          Uri.parse('/products').replace(queryParameters: queryParameters);
+
+      final response = await _dio.get(uri.toString());
+
+      if (response.isSuccess) {
+        return (response.data['data'] as List)
+            .map(
+              (json) =>
+                  ProductLightModel.fromJson(json as Map<String, dynamic>),
             )
             .toList();
       } else {

@@ -1,10 +1,16 @@
 import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc.dart';
+import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc_state.dart';
+import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc.dart';
+import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc_state.dart';
 import 'package:exclusive_web/pages/home_page/widgets/account_popup.dart';
+import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/services/shared_preferences_service/shared_preferences_service.dart';
 import 'package:exclusive_web/widgets/app_bar_text_field.dart';
 import 'package:exclusive_web/widgets/nav_title_item_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -111,19 +117,94 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         SizedBox(
                           width: 24.0,
                         ),
-                        SvgPicture.asset(
-                          Assets.icons.widhlist,
+                        BlocBuilder<FavouriteBloc, FavouriteBlocState>(
+                          builder: (context, state) {
+                            int productInWishlist = state.productsList.length;
+                            return GestureDetector(
+                              onTap: () => context.go(
+                                '/favourite',
+                              ),
+                              child: SizedBox(
+                                width: 32.0,
+                                height: 32.0,
+                                child: Stack(
+                                  children: [
+                                    SvgPicture.asset(
+                                      Assets.icons.widhlist,
+                                    ),
+                                    if (productInWishlist > 0)
+                                      Align(
+                                        alignment: Alignment.topRight,
+                                        child: Container(
+                                          width: 16.0,
+                                          height: 16.0,
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              '$productInWishlist',
+                                              style: AppFonts.poppingRegular
+                                                  .copyWith(
+                                                fontSize: 12.0,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         ),
                         SizedBox(
                           width: 12.0,
                         ),
-                        GestureDetector(
-                          onTap: () => context.go(
-                            '/home/cart',
-                          ),
-                          child: SvgPicture.asset(
-                            Assets.icons.cart,
-                          ),
+                        BlocBuilder<CartBloc, CartBlocState>(
+                          builder: (context, state) {
+                            int productInCartlist = state.productsList.length;
+                            return GestureDetector(
+                              onTap: () => context.go(
+                                '/home/cart',
+                              ),
+                              child: SizedBox(
+                                width: 32.0,
+                                height: 32.0,
+                                child: Stack(
+                                  children: [
+                                    SvgPicture.asset(
+                                      Assets.icons.cart,
+                                    ),
+                                    if (productInCartlist > 0)
+                                      Align(
+                                        alignment: Alignment.topRight,
+                                        child: Container(
+                                          width: 16.0,
+                                          height: 16.0,
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              '$productInCartlist',
+                                              style: AppFonts.poppingRegular
+                                                  .copyWith(
+                                                fontSize: 12.0,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         ),
                         SizedBox(
                           width: 12.0,

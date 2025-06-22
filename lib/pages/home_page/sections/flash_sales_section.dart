@@ -7,6 +7,7 @@ import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:exclusive_web/widgets/product_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class FlashSalesSection extends StatefulWidget {
   final List<ProductLightModel> flashSalesProducts;
@@ -162,22 +163,11 @@ class _FlashSalesSectionState extends State<FlashSalesSection> {
                     separatorBuilder: (_, __) => const SizedBox(width: 20.0),
                     itemBuilder: (context, index) {
                       final product = widget.flashSalesProducts[index];
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const ProductDetailsScreen(
-                              productId: '1',
-                            ),
-                          ),
-                        ),
-                        child: ProductItemTile(
-                          productColor: product.product_colors,
-                          productName: product.productName,
-                          productPrice: product.productPrice,
-                          productOriginPrice: product.productOriginPrice,
-                          productSalePercent: product.salePercent,
-                        ),
+                      return ProductItemTile(
+                        onProductImageTap: () {
+                          context.go('/home/product/${product.documentId}');
+                        },
+                        product: product,
                       );
                     },
                   ),

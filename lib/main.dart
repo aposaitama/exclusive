@@ -4,7 +4,9 @@ import 'package:exclusive_web/navigation/app_router.dart';
 import 'package:exclusive_web/navigation/cubit/navigation_cubit.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/bloc/register_bloc/register_bloc.dart';
+import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc.dart';
 import 'package:exclusive_web/pages/contact_page/bloc/contact_bloc/contact_bloc.dart';
+import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/best_selling_bloc/best_selling_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/categories_bloc/categories_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/flash_sales_bloc/flash_sales_bloc.dart';
@@ -18,6 +20,7 @@ void main() async {
   await dotenv.load(
     fileName: "lib/api_keys.env",
   );
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
   await setupLocator(scaffoldKey);
   runApp(MultiBlocProvider(
@@ -45,6 +48,12 @@ void main() async {
       ),
       BlocProvider(
         create: (context) => NavigationCubit(),
+      ),
+      BlocProvider(
+        create: (context) => FavouriteBloc(),
+      ),
+      BlocProvider(
+        create: (context) => CartBloc(),
       ),
     ],
     child: const MyApp(),

@@ -1,4 +1,3 @@
-import 'package:exclusive_web/models/image_model/image_model.dart';
 import 'package:exclusive_web/models/product_color_model/product_color_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -8,6 +7,8 @@ part 'product_light_model.g.dart';
 @freezed
 class ProductLightModel with _$ProductLightModel {
   const factory ProductLightModel({
+    required int id,
+    required String documentId,
     required String productName,
     required double productPrice,
     double? productOriginPrice,

@@ -8,6 +8,7 @@ part of 'routes.dart';
 
 List<RouteBase> get $appRoutes => [
       $loginRoute,
+      $favouriteRoute,
       $rootShellRoute,
     ];
 
@@ -21,6 +22,29 @@ extension $LoginRouteExtension on LoginRoute {
 
   String get location => GoRouteData.$location(
         '/login',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $favouriteRoute => GoRouteData.$route(
+      path: '/favourite',
+      factory: $FavouriteRouteExtension._fromState,
+    );
+
+extension $FavouriteRouteExtension on FavouriteRoute {
+  static FavouriteRoute _fromState(GoRouterState state) =>
+      const FavouriteRoute();
+
+  String get location => GoRouteData.$location(
+        '/favourite',
       );
 
   void go(BuildContext context) => context.go(location);

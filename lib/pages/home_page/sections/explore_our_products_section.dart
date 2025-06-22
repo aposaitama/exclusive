@@ -1,12 +1,12 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
-import 'package:exclusive_web/pages/product_details_page/product_details_screen.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:exclusive_web/widgets/product_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class ExploreOurProductsSection extends StatefulWidget {
   final List<ProductLightModel> ourProducts;
@@ -153,21 +153,10 @@ class _ExploreOurProductsSectionState extends State<ExploreOurProductsSection> {
               ),
               itemBuilder: (context, index) {
                 final product = widget.ourProducts[index];
-                return GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const ProductDetailsScreen(
-                        productId: '1',
-                      ),
-                    ),
-                  ),
-                  child: ProductItemTile(
-                    productColor: product.product_colors,
-                    productName: product.productName,
-                    productPrice: product.productPrice,
-                    productOriginPrice: product.productOriginPrice,
-                    productSalePercent: product.salePercent,
+                return ProductItemTile(
+                  product: product,
+                  onProductImageTap: () => context.go(
+                    '/home/product/${product.documentId}',
                   ),
                 );
               },

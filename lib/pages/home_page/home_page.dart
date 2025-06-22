@@ -1,4 +1,8 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc.dart';
+import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc_event.dart';
+import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc.dart';
+import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_event_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/best_selling_bloc/best_selling_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/best_selling_bloc/best_selling_bloc_event.dart';
 import 'package:exclusive_web/pages/home_page/bloc/best_selling_bloc/best_selling_bloc_state.dart';
@@ -35,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     context.read<CategoriesBloc>().add(
           LoadCategoriesBlocEvent(),
         );
@@ -46,6 +51,12 @@ class _HomePageState extends State<HomePage> {
         );
     context.read<OurProductBloc>().add(
           LoadOurProductsProductEvent(),
+        );
+    context.read<FavouriteBloc>().add(
+          LoadWishlistProductsEvent(),
+        );
+    context.read<CartBloc>().add(
+          LoadCartlistProductsEvent(),
         );
   }
 

@@ -5,6 +5,7 @@ import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:exclusive_web/widgets/product_item_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BestSellingProductsSection extends StatefulWidget {
   final List<ProductLightModel> bestSellingProducts;
@@ -84,21 +85,10 @@ class _BestSellingProductsSectionState
               separatorBuilder: (_, __) => const SizedBox(width: 20.0),
               itemBuilder: (context, index) {
                 final product = widget.bestSellingProducts[index];
-                return GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const ProductDetailsScreen(
-                        productId: '1',
-                      ),
-                    ),
-                  ),
-                  child: ProductItemTile(
-                    productColor: product.product_colors,
-                    productName: product.productName,
-                    productPrice: product.productPrice,
-                    productOriginPrice: product.productOriginPrice,
-                    productSalePercent: product.salePercent,
+                return ProductItemTile(
+                  product: product,
+                  onProductImageTap: () => context.go(
+                    '/home/product/${product.documentId}',
                   ),
                 );
               },

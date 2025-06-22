@@ -45,14 +45,14 @@ class $AssetsFontsGen {
 
   /// List of all assets
   List<String> get values => [
-    interMedium,
-    interRegular,
-    interSemiBold,
-    poppinsBold,
-    poppinsMedium,
-    poppinsRegular,
-    poppinsSemiBold,
-  ];
+        interMedium,
+        interRegular,
+        interSemiBold,
+        poppinsBold,
+        poppinsMedium,
+        poppinsRegular,
+        poppinsSemiBold
+      ];
 }
 
 class $AssetsIconsGen {
@@ -93,6 +93,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/icon-customerService.svg
   String get iconCustomerService => 'assets/icons/icon-customerService.svg';
+
+  /// File path: assets/icons/icon-delete.svg
+  String get iconDelete => 'assets/icons/icon-delete.svg';
 
   /// File path: assets/icons/icon-delivery.svg
   String get iconDelivery => 'assets/icons/icon-delivery.svg';
@@ -150,37 +153,38 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<String> get values => [
-    iconReturn,
-    iconSecure,
-    appleLogo,
-    cart,
-    categorySellPhone,
-    customer,
-    exclusiveLogo,
-    goals,
-    heartSmall,
-    iconReviews,
-    iconCopyright,
-    iconCustomerService,
-    iconDelivery,
-    iconFacebook,
-    iconInstagram,
-    iconLinkedin,
-    iconLogout,
-    iconMallbag,
-    iconTwitter,
-    iconsArrowLeft,
-    iconsMail,
-    iconsPhone,
-    jacket,
-    productSale,
-    profile,
-    quickView,
-    sallers,
-    search,
-    smallArrow,
-    widhlist,
-  ];
+        iconReturn,
+        iconSecure,
+        appleLogo,
+        cart,
+        categorySellPhone,
+        customer,
+        exclusiveLogo,
+        goals,
+        heartSmall,
+        iconReviews,
+        iconCopyright,
+        iconCustomerService,
+        iconDelete,
+        iconDelivery,
+        iconFacebook,
+        iconInstagram,
+        iconLinkedin,
+        iconLogout,
+        iconMallbag,
+        iconTwitter,
+        iconsArrowLeft,
+        iconsMail,
+        iconsPhone,
+        jacket,
+        productSale,
+        profile,
+        quickView,
+        sallers,
+        search,
+        smallArrow,
+        widhlist
+      ];
 }
 
 class $AssetsImagesGen {
@@ -238,20 +242,20 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-    appleLogo,
-    authSide,
-    downloadAppstore,
-    downloadpPlay,
-    gucciPromo,
-    iosPromo,
-    jbl,
-    ourStory,
-    playstationPromo,
-    speakersPromo,
-    tgImage1056703926,
-    womenPromo,
-    xbox,
-  ];
+        appleLogo,
+        authSide,
+        downloadAppstore,
+        downloadpPlay,
+        gucciPromo,
+        iosPromo,
+        jbl,
+        ourStory,
+        playstationPromo,
+        speakersPromo,
+        tgImage1056703926,
+        womenPromo,
+        xbox
+      ];
 }
 
 class Assets {
@@ -264,7 +268,11 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
 
@@ -324,8 +332,15 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({AssetBundle? bundle, String? package}) {
-    return AssetImage(_assetName, bundle: bundle, package: package);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
   }
 
   String get path => _assetName;

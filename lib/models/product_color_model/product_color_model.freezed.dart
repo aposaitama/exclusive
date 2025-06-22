@@ -20,6 +20,7 @@ ProductColorModel _$ProductColorModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductColorModel {
+  int get id => throw _privateConstructorUsedError;
   String get colorCode => throw _privateConstructorUsedError;
   ImageModel get mainProductImage => throw _privateConstructorUsedError;
   List<ImageModel> get galleryProductImages =>
@@ -42,7 +43,8 @@ abstract class $ProductColorModelCopyWith<$Res> {
       _$ProductColorModelCopyWithImpl<$Res, ProductColorModel>;
   @useResult
   $Res call(
-      {String colorCode,
+      {int id,
+      String colorCode,
       ImageModel mainProductImage,
       List<ImageModel> galleryProductImages});
 
@@ -64,11 +66,16 @@ class _$ProductColorModelCopyWithImpl<$Res, $Val extends ProductColorModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? colorCode = null,
     Object? mainProductImage = null,
     Object? galleryProductImages = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       colorCode: null == colorCode
           ? _value.colorCode
           : colorCode // ignore: cast_nullable_to_non_nullable
@@ -104,7 +111,8 @@ abstract class _$$ProductColorModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String colorCode,
+      {int id,
+      String colorCode,
       ImageModel mainProductImage,
       List<ImageModel> galleryProductImages});
 
@@ -125,11 +133,16 @@ class __$$ProductColorModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? colorCode = null,
     Object? mainProductImage = null,
     Object? galleryProductImages = null,
   }) {
     return _then(_$ProductColorModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       colorCode: null == colorCode
           ? _value.colorCode
           : colorCode // ignore: cast_nullable_to_non_nullable
@@ -150,7 +163,8 @@ class __$$ProductColorModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductColorModelImpl implements _ProductColorModel {
   const _$ProductColorModelImpl(
-      {required this.colorCode,
+      {required this.id,
+      required this.colorCode,
       required this.mainProductImage,
       required final List<ImageModel> galleryProductImages})
       : _galleryProductImages = galleryProductImages;
@@ -158,6 +172,8 @@ class _$ProductColorModelImpl implements _ProductColorModel {
   factory _$ProductColorModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductColorModelImplFromJson(json);
 
+  @override
+  final int id;
   @override
   final String colorCode;
   @override
@@ -173,7 +189,7 @@ class _$ProductColorModelImpl implements _ProductColorModel {
 
   @override
   String toString() {
-    return 'ProductColorModel(colorCode: $colorCode, mainProductImage: $mainProductImage, galleryProductImages: $galleryProductImages)';
+    return 'ProductColorModel(id: $id, colorCode: $colorCode, mainProductImage: $mainProductImage, galleryProductImages: $galleryProductImages)';
   }
 
   @override
@@ -181,6 +197,7 @@ class _$ProductColorModelImpl implements _ProductColorModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductColorModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.colorCode, colorCode) ||
                 other.colorCode == colorCode) &&
             (identical(other.mainProductImage, mainProductImage) ||
@@ -191,7 +208,7 @@ class _$ProductColorModelImpl implements _ProductColorModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, colorCode, mainProductImage,
+  int get hashCode => Object.hash(runtimeType, id, colorCode, mainProductImage,
       const DeepCollectionEquality().hash(_galleryProductImages));
 
   /// Create a copy of ProductColorModel
@@ -213,7 +230,8 @@ class _$ProductColorModelImpl implements _ProductColorModel {
 
 abstract class _ProductColorModel implements ProductColorModel {
   const factory _ProductColorModel(
-          {required final String colorCode,
+          {required final int id,
+          required final String colorCode,
           required final ImageModel mainProductImage,
           required final List<ImageModel> galleryProductImages}) =
       _$ProductColorModelImpl;
@@ -221,6 +239,8 @@ abstract class _ProductColorModel implements ProductColorModel {
   factory _ProductColorModel.fromJson(Map<String, dynamic> json) =
       _$ProductColorModelImpl.fromJson;
 
+  @override
+  int get id;
   @override
   String get colorCode;
   @override

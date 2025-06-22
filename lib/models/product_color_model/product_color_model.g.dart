@@ -9,6 +9,7 @@ part of 'product_color_model.dart';
 _$ProductColorModelImpl _$$ProductColorModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProductColorModelImpl(
+      id: (json['id'] as num).toInt(),
       colorCode: json['colorCode'] as String,
       mainProductImage:
           ImageModel.fromJson(json['mainProductImage'] as Map<String, dynamic>),
@@ -20,6 +21,7 @@ _$ProductColorModelImpl _$$ProductColorModelImplFromJson(
 Map<String, dynamic> _$$ProductColorModelImplToJson(
         _$ProductColorModelImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'colorCode': instance.colorCode,
       'mainProductImage': instance.mainProductImage,
       'galleryProductImages': instance.galleryProductImages,

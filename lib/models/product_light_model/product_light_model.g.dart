@@ -9,6 +9,8 @@ part of 'product_light_model.dart';
 _$ProductLightModelImpl _$$ProductLightModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProductLightModelImpl(
+      id: (json['id'] as num).toInt(),
+      documentId: json['documentId'] as String,
       productName: json['productName'] as String,
       productPrice: (json['productPrice'] as num).toDouble(),
       productOriginPrice: (json['productOriginPrice'] as num?)?.toDouble(),
@@ -24,6 +26,8 @@ _$ProductLightModelImpl _$$ProductLightModelImplFromJson(
 Map<String, dynamic> _$$ProductLightModelImplToJson(
         _$ProductLightModelImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
+      'documentId': instance.documentId,
       'productName': instance.productName,
       'productPrice': instance.productPrice,
       'productOriginPrice': instance.productOriginPrice,
