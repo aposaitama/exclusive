@@ -9,30 +9,33 @@ class CustomTransparentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onButtonPressed,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 48.0,
-          vertical: 16.0,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            4.0,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onButtonPressed,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 48.0,
+            vertical: 16.0,
           ),
-          border: Border.all(
-            width: 1.0,
-            color: Colors.black.withValues(
-              alpha: 0.5,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              4.0,
             ),
+            border: Border.all(
+              width: 1.0,
+              color: Colors.black.withValues(
+                alpha: 0.5,
+              ),
+            ),
+            color: Colors.white,
           ),
-          color: Colors.white,
-        ),
-        child: Text(
-          buttonTitle,
-          style: AppFonts.poppingMedium.copyWith(
-            color: Colors.black,
-            fontSize: 16.0,
+          child: Text(
+            buttonTitle,
+            style: AppFonts.poppingMedium.copyWith(
+              color: Colors.black,
+              fontSize: 16.0,
+            ),
           ),
         ),
       ),

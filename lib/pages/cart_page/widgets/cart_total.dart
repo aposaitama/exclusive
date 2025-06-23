@@ -1,6 +1,7 @@
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CartTotal extends StatelessWidget {
   final double subTotalSumm;
@@ -121,6 +122,7 @@ class CartTotal extends StatelessWidget {
           ),
           Center(
             child: CustomRedButton(
+              onButtonPressed: () => context.go('/home/checkout'),
               buttonTitle: 'Procees to checkout',
             ),
           )

@@ -219,11 +219,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                       context,
                                       _layerLink,
                                     )
-                                    // //   context.go(
-                                    // //   '/home/account',
-                                    // // )
-                                    // _sharedPreferencesService.removeToken(),
-                                    // isAuthenticated = false
                                   },
                                   child: SvgPicture.asset(
                                     Assets.icons.profile,

@@ -73,11 +73,11 @@ class CartBloc extends Bloc<CartBlocEvent, CartBlocState> {
       ),
     );
     try {
-      // await _favouriteService.removeFromWishlist(event.productId);
-      // final updatedList = await _favouriteService.getWishlist();
+      await _cartService.removeFromCart(event.productId);
+      final updatedList = await _cartService.getCartProducts();
       emit(
         state.copyWith(
-          // productsList: updatedList,
+          productsList: updatedList,
           loadingCartlistStatus: LoadingCartlistStatus.successfull,
           errorMessage: '',
         ),
@@ -128,10 +128,30 @@ class CartBloc extends Bloc<CartBlocEvent, CartBlocState> {
   Future<void> _addProductQuantity(
     AddProductQuantityEvent event,
     Emitter<CartBlocState> emit,
-  ) async {}
+  ) async {
+    await _cartService.increaseProductQuantity(event.productId);
+    final updatedList = await _cartService.getCartProducts();
+    emit(
+      state.copyWith(
+        productsList: updatedList,
+        loadingCartlistStatus: LoadingCartlistStatus.successfull,
+        errorMessage: '',
+      ),
+    );
+  }
 
   Future<void> _removeProductQuantity(
     RemoveProductQuantityEvent event,
     Emitter<CartBlocState> emit,
-  ) async {}
+  ) async {
+    await _cartService.decreaseProductQuantity(event.productId);
+    final updatedList = await _cartService.getCartProducts();
+    emit(
+      state.copyWith(
+        productsList: updatedList,
+        loadingCartlistStatus: LoadingCartlistStatus.successfull,
+        errorMessage: '',
+      ),
+    );
+  }
 }

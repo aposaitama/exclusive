@@ -4,6 +4,7 @@ import 'package:exclusive_web/pages/account_page/account_page.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/login_page.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/register_page.dart';
 import 'package:exclusive_web/pages/cart_page/cart_page.dart';
+import 'package:exclusive_web/pages/checkout_page/checkout_page.dart';
 import 'package:exclusive_web/pages/contact_page/contact_page.dart';
 import 'package:exclusive_web/pages/favourite_page/favourite_page.dart';
 import 'package:exclusive_web/pages/home_page/home_page.dart';
@@ -52,6 +53,9 @@ class FavouriteRoute extends GoRouteData {
         TypedGoRoute<HomeRoute>(path: '/home', routes: [
           TypedGoRoute<CartRoute>(
             path: 'cart',
+          ),
+          TypedGoRoute<CheckoutRoute>(
+            path: 'checkout',
           ),
           TypedGoRoute<AccountRoute>(
             path: 'account',
@@ -135,6 +139,17 @@ class CartRoute extends GoRouteData {
     GoRouterState state,
   ) =>
       const CartPage();
+}
+
+class CheckoutRoute extends GoRouteData {
+  const CheckoutRoute();
+
+  @override
+  Widget build(
+    BuildContext context,
+    GoRouterState state,
+  ) =>
+      const CheckoutPage();
 }
 
 class ContactRoute extends GoRouteData {

@@ -67,11 +67,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/apple_logo.svg
   String get appleLogo => 'assets/icons/apple_logo.svg';
 
+  /// File path: assets/icons/card_logos.svg
+  String get cardLogos => 'assets/icons/card_logos.svg';
+
   /// File path: assets/icons/cart.svg
   String get cart => 'assets/icons/cart.svg';
 
   /// File path: assets/icons/category_sell_phone.svg
   String get categorySellPhone => 'assets/icons/category_sell_phone.svg';
+
+  /// File path: assets/icons/close_icon.svg
+  String get closeIcon => 'assets/icons/close_icon.svg';
 
   /// File path: assets/icons/customer.svg
   String get customer => 'assets/icons/customer.svg';
@@ -156,8 +162,10 @@ class $AssetsIconsGen {
         iconReturn,
         iconSecure,
         appleLogo,
+        cardLogos,
         cart,
         categorySellPhone,
+        closeIcon,
         customer,
         exclusiveLogo,
         goals,
@@ -197,6 +205,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/auth_side.png
   AssetGenImage get authSide =>
       const AssetGenImage('assets/images/auth_side.png');
+
+  /// File path: assets/images/card_logos.png
+  AssetGenImage get cardLogos =>
+      const AssetGenImage('assets/images/card_logos.png');
 
   /// File path: assets/images/download_appstore.png
   AssetGenImage get downloadAppstore =>
@@ -244,6 +256,7 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
         appleLogo,
         authSide,
+        cardLogos,
         downloadAppstore,
         downloadpPlay,
         gucciPromo,

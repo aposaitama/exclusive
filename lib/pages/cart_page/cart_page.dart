@@ -33,6 +33,21 @@ class _CartPageState extends State<CartPage> {
             BlocBuilder<CartBloc, CartBlocState>(
               builder: (context, state) {
                 return CartSection(
+                  onIncreaseArrowPressed: (productId) {
+                    context
+                        .read<CartBloc>()
+                        .add(AddProductQuantityEvent(productId));
+                  },
+                  onDecreaseArrowPressed: (productId) {
+                    context
+                        .read<CartBloc>()
+                        .add(RemoveProductQuantityEvent(productId));
+                  },
+                  onDeletePressed: (productId) {
+                    context
+                        .read<CartBloc>()
+                        .add(RemoveProductFromCartlistEvent(productId));
+                  },
                   cartProducts: state.productsList,
                 );
               },

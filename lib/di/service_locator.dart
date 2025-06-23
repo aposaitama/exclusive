@@ -5,11 +5,13 @@ import 'package:exclusive_web/models/hive_models/hive_product_model/hive_product
 import 'package:exclusive_web/repositories/auth_repository/auth_repository.dart';
 import 'package:exclusive_web/repositories/cart_local_repository/cart_local_repository.dart';
 import 'package:exclusive_web/repositories/categories_repository/categories_repository.dart';
+import 'package:exclusive_web/repositories/checkout_repository/checkout_repository.dart';
 import 'package:exclusive_web/repositories/contact_repository/contact_repository.dart';
 import 'package:exclusive_web/repositories/favourite_local_repository/favourite_local_repository.dart';
 import 'package:exclusive_web/repositories/product_repository/product_repository.dart';
 import 'package:exclusive_web/services/cart_service/cart_service.dart';
 import 'package:exclusive_web/services/categories_service/categories_service.dart';
+import 'package:exclusive_web/services/checkout_service/checkout_service.dart';
 import 'package:exclusive_web/services/contact_service/contact_service.dart';
 import 'package:exclusive_web/services/dio_service/dio_service.dart';
 import 'package:exclusive_web/services/favourite_service/favourite_service.dart';
@@ -62,5 +64,7 @@ Future<void> setupLocator(GlobalKey<ScaffoldState> scaffoldKey) async {
   locator.registerLazySingleton(() => CategoriesService());
   locator.registerLazySingleton(() => ProductRepository());
   locator.registerLazySingleton(() => ProductService());
+  locator.registerLazySingleton(() => CheckoutRepository());
+  locator.registerLazySingleton(() => CheckoutService());
   locator.registerSingleton<GlobalKey<ScaffoldState>>(scaffoldKey);
 }
