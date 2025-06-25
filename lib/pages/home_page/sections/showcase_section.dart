@@ -1,10 +1,12 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
-import 'package:exclusive_web/pages/home_page/sections/advert_promo_slider.dart';
+import 'package:exclusive_web/models/advert_models/promo_slider_model/promo_slider_model.dart';
+import 'package:exclusive_web/pages/home_page/sections/advert_promo_slider_builder.dart';
 import 'package:exclusive_web/pages/home_page/widgets/category_showcase_item_tile.dart';
 import 'package:flutter/material.dart';
 
 class ShowcaseSection extends StatelessWidget {
-  const ShowcaseSection({super.key});
+  final List<PromoSliderModel> promoItems;
+  const ShowcaseSection({super.key, required this.promoItems});
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +72,7 @@ class ShowcaseSection extends StatelessWidget {
             ),
           ),
           AdvertPromoSlider(
+            promoItems: promoItems,
             advertBannerTitle: 'Up to 10% off Voucher',
             advertBannerImagePath: Assets.images.iosPromo.path,
             bannerProductIcon: Assets.images.appleLogo.path,

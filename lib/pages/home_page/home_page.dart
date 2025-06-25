@@ -15,6 +15,9 @@ import 'package:exclusive_web/pages/home_page/bloc/flash_sales_bloc/flash_sales_
 import 'package:exclusive_web/pages/home_page/bloc/our_product_bloc/our_product_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/our_product_bloc/our_product_bloc_event.dart';
 import 'package:exclusive_web/pages/home_page/bloc/our_product_bloc/our_product_bloc_state.dart';
+import 'package:exclusive_web/pages/home_page/bloc/promo_bloc/promo_bloc.dart';
+import 'package:exclusive_web/pages/home_page/bloc/promo_bloc/promo_bloc_event.dart';
+import 'package:exclusive_web/pages/home_page/bloc/promo_bloc/promo_bloc_state.dart';
 import 'package:exclusive_web/pages/home_page/sections/advert_banner_section.dart';
 import 'package:exclusive_web/pages/home_page/sections/best_selling_products_section.dart';
 import 'package:exclusive_web/pages/home_page/sections/category_section.dart';
@@ -40,6 +43,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
+    context.read<PromoBloc>().add(
+          LoadPromoBlocEvent(),
+        );
     context.read<CategoriesBloc>().add(
           LoadCategoriesBlocEvent(),
         );
@@ -68,15 +74,25 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             CustomAppBar(),
-            ShowcaseSection(),
+            BlocBuilder<PromoBloc, PromoBlocState>(
+              builder: (context, state) {
+                return ShowcaseSection(
+                  promoItems: state.promoSliderItems,
+                );
+              },
+            ),
             SizedBox(
               height: 140.0,
             ),
             BlocBuilder<FlashSalesBloc, FlashSalesBlocState>(
               builder: (context, state) {
-                return FlashSalesSection(
-                  flashSalesProducts: state.flashSalesProductList,
-                );
+                if (state.flashSales.flashSaleDate != null) {
+                  return FlashSalesSection(
+                    flashSalesItems: state.flashSales,
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
               },
             ),
             BlocBuilder<CategoriesBloc, CategoriesBlocState>(
@@ -93,16 +109,25 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            AdvertBannerSection(
-              categoryName: 'Categories',
-              advertBannerTitle: 'Enhance Your Music Experience',
-              advertBannerImagePath: Assets.images.jbl.path,
-              advertBannerFinishDate: DateTime(
-                20205,
-                6,
-                25,
-                18,
-              ),
+            BlocBuilder<PromoBloc, PromoBlocState>(
+              builder: (context, state) {
+                if (state.advertCardItem.endDate != null) {
+                  return AdvertBannerSection(
+                    advertCardItem: state.advertCardItem,
+                    categoryName: 'Categories',
+                    advertBannerTitle: 'Enhance Your Music Experience',
+                    advertBannerImagePath: Assets.images.jbl.path,
+                    advertBannerFinishDate: DateTime(
+                      20205,
+                      6,
+                      25,
+                      18,
+                    ),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
             ),
             BlocBuilder<OurProductBloc, OurProductBlocState>(
               builder: (context, state) {
@@ -111,7 +136,13 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            NewArivalSection(),
+            BlocBuilder<PromoBloc, PromoBlocState>(
+              builder: (context, state) {
+                return NewArivalSection(
+                  newArivalItems: state.newArivalItems,
+                );
+              },
+            ),
             BenefitsSection(),
             FooterSection(),
           ],

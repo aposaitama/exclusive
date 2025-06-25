@@ -1,5 +1,4 @@
 import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
-import 'package:exclusive_web/pages/product_details_page/product_details_screen.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';

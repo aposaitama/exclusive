@@ -1,4 +1,3 @@
-import 'package:exclusive_web/models/category_light_model/category_light_model.dart';
 import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

@@ -2,6 +2,7 @@ import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:exclusive_web/widgets/custom_text_field.dart';
 import 'package:exclusive_web/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ContactFormItem extends StatelessWidget {
   final TextEditingController nameController;
@@ -20,8 +21,10 @@ class ContactFormItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return Container(
-      height: 457.0,
+      height: isMobileOrTablet ? 600 : 457.0,
       padding: EdgeInsets.symmetric(
         horizontal: 32.0,
         vertical: 40.0,
@@ -48,34 +51,57 @@ class ContactFormItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: CustomTextField(
-                  hintText: 'Your Name',
-                  controller: nameController,
+          isMobileOrTablet
+              ? Column(
+                  children: [
+                    CustomTextField(
+                      hintText: 'Your Name',
+                      controller: nameController,
+                    ),
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    CustomTextField(
+                      hintText: 'Your Email',
+                      controller: emailController,
+                    ),
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    CustomTextField(
+                      hintText: 'Your Phone',
+                      controller: phoneController,
+                    )
+                  ],
+                )
+              : Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        hintText: 'Your Name',
+                        controller: nameController,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16.0,
+                    ),
+                    Expanded(
+                      child: CustomTextField(
+                        hintText: 'Your Email',
+                        controller: emailController,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16.0,
+                    ),
+                    Expanded(
+                      child: CustomTextField(
+                        hintText: 'Your Phone',
+                        controller: phoneController,
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              SizedBox(
-                width: 16.0,
-              ),
-              Expanded(
-                child: CustomTextField(
-                  hintText: 'Your Email',
-                  controller: emailController,
-                ),
-              ),
-              SizedBox(
-                width: 16.0,
-              ),
-              Expanded(
-                child: CustomTextField(
-                  hintText: 'Your Phone',
-                  controller: phoneController,
-                ),
-              )
-            ],
-          ),
           SizedBox(
             height: 32.0,
           ),

@@ -20,4 +20,5 @@ class CartBlocEvent with _$CartBlocEvent {
   const factory CartBlocEvent.removeProductQuantity(
     String productId,
   ) = RemoveProductQuantityEvent;
+  const factory CartBlocEvent.clearCart() = ClearCartEvent;
 }

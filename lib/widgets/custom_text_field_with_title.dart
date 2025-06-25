@@ -7,11 +7,13 @@ class CustomTextFieldWithTitle extends StatelessWidget {
   final TextEditingController textFieldEditingController;
   final String fieldTitle;
   final bool isRequired;
+  final String? Function(String?)? validator;
   const CustomTextFieldWithTitle(
       {super.key,
       required this.textFieldEditingController,
       required this.fieldTitle,
-      this.isRequired = false});
+      this.isRequired = false,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class CustomTextFieldWithTitle extends StatelessWidget {
           height: 8.0,
         ),
         CustomTextField(
+          validator: validator,
           hintText: '',
           controller: textFieldEditingController,
         )

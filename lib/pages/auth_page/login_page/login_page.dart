@@ -3,6 +3,7 @@ import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc_event.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc_state.dart';
+import 'package:exclusive_web/pages/sections/footer_section.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/widgets/auth_text_field.dart';
 import 'package:exclusive_web/widgets/custom_app_bar.dart';
@@ -10,6 +11,7 @@ import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -47,6 +49,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -96,90 +100,98 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    Assets.images.authSide.path,
-                  ),
+                  if (!isMobileOrTablet)
+                    Image.asset(
+                      Assets.images.authSide.path,
+                      fit: BoxFit.cover,
+                      width: MediaQuery.of(context).size.width / 2,
+                    ),
                   Expanded(
-                      child: Center(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: 370.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Log in to Exclusive',
-                            style: AppFonts.poppingMedium.copyWith(
-                              fontSize: 36.0,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 24.0,
-                          ),
-                          Text(
-                            'Enter your details below',
-                            style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 48.0,
-                          ),
-                          AuthTextField(
-                            controller: emailOrPhoneNumberController,
-                            hintText: 'Email or Phone Number',
-                          ),
-                          SizedBox(
-                            height: 40.0,
-                          ),
-                          AuthTextField(
-                            isObscure: true,
-                            controller: passwordController,
-                            hintText: 'Password',
-                          ),
-                          SizedBox(
-                            height: 40.0,
-                          ),
-                          CustomRedButton(
-                            onButtonPressed: _onLoginPressed,
-                            buttonTitle: 'Log In',
-                          ),
-                          SizedBox(
-                            height: 110.0,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Don\'t have account?',
-                                style: AppFonts.poppingRegular.copyWith(
-                                  fontSize: 16.0,
-                                ),
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: 370.0,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Log in to Exclusive',
+                              style: AppFonts.poppingMedium.copyWith(
+                                fontSize: 36.0,
                               ),
-                              SizedBox(
-                                width: 16.0,
+                            ),
+                            SizedBox(
+                              height: 24.0,
+                            ),
+                            Text(
+                              'Enter your details below',
+                              style: AppFonts.poppingRegular.copyWith(
+                                fontSize: 16.0,
                               ),
-                              MouseRegion(
-                                cursor: SystemMouseCursors.click,
-                                child: GestureDetector(
-                                  onTap: _onSignUpPressed,
-                                  child: Text(
-                                    'Sign up',
-                                    style: AppFonts.poppingMedium.copyWith(
-                                      fontSize: 16.0,
-                                    ),
+                            ),
+                            SizedBox(
+                              height: 48.0,
+                            ),
+                            AuthTextField(
+                              controller: emailOrPhoneNumberController,
+                              hintText: 'Email or Phone Number',
+                            ),
+                            SizedBox(
+                              height: 40.0,
+                            ),
+                            AuthTextField(
+                              isObscure: true,
+                              controller: passwordController,
+                              hintText: 'Password',
+                            ),
+                            SizedBox(
+                              height: 40.0,
+                            ),
+                            CustomRedButton(
+                              onButtonPressed: _onLoginPressed,
+                              buttonTitle: 'Log In',
+                            ),
+                            SizedBox(
+                              height: 110.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Don\'t have account?',
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 16.0,
                                   ),
                                 ),
-                              )
-                            ],
-                          )
-                        ],
+                                SizedBox(
+                                  width: 16.0,
+                                ),
+                                MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  child: GestureDetector(
+                                    onTap: _onSignUpPressed,
+                                    child: Text(
+                                      'Sign up',
+                                      style: AppFonts.poppingMedium.copyWith(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ))
+                  )
                 ],
               ),
+              SizedBox(
+                height: 140.0,
+              ),
+              FooterSection(),
             ],
           ),
         ),

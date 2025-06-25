@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:exclusive_web/di/service_locator.dart';
+import 'package:exclusive_web/models/flash_sale_model/flash_sale_model.dart';
 import 'package:exclusive_web/models/product_detailed_model/product_detailed_model.dart';
 import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
 import 'package:exclusive_web/utils/extensions.dart';
@@ -7,23 +8,24 @@ import 'package:exclusive_web/utils/extensions.dart';
 class ProductRepository {
   final Dio _dio = locator<Dio>();
 
-  Future<List<ProductLightModel>> fetchProductsOnFlashSale() async {
+  Future<FlashSaleModel?> fetchProductsOnFlashSale() async {
     try {
       const url =
-          '/products?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&filters[isOnFleshSales]=true';
+          '/flash-sales?populate=products.product_colors.mainProductImage&populate[]=products.product_colors.galleryProductImages';
 
       final response = await _dio.get(url);
 
       if (response.isSuccess) {
-        return (response.data['data'] as List)
-            .map(
-              (json) => ProductLightModel.fromJson(
-                json as Map<String, dynamic>,
-              ),
-            )
-            .toList();
+        final dataList = response.data['data'] as List<dynamic>?;
+
+        if (dataList != null && dataList.isNotEmpty) {
+          final first = dataList.first as Map<String, dynamic>;
+          return FlashSaleModel.fromJson(first);
+        } else {
+          return null;
+        }
       } else {
-        return [];
+        return null;
       }
     } catch (e) {
       rethrow;

@@ -1,6 +1,8 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/models/advert_models/promo_slider_model/promo_slider_model.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
+import 'package:exclusive_web/utils/extensions.dart';
 import 'package:exclusive_web/utils/scroll_behavior_helper.dart';
 import 'package:exclusive_web/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class AdvertPromoSlider extends StatefulWidget {
+  final List<PromoSliderModel> promoItems;
   final String bannerProductIcon;
   final String bannerProductName;
   final String advertBannerTitle;
@@ -21,6 +24,7 @@ class AdvertPromoSlider extends StatefulWidget {
     this.onButtonPressed,
     required this.bannerProductIcon,
     required this.bannerProductName,
+    required this.promoItems,
   });
 
   @override
@@ -29,9 +33,8 @@ class AdvertPromoSlider extends StatefulWidget {
 
 class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
   final PageController _pageController = PageController(initialPage: 2);
-  int _currentPage = 2;
+  int currentPage = 2;
 
-  final int _totalSlides = 5;
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -48,12 +51,12 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
               child: PageView.builder(
                 scrollBehavior: MyCustomScrollBehavior(),
                 controller: _pageController,
-                itemCount: _totalSlides,
+                itemCount: widget.promoItems.length,
                 physics: const BouncingScrollPhysics(),
                 onPageChanged: (index) {
                   setState(
                     () {
-                      _currentPage = index;
+                      currentPage = index;
                     },
                   );
                 },
@@ -62,8 +65,16 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                     children: [
                       Align(
                         alignment: Alignment.centerRight,
-                        child: Image.asset(
-                          widget.advertBannerImagePath,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 20.0,
+                            bottom: 20.0,
+                            right: 20.0,
+                          ),
+                          child: Image.network(
+                            widget.promoItems[index].advertBannerImage.url
+                                .toImageUrl(),
+                          ),
                         ),
                       ),
                       Padding(
@@ -81,14 +92,17 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                               children: [
                                 Row(
                                   children: [
-                                    Image.asset(
-                                      widget.bannerProductIcon,
+                                    Image.network(
+                                      widget.promoItems[index].bannerProductIcon
+                                          .url
+                                          .toImageUrl(),
                                     ),
                                     SizedBox(
                                       width: 24.0,
                                     ),
                                     Text(
-                                      widget.bannerProductName,
+                                      widget
+                                          .promoItems[index].bannerProductName,
                                       style: AppFonts.poppingSemiBold.copyWith(
                                         color: Colors.white,
                                         fontSize: 16.0,
@@ -98,11 +112,14 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                                 ),
                                 SizedBox(
                                   width: 294.0,
-                                  child: Text(
-                                    widget.advertBannerTitle,
-                                    style: AppFonts.poppingSemiBold.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 48.0,
+                                  child: Expanded(
+                                    child: Text(
+                                      widget
+                                          .promoItems[index].advertBannerTitle,
+                                      style: AppFonts.poppingSemiBold.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 48.0,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -144,7 +161,7 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                 alignment: Alignment.bottomCenter,
                 child: SmoothPageIndicator(
                   controller: _pageController,
-                  count: _totalSlides,
+                  count: widget.promoItems.length,
                   onDotClicked: (index) {
                     _pageController.animateToPage(
                       index,

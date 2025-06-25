@@ -18,19 +18,20 @@ class FlashSalesBloc extends Bloc<FlashSalesBlocEvent, FlashSalesBlocState> {
     Emitter<FlashSalesBlocState> emit,
   ) async {
     try {
-      final flashSalesProductList =
-          await _productService.getFlashSalesProduct();
-      emit(
-        state.copyWith(
-          flashSalesProductList: flashSalesProductList,
-        ),
-      );
+      final flashSalesProduct = await _productService.getFlashSalesProduct();
+      if (flashSalesProduct != null) {
+        emit(
+          state.copyWith(
+            flashSales: flashSalesProduct,
+          ),
+        );
+      }
     } catch (e) {
-      emit(
-        state.copyWith(
-          flashSalesProductList: [],
-        ),
-      );
+      // emit(
+      //   state.copyWith(
+      //     flashSalesProductList: [],
+      //   ),
+      // );
     }
   }
 }

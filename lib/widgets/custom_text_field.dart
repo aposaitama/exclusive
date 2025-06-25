@@ -1,19 +1,22 @@
-import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool isRequired;
+  final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
   const CustomTextField({
     super.key,
     required this.hintText,
     required this.controller,
     this.isRequired = false,
+    this.validator,
+    this.inputFormatters,
   });
 
   @override
@@ -22,7 +25,9 @@ class CustomTextField extends StatelessWidget {
       context,
     );
     final mobileVersion = responsive.isTablet || responsive.isMobile;
-    return TextField(
+    return TextFormField(
+      inputFormatters: inputFormatters,
+      validator: validator,
       style: AppFonts.poppingRegular.copyWith(
         fontSize: 16.0,
         color: Colors.black.withValues(

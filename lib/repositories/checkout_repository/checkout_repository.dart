@@ -23,6 +23,7 @@ class CheckoutRepository {
         card: card,
         action: LiqPayAction.pay,
       );
+
       final purchaseResult = await liqPay.purchase(order);
       if (purchaseResult.status == 'success') {
         return true;

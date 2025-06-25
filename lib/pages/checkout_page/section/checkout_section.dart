@@ -1,14 +1,19 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/models/cart_product_model/cart_product_model.dart';
-import 'package:exclusive_web/pages/cart_page/widgets/cart_test_item.dart';
+import 'package:exclusive_web/pages/checkout_page/bloc/checkout_bloc/checkout_bloc.dart';
+import 'package:exclusive_web/pages/checkout_page/bloc/checkout_bloc/checkout_bloc_event.dart';
+import 'package:exclusive_web/pages/checkout_page/bloc/checkout_bloc/checkout_bloc_state.dart';
+
 import 'package:exclusive_web/pages/checkout_page/widget/checkout_item_tile.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
+import 'package:exclusive_web/services/toast_service/toast_service.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:exclusive_web/widgets/custom_text_field.dart';
 import 'package:exclusive_web/widgets/custom_text_field_with_title.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 enum PaymentMethod { creditCard, cash }
 
@@ -45,6 +50,7 @@ class CheckoutSection extends StatefulWidget {
 }
 
 class _CheckoutSectionState extends State<CheckoutSection> {
+  final _formKey = GlobalKey<FormState>();
   PaymentMethod _selectedMethod = PaymentMethod.creditCard;
   bool isCheckedToSaveAddress = false;
 
@@ -53,6 +59,93 @@ class _CheckoutSectionState extends State<CheckoutSection> {
       return sum + (product.productPrice * product.quantity);
     });
   }
+
+  String? _validateRequired(String? value, String fieldName) {
+    if (value == null || value.trim().isEmpty) {
+      return '$fieldName is required';
+    }
+    return null;
+  }
+
+  String? _validateEmail(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Email is required';
+    }
+
+    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+    if (!emailRegex.hasMatch(value.trim())) {
+      return 'Enter a valid email';
+    }
+    return null;
+  }
+
+  String? _validatePhone(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Phone number is required';
+    }
+
+    final phoneRegex = RegExp(r'^\+?[0-9]{7,}$');
+    if (!phoneRegex.hasMatch(value.trim())) {
+      return 'Enter a valid phone number';
+    }
+    return null;
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      if (_selectedMethod == PaymentMethod.cash) {
+      } else if (_selectedMethod == PaymentMethod.creditCard) {
+        context.read<CheckoutBloc>().add(
+              CheckoutWithCardEvent(
+                widget.cartProducts,
+                maskCardNumFormatter.getUnmaskedText(),
+                maskExpDateFormatter.getUnmaskedText().substring(0, 2),
+                maskExpDateFormatter.getUnmaskedText().substring(2, 4),
+                maskCVVNumFormatter.getUnmaskedText(),
+                widget.firstNameController.text,
+                widget.companyNameController.text,
+                widget.streetAddressController.text,
+                widget.cityController.text,
+                widget.phoneNumberController.text,
+                widget.emailAddressController.text,
+              ),
+            );
+      } else {
+        ToastService.showError(
+          'Select payment method',
+        );
+      }
+    } else {
+      ToastService.showError(
+        'Some fields are invalid, please correct them',
+      );
+    }
+  }
+
+  MaskTextInputFormatter maskCardNumFormatter = MaskTextInputFormatter(
+    mask: '####-####-####-####',
+    filter: {
+      "#": RegExp(
+        r'[0-9]',
+      ),
+    },
+  );
+  MaskTextInputFormatter maskExpDateFormatter = MaskTextInputFormatter(
+    mask: '##/##',
+    filter: {
+      "#": RegExp(
+        r'[0-9]',
+      ),
+    },
+  );
+  MaskTextInputFormatter maskCVVNumFormatter = MaskTextInputFormatter(
+    mask: '###',
+    filter: {
+      "#": RegExp(
+        r'[0-9]',
+      ),
+    },
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -73,110 +166,135 @@ class _CheckoutSectionState extends State<CheckoutSection> {
                   padding: const EdgeInsets.only(
                     right: 115.0,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Billing Details',
-                        style: AppFonts.poppingMedium.copyWith(
-                          fontSize: 36.0,
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Billing Details',
+                          style: AppFonts.poppingMedium.copyWith(
+                            fontSize: 36.0,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 48.0,
-                      ),
-                      CustomTextFieldWithTitle(
-                        textFieldEditingController: widget.firstNameController,
-                        fieldTitle: 'First Name',
-                        isRequired: true,
-                      ),
-                      SizedBox(
-                        height: 32.0,
-                      ),
-                      CustomTextFieldWithTitle(
-                        textFieldEditingController: widget.firstNameController,
-                        fieldTitle: 'Company Name',
-                        isRequired: true,
-                      ),
-                      SizedBox(
-                        height: 32.0,
-                      ),
-                      CustomTextFieldWithTitle(
-                        textFieldEditingController: widget.firstNameController,
-                        fieldTitle: 'Street Address',
-                        isRequired: true,
-                      ),
-                      SizedBox(
-                        height: 32.0,
-                      ),
-                      CustomTextFieldWithTitle(
-                        textFieldEditingController: widget.firstNameController,
-                        fieldTitle: 'Apartment, floor, etc. (optional)',
-                      ),
-                      SizedBox(
-                        height: 32.0,
-                      ),
-                      CustomTextFieldWithTitle(
-                        textFieldEditingController: widget.firstNameController,
-                        fieldTitle: 'Town/City',
-                        isRequired: true,
-                      ),
-                      SizedBox(
-                        height: 32.0,
-                      ),
-                      CustomTextFieldWithTitle(
-                        textFieldEditingController: widget.firstNameController,
-                        fieldTitle: 'Phone Number',
-                        isRequired: true,
-                      ),
-                      SizedBox(
-                        height: 32.0,
-                      ),
-                      CustomTextFieldWithTitle(
-                        textFieldEditingController: widget.firstNameController,
-                        fieldTitle: 'Email Address',
-                        isRequired: true,
-                      ),
-                      SizedBox(
-                        height: 24.0,
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: isCheckedToSaveAddress,
-                            onChanged: (bool? value) {
-                              setState(
-                                () {
-                                  isCheckedToSaveAddress = value ?? false;
-                                },
-                              );
-                            },
-                            fillColor: WidgetStateProperty.resolveWith<Color>(
-                                (states) {
-                              if (states.contains(WidgetState.selected)) {
-                                return AppColors.redColor;
-                              }
-                              return Colors.white;
-                            }),
-                            checkColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0),
-                            ),
+                        SizedBox(
+                          height: 48.0,
+                        ),
+                        CustomTextFieldWithTitle(
+                          textFieldEditingController:
+                              widget.firstNameController,
+                          fieldTitle: 'First Name',
+                          isRequired: true,
+                          validator: (value) => _validateRequired(
+                            value,
+                            'First Name',
                           ),
-                          SizedBox(
-                            width: 8.0,
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        CustomTextFieldWithTitle(
+                          textFieldEditingController:
+                              widget.companyNameController,
+                          fieldTitle: 'Company Name',
+                          isRequired: true,
+                          validator: (value) => _validateRequired(
+                            value,
+                            'Company Name',
                           ),
-                          Expanded(
-                            child: Text(
-                              'Save this information for faster check-out next time',
-                              style: AppFonts.poppingRegular.copyWith(
-                                fontSize: 16.0,
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        CustomTextFieldWithTitle(
+                          textFieldEditingController:
+                              widget.streetAddressController,
+                          fieldTitle: 'Street Address',
+                          isRequired: true,
+                          validator: (value) => _validateRequired(
+                            value,
+                            'Street Address',
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        CustomTextFieldWithTitle(
+                          textFieldEditingController:
+                              widget.apartmentController,
+                          fieldTitle: 'Apartment, floor, etc. (optional)',
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        CustomTextFieldWithTitle(
+                          textFieldEditingController: widget.cityController,
+                          fieldTitle: 'Town/City',
+                          isRequired: true,
+                          validator: (value) =>
+                              _validateRequired(value, 'Town/City'),
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        CustomTextFieldWithTitle(
+                          textFieldEditingController:
+                              widget.phoneNumberController,
+                          fieldTitle: 'Phone Number',
+                          isRequired: true,
+                          validator: _validatePhone,
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        CustomTextFieldWithTitle(
+                          textFieldEditingController:
+                              widget.emailAddressController,
+                          fieldTitle: 'Email Address',
+                          isRequired: true,
+                          validator: _validateEmail,
+                        ),
+                        SizedBox(
+                          height: 24.0,
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: isCheckedToSaveAddress,
+                              onChanged: (bool? value) {
+                                setState(
+                                  () {
+                                    isCheckedToSaveAddress = value ?? false;
+                                  },
+                                );
+                              },
+                              fillColor: WidgetStateProperty.resolveWith<Color>(
+                                  (states) {
+                                if (states.contains(WidgetState.selected)) {
+                                  return AppColors.redColor;
+                                }
+                                return Colors.white;
+                              }),
+                              checkColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                             ),
-                          )
-                        ],
-                      )
-                    ],
+                            SizedBox(
+                              width: 8.0,
+                            ),
+                            Expanded(
+                              child: Text(
+                                'Save this information for faster check-out next time',
+                                style: AppFonts.poppingRegular.copyWith(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -316,6 +434,7 @@ class _CheckoutSectionState extends State<CheckoutSection> {
                               CustomTextField(
                                 hintText: 'cardNum',
                                 controller: widget.cardNumController,
+                                inputFormatters: [maskCardNumFormatter],
                               ),
                               SizedBox(
                                 height: 16.0,
@@ -324,6 +443,7 @@ class _CheckoutSectionState extends State<CheckoutSection> {
                                 children: [
                                   Expanded(
                                     child: CustomTextField(
+                                      inputFormatters: [maskExpDateFormatter],
                                       hintText: 'Exp. date',
                                       controller: widget.cardExpDateController,
                                     ),
@@ -335,6 +455,7 @@ class _CheckoutSectionState extends State<CheckoutSection> {
                                     child: CustomTextField(
                                       hintText: 'Cvv',
                                       controller: widget.cardCvvController,
+                                      inputFormatters: [maskCVVNumFormatter],
                                     ),
                                   ),
                                 ],
@@ -371,7 +492,10 @@ class _CheckoutSectionState extends State<CheckoutSection> {
                       SizedBox(
                         height: 32.0,
                       ),
-                      CustomRedButton(buttonTitle: 'Place Order'),
+                      CustomRedButton(
+                        buttonTitle: 'Place Order',
+                        onButtonPressed: _submitForm,
+                      ),
                     ],
                   ),
                 ),

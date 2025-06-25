@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/models/hive_models/hive_cart_model/hive_cart_product_model.dart';
-import 'package:exclusive_web/models/hive_models/hive_product_model/hive_product_model.dart';
+
 import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc_event.dart';
 import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc_state.dart';
 import 'package:exclusive_web/services/cart_service/cart_service.dart';
-import 'package:exclusive_web/services/favourite_service/favourite_service.dart';
 
 class CartBloc extends Bloc<CartBlocEvent, CartBlocState> {
   final _cartService = locator<CartService>();
@@ -27,6 +26,37 @@ class CartBloc extends Bloc<CartBlocEvent, CartBlocState> {
     on<RemoveProductQuantityEvent>(
       _removeProductQuantity,
     );
+    on<ClearCartEvent>(
+      _clearCart,
+    );
+  }
+
+  Future<void> _clearCart(
+    ClearCartEvent event,
+    Emitter<CartBlocState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        errorMessage: '',
+      ),
+    );
+    try {
+      await _cartService.clearCart();
+      final updatedList = await _cartService.getCartProducts();
+      emit(
+        state.copyWith(
+          productsList: updatedList,
+          loadingCartlistStatus: LoadingCartlistStatus.successfull,
+          errorMessage: '',
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          errorMessage: e.toString(),
+        ),
+      );
+    }
   }
 
   Future<void> _addProductToCart(

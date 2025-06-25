@@ -24,6 +24,7 @@ mixin _$CartBlocEvent {
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
     required TResult Function(String productId) removeProductQuantity,
+    required TResult Function() clearCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$CartBlocEvent {
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
     TResult? Function(String productId)? removeProductQuantity,
+    TResult? Function()? clearCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,7 @@ mixin _$CartBlocEvent {
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
     TResult Function(String productId)? removeProductQuantity,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -58,6 +61,7 @@ mixin _$CartBlocEvent {
     required TResult Function(AddProductQuantityEvent value) addProductQuantity,
     required TResult Function(RemoveProductQuantityEvent value)
         removeProductQuantity,
+    required TResult Function(ClearCartEvent value) clearCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +72,7 @@ mixin _$CartBlocEvent {
         removeProductFromCartlist,
     TResult? Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult? Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult? Function(ClearCartEvent value)? clearCart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +83,7 @@ mixin _$CartBlocEvent {
         removeProductFromCartlist,
     TResult Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult Function(ClearCartEvent value)? clearCart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,6 +160,7 @@ class _$LoadCartlistProductsEventImpl implements LoadCartlistProductsEvent {
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
     required TResult Function(String productId) removeProductQuantity,
+    required TResult Function() clearCart,
   }) {
     return loadCartlistProducts();
   }
@@ -167,6 +174,7 @@ class _$LoadCartlistProductsEventImpl implements LoadCartlistProductsEvent {
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
     TResult? Function(String productId)? removeProductQuantity,
+    TResult? Function()? clearCart,
   }) {
     return loadCartlistProducts?.call();
   }
@@ -180,6 +188,7 @@ class _$LoadCartlistProductsEventImpl implements LoadCartlistProductsEvent {
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
     TResult Function(String productId)? removeProductQuantity,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) {
     if (loadCartlistProducts != null) {
@@ -200,6 +209,7 @@ class _$LoadCartlistProductsEventImpl implements LoadCartlistProductsEvent {
     required TResult Function(AddProductQuantityEvent value) addProductQuantity,
     required TResult Function(RemoveProductQuantityEvent value)
         removeProductQuantity,
+    required TResult Function(ClearCartEvent value) clearCart,
   }) {
     return loadCartlistProducts(this);
   }
@@ -213,6 +223,7 @@ class _$LoadCartlistProductsEventImpl implements LoadCartlistProductsEvent {
         removeProductFromCartlist,
     TResult? Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult? Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult? Function(ClearCartEvent value)? clearCart,
   }) {
     return loadCartlistProducts?.call(this);
   }
@@ -226,6 +237,7 @@ class _$LoadCartlistProductsEventImpl implements LoadCartlistProductsEvent {
         removeProductFromCartlist,
     TResult Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult Function(ClearCartEvent value)? clearCart,
     required TResult orElse(),
   }) {
     if (loadCartlistProducts != null) {
@@ -334,6 +346,7 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
     required TResult Function(String productId) removeProductQuantity,
+    required TResult Function() clearCart,
   }) {
     return addProductToCartlist(productId, colorId, count);
   }
@@ -347,6 +360,7 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
     TResult? Function(String productId)? removeProductQuantity,
+    TResult? Function()? clearCart,
   }) {
     return addProductToCartlist?.call(productId, colorId, count);
   }
@@ -360,6 +374,7 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
     TResult Function(String productId)? removeProductQuantity,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) {
     if (addProductToCartlist != null) {
@@ -380,6 +395,7 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
     required TResult Function(AddProductQuantityEvent value) addProductQuantity,
     required TResult Function(RemoveProductQuantityEvent value)
         removeProductQuantity,
+    required TResult Function(ClearCartEvent value) clearCart,
   }) {
     return addProductToCartlist(this);
   }
@@ -393,6 +409,7 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
         removeProductFromCartlist,
     TResult? Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult? Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult? Function(ClearCartEvent value)? clearCart,
   }) {
     return addProductToCartlist?.call(this);
   }
@@ -406,6 +423,7 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
         removeProductFromCartlist,
     TResult Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult Function(ClearCartEvent value)? clearCart,
     required TResult orElse(),
   }) {
     if (addProductToCartlist != null) {
@@ -512,6 +530,7 @@ class _$RemoveProductFromCartlistEventImpl
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
     required TResult Function(String productId) removeProductQuantity,
+    required TResult Function() clearCart,
   }) {
     return removeProductFromCartlist(productId);
   }
@@ -525,6 +544,7 @@ class _$RemoveProductFromCartlistEventImpl
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
     TResult? Function(String productId)? removeProductQuantity,
+    TResult? Function()? clearCart,
   }) {
     return removeProductFromCartlist?.call(productId);
   }
@@ -538,6 +558,7 @@ class _$RemoveProductFromCartlistEventImpl
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
     TResult Function(String productId)? removeProductQuantity,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) {
     if (removeProductFromCartlist != null) {
@@ -558,6 +579,7 @@ class _$RemoveProductFromCartlistEventImpl
     required TResult Function(AddProductQuantityEvent value) addProductQuantity,
     required TResult Function(RemoveProductQuantityEvent value)
         removeProductQuantity,
+    required TResult Function(ClearCartEvent value) clearCart,
   }) {
     return removeProductFromCartlist(this);
   }
@@ -571,6 +593,7 @@ class _$RemoveProductFromCartlistEventImpl
         removeProductFromCartlist,
     TResult? Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult? Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult? Function(ClearCartEvent value)? clearCart,
   }) {
     return removeProductFromCartlist?.call(this);
   }
@@ -584,6 +607,7 @@ class _$RemoveProductFromCartlistEventImpl
         removeProductFromCartlist,
     TResult Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult Function(ClearCartEvent value)? clearCart,
     required TResult orElse(),
   }) {
     if (removeProductFromCartlist != null) {
@@ -685,6 +709,7 @@ class _$AddProductQuantityEventImpl implements AddProductQuantityEvent {
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
     required TResult Function(String productId) removeProductQuantity,
+    required TResult Function() clearCart,
   }) {
     return addProductQuantity(productId);
   }
@@ -698,6 +723,7 @@ class _$AddProductQuantityEventImpl implements AddProductQuantityEvent {
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
     TResult? Function(String productId)? removeProductQuantity,
+    TResult? Function()? clearCart,
   }) {
     return addProductQuantity?.call(productId);
   }
@@ -711,6 +737,7 @@ class _$AddProductQuantityEventImpl implements AddProductQuantityEvent {
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
     TResult Function(String productId)? removeProductQuantity,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) {
     if (addProductQuantity != null) {
@@ -731,6 +758,7 @@ class _$AddProductQuantityEventImpl implements AddProductQuantityEvent {
     required TResult Function(AddProductQuantityEvent value) addProductQuantity,
     required TResult Function(RemoveProductQuantityEvent value)
         removeProductQuantity,
+    required TResult Function(ClearCartEvent value) clearCart,
   }) {
     return addProductQuantity(this);
   }
@@ -744,6 +772,7 @@ class _$AddProductQuantityEventImpl implements AddProductQuantityEvent {
         removeProductFromCartlist,
     TResult? Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult? Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult? Function(ClearCartEvent value)? clearCart,
   }) {
     return addProductQuantity?.call(this);
   }
@@ -757,6 +786,7 @@ class _$AddProductQuantityEventImpl implements AddProductQuantityEvent {
         removeProductFromCartlist,
     TResult Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult Function(ClearCartEvent value)? clearCart,
     required TResult orElse(),
   }) {
     if (addProductQuantity != null) {
@@ -857,6 +887,7 @@ class _$RemoveProductQuantityEventImpl implements RemoveProductQuantityEvent {
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
     required TResult Function(String productId) removeProductQuantity,
+    required TResult Function() clearCart,
   }) {
     return removeProductQuantity(productId);
   }
@@ -870,6 +901,7 @@ class _$RemoveProductQuantityEventImpl implements RemoveProductQuantityEvent {
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
     TResult? Function(String productId)? removeProductQuantity,
+    TResult? Function()? clearCart,
   }) {
     return removeProductQuantity?.call(productId);
   }
@@ -883,6 +915,7 @@ class _$RemoveProductQuantityEventImpl implements RemoveProductQuantityEvent {
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
     TResult Function(String productId)? removeProductQuantity,
+    TResult Function()? clearCart,
     required TResult orElse(),
   }) {
     if (removeProductQuantity != null) {
@@ -903,6 +936,7 @@ class _$RemoveProductQuantityEventImpl implements RemoveProductQuantityEvent {
     required TResult Function(AddProductQuantityEvent value) addProductQuantity,
     required TResult Function(RemoveProductQuantityEvent value)
         removeProductQuantity,
+    required TResult Function(ClearCartEvent value) clearCart,
   }) {
     return removeProductQuantity(this);
   }
@@ -916,6 +950,7 @@ class _$RemoveProductQuantityEventImpl implements RemoveProductQuantityEvent {
         removeProductFromCartlist,
     TResult? Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult? Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult? Function(ClearCartEvent value)? clearCart,
   }) {
     return removeProductQuantity?.call(this);
   }
@@ -929,6 +964,7 @@ class _$RemoveProductQuantityEventImpl implements RemoveProductQuantityEvent {
         removeProductFromCartlist,
     TResult Function(AddProductQuantityEvent value)? addProductQuantity,
     TResult Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult Function(ClearCartEvent value)? clearCart,
     required TResult orElse(),
   }) {
     if (removeProductQuantity != null) {
@@ -949,4 +985,142 @@ abstract class RemoveProductQuantityEvent implements CartBlocEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RemoveProductQuantityEventImplCopyWith<_$RemoveProductQuantityEventImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClearCartEventImplCopyWith<$Res> {
+  factory _$$ClearCartEventImplCopyWith(_$ClearCartEventImpl value,
+          $Res Function(_$ClearCartEventImpl) then) =
+      __$$ClearCartEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearCartEventImplCopyWithImpl<$Res>
+    extends _$CartBlocEventCopyWithImpl<$Res, _$ClearCartEventImpl>
+    implements _$$ClearCartEventImplCopyWith<$Res> {
+  __$$ClearCartEventImplCopyWithImpl(
+      _$ClearCartEventImpl _value, $Res Function(_$ClearCartEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CartBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearCartEventImpl implements ClearCartEvent {
+  const _$ClearCartEventImpl();
+
+  @override
+  String toString() {
+    return 'CartBlocEvent.clearCart()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearCartEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadCartlistProducts,
+    required TResult Function(String productId, String colorId, int count)
+        addProductToCartlist,
+    required TResult Function(String productId) removeProductFromCartlist,
+    required TResult Function(String productId) addProductQuantity,
+    required TResult Function(String productId) removeProductQuantity,
+    required TResult Function() clearCart,
+  }) {
+    return clearCart();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadCartlistProducts,
+    TResult? Function(String productId, String colorId, int count)?
+        addProductToCartlist,
+    TResult? Function(String productId)? removeProductFromCartlist,
+    TResult? Function(String productId)? addProductQuantity,
+    TResult? Function(String productId)? removeProductQuantity,
+    TResult? Function()? clearCart,
+  }) {
+    return clearCart?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadCartlistProducts,
+    TResult Function(String productId, String colorId, int count)?
+        addProductToCartlist,
+    TResult Function(String productId)? removeProductFromCartlist,
+    TResult Function(String productId)? addProductQuantity,
+    TResult Function(String productId)? removeProductQuantity,
+    TResult Function()? clearCart,
+    required TResult orElse(),
+  }) {
+    if (clearCart != null) {
+      return clearCart();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadCartlistProductsEvent value)
+        loadCartlistProducts,
+    required TResult Function(AddProductToCartlistEvent value)
+        addProductToCartlist,
+    required TResult Function(RemoveProductFromCartlistEvent value)
+        removeProductFromCartlist,
+    required TResult Function(AddProductQuantityEvent value) addProductQuantity,
+    required TResult Function(RemoveProductQuantityEvent value)
+        removeProductQuantity,
+    required TResult Function(ClearCartEvent value) clearCart,
+  }) {
+    return clearCart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCartlistProductsEvent value)? loadCartlistProducts,
+    TResult? Function(AddProductToCartlistEvent value)? addProductToCartlist,
+    TResult? Function(RemoveProductFromCartlistEvent value)?
+        removeProductFromCartlist,
+    TResult? Function(AddProductQuantityEvent value)? addProductQuantity,
+    TResult? Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult? Function(ClearCartEvent value)? clearCart,
+  }) {
+    return clearCart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCartlistProductsEvent value)? loadCartlistProducts,
+    TResult Function(AddProductToCartlistEvent value)? addProductToCartlist,
+    TResult Function(RemoveProductFromCartlistEvent value)?
+        removeProductFromCartlist,
+    TResult Function(AddProductQuantityEvent value)? addProductQuantity,
+    TResult Function(RemoveProductQuantityEvent value)? removeProductQuantity,
+    TResult Function(ClearCartEvent value)? clearCart,
+    required TResult orElse(),
+  }) {
+    if (clearCart != null) {
+      return clearCart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ClearCartEvent implements CartBlocEvent {
+  const factory ClearCartEvent() = _$ClearCartEventImpl;
 }

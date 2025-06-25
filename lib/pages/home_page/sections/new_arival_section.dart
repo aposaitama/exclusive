@@ -1,11 +1,12 @@
-import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/models/advert_models/new_arival_model/new_arival_model.dart';
 import 'package:exclusive_web/pages/home_page/widgets/promo_card_item_tile.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 class NewArivalSection extends StatelessWidget {
-  const NewArivalSection({super.key});
+  final List<NewArivalModel> newArivalItems;
+  const NewArivalSection({super.key, required this.newArivalItems});
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +67,10 @@ class NewArivalSection extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: PromoCardItemTile(
-                    promoCardImage: Assets.images.playstationPromo.path,
-                    promoCardTitle: 'PlayStation 5',
+                    promoCardImage: newArivalItems[0].advertBannerImage.url,
+                    promoCardTitle: newArivalItems[0].advertBannerTitle,
                     promoCardSubtitle:
-                        'Black and White version of the PS5\ncoming out on sale.',
+                        newArivalItems[0].advertBannerDescription,
                   ),
                 ),
                 SizedBox(
@@ -81,10 +82,11 @@ class NewArivalSection extends StatelessWidget {
                     children: [
                       Expanded(
                         child: PromoCardItemTile(
-                          promoCardImage: Assets.images.womenPromo.path,
-                          promoCardTitle: "Women’s Collections",
+                          promoCardImage:
+                              newArivalItems[1].advertBannerImage.url,
+                          promoCardTitle: newArivalItems[1].advertBannerTitle,
                           promoCardSubtitle:
-                              'Featured woman collections\nthat give you another vibe.',
+                              newArivalItems[1].advertBannerDescription,
                         ),
                       ),
                       SizedBox(
@@ -96,9 +98,11 @@ class NewArivalSection extends StatelessWidget {
                             Expanded(
                               child: PromoCardItemTile(
                                 promoCardImage:
-                                    Assets.images.speakersPromo.path,
-                                promoCardTitle: 'Speakers',
-                                promoCardSubtitle: 'Amazon wireless speakers',
+                                    newArivalItems[2].advertBannerImage.url,
+                                promoCardTitle:
+                                    newArivalItems[2].advertBannerTitle,
+                                promoCardSubtitle:
+                                    newArivalItems[2].advertBannerDescription,
                               ),
                             ),
                             SizedBox(
@@ -106,9 +110,12 @@ class NewArivalSection extends StatelessWidget {
                             ),
                             Expanded(
                               child: PromoCardItemTile(
-                                promoCardImage: Assets.images.gucciPromo.path,
-                                promoCardTitle: 'Perfume',
-                                promoCardSubtitle: 'GUCCI INTENSE OUD EDP',
+                                promoCardImage:
+                                    newArivalItems[3].advertBannerImage.url,
+                                promoCardTitle:
+                                    newArivalItems[3].advertBannerTitle,
+                                promoCardSubtitle:
+                                    newArivalItems[3].advertBannerDescription,
                               ),
                             ),
                           ],

@@ -26,15 +26,15 @@ part 'routes.g.dart';
 //   Widget build(BuildContext context, GoRouterState state) => const ErrorPage();
 // }
 
-@TypedGoRoute<LoginRoute>(path: '/login')
-class LoginRoute extends GoRouteData {
-  const LoginRoute();
+// @TypedGoRoute<LoginRoute>(path: '/login')
+// class LoginRoute extends GoRouteData {
+//   const LoginRoute();
 
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const LoginPage();
-  }
-}
+//   @override
+//   Widget build(BuildContext context, GoRouterState state) {
+//     return const LoginPage();
+//   }
+// }
 
 @TypedGoRoute<FavouriteRoute>(path: '/favourite')
 class FavouriteRoute extends GoRouteData {
@@ -84,6 +84,9 @@ class FavouriteRoute extends GoRouteData {
       routes: [
         TypedGoRoute<SignUpRoute>(
           path: '/sign-up',
+        ),
+        TypedGoRoute<LoginRoute>(
+          path: '/login',
         ),
       ],
     ),
@@ -194,6 +197,17 @@ class SignUpRoute extends GoRouteData {
     GoRouterState state,
   ) =>
       const RegisterPage();
+}
+
+class LoginRoute extends GoRouteData {
+  const LoginRoute();
+
+  @override
+  Widget build(
+    BuildContext context,
+    GoRouterState state,
+  ) =>
+      const LoginPage();
 }
 
 class ProductDetailsRoute extends GoRouteData {

@@ -1,3 +1,4 @@
+import 'package:exclusive_web/utils/extensions.dart';
 import 'package:flutter/material.dart';
 
 class PromoCardItemTile extends StatelessWidget {
@@ -21,8 +22,8 @@ class PromoCardItemTile extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.bottomCenter,
-            child: Image.asset(
-              promoCardImage,
+            child: Image.network(
+              promoCardImage.toImageUrl(),
               fit: BoxFit.cover,
             ),
           ),

@@ -1,6 +1,4 @@
 import 'package:exclusive_web/models/image_model/image_model.dart';
-import 'package:exclusive_web/models/product_color_model/product_color_model.dart';
-import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'cart_product_model.freezed.dart';

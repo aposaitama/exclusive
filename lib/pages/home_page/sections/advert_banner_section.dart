@@ -1,10 +1,15 @@
+import 'dart:async';
+
+import 'package:exclusive_web/models/advert_models/advert_card_model/advert_card_model.dart';
 import 'package:exclusive_web/pages/home_page/widgets/remaining_time_item_tile.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
+import 'package:exclusive_web/utils/extensions.dart';
 import 'package:exclusive_web/widgets/custom_green_button.dart';
 import 'package:flutter/material.dart';
 
 class AdvertBannerSection extends StatefulWidget {
+  final AdvertCardModel advertCardItem;
   final String categoryName;
   final String advertBannerTitle;
   final String advertBannerImagePath;
@@ -17,6 +22,7 @@ class AdvertBannerSection extends StatefulWidget {
     required this.advertBannerFinishDate,
     this.onButtonPressed,
     required this.advertBannerImagePath,
+    required this.advertCardItem,
   });
 
   @override
@@ -24,6 +30,45 @@ class AdvertBannerSection extends StatefulWidget {
 }
 
 class _AdvertBannerSectionState extends State<AdvertBannerSection> {
+  late Duration timeLeft;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startCountdown();
+  }
+
+  void _startCountdown() {
+    final rawDate = widget.advertCardItem.endDate;
+
+    if (rawDate == null) {
+      timeLeft = Duration.zero;
+      return;
+    }
+
+    final flashSaleDate = rawDate.toLocal();
+    final now = DateTime.now();
+
+    setState(() {
+      timeLeft = flashSaleDate.difference(now);
+    });
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      final updated = flashSaleDate.difference(DateTime.now());
+      if (updated.isNegative) {
+        _timer?.cancel();
+        setState(() {
+          timeLeft = Duration.zero;
+        });
+      } else {
+        setState(() {
+          timeLeft = updated;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -66,8 +111,8 @@ class _AdvertBannerSectionState extends State<AdvertBannerSection> {
                         ],
                       ),
                     ),
-                    Image.asset(
-                      widget.advertBannerImagePath,
+                    Image.network(
+                      widget.advertCardItem.advertCardImage.url.toImageUrl(),
                     ),
                   ],
                 ),
@@ -87,7 +132,7 @@ class _AdvertBannerSectionState extends State<AdvertBannerSection> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        widget.categoryName,
+                        widget.advertCardItem.advertCardCategoryName,
                         style: AppFonts.poppingSemiBold.copyWith(
                           color: AppColors.greenColor,
                           fontSize: 16.0,
@@ -96,7 +141,7 @@ class _AdvertBannerSectionState extends State<AdvertBannerSection> {
                       SizedBox(
                         width: 440.0,
                         child: Text(
-                          widget.advertBannerTitle,
+                          widget.advertCardItem.advertCardTitle,
                           style: AppFonts.poppingSemiBold.copyWith(
                             color: Colors.white,
                             fontSize: 48.0,
@@ -107,28 +152,43 @@ class _AdvertBannerSectionState extends State<AdvertBannerSection> {
                         children: [
                           RemainingTimeItemTile(
                             tileTitle: 'Days',
-                            remainingTime: '5',
+                            remainingTime: timeLeft.inDays.toString().padLeft(
+                                  2,
+                                  '0',
+                                ),
                           ),
                           SizedBox(
                             width: 24.0,
                           ),
                           RemainingTimeItemTile(
                             tileTitle: 'Hours',
-                            remainingTime: '23',
+                            remainingTime:
+                                (timeLeft.inHours % 24).toString().padLeft(
+                                      2,
+                                      '0',
+                                    ),
                           ),
                           SizedBox(
                             width: 24.0,
                           ),
                           RemainingTimeItemTile(
                             tileTitle: 'Minutes',
-                            remainingTime: '59',
+                            remainingTime:
+                                (timeLeft.inMinutes % 60).toString().padLeft(
+                                      2,
+                                      '0',
+                                    ),
                           ),
                           SizedBox(
                             width: 24.0,
                           ),
                           RemainingTimeItemTile(
                             tileTitle: 'Seconds',
-                            remainingTime: '35',
+                            remainingTime:
+                                (timeLeft.inSeconds % 60).toString().padLeft(
+                                      2,
+                                      '0',
+                                    ),
                           ),
                         ],
                       ),

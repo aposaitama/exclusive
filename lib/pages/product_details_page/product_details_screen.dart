@@ -18,39 +18,53 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  late final ProductDetailsBloc _productDetailsBloc;
   @override
   void initState() {
-    context.read<ProductDetailsBloc>().add(
-          LoadDetailedProductInfoEvent(
-            widget.productId,
-          ),
-        );
+    _productDetailsBloc = ProductDetailsBloc();
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        _productDetailsBloc.add(
+          LoadDetailedProductInfoEvent(widget.productId),
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _productDetailsBloc.close();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomAppBar(),
-            BlocBuilder<ProductDetailsBloc, ProductDetailsBlocState>(
-              builder: (context, state) {
-                if (state.product == null) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return ProductDetailsSection(
-                    productDetailedInfo: state.product!,
-                  );
-                }
-              },
-            ),
-            FooterSection(),
-          ],
+    return BlocProvider.value(
+      value: _productDetailsBloc,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              CustomAppBar(),
+              BlocBuilder<ProductDetailsBloc, ProductDetailsBlocState>(
+                builder: (context, state) {
+                  if (state.product == null) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return ProductDetailsSection(
+                      productDetailedInfo: state.product!,
+                    );
+                  }
+                },
+              ),
+              FooterSection(),
+            ],
+          ),
         ),
       ),
     );

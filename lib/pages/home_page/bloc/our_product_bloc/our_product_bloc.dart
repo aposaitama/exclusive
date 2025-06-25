@@ -18,7 +18,7 @@ class OurProductBloc extends Bloc<OurProductBlocEvent, OurProductBlocState> {
     Emitter<OurProductBlocState> emit,
   ) async {
     try {
-      final ourProductList = await _productService.getFlashSalesProduct();
+      final ourProductList = await _productService.getOurProduct();
       emit(
         state.copyWith(
           ourProductList: ourProductList,

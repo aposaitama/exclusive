@@ -11,40 +11,53 @@ class CartService {
 
   final ProductRepository _productRepository = locator<ProductRepository>();
 
-  /// Додати товар до кошика або збільшити кількість, якщо вже є
-  Future<void> addToCart(HiveCartProductModel product) async {
-    await _cartRepository.addProduct(product);
+  Future<void> addToCart(
+    HiveCartProductModel product,
+  ) async {
+    await _cartRepository.addProduct(
+      product,
+    );
   }
 
-  /// Видалити товар з кошика повністю
-  Future<void> removeFromCart(String productId) async {
-    await _cartRepository.removeProduct(productId);
+  Future<void> removeFromCart(
+    String productId,
+  ) async {
+    await _cartRepository.removeProduct(
+      productId,
+    );
   }
 
-  /// Збільшити кількість товару в кошику на 1
-  Future<void> increaseProductQuantity(String productId) async {
-    await _cartRepository.increaseQuantity(productId);
+  Future<void> increaseProductQuantity(
+    String productId,
+  ) async {
+    await _cartRepository.increaseQuantity(
+      productId,
+    );
   }
 
-  /// Зменшити кількість товару в кошику на 1 або видалити, якщо count == 1
-  Future<void> decreaseProductQuantity(String productId) async {
-    await _cartRepository.decreaseQuantity(productId);
+  Future<void> decreaseProductQuantity(
+    String productId,
+  ) async {
+    await _cartRepository.decreaseQuantity(
+      productId,
+    );
   }
 
-  /// Отримати всі товари з кошика
   Future<List<CartProductModel>> getCartProducts() async {
     final hiveItems = await _cartRepository.getCartlistProducts();
 
     final List<CartProductModel> result = [];
 
     for (final hiveItem in hiveItems) {
-      // Отримуємо детальну інформацію про продукт зі Strapi
-      final product =
-          await _productRepository.fetchConcreteProductById(hiveItem.id);
+      final product = await _productRepository.fetchConcreteProductById(
+        hiveItem.id,
+      );
       if (product != null) {
         final selectedColor = product.product_colors.firstWhere(
           (color) => color.id.toString() == hiveItem.colorId,
-          orElse: () => throw Exception("Color not found"),
+          orElse: () => throw Exception(
+            "Color not found",
+          ),
         );
 
         final CartProductModel model = CartProductModel(
@@ -58,15 +71,15 @@ class CartService {
           productPrice: product.productPrice,
         );
 
-        result.add(model);
+        result.add(
+          model,
+        );
       }
-      // Шукаємо обраний колір
     }
-    print(result);
+
     return result;
   }
 
-  /// Очистити кошик повністю
   Future<void> clearCart() async {
     await _cartRepository.clearCartlist();
   }

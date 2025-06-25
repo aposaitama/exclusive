@@ -5,12 +5,14 @@ import 'package:exclusive_web/navigation/cubit/navigation_cubit.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/bloc/register_bloc/register_bloc.dart';
 import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc.dart';
+import 'package:exclusive_web/pages/checkout_page/bloc/checkout_bloc/checkout_bloc.dart';
 import 'package:exclusive_web/pages/contact_page/bloc/contact_bloc/contact_bloc.dart';
 import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/best_selling_bloc/best_selling_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/categories_bloc/categories_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/flash_sales_bloc/flash_sales_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/our_product_bloc/our_product_bloc.dart';
+import 'package:exclusive_web/pages/home_page/bloc/promo_bloc/promo_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -35,6 +37,9 @@ void main() async {
         create: (context) => CategoriesBloc(),
       ),
       BlocProvider(
+        create: (context) => PromoBloc(),
+      ),
+      BlocProvider(
         create: (context) => FlashSalesBloc(),
       ),
       BlocProvider(
@@ -54,6 +59,9 @@ void main() async {
       ),
       BlocProvider(
         create: (context) => CartBloc(),
+      ),
+      BlocProvider(
+        create: (context) => CheckoutBloc(),
       ),
     ],
     child: const MyApp(),

@@ -7,32 +7,9 @@ part of 'routes.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $loginRoute,
       $favouriteRoute,
       $rootShellRoute,
     ];
-
-RouteBase get $loginRoute => GoRouteData.$route(
-      path: '/login',
-      factory: $LoginRouteExtension._fromState,
-    );
-
-extension $LoginRouteExtension on LoginRoute {
-  static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
-
-  String get location => GoRouteData.$location(
-        '/login',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
 
 RouteBase get $favouriteRoute => GoRouteData.$route(
       path: '/favourite',
@@ -107,6 +84,10 @@ RouteBase get $rootShellRoute => StatefulShellRouteData.$route(
             GoRouteData.$route(
               path: '/sign-up',
               factory: $SignUpRouteExtension._fromState,
+            ),
+            GoRouteData.$route(
+              path: '/login',
+              factory: $LoginRouteExtension._fromState,
             ),
           ],
         ),
@@ -245,6 +226,23 @@ extension $SignUpRouteExtension on SignUpRoute {
 
   String get location => GoRouteData.$location(
         '/sign-up',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $LoginRouteExtension on LoginRoute {
+  static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
+
+  String get location => GoRouteData.$location(
+        '/login',
       );
 
   void go(BuildContext context) => context.go(location);

@@ -3,6 +3,7 @@ import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/services/shared_preferences_service/shared_preferences_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//TODO refactor.
 class AuthRepository {
   final SharedPreferences prefs = locator<SharedPreferences>();
   final Dio _dio = locator<Dio>();
@@ -42,8 +43,12 @@ class AuthRepository {
       final token = response.data['jwt'];
       final userId = response.data['user']['id'];
 
-      await _sharedPreferencesService.saveUserId(userId);
-      await saveToken(token);
+      await _sharedPreferencesService.saveUserId(
+        userId,
+      );
+      await saveToken(
+        token,
+      );
 
       return token;
     } on DioException catch (e) {

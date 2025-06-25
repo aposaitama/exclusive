@@ -16,8 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FlashSalesBlocState {
-  List<ProductLightModel> get flashSalesProductList =>
-      throw _privateConstructorUsedError;
+  FlashSaleModel get flashSales => throw _privateConstructorUsedError;
+  int get page => throw _privateConstructorUsedError;
+  int get pageSize => throw _privateConstructorUsedError;
+  bool get hasReachedEnd => throw _privateConstructorUsedError;
+  bool get isLoadingNext => throw _privateConstructorUsedError;
 
   /// Create a copy of FlashSalesBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +35,14 @@ abstract class $FlashSalesBlocStateCopyWith<$Res> {
           FlashSalesBlocState value, $Res Function(FlashSalesBlocState) then) =
       _$FlashSalesBlocStateCopyWithImpl<$Res, FlashSalesBlocState>;
   @useResult
-  $Res call({List<ProductLightModel> flashSalesProductList});
+  $Res call(
+      {FlashSaleModel flashSales,
+      int page,
+      int pageSize,
+      bool hasReachedEnd,
+      bool isLoadingNext});
+
+  $FlashSaleModelCopyWith<$Res> get flashSales;
 }
 
 /// @nodoc
@@ -50,14 +60,44 @@ class _$FlashSalesBlocStateCopyWithImpl<$Res, $Val extends FlashSalesBlocState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? flashSalesProductList = null,
+    Object? flashSales = null,
+    Object? page = null,
+    Object? pageSize = null,
+    Object? hasReachedEnd = null,
+    Object? isLoadingNext = null,
   }) {
     return _then(_value.copyWith(
-      flashSalesProductList: null == flashSalesProductList
-          ? _value.flashSalesProductList
-          : flashSalesProductList // ignore: cast_nullable_to_non_nullable
-              as List<ProductLightModel>,
+      flashSales: null == flashSales
+          ? _value.flashSales
+          : flashSales // ignore: cast_nullable_to_non_nullable
+              as FlashSaleModel,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageSize: null == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasReachedEnd: null == hasReachedEnd
+          ? _value.hasReachedEnd
+          : hasReachedEnd // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingNext: null == isLoadingNext
+          ? _value.isLoadingNext
+          : isLoadingNext // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
+  }
+
+  /// Create a copy of FlashSalesBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FlashSaleModelCopyWith<$Res> get flashSales {
+    return $FlashSaleModelCopyWith<$Res>(_value.flashSales, (value) {
+      return _then(_value.copyWith(flashSales: value) as $Val);
+    });
   }
 }
 
@@ -69,7 +109,15 @@ abstract class _$$FlashSalesBlocStateImplCopyWith<$Res>
       __$$FlashSalesBlocStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<ProductLightModel> flashSalesProductList});
+  $Res call(
+      {FlashSaleModel flashSales,
+      int page,
+      int pageSize,
+      bool hasReachedEnd,
+      bool isLoadingNext});
+
+  @override
+  $FlashSaleModelCopyWith<$Res> get flashSales;
 }
 
 /// @nodoc
@@ -85,13 +133,33 @@ class __$$FlashSalesBlocStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? flashSalesProductList = null,
+    Object? flashSales = null,
+    Object? page = null,
+    Object? pageSize = null,
+    Object? hasReachedEnd = null,
+    Object? isLoadingNext = null,
   }) {
     return _then(_$FlashSalesBlocStateImpl(
-      flashSalesProductList: null == flashSalesProductList
-          ? _value._flashSalesProductList
-          : flashSalesProductList // ignore: cast_nullable_to_non_nullable
-              as List<ProductLightModel>,
+      flashSales: null == flashSales
+          ? _value.flashSales
+          : flashSales // ignore: cast_nullable_to_non_nullable
+              as FlashSaleModel,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageSize: null == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasReachedEnd: null == hasReachedEnd
+          ? _value.hasReachedEnd
+          : hasReachedEnd // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingNext: null == isLoadingNext
+          ? _value.isLoadingNext
+          : isLoadingNext // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -100,22 +168,32 @@ class __$$FlashSalesBlocStateImplCopyWithImpl<$Res>
 
 class _$FlashSalesBlocStateImpl implements _FlashSalesBlocState {
   const _$FlashSalesBlocStateImpl(
-      {final List<ProductLightModel> flashSalesProductList = const []})
-      : _flashSalesProductList = flashSalesProductList;
+      {this.flashSales =
+          const FlashSaleModel(id: 0, documentId: '', products: []),
+      this.page = 1,
+      this.pageSize = 6,
+      this.hasReachedEnd = false,
+      this.isLoadingNext = false});
 
-  final List<ProductLightModel> _flashSalesProductList;
   @override
   @JsonKey()
-  List<ProductLightModel> get flashSalesProductList {
-    if (_flashSalesProductList is EqualUnmodifiableListView)
-      return _flashSalesProductList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_flashSalesProductList);
-  }
+  final FlashSaleModel flashSales;
+  @override
+  @JsonKey()
+  final int page;
+  @override
+  @JsonKey()
+  final int pageSize;
+  @override
+  @JsonKey()
+  final bool hasReachedEnd;
+  @override
+  @JsonKey()
+  final bool isLoadingNext;
 
   @override
   String toString() {
-    return 'FlashSalesBlocState(flashSalesProductList: $flashSalesProductList)';
+    return 'FlashSalesBlocState(flashSales: $flashSales, page: $page, pageSize: $pageSize, hasReachedEnd: $hasReachedEnd, isLoadingNext: $isLoadingNext)';
   }
 
   @override
@@ -123,13 +201,20 @@ class _$FlashSalesBlocStateImpl implements _FlashSalesBlocState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FlashSalesBlocStateImpl &&
-            const DeepCollectionEquality()
-                .equals(other._flashSalesProductList, _flashSalesProductList));
+            (identical(other.flashSales, flashSales) ||
+                other.flashSales == flashSales) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.pageSize, pageSize) ||
+                other.pageSize == pageSize) &&
+            (identical(other.hasReachedEnd, hasReachedEnd) ||
+                other.hasReachedEnd == hasReachedEnd) &&
+            (identical(other.isLoadingNext, isLoadingNext) ||
+                other.isLoadingNext == isLoadingNext));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_flashSalesProductList));
+      runtimeType, flashSales, page, pageSize, hasReachedEnd, isLoadingNext);
 
   /// Create a copy of FlashSalesBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -143,11 +228,22 @@ class _$FlashSalesBlocStateImpl implements _FlashSalesBlocState {
 
 abstract class _FlashSalesBlocState implements FlashSalesBlocState {
   const factory _FlashSalesBlocState(
-          {final List<ProductLightModel> flashSalesProductList}) =
-      _$FlashSalesBlocStateImpl;
+      {final FlashSaleModel flashSales,
+      final int page,
+      final int pageSize,
+      final bool hasReachedEnd,
+      final bool isLoadingNext}) = _$FlashSalesBlocStateImpl;
 
   @override
-  List<ProductLightModel> get flashSalesProductList;
+  FlashSaleModel get flashSales;
+  @override
+  int get page;
+  @override
+  int get pageSize;
+  @override
+  bool get hasReachedEnd;
+  @override
+  bool get isLoadingNext;
 
   /// Create a copy of FlashSalesBlocState
   /// with the given fields replaced by the non-null parameter values.

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'auth_bloc_state.dart';
+part of 'checkout_bloc_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,56 +15,49 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$AuthBlocState {
-  RegisterStatus get status => throw _privateConstructorUsedError;
-  LoginStatus get loginStatus => throw _privateConstructorUsedError;
+mixin _$CheckoutBlocState {
+  CheckoutStatus get status => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
 
-  /// Create a copy of AuthBlocState
+  /// Create a copy of CheckoutBlocState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AuthBlocStateCopyWith<AuthBlocState> get copyWith =>
+  $CheckoutBlocStateCopyWith<CheckoutBlocState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AuthBlocStateCopyWith<$Res> {
-  factory $AuthBlocStateCopyWith(
-          AuthBlocState value, $Res Function(AuthBlocState) then) =
-      _$AuthBlocStateCopyWithImpl<$Res, AuthBlocState>;
+abstract class $CheckoutBlocStateCopyWith<$Res> {
+  factory $CheckoutBlocStateCopyWith(
+          CheckoutBlocState value, $Res Function(CheckoutBlocState) then) =
+      _$CheckoutBlocStateCopyWithImpl<$Res, CheckoutBlocState>;
   @useResult
-  $Res call(
-      {RegisterStatus status, LoginStatus loginStatus, String errorMessage});
+  $Res call({CheckoutStatus status, String errorMessage});
 }
 
 /// @nodoc
-class _$AuthBlocStateCopyWithImpl<$Res, $Val extends AuthBlocState>
-    implements $AuthBlocStateCopyWith<$Res> {
-  _$AuthBlocStateCopyWithImpl(this._value, this._then);
+class _$CheckoutBlocStateCopyWithImpl<$Res, $Val extends CheckoutBlocState>
+    implements $CheckoutBlocStateCopyWith<$Res> {
+  _$CheckoutBlocStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AuthBlocState
+  /// Create a copy of CheckoutBlocState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? status = null,
-    Object? loginStatus = null,
     Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as RegisterStatus,
-      loginStatus: null == loginStatus
-          ? _value.loginStatus
-          : loginStatus // ignore: cast_nullable_to_non_nullable
-              as LoginStatus,
+              as CheckoutStatus,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -74,43 +67,37 @@ class _$AuthBlocStateCopyWithImpl<$Res, $Val extends AuthBlocState>
 }
 
 /// @nodoc
-abstract class _$$AuthBlocStateImplCopyWith<$Res>
-    implements $AuthBlocStateCopyWith<$Res> {
-  factory _$$AuthBlocStateImplCopyWith(
-          _$AuthBlocStateImpl value, $Res Function(_$AuthBlocStateImpl) then) =
-      __$$AuthBlocStateImplCopyWithImpl<$Res>;
+abstract class _$$CheckoutBlocStateImplCopyWith<$Res>
+    implements $CheckoutBlocStateCopyWith<$Res> {
+  factory _$$CheckoutBlocStateImplCopyWith(_$CheckoutBlocStateImpl value,
+          $Res Function(_$CheckoutBlocStateImpl) then) =
+      __$$CheckoutBlocStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {RegisterStatus status, LoginStatus loginStatus, String errorMessage});
+  $Res call({CheckoutStatus status, String errorMessage});
 }
 
 /// @nodoc
-class __$$AuthBlocStateImplCopyWithImpl<$Res>
-    extends _$AuthBlocStateCopyWithImpl<$Res, _$AuthBlocStateImpl>
-    implements _$$AuthBlocStateImplCopyWith<$Res> {
-  __$$AuthBlocStateImplCopyWithImpl(
-      _$AuthBlocStateImpl _value, $Res Function(_$AuthBlocStateImpl) _then)
+class __$$CheckoutBlocStateImplCopyWithImpl<$Res>
+    extends _$CheckoutBlocStateCopyWithImpl<$Res, _$CheckoutBlocStateImpl>
+    implements _$$CheckoutBlocStateImplCopyWith<$Res> {
+  __$$CheckoutBlocStateImplCopyWithImpl(_$CheckoutBlocStateImpl _value,
+      $Res Function(_$CheckoutBlocStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AuthBlocState
+  /// Create a copy of CheckoutBlocState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? status = null,
-    Object? loginStatus = null,
     Object? errorMessage = null,
   }) {
-    return _then(_$AuthBlocStateImpl(
+    return _then(_$CheckoutBlocStateImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as RegisterStatus,
-      loginStatus: null == loginStatus
-          ? _value.loginStatus
-          : loginStatus // ignore: cast_nullable_to_non_nullable
-              as LoginStatus,
+              as CheckoutStatus,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -121,69 +108,59 @@ class __$$AuthBlocStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthBlocStateImpl implements _AuthBlocState {
-  const _$AuthBlocStateImpl(
-      {this.status = RegisterStatus.initial,
-      this.loginStatus = LoginStatus.initial,
-      this.errorMessage = ''});
+class _$CheckoutBlocStateImpl implements _CheckoutBlocState {
+  const _$CheckoutBlocStateImpl(
+      {this.status = CheckoutStatus.initial, this.errorMessage = ''});
 
   @override
   @JsonKey()
-  final RegisterStatus status;
-  @override
-  @JsonKey()
-  final LoginStatus loginStatus;
+  final CheckoutStatus status;
   @override
   @JsonKey()
   final String errorMessage;
 
   @override
   String toString() {
-    return 'AuthBlocState(status: $status, loginStatus: $loginStatus, errorMessage: $errorMessage)';
+    return 'CheckoutBlocState(status: $status, errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthBlocStateImpl &&
+            other is _$CheckoutBlocStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.loginStatus, loginStatus) ||
-                other.loginStatus == loginStatus) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, loginStatus, errorMessage);
+  int get hashCode => Object.hash(runtimeType, status, errorMessage);
 
-  /// Create a copy of AuthBlocState
+  /// Create a copy of CheckoutBlocState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AuthBlocStateImplCopyWith<_$AuthBlocStateImpl> get copyWith =>
-      __$$AuthBlocStateImplCopyWithImpl<_$AuthBlocStateImpl>(this, _$identity);
+  _$$CheckoutBlocStateImplCopyWith<_$CheckoutBlocStateImpl> get copyWith =>
+      __$$CheckoutBlocStateImplCopyWithImpl<_$CheckoutBlocStateImpl>(
+          this, _$identity);
 }
 
-abstract class _AuthBlocState implements AuthBlocState {
-  const factory _AuthBlocState(
-      {final RegisterStatus status,
-      final LoginStatus loginStatus,
-      final String errorMessage}) = _$AuthBlocStateImpl;
+abstract class _CheckoutBlocState implements CheckoutBlocState {
+  const factory _CheckoutBlocState(
+      {final CheckoutStatus status,
+      final String errorMessage}) = _$CheckoutBlocStateImpl;
 
   @override
-  RegisterStatus get status;
-  @override
-  LoginStatus get loginStatus;
+  CheckoutStatus get status;
   @override
   String get errorMessage;
 
-  /// Create a copy of AuthBlocState
+  /// Create a copy of CheckoutBlocState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AuthBlocStateImplCopyWith<_$AuthBlocStateImpl> get copyWith =>
+  _$$CheckoutBlocStateImplCopyWith<_$CheckoutBlocStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

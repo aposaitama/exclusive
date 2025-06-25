@@ -1,6 +1,5 @@
 import 'package:exclusive_web/models/cart_product_model/cart_product_model.dart';
 import 'package:exclusive_web/pages/cart_page/widgets/cart_product_item_tile.dart';
-import 'package:exclusive_web/pages/cart_page/widgets/cart_test_item.dart';
 import 'package:exclusive_web/pages/cart_page/widgets/cart_total.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/widgets/custom_transparent_button.dart';

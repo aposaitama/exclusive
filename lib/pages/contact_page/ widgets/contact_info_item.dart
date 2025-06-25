@@ -2,14 +2,17 @@ import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ContactInfoItemTile extends StatelessWidget {
   const ContactInfoItemTile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return Container(
-      width: 340.0,
+      width: isMobileOrTablet ? double.infinity : 340.0,
       height: 457.0,
       padding: EdgeInsets.only(
         left: 35.0,

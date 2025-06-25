@@ -1,10 +1,16 @@
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc.dart';
+import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc_event.dart';
 import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc_state.dart';
+import 'package:exclusive_web/pages/checkout_page/bloc/checkout_bloc/checkout_bloc.dart';
+import 'package:exclusive_web/pages/checkout_page/bloc/checkout_bloc/checkout_bloc_state.dart';
 import 'package:exclusive_web/pages/checkout_page/section/checkout_section.dart';
 import 'package:exclusive_web/pages/sections/footer_section.dart';
+import 'package:exclusive_web/services/toast_service/toast_service.dart';
 import 'package:exclusive_web/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
@@ -45,22 +51,37 @@ class _CheckoutPageState extends State<CheckoutPage> {
         child: Column(
           children: [
             CustomAppBar(),
-            BlocBuilder<CartBloc, CartBlocState>(
-              builder: (context, state) {
-                return CheckoutSection(
-                  cartProducts: state.productsList,
-                  firstNameController: firstNameController,
-                  companyNameController: companyNameController,
-                  streetAddressController: streetAddressController,
-                  apartmentController: apartmentController,
-                  cityController: cityController,
-                  phoneNumberController: phoneNumberController,
-                  emailAddressController: emailAddressController,
-                  cardNumController: cardNumController,
-                  cardExpDateController: cardExpDateController,
-                  cardCvvController: cardCvvController,
-                );
+            BlocListener<CheckoutBloc, CheckoutBlocState>(
+              listener: (context, state) {
+                if (state.status == CheckoutStatus.successfull) {
+                  ToastService.showError(
+                    'Successfull payment',
+                  );
+                  HomeRoute().go(context);
+                  context.read<CartBloc>().add(ClearCartEvent());
+                } else if (state.status == CheckoutStatus.failed) {
+                  ToastService.showError(
+                    'Payment failed',
+                  );
+                }
               },
+              child: BlocBuilder<CartBloc, CartBlocState>(
+                builder: (context, state) {
+                  return CheckoutSection(
+                    cartProducts: state.productsList,
+                    firstNameController: firstNameController,
+                    companyNameController: companyNameController,
+                    streetAddressController: streetAddressController,
+                    apartmentController: apartmentController,
+                    cityController: cityController,
+                    phoneNumberController: phoneNumberController,
+                    emailAddressController: emailAddressController,
+                    cardNumController: cardNumController,
+                    cardExpDateController: cardExpDateController,
+                    cardCvvController: cardCvvController,
+                  );
+                },
+              ),
             ),
             FooterSection(),
           ],
