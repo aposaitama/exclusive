@@ -6,28 +6,26 @@ class AutoBreadcrumbs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String fullPath = GoRouter.of(context).state.fullPath ?? '';
-
-    // розділити шлях на частини, прибравши порожні
+    final String fullPath = GoRouter.of(context).state.uri.path;
+    print(fullPath);
     final segments = fullPath.split('/').where((s) => s.isNotEmpty).toList();
+    print(segments);
 
-    // створити список: для "cart" буде /home/cart
     List<Widget> breadcrumbs = [];
     String accumulatedPath = '';
 
     for (int i = 0; i < segments.length; i++) {
       accumulatedPath += '/${segments[i]}';
+      final currentPath = accumulatedPath; // Локальна копія
 
       final isLast = i == segments.length - 1;
 
       breadcrumbs.add(GestureDetector(
         onTap: isLast
             ? null
-            : () => {
-                  context.go(
-                    accumulatedPath,
-                  ),
-                },
+            : () {
+                context.go(currentPath); // Використовуємо локальну змінну
+              },
         child: Text(
           capitalize(segments[i]),
           style: TextStyle(
