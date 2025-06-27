@@ -173,77 +173,81 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                               SizedBox(
                                 height: 24.0,
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Colours:',
-                                    style: AppFonts.poppingRegular.copyWith(
-                                      fontSize: 20.0,
+                              if (widget.productDetailedInfo.product_colors
+                                      .first.colorCode !=
+                                  null)
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Colours:',
+                                      style: AppFonts.poppingRegular.copyWith(
+                                        fontSize: 20.0,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 24.0,
-                                  ),
-                                  ...widget.productDetailedInfo.product_colors
-                                      .map((color) {
-                                    final isSelected = color == selectedColor;
+                                    SizedBox(
+                                      width: 24.0,
+                                    ),
+                                    ...widget.productDetailedInfo.product_colors
+                                        .map((color) {
+                                      final isSelected = color == selectedColor;
 
-                                    return GestureDetector(
-                                      onTap: () {
-                                        setState(
-                                          () {
-                                            selectedColor = color;
-                                          },
-                                        );
-                                      },
-                                      child: Container(
-                                        margin: const EdgeInsets.only(
-                                          right: 12.0,
-                                        ),
-                                        width: 20.0,
-                                        height: 20.0,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: isSelected
-                                              ? Border.all(
-                                                  color: Colors.black,
-                                                  width: 2,
-                                                )
-                                              : null,
-                                          color: !isSelected
-                                              ? Color(
-                                                  int.parse(
-                                                    color.colorCode,
-                                                  ),
-                                                )
-                                              : Colors.transparent,
-                                        ),
-                                        child: Center(
-                                          child: isSelected
-                                              ? Container(
-                                                  width: 12.0,
-                                                  height: 12.0,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Color(
-                                                      int.parse(
-                                                        color.colorCode,
+                                      return GestureDetector(
+                                        onTap: () {
+                                          setState(
+                                            () {
+                                              selectedColor = color;
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                            right: 12.0,
+                                          ),
+                                          width: 20.0,
+                                          height: 20.0,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: isSelected
+                                                ? Border.all(
+                                                    color: Colors.black,
+                                                    width: 2,
+                                                  )
+                                                : null,
+                                            color: !isSelected
+                                                ? Color(
+                                                    int.parse(
+                                                      color.colorCode!,
+                                                    ),
+                                                  )
+                                                : Colors.transparent,
+                                          ),
+                                          child: Center(
+                                            child: isSelected
+                                                ? Container(
+                                                    width: 12.0,
+                                                    height: 12.0,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: Color(
+                                                        int.parse(
+                                                          color.colorCode!,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                )
-                                              : SizedBox.shrink(),
+                                                  )
+                                                : SizedBox.shrink(),
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  }),
-                                ],
-                              ),
+                                      );
+                                    }),
+                                  ],
+                                ),
                               SizedBox(
                                 height: 30.0,
                               ),
-                              if (widget.productDetailedInfo.productSizeList !=
-                                  null)
+                              if (widget.productDetailedInfo.productSizeList
+                                      ?.isNotEmpty ??
+                                  false)
                                 Row(
                                   children: [
                                     Text(
@@ -324,6 +328,7 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                                                     .toString(),
                                                 selectedColor.id.toString(),
                                                 quantity,
+                                                selectedSize,
                                               ),
                                             ),
                                     buttonTitle: 'Buy Now',

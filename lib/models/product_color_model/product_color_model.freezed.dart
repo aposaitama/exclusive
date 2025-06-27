@@ -21,7 +21,7 @@ ProductColorModel _$ProductColorModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProductColorModel {
   int get id => throw _privateConstructorUsedError;
-  String get colorCode => throw _privateConstructorUsedError;
+  String? get colorCode => throw _privateConstructorUsedError;
   ImageModel get mainProductImage => throw _privateConstructorUsedError;
   List<ImageModel> get galleryProductImages =>
       throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $ProductColorModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      String colorCode,
+      String? colorCode,
       ImageModel mainProductImage,
       List<ImageModel> galleryProductImages});
 
@@ -67,7 +67,7 @@ class _$ProductColorModelCopyWithImpl<$Res, $Val extends ProductColorModel>
   @override
   $Res call({
     Object? id = null,
-    Object? colorCode = null,
+    Object? colorCode = freezed,
     Object? mainProductImage = null,
     Object? galleryProductImages = null,
   }) {
@@ -76,10 +76,10 @@ class _$ProductColorModelCopyWithImpl<$Res, $Val extends ProductColorModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      colorCode: null == colorCode
+      colorCode: freezed == colorCode
           ? _value.colorCode
           : colorCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       mainProductImage: null == mainProductImage
           ? _value.mainProductImage
           : mainProductImage // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ abstract class _$$ProductColorModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      String colorCode,
+      String? colorCode,
       ImageModel mainProductImage,
       List<ImageModel> galleryProductImages});
 
@@ -134,7 +134,7 @@ class __$$ProductColorModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? colorCode = null,
+    Object? colorCode = freezed,
     Object? mainProductImage = null,
     Object? galleryProductImages = null,
   }) {
@@ -143,10 +143,10 @@ class __$$ProductColorModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      colorCode: null == colorCode
+      colorCode: freezed == colorCode
           ? _value.colorCode
           : colorCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       mainProductImage: null == mainProductImage
           ? _value.mainProductImage
           : mainProductImage // ignore: cast_nullable_to_non_nullable
@@ -164,7 +164,7 @@ class __$$ProductColorModelImplCopyWithImpl<$Res>
 class _$ProductColorModelImpl implements _ProductColorModel {
   const _$ProductColorModelImpl(
       {required this.id,
-      required this.colorCode,
+      this.colorCode,
       required this.mainProductImage,
       required final List<ImageModel> galleryProductImages})
       : _galleryProductImages = galleryProductImages;
@@ -175,7 +175,7 @@ class _$ProductColorModelImpl implements _ProductColorModel {
   @override
   final int id;
   @override
-  final String colorCode;
+  final String? colorCode;
   @override
   final ImageModel mainProductImage;
   final List<ImageModel> _galleryProductImages;
@@ -231,7 +231,7 @@ class _$ProductColorModelImpl implements _ProductColorModel {
 abstract class _ProductColorModel implements ProductColorModel {
   const factory _ProductColorModel(
           {required final int id,
-          required final String colorCode,
+          final String? colorCode,
           required final ImageModel mainProductImage,
           required final List<ImageModel> galleryProductImages}) =
       _$ProductColorModelImpl;
@@ -242,7 +242,7 @@ abstract class _ProductColorModel implements ProductColorModel {
   @override
   int get id;
   @override
-  String get colorCode;
+  String? get colorCode;
   @override
   ImageModel get mainProductImage;
   @override

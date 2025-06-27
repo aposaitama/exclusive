@@ -8,12 +8,23 @@ import 'package:exclusive_web/utils/extensions.dart';
 class ProductRepository {
   final Dio _dio = locator<Dio>();
 
-  Future<FlashSaleModel?> fetchProductsOnFlashSale() async {
+  Future<FlashSaleModel?> fetchProductsOnFlashSale(
+      //   {
+      //   required int page,
+      //   int pageSize = 6,
+      // }
+      ) async {
     try {
       const url =
           '/flash-sales?populate=products.product_colors.mainProductImage&populate[]=products.product_colors.galleryProductImages';
 
-      final response = await _dio.get(url);
+      final response = await _dio.get(
+        url,
+        // queryParameters: {
+        //   'pagination[page]': page,
+        //   'pagination[pageSize]': pageSize,
+        // }
+      );
 
       if (response.isSuccess) {
         final dataList = response.data['data'] as List<dynamic>?;
@@ -26,6 +37,35 @@ class ProductRepository {
         }
       } else {
         return null;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductLightModel>> fetchProductsOnFlashSaleLightModel({
+    required int page,
+    int pageSize = 6,
+  }) async {
+    try {
+      const url =
+          '/products?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&filters[isOnFleshSales]=true';
+
+      final response = await _dio.get(url, queryParameters: {
+        'pagination[page]': page,
+        'pagination[pageSize]': pageSize,
+      });
+
+      if (response.isSuccess) {
+        return (response.data['data'] as List)
+            .map(
+              (json) => ProductLightModel.fromJson(
+                json as Map<String, dynamic>,
+              ),
+            )
+            .toList();
+      } else {
+        return [];
       }
     } catch (e) {
       rethrow;
@@ -83,7 +123,7 @@ class ProductRepository {
   ) async {
     try {
       final url =
-          '/products/$productId?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage';
+          '/products/$productId?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&populate=productSizeList';
 
       final response = await _dio.get(url);
 

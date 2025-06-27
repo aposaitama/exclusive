@@ -11,20 +11,23 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border(
-          bottom: BorderSide(
-            color: Colors.white,
-            width: 1.0,
-          ),
-        )),
-        child: Text(
-          buttonTitle,
-          style: AppFonts.poppingMedium.copyWith(
-            color: Colors.white,
-            fontSize: 16.0,
-            height: 1.4,
+      child: GestureDetector(
+        onTap: onButtonPressed,
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border(
+            bottom: BorderSide(
+              color: Colors.white,
+              width: 1.0,
+            ),
+          )),
+          child: Text(
+            buttonTitle,
+            style: AppFonts.poppingMedium.copyWith(
+              color: Colors.white,
+              fontSize: 16.0,
+              height: 1.4,
+            ),
           ),
         ),
       ),

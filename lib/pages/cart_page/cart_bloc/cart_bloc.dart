@@ -74,6 +74,7 @@ class CartBloc extends Bloc<CartBlocEvent, CartBlocState> {
           id: event.productId,
           colorId: event.colorId,
           count: event.count,
+          size: event.productSize,
         ),
       );
       final updatedList = await _cartService.getCartProducts();

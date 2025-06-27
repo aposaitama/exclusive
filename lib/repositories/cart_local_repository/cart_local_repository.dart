@@ -23,7 +23,6 @@ class CartLocalRepository {
         await box.put(existingKey, updatedProduct);
       }
     }
-    print(box.length);
   }
 
   Future<void> removeProduct(String productId) async {

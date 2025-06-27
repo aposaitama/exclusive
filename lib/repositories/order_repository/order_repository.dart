@@ -12,6 +12,7 @@ class OrderRepository {
     String phoneNumber,
     String emailAddress,
     List<int> productsId,
+    List<int> orderItemsId,
   ) async {
     try {
       await _dio.post('/orders', data: {
@@ -23,8 +24,33 @@ class OrderRepository {
           "phoneNumber": phoneNumber,
           "emailAddress": emailAddress,
           "products": productsId,
+          "order_items": orderItemsId,
         },
       });
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<int> createOrderItem(
+    String productId,
+    int quantity,
+    String product_color,
+    String productSize,
+  ) async {
+    try {
+      final response = await _dio.post(
+        '/order-items',
+        data: {
+          "data": {
+            "product": productId,
+            "quantity": quantity,
+            "product_color": product_color,
+            "productSize": productSize,
+          },
+        },
+      );
+      return response.data['data']['id'];
     } catch (e) {
       rethrow;
     }

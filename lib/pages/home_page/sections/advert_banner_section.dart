@@ -10,18 +10,11 @@ import 'package:flutter/material.dart';
 
 class AdvertBannerSection extends StatefulWidget {
   final AdvertCardModel advertCardItem;
-  final String categoryName;
-  final String advertBannerTitle;
-  final String advertBannerImagePath;
-  final DateTime advertBannerFinishDate;
+
   final void Function()? onButtonPressed;
   const AdvertBannerSection({
     super.key,
-    required this.categoryName,
-    required this.advertBannerTitle,
-    required this.advertBannerFinishDate,
     this.onButtonPressed,
-    required this.advertBannerImagePath,
     required this.advertCardItem,
   });
 

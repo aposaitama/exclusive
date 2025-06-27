@@ -19,7 +19,8 @@ mixin _$CartBlocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCartlistProducts,
-    required TResult Function(String productId, String colorId, int count)
+    required TResult Function(
+            String productId, String colorId, int count, String? productSize)
         addProductToCartlist,
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
@@ -30,7 +31,8 @@ mixin _$CartBlocEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCartlistProducts,
-    TResult? Function(String productId, String colorId, int count)?
+    TResult? Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
@@ -41,7 +43,8 @@ mixin _$CartBlocEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCartlistProducts,
-    TResult Function(String productId, String colorId, int count)?
+    TResult Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
@@ -155,7 +158,8 @@ class _$LoadCartlistProductsEventImpl implements LoadCartlistProductsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCartlistProducts,
-    required TResult Function(String productId, String colorId, int count)
+    required TResult Function(
+            String productId, String colorId, int count, String? productSize)
         addProductToCartlist,
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
@@ -169,7 +173,8 @@ class _$LoadCartlistProductsEventImpl implements LoadCartlistProductsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCartlistProducts,
-    TResult? Function(String productId, String colorId, int count)?
+    TResult? Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
@@ -183,7 +188,8 @@ class _$LoadCartlistProductsEventImpl implements LoadCartlistProductsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCartlistProducts,
-    TResult Function(String productId, String colorId, int count)?
+    TResult Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
@@ -258,7 +264,7 @@ abstract class _$$AddProductToCartlistEventImplCopyWith<$Res> {
           $Res Function(_$AddProductToCartlistEventImpl) then) =
       __$$AddProductToCartlistEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String productId, String colorId, int count});
+  $Res call({String productId, String colorId, int count, String? productSize});
 }
 
 /// @nodoc
@@ -278,6 +284,7 @@ class __$$AddProductToCartlistEventImplCopyWithImpl<$Res>
     Object? productId = null,
     Object? colorId = null,
     Object? count = null,
+    Object? productSize = freezed,
   }) {
     return _then(_$AddProductToCartlistEventImpl(
       null == productId
@@ -292,6 +299,10 @@ class __$$AddProductToCartlistEventImplCopyWithImpl<$Res>
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
+      freezed == productSize
+          ? _value.productSize
+          : productSize // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -300,7 +311,7 @@ class __$$AddProductToCartlistEventImplCopyWithImpl<$Res>
 
 class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
   const _$AddProductToCartlistEventImpl(
-      this.productId, this.colorId, this.count);
+      this.productId, this.colorId, this.count, this.productSize);
 
   @override
   final String productId;
@@ -308,10 +319,12 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
   final String colorId;
   @override
   final int count;
+  @override
+  final String? productSize;
 
   @override
   String toString() {
-    return 'CartBlocEvent.addProductToCartlist(productId: $productId, colorId: $colorId, count: $count)';
+    return 'CartBlocEvent.addProductToCartlist(productId: $productId, colorId: $colorId, count: $count, productSize: $productSize)';
   }
 
   @override
@@ -322,11 +335,14 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.colorId, colorId) || other.colorId == colorId) &&
-            (identical(other.count, count) || other.count == count));
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.productSize, productSize) ||
+                other.productSize == productSize));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, productId, colorId, count);
+  int get hashCode =>
+      Object.hash(runtimeType, productId, colorId, count, productSize);
 
   /// Create a copy of CartBlocEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -341,35 +357,38 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCartlistProducts,
-    required TResult Function(String productId, String colorId, int count)
+    required TResult Function(
+            String productId, String colorId, int count, String? productSize)
         addProductToCartlist,
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
     required TResult Function(String productId) removeProductQuantity,
     required TResult Function() clearCart,
   }) {
-    return addProductToCartlist(productId, colorId, count);
+    return addProductToCartlist(productId, colorId, count, productSize);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCartlistProducts,
-    TResult? Function(String productId, String colorId, int count)?
+    TResult? Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
     TResult? Function(String productId)? removeProductQuantity,
     TResult? Function()? clearCart,
   }) {
-    return addProductToCartlist?.call(productId, colorId, count);
+    return addProductToCartlist?.call(productId, colorId, count, productSize);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCartlistProducts,
-    TResult Function(String productId, String colorId, int count)?
+    TResult Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
@@ -378,7 +397,7 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
     required TResult orElse(),
   }) {
     if (addProductToCartlist != null) {
-      return addProductToCartlist(productId, colorId, count);
+      return addProductToCartlist(productId, colorId, count, productSize);
     }
     return orElse();
   }
@@ -435,12 +454,15 @@ class _$AddProductToCartlistEventImpl implements AddProductToCartlistEvent {
 
 abstract class AddProductToCartlistEvent implements CartBlocEvent {
   const factory AddProductToCartlistEvent(
-          final String productId, final String colorId, final int count) =
-      _$AddProductToCartlistEventImpl;
+      final String productId,
+      final String colorId,
+      final int count,
+      final String? productSize) = _$AddProductToCartlistEventImpl;
 
   String get productId;
   String get colorId;
   int get count;
+  String? get productSize;
 
   /// Create a copy of CartBlocEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -525,7 +547,8 @@ class _$RemoveProductFromCartlistEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCartlistProducts,
-    required TResult Function(String productId, String colorId, int count)
+    required TResult Function(
+            String productId, String colorId, int count, String? productSize)
         addProductToCartlist,
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
@@ -539,7 +562,8 @@ class _$RemoveProductFromCartlistEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCartlistProducts,
-    TResult? Function(String productId, String colorId, int count)?
+    TResult? Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
@@ -553,7 +577,8 @@ class _$RemoveProductFromCartlistEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCartlistProducts,
-    TResult Function(String productId, String colorId, int count)?
+    TResult Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
@@ -704,7 +729,8 @@ class _$AddProductQuantityEventImpl implements AddProductQuantityEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCartlistProducts,
-    required TResult Function(String productId, String colorId, int count)
+    required TResult Function(
+            String productId, String colorId, int count, String? productSize)
         addProductToCartlist,
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
@@ -718,7 +744,8 @@ class _$AddProductQuantityEventImpl implements AddProductQuantityEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCartlistProducts,
-    TResult? Function(String productId, String colorId, int count)?
+    TResult? Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
@@ -732,7 +759,8 @@ class _$AddProductQuantityEventImpl implements AddProductQuantityEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCartlistProducts,
-    TResult Function(String productId, String colorId, int count)?
+    TResult Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
@@ -882,7 +910,8 @@ class _$RemoveProductQuantityEventImpl implements RemoveProductQuantityEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCartlistProducts,
-    required TResult Function(String productId, String colorId, int count)
+    required TResult Function(
+            String productId, String colorId, int count, String? productSize)
         addProductToCartlist,
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
@@ -896,7 +925,8 @@ class _$RemoveProductQuantityEventImpl implements RemoveProductQuantityEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCartlistProducts,
-    TResult? Function(String productId, String colorId, int count)?
+    TResult? Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
@@ -910,7 +940,8 @@ class _$RemoveProductQuantityEventImpl implements RemoveProductQuantityEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCartlistProducts,
-    TResult Function(String productId, String colorId, int count)?
+    TResult Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,
@@ -1029,7 +1060,8 @@ class _$ClearCartEventImpl implements ClearCartEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadCartlistProducts,
-    required TResult Function(String productId, String colorId, int count)
+    required TResult Function(
+            String productId, String colorId, int count, String? productSize)
         addProductToCartlist,
     required TResult Function(String productId) removeProductFromCartlist,
     required TResult Function(String productId) addProductQuantity,
@@ -1043,7 +1075,8 @@ class _$ClearCartEventImpl implements ClearCartEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadCartlistProducts,
-    TResult? Function(String productId, String colorId, int count)?
+    TResult? Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult? Function(String productId)? removeProductFromCartlist,
     TResult? Function(String productId)? addProductQuantity,
@@ -1057,7 +1090,8 @@ class _$ClearCartEventImpl implements ClearCartEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadCartlistProducts,
-    TResult Function(String productId, String colorId, int count)?
+    TResult Function(
+            String productId, String colorId, int count, String? productSize)?
         addProductToCartlist,
     TResult Function(String productId)? removeProductFromCartlist,
     TResult Function(String productId)? addProductQuantity,

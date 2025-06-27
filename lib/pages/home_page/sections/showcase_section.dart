@@ -56,18 +56,7 @@ class ShowcaseSection extends StatelessWidget {
                       (index) => CategoryShowcaseItemTile(
                         categoryName: categories[index],
                       ),
-                    )
-                    // [
-                    //   ListView.builder(
-                    //     itemCount: categories.length,
-                    //     itemBuilder: (context, index) {
-                    //       return CategoryShowcaseItemTile(
-                    //         categoryName: categories[index],
-                    //       );
-                    //     },
-                    //   )
-                    // ],
-                    ),
+                    )),
               ),
             ),
           ),

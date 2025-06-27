@@ -55,62 +55,78 @@ class _CartProductItemTileState extends State<CartProductItemTile> {
           child: Row(
             children: [
               Expanded(
-                  child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  MouseRegion(
-                    onEnter: (_) => setState(
-                      () => _isHovered = true,
-                    ),
-                    onExit: (_) => setState(
-                      () => _isHovered = false,
-                    ),
-                    child: SizedBox(
-                      height: 54.0,
-                      width: 54.0,
-                      child: Stack(
-                        children: [
-                          Image.network(
-                            widget.product.mainProductImage.url.toImageUrl(),
-                            fit: BoxFit.scaleDown,
-                          ),
-                          if (_isHovered)
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: GestureDetector(
-                                onTap: () => widget.onDeletePressed?.call(
-                                  widget.product.id.toString(),
-                                ),
-                                child: Container(
-                                  width: 18.0,
-                                  height: 18.0,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.redColor,
-                                    shape: BoxShape.circle,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    MouseRegion(
+                      onEnter: (_) => setState(
+                        () => _isHovered = true,
+                      ),
+                      onExit: (_) => setState(
+                        () => _isHovered = false,
+                      ),
+                      child: SizedBox(
+                        height: 54.0,
+                        width: 54.0,
+                        child: Stack(
+                          children: [
+                            Image.network(
+                              widget.product.mainProductImage.url.toImageUrl(),
+                              fit: BoxFit.scaleDown,
+                            ),
+                            if (_isHovered)
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: GestureDetector(
+                                  onTap: () => widget.onDeletePressed?.call(
+                                    widget.product.id.toString(),
                                   ),
-                                  child: Center(
-                                    child: SvgPicture.asset(
-                                      Assets.icons.closeIcon,
+                                  child: Container(
+                                    width: 18.0,
+                                    height: 18.0,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.redColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Center(
+                                      child: SvgPicture.asset(
+                                        Assets.icons.closeIcon,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            )
-                        ],
+                              )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                  Text(
-                    widget.product.productName,
-                    style: AppFonts.poppingRegular.copyWith(
-                      fontSize: 16.0,
+                    SizedBox(
+                      width: 20.0,
                     ),
-                  ),
-                ],
-              )),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.product.productName,
+                          style: AppFonts.poppingRegular.copyWith(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4.0,
+                        ),
+                        if (widget.product.productSize?.isNotEmpty ?? false)
+                          Text(
+                            'Size: ${widget.product.productSize!}',
+                            style: AppFonts.poppingRegular.copyWith(
+                              fontSize: 12.0,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
               Expanded(
                 child: Text(
                   '\$${widget.product.productPrice.toStringAsFixed(2)}',

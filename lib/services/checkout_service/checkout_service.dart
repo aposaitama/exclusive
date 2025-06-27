@@ -8,6 +8,7 @@ class CheckoutService {
   final CheckoutRepository _checkoutRepository = locator<CheckoutRepository>();
   final OrderService _orderService = locator<OrderService>();
   final CartService _cartService = locator<CartService>();
+
   Future<bool> checkoutWithCard(
     String cardNum,
     String expMonth,
@@ -36,6 +37,34 @@ class CheckoutService {
       );
       if (!paymentStatus) return false;
 
+      await _orderService.createOrder(
+        firstName,
+        companyName,
+        streetAddress,
+        city,
+        phoneNumber,
+        emailAddress,
+        cartProducts,
+      );
+
+      _cartService.clearCart();
+
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> checkoutWithCash(
+    List<CartProductModel> cartProducts,
+    String firstName,
+    String companyName,
+    String streetAddress,
+    String city,
+    String phoneNumber,
+    String emailAddress,
+  ) async {
+    try {
       await _orderService.createOrder(
         firstName,
         companyName,

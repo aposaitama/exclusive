@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$FlashSalesBlocState {
   FlashSaleModel get flashSales => throw _privateConstructorUsedError;
+  List<ProductLightModel> get products => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
   int get pageSize => throw _privateConstructorUsedError;
   bool get hasReachedEnd => throw _privateConstructorUsedError;
@@ -37,6 +38,7 @@ abstract class $FlashSalesBlocStateCopyWith<$Res> {
   @useResult
   $Res call(
       {FlashSaleModel flashSales,
+      List<ProductLightModel> products,
       int page,
       int pageSize,
       bool hasReachedEnd,
@@ -61,6 +63,7 @@ class _$FlashSalesBlocStateCopyWithImpl<$Res, $Val extends FlashSalesBlocState>
   @override
   $Res call({
     Object? flashSales = null,
+    Object? products = null,
     Object? page = null,
     Object? pageSize = null,
     Object? hasReachedEnd = null,
@@ -71,6 +74,10 @@ class _$FlashSalesBlocStateCopyWithImpl<$Res, $Val extends FlashSalesBlocState>
           ? _value.flashSales
           : flashSales // ignore: cast_nullable_to_non_nullable
               as FlashSaleModel,
+      products: null == products
+          ? _value.products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductLightModel>,
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -111,6 +118,7 @@ abstract class _$$FlashSalesBlocStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {FlashSaleModel flashSales,
+      List<ProductLightModel> products,
       int page,
       int pageSize,
       bool hasReachedEnd,
@@ -134,6 +142,7 @@ class __$$FlashSalesBlocStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? flashSales = null,
+    Object? products = null,
     Object? page = null,
     Object? pageSize = null,
     Object? hasReachedEnd = null,
@@ -144,6 +153,10 @@ class __$$FlashSalesBlocStateImplCopyWithImpl<$Res>
           ? _value.flashSales
           : flashSales // ignore: cast_nullable_to_non_nullable
               as FlashSaleModel,
+      products: null == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductLightModel>,
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -170,14 +183,25 @@ class _$FlashSalesBlocStateImpl implements _FlashSalesBlocState {
   const _$FlashSalesBlocStateImpl(
       {this.flashSales =
           const FlashSaleModel(id: 0, documentId: '', products: []),
+      final List<ProductLightModel> products = const [],
       this.page = 1,
       this.pageSize = 6,
       this.hasReachedEnd = false,
-      this.isLoadingNext = false});
+      this.isLoadingNext = false})
+      : _products = products;
 
   @override
   @JsonKey()
   final FlashSaleModel flashSales;
+  final List<ProductLightModel> _products;
+  @override
+  @JsonKey()
+  List<ProductLightModel> get products {
+    if (_products is EqualUnmodifiableListView) return _products;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_products);
+  }
+
   @override
   @JsonKey()
   final int page;
@@ -193,7 +217,7 @@ class _$FlashSalesBlocStateImpl implements _FlashSalesBlocState {
 
   @override
   String toString() {
-    return 'FlashSalesBlocState(flashSales: $flashSales, page: $page, pageSize: $pageSize, hasReachedEnd: $hasReachedEnd, isLoadingNext: $isLoadingNext)';
+    return 'FlashSalesBlocState(flashSales: $flashSales, products: $products, page: $page, pageSize: $pageSize, hasReachedEnd: $hasReachedEnd, isLoadingNext: $isLoadingNext)';
   }
 
   @override
@@ -203,6 +227,7 @@ class _$FlashSalesBlocStateImpl implements _FlashSalesBlocState {
             other is _$FlashSalesBlocStateImpl &&
             (identical(other.flashSales, flashSales) ||
                 other.flashSales == flashSales) &&
+            const DeepCollectionEquality().equals(other._products, _products) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.pageSize, pageSize) ||
                 other.pageSize == pageSize) &&
@@ -214,7 +239,13 @@ class _$FlashSalesBlocStateImpl implements _FlashSalesBlocState {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, flashSales, page, pageSize, hasReachedEnd, isLoadingNext);
+      runtimeType,
+      flashSales,
+      const DeepCollectionEquality().hash(_products),
+      page,
+      pageSize,
+      hasReachedEnd,
+      isLoadingNext);
 
   /// Create a copy of FlashSalesBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -229,6 +260,7 @@ class _$FlashSalesBlocStateImpl implements _FlashSalesBlocState {
 abstract class _FlashSalesBlocState implements FlashSalesBlocState {
   const factory _FlashSalesBlocState(
       {final FlashSaleModel flashSales,
+      final List<ProductLightModel> products,
       final int page,
       final int pageSize,
       final bool hasReachedEnd,
@@ -236,6 +268,8 @@ abstract class _FlashSalesBlocState implements FlashSalesBlocState {
 
   @override
   FlashSaleModel get flashSales;
+  @override
+  List<ProductLightModel> get products;
   @override
   int get page;
   @override

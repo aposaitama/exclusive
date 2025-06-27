@@ -6,4 +6,8 @@ part 'flash_sales_bloc_event.freezed.dart';
 class FlashSalesBlocEvent with _$FlashSalesBlocEvent {
   const factory FlashSalesBlocEvent.loadFlashSalesProducts() =
       LoadFlashSalesProductEvent;
+  const factory FlashSalesBlocEvent.loadFlashSalesProductsLightModel(
+    int page,
+    bool refresh,
+  ) = LoadFlashSalesProductLightModelEvent;
 }

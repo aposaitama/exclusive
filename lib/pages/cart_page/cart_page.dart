@@ -3,6 +3,7 @@ import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc_event.dart';
 import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc_state.dart';
 import 'package:exclusive_web/pages/cart_page/sections/cart_section.dart';
 import 'package:exclusive_web/pages/sections/footer_section.dart';
+import 'package:exclusive_web/widgets/breadcrumbs_item.dart';
 import 'package:exclusive_web/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -30,23 +31,30 @@ class _CartPageState extends State<CartPage> {
         child: Column(
           children: [
             CustomAppBar(),
+            AutoBreadcrumbs(),
             BlocBuilder<CartBloc, CartBlocState>(
               builder: (context, state) {
                 return CartSection(
                   onIncreaseArrowPressed: (productId) {
-                    context
-                        .read<CartBloc>()
-                        .add(AddProductQuantityEvent(productId));
+                    context.read<CartBloc>().add(
+                          AddProductQuantityEvent(
+                            productId,
+                          ),
+                        );
                   },
                   onDecreaseArrowPressed: (productId) {
-                    context
-                        .read<CartBloc>()
-                        .add(RemoveProductQuantityEvent(productId));
+                    context.read<CartBloc>().add(
+                          RemoveProductQuantityEvent(
+                            productId,
+                          ),
+                        );
                   },
                   onDeletePressed: (productId) {
-                    context
-                        .read<CartBloc>()
-                        .add(RemoveProductFromCartlistEvent(productId));
+                    context.read<CartBloc>().add(
+                          RemoveProductFromCartlistEvent(
+                            productId,
+                          ),
+                        );
                   },
                   cartProducts: state.productsList,
                 );

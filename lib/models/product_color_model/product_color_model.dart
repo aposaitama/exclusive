@@ -8,7 +8,7 @@ part 'product_color_model.g.dart';
 class ProductColorModel with _$ProductColorModel {
   const factory ProductColorModel({
     required int id,
-    required String colorCode,
+    String? colorCode,
     required ImageModel mainProductImage,
     required List<ImageModel> galleryProductImages,
   }) = _ProductColorModel;

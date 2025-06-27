@@ -19,16 +19,20 @@ mixin _$FlashSalesBlocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadFlashSalesProducts,
+    required TResult Function(int page, bool refresh)
+        loadFlashSalesProductsLightModel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadFlashSalesProducts,
+    TResult? Function(int page, bool refresh)? loadFlashSalesProductsLightModel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadFlashSalesProducts,
+    TResult Function(int page, bool refresh)? loadFlashSalesProductsLightModel,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -36,16 +40,22 @@ mixin _$FlashSalesBlocEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadFlashSalesProductEvent value)
         loadFlashSalesProducts,
+    required TResult Function(LoadFlashSalesProductLightModelEvent value)
+        loadFlashSalesProductsLightModel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFlashSalesProductEvent value)? loadFlashSalesProducts,
+    TResult? Function(LoadFlashSalesProductLightModelEvent value)?
+        loadFlashSalesProductsLightModel,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFlashSalesProductEvent value)? loadFlashSalesProducts,
+    TResult Function(LoadFlashSalesProductLightModelEvent value)?
+        loadFlashSalesProductsLightModel,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -118,6 +128,8 @@ class _$LoadFlashSalesProductEventImpl implements LoadFlashSalesProductEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadFlashSalesProducts,
+    required TResult Function(int page, bool refresh)
+        loadFlashSalesProductsLightModel,
   }) {
     return loadFlashSalesProducts();
   }
@@ -126,6 +138,7 @@ class _$LoadFlashSalesProductEventImpl implements LoadFlashSalesProductEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadFlashSalesProducts,
+    TResult? Function(int page, bool refresh)? loadFlashSalesProductsLightModel,
   }) {
     return loadFlashSalesProducts?.call();
   }
@@ -134,6 +147,7 @@ class _$LoadFlashSalesProductEventImpl implements LoadFlashSalesProductEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadFlashSalesProducts,
+    TResult Function(int page, bool refresh)? loadFlashSalesProductsLightModel,
     required TResult orElse(),
   }) {
     if (loadFlashSalesProducts != null) {
@@ -147,6 +161,8 @@ class _$LoadFlashSalesProductEventImpl implements LoadFlashSalesProductEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadFlashSalesProductEvent value)
         loadFlashSalesProducts,
+    required TResult Function(LoadFlashSalesProductLightModelEvent value)
+        loadFlashSalesProductsLightModel,
   }) {
     return loadFlashSalesProducts(this);
   }
@@ -155,6 +171,8 @@ class _$LoadFlashSalesProductEventImpl implements LoadFlashSalesProductEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadFlashSalesProductEvent value)? loadFlashSalesProducts,
+    TResult? Function(LoadFlashSalesProductLightModelEvent value)?
+        loadFlashSalesProductsLightModel,
   }) {
     return loadFlashSalesProducts?.call(this);
   }
@@ -163,6 +181,8 @@ class _$LoadFlashSalesProductEventImpl implements LoadFlashSalesProductEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadFlashSalesProductEvent value)? loadFlashSalesProducts,
+    TResult Function(LoadFlashSalesProductLightModelEvent value)?
+        loadFlashSalesProductsLightModel,
     required TResult orElse(),
   }) {
     if (loadFlashSalesProducts != null) {
@@ -174,4 +194,168 @@ class _$LoadFlashSalesProductEventImpl implements LoadFlashSalesProductEvent {
 
 abstract class LoadFlashSalesProductEvent implements FlashSalesBlocEvent {
   const factory LoadFlashSalesProductEvent() = _$LoadFlashSalesProductEventImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadFlashSalesProductLightModelEventImplCopyWith<$Res> {
+  factory _$$LoadFlashSalesProductLightModelEventImplCopyWith(
+          _$LoadFlashSalesProductLightModelEventImpl value,
+          $Res Function(_$LoadFlashSalesProductLightModelEventImpl) then) =
+      __$$LoadFlashSalesProductLightModelEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int page, bool refresh});
+}
+
+/// @nodoc
+class __$$LoadFlashSalesProductLightModelEventImplCopyWithImpl<$Res>
+    extends _$FlashSalesBlocEventCopyWithImpl<$Res,
+        _$LoadFlashSalesProductLightModelEventImpl>
+    implements _$$LoadFlashSalesProductLightModelEventImplCopyWith<$Res> {
+  __$$LoadFlashSalesProductLightModelEventImplCopyWithImpl(
+      _$LoadFlashSalesProductLightModelEventImpl _value,
+      $Res Function(_$LoadFlashSalesProductLightModelEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FlashSalesBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? refresh = null,
+  }) {
+    return _then(_$LoadFlashSalesProductLightModelEventImpl(
+      null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == refresh
+          ? _value.refresh
+          : refresh // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadFlashSalesProductLightModelEventImpl
+    implements LoadFlashSalesProductLightModelEvent {
+  const _$LoadFlashSalesProductLightModelEventImpl(this.page, this.refresh);
+
+  @override
+  final int page;
+  @override
+  final bool refresh;
+
+  @override
+  String toString() {
+    return 'FlashSalesBlocEvent.loadFlashSalesProductsLightModel(page: $page, refresh: $refresh)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadFlashSalesProductLightModelEventImpl &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.refresh, refresh) || other.refresh == refresh));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, page, refresh);
+
+  /// Create a copy of FlashSalesBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadFlashSalesProductLightModelEventImplCopyWith<
+          _$LoadFlashSalesProductLightModelEventImpl>
+      get copyWith => __$$LoadFlashSalesProductLightModelEventImplCopyWithImpl<
+          _$LoadFlashSalesProductLightModelEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadFlashSalesProducts,
+    required TResult Function(int page, bool refresh)
+        loadFlashSalesProductsLightModel,
+  }) {
+    return loadFlashSalesProductsLightModel(page, refresh);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadFlashSalesProducts,
+    TResult? Function(int page, bool refresh)? loadFlashSalesProductsLightModel,
+  }) {
+    return loadFlashSalesProductsLightModel?.call(page, refresh);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadFlashSalesProducts,
+    TResult Function(int page, bool refresh)? loadFlashSalesProductsLightModel,
+    required TResult orElse(),
+  }) {
+    if (loadFlashSalesProductsLightModel != null) {
+      return loadFlashSalesProductsLightModel(page, refresh);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadFlashSalesProductEvent value)
+        loadFlashSalesProducts,
+    required TResult Function(LoadFlashSalesProductLightModelEvent value)
+        loadFlashSalesProductsLightModel,
+  }) {
+    return loadFlashSalesProductsLightModel(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadFlashSalesProductEvent value)? loadFlashSalesProducts,
+    TResult? Function(LoadFlashSalesProductLightModelEvent value)?
+        loadFlashSalesProductsLightModel,
+  }) {
+    return loadFlashSalesProductsLightModel?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadFlashSalesProductEvent value)? loadFlashSalesProducts,
+    TResult Function(LoadFlashSalesProductLightModelEvent value)?
+        loadFlashSalesProductsLightModel,
+    required TResult orElse(),
+  }) {
+    if (loadFlashSalesProductsLightModel != null) {
+      return loadFlashSalesProductsLightModel(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadFlashSalesProductLightModelEvent
+    implements FlashSalesBlocEvent {
+  const factory LoadFlashSalesProductLightModelEvent(
+          final int page, final bool refresh) =
+      _$LoadFlashSalesProductLightModelEventImpl;
+
+  int get page;
+  bool get refresh;
+
+  /// Create a copy of FlashSalesBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadFlashSalesProductLightModelEventImplCopyWith<
+          _$LoadFlashSalesProductLightModelEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

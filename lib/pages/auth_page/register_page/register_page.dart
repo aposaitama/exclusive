@@ -1,5 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_bloc.dart';
+import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_event.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/bloc/register_bloc/register_bloc.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/bloc/register_bloc/register_bloc_event.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/bloc/register_bloc/register_bloc_state.dart';
@@ -60,6 +62,9 @@ class _RegisterPageState extends State<RegisterPage> {
         child: BlocListener<RegisterBloc, RegisterBlocState>(
           listener: (context, state) {
             if (state.status == RegisterStatus.successfull) {
+              context.read<AccountBloc>().add(
+                    AuthenticateUserEvent(),
+                  );
               context.go(
                 '/home',
               );

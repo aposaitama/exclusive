@@ -67,7 +67,7 @@ class CartService {
           colorsSelectedId: selectedColor.id,
           mainProductImage: selectedColor.mainProductImage,
           quantity: hiveItem.count,
-          productSize: null,
+          productSize: hiveItem.size,
           productPrice: product.productPrice,
         );
 

@@ -21,4 +21,14 @@ class CheckoutBlocEvent with _$CheckoutBlocEvent {
     String phoneNumber,
     String emailAddress,
   ) = CheckoutWithCardEvent;
+
+  const factory CheckoutBlocEvent.checkoutWithCash(
+    List<CartProductModel> cartProducts,
+    String firstName,
+    String companyName,
+    String streetAddress,
+    String city,
+    String phoneNumber,
+    String emailAddress,
+  ) = CheckoutWithCashEvent;
 }

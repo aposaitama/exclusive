@@ -11,6 +11,9 @@ class FlashSalesBloc extends Bloc<FlashSalesBlocEvent, FlashSalesBlocState> {
     on<LoadFlashSalesProductEvent>(
       _loadFlashSalesProducts,
     );
+    on<LoadFlashSalesProductLightModelEvent>(
+      _loadFlashSalesProductsLightModel,
+    );
   }
 
   Future<void> _loadFlashSalesProducts(
@@ -19,6 +22,7 @@ class FlashSalesBloc extends Bloc<FlashSalesBlocEvent, FlashSalesBlocState> {
   ) async {
     try {
       final flashSalesProduct = await _productService.getFlashSalesProduct();
+
       if (flashSalesProduct != null) {
         emit(
           state.copyWith(
@@ -32,6 +36,41 @@ class FlashSalesBloc extends Bloc<FlashSalesBlocEvent, FlashSalesBlocState> {
       //     flashSalesProductList: [],
       //   ),
       // );
+    }
+  }
+
+  Future<void> _loadFlashSalesProductsLightModel(
+    LoadFlashSalesProductLightModelEvent event,
+    Emitter<FlashSalesBlocState> emit,
+  ) async {
+    if (state.isLoadingNext && !event.refresh) return;
+
+    if (!event.refresh) {
+      emit(state.copyWith(isLoadingNext: true));
+    }
+
+    final nextPage = event.refresh ? 1 : state.page + 1;
+
+    try {
+      final flashSalesProduct =
+          await _productService.getFlashSalesProductLightModel(
+        page: nextPage,
+      );
+
+      final newProducts = flashSalesProduct;
+      final combined =
+          event.refresh ? newProducts : [...state.products, ...newProducts];
+
+      emit(
+        state.copyWith(
+          products: combined,
+          page: nextPage,
+          isLoadingNext: false,
+          hasReachedEnd: newProducts.length < state.pageSize,
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(isLoadingNext: false));
     }
   }
 }

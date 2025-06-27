@@ -7,9 +7,34 @@ import 'package:exclusive_web/repositories/product_repository/product_repository
 class ProductService {
   final ProductRepository _productRepository = locator<ProductRepository>();
 
-  Future<FlashSaleModel?> getFlashSalesProduct() async {
+  Future<FlashSaleModel?> getFlashSalesProduct(
+      //   {
+      //   required int page,
+      //   int pageSize = 6,
+      // }
+      ) async {
     try {
-      final products = await _productRepository.fetchProductsOnFlashSale();
+      final products = await _productRepository.fetchProductsOnFlashSale(
+          // page: page,
+          // pageSize: pageSize,
+          );
+
+      return products;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductLightModel>> getFlashSalesProductLightModel({
+    required int page,
+    int pageSize = 6,
+  }) async {
+    try {
+      final products =
+          await _productRepository.fetchProductsOnFlashSaleLightModel(
+        page: page,
+        pageSize: pageSize,
+      );
 
       return products;
     } catch (e) {

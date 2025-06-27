@@ -1,4 +1,5 @@
 import 'package:exclusive_web/models/advert_models/new_arival_model/new_arival_model.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/pages/home_page/widgets/promo_card_item_tile.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
@@ -10,6 +11,12 @@ class NewArivalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onShopNowPressed(int index) {
+      ProductDetailsRoute(
+        id: newArivalItems[index].productID,
+      ).go(context);
+    }
+
     return ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: 1170.0,
@@ -67,6 +74,7 @@ class NewArivalSection extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: PromoCardItemTile(
+                    onTap: () => onShopNowPressed(0),
                     promoCardImage: newArivalItems[0].advertBannerImage.url,
                     promoCardTitle: newArivalItems[0].advertBannerTitle,
                     promoCardSubtitle:
@@ -82,6 +90,7 @@ class NewArivalSection extends StatelessWidget {
                     children: [
                       Expanded(
                         child: PromoCardItemTile(
+                          onTap: () => onShopNowPressed(1),
                           promoCardImage:
                               newArivalItems[1].advertBannerImage.url,
                           promoCardTitle: newArivalItems[1].advertBannerTitle,
@@ -97,6 +106,7 @@ class NewArivalSection extends StatelessWidget {
                           children: [
                             Expanded(
                               child: PromoCardItemTile(
+                                onTap: () => onShopNowPressed(2),
                                 promoCardImage:
                                     newArivalItems[2].advertBannerImage.url,
                                 promoCardTitle:
@@ -110,6 +120,7 @@ class NewArivalSection extends StatelessWidget {
                             ),
                             Expanded(
                               child: PromoCardItemTile(
+                                onTap: () => onShopNowPressed(3),
                                 promoCardImage:
                                     newArivalItems[3].advertBannerImage.url,
                                 promoCardTitle:

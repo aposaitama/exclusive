@@ -1,5 +1,6 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/models/advert_models/promo_slider_model/promo_slider_model.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/utils/extensions.dart';
@@ -32,8 +33,14 @@ class AdvertPromoSlider extends StatefulWidget {
 }
 
 class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
-  final PageController _pageController = PageController(initialPage: 2);
+  final PageController _pageController = PageController();
   int currentPage = 2;
+
+  void onShopNowPressed(int index) {
+    ProductDetailsRoute(
+      id: widget.promoItems[index].productID.toString(),
+    ).go(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,20 +119,19 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                                 ),
                                 SizedBox(
                                   width: 294.0,
-                                  child: Expanded(
-                                    child: Text(
-                                      widget
-                                          .promoItems[index].advertBannerTitle,
-                                      style: AppFonts.poppingSemiBold.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 48.0,
-                                      ),
+                                  child: Text(
+                                    widget.promoItems[index].advertBannerTitle,
+                                    style: AppFonts.poppingSemiBold.copyWith(
+                                      color: Colors.white,
+                                      fontSize: 48.0,
                                     ),
                                   ),
                                 ),
                                 Row(
                                   children: [
                                     CustomTextButton(
+                                      onButtonPressed: () =>
+                                          onShopNowPressed(index),
                                       buttonTitle: 'Shop Now',
                                     ),
                                     SizedBox(
@@ -153,50 +159,51 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                bottom: 12.0,
-              ),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: SmoothPageIndicator(
-                  controller: _pageController,
-                  count: widget.promoItems.length,
-                  onDotClicked: (index) {
-                    _pageController.animateToPage(
-                      index,
-                      duration: const Duration(
-                        milliseconds: 600,
+            if (widget.promoItems.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 12.0,
+                ),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SmoothPageIndicator(
+                    controller: _pageController,
+                    count: widget.promoItems.length,
+                    onDotClicked: (index) {
+                      _pageController.animateToPage(
+                        index,
+                        duration: const Duration(
+                          milliseconds: 600,
+                        ),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    effect: CustomizableEffect(
+                      activeDotDecoration: DotDecoration(
+                        width: 14,
+                        height: 14,
+                        color: AppColors.redColor,
+                        borderRadius: BorderRadius.circular(
+                          7,
+                        ),
+                        dotBorder: DotBorder(
+                          width: 2.0,
+                          color: Colors.white,
+                        ),
                       ),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                  effect: CustomizableEffect(
-                    activeDotDecoration: DotDecoration(
-                      width: 14,
-                      height: 14,
-                      color: AppColors.redColor,
-                      borderRadius: BorderRadius.circular(
-                        7,
+                      dotDecoration: DotDecoration(
+                        width: 12,
+                        height: 12,
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
                       ),
-                      dotBorder: DotBorder(
-                        width: 2.0,
-                        color: Colors.white,
-                      ),
+                      spacing: 11,
                     ),
-                    dotDecoration: DotDecoration(
-                      width: 12,
-                      height: 12,
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                    ),
-                    spacing: 11,
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),

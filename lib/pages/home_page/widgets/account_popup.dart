@@ -1,9 +1,13 @@
 import 'dart:ui';
 import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_bloc.dart';
+import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_event.dart';
 import 'package:exclusive_web/pages/home_page/widgets/account_popup_item_tile.dart';
 import 'package:exclusive_web/services/shared_preferences_service/shared_preferences_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class AccountPopup {
   static final _sharedPreferencesService = locator<SharedPreferencesService>();
@@ -95,7 +99,9 @@ class AccountPopup {
                               ),
                               AccountPopupItemTile(
                                 onItemPressed: () {
-                                  _sharedPreferencesService.removeToken();
+                                  context.read<AccountBloc>().add(
+                                        LogoutUserEvent(),
+                                      );
                                 },
                                 iconPath: Assets.icons.iconLogout,
                                 accountPopupItemName: 'Logout',

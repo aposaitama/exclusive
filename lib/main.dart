@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/navigation/app_router.dart';
 import 'package:exclusive_web/navigation/cubit/navigation_cubit.dart';
+import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_bloc.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/bloc/register_bloc/register_bloc.dart';
 import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc.dart';
@@ -32,6 +33,9 @@ void main() async {
       ),
       BlocProvider(
         create: (context) => LoginBloc(),
+      ),
+      BlocProvider(
+        create: (context) => AccountBloc(),
       ),
       BlocProvider(
         create: (context) => CategoriesBloc(),

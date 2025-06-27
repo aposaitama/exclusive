@@ -5,11 +5,13 @@ class PromoCardItemTile extends StatelessWidget {
   final String promoCardImage;
   final String promoCardTitle;
   final String promoCardSubtitle;
+  final void Function()? onTap;
   const PromoCardItemTile({
     super.key,
     required this.promoCardImage,
     required this.promoCardTitle,
     required this.promoCardSubtitle,
+    this.onTap,
   });
 
   @override
@@ -60,11 +62,14 @@ class PromoCardItemTile extends StatelessWidget {
                     const SizedBox(
                       height: 8,
                     ),
-                    const Text(
-                      'Shop Now',
-                      style: TextStyle(
-                        color: Colors.white,
-                        decoration: TextDecoration.underline,
+                    GestureDetector(
+                      onTap: onTap,
+                      child: const Text(
+                        'Shop Now',
+                        style: TextStyle(
+                          color: Colors.white,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ],

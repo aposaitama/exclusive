@@ -15,6 +15,16 @@ class OrderService {
     List<CartProductModel> productsInCart,
   ) async {
     final productIds = productsInCart.map((e) => e.id).toList();
+    List<int> orderItemIds = [];
+    for (final e in productsInCart) {
+      final createdOrderItem = await _orderRepository.createOrderItem(
+          e.id.toString(),
+          e.quantity,
+          e.colorsSelectedId.toString(),
+          e.productSize ?? '');
+      orderItemIds.add(createdOrderItem);
+    }
+
     try {
       await _orderRepository.placeOrder(
         firstName,
@@ -24,6 +34,7 @@ class OrderService {
         phoneNumber,
         emailAddress,
         productIds,
+        orderItemIds,
       );
     } catch (e) {
       rethrow;

@@ -94,6 +94,17 @@ class _CheckoutSectionState extends State<CheckoutSection> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       if (_selectedMethod == PaymentMethod.cash) {
+        context.read<CheckoutBloc>().add(
+              CheckoutWithCashEvent(
+                widget.cartProducts,
+                widget.firstNameController.text,
+                widget.companyNameController.text,
+                widget.streetAddressController.text,
+                widget.cityController.text,
+                widget.phoneNumberController.text,
+                widget.emailAddressController.text,
+              ),
+            );
       } else if (_selectedMethod == PaymentMethod.creditCard) {
         context.read<CheckoutBloc>().add(
               CheckoutWithCardEvent(
@@ -432,7 +443,7 @@ class _CheckoutSectionState extends State<CheckoutSection> {
                                 height: 16.0,
                               ),
                               CustomTextField(
-                                hintText: 'cardNum',
+                                hintText: 'Card num.',
                                 controller: widget.cardNumController,
                                 inputFormatters: [maskCardNumFormatter],
                               ),

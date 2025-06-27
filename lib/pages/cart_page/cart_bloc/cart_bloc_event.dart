@@ -10,6 +10,7 @@ class CartBlocEvent with _$CartBlocEvent {
     String productId,
     String colorId,
     int count,
+    String? productSize,
   ) = AddProductToCartlistEvent;
   const factory CartBlocEvent.removeProductFromCartlist(
     String productId,

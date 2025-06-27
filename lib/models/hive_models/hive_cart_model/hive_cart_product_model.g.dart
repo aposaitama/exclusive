@@ -20,19 +20,22 @@ class HiveCartProductModelAdapter extends TypeAdapter<HiveCartProductModel> {
       id: fields[0] as String,
       colorId: fields[1] as String,
       count: fields[2] as int,
+      size: fields[3] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveCartProductModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.colorId)
       ..writeByte(2)
-      ..write(obj.count);
+      ..write(obj.count)
+      ..writeByte(3)
+      ..write(obj.size);
   }
 
   @override

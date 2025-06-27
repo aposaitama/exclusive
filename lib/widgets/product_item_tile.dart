@@ -191,6 +191,7 @@ class _ProductItemTileState extends State<ProductItemTile> {
                                   widget.product.product_colors.first.id
                                       .toString(),
                                   1,
+                                  null,
                                 ),
                               ),
                           child: AnimatedContainer(

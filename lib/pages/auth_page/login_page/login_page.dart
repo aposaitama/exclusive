@@ -1,5 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_bloc.dart';
+import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_event.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc_event.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc_state.dart';
@@ -57,6 +59,9 @@ class _LoginPageState extends State<LoginPage> {
         child: BlocListener<LoginBloc, LoginBlocState>(
           listener: (context, state) {
             if (state.loginStatus == LoginStatus.successfull) {
+              context.read<AccountBloc>().add(
+                    AuthenticateUserEvent(),
+                  );
               context.go(
                 '/home',
               );

@@ -10,7 +10,7 @@ _$ProductColorModelImpl _$$ProductColorModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProductColorModelImpl(
       id: (json['id'] as num).toInt(),
-      colorCode: json['colorCode'] as String,
+      colorCode: json['colorCode'] as String?,
       mainProductImage:
           ImageModel.fromJson(json['mainProductImage'] as Map<String, dynamic>),
       galleryProductImages: (json['galleryProductImages'] as List<dynamic>)
