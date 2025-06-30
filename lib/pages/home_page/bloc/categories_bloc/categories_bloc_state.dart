@@ -7,5 +7,8 @@ part 'categories_bloc_state.freezed.dart';
 class CategoriesBlocState with _$CategoriesBlocState {
   const factory CategoriesBlocState({
     @Default([]) List<CategoryLightModel> categoriesList,
+    @Default(1) int page,
+    @Default(false) bool hasReachedEnd,
+    @Default(false) bool isLoadingNext,
   }) = _CategoriesBlocState;
 }

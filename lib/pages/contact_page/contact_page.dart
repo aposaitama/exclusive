@@ -5,6 +5,7 @@ import 'package:exclusive_web/pages/contact_page/bloc/contact_bloc/contact_bloc.
 import 'package:exclusive_web/pages/contact_page/bloc/contact_bloc/contact_bloc_event.dart';
 import 'package:exclusive_web/pages/contact_page/bloc/contact_bloc/contact_bloc_state.dart';
 import 'package:exclusive_web/pages/sections/footer_section.dart';
+import 'package:exclusive_web/widgets/breadcrumbs_item.dart';
 import 'package:exclusive_web/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,9 +104,7 @@ class _ContactPageState extends State<ContactPage> {
           child: Column(
             children: [
               CustomAppBar(),
-              SizedBox(
-                height: 80.0,
-              ),
+              AutoBreadcrumbs(),
               ConstrainedBox(
                 constraints: BoxConstraints(
                   maxWidth: 1170.0,

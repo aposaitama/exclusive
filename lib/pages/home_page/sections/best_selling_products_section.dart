@@ -5,6 +5,7 @@ import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:exclusive_web/widgets/product_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class BestSellingProductsSection extends StatefulWidget {
   final List<ProductLightModel> bestSellingProducts;
@@ -22,6 +23,9 @@ class _BestSellingProductsSectionState
     extends State<BestSellingProductsSection> {
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
+
     return ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: 1170.0,
@@ -75,23 +79,36 @@ class _BestSellingProductsSectionState
           SizedBox(
             height: 60.0,
           ),
-          SizedBox(
-            height: 350.0,
-            width: (MediaQuery.of(context).size.width / 2) + 585.0,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: widget.bestSellingProducts.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 20.0),
-              itemBuilder: (context, index) {
-                final product = widget.bestSellingProducts[index];
-                return ProductItemTile(
-                  product: product,
-                  onProductImageTap: () => context.go(
-                    '/home/product/${product.documentId}',
-                  ),
-                );
-              },
-            ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final containerWidth = constraints.maxWidth;
+
+              final itemsPerPage = isMobileOrTablet ? 3 : 4;
+              final itemSpacing = 20.0;
+              final totalSpacing = itemSpacing * (itemsPerPage - 1);
+              final itemWidth = (containerWidth - totalSpacing) / itemsPerPage;
+
+              return SizedBox(
+                height: isMobileOrTablet ? 250 : 350,
+                width: containerWidth,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: widget.bestSellingProducts.length,
+                  separatorBuilder: (_, __) => SizedBox(width: itemSpacing),
+                  itemBuilder: (context, index) {
+                    final product = widget.bestSellingProducts[index];
+                    return SizedBox(
+                      width: itemWidth,
+                      child: ProductItemTile(
+                        product: product,
+                        onProductImageTap: () =>
+                            context.go('/home/product/${product.documentId}'),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
           ),
           SizedBox(
             height: 140.0,

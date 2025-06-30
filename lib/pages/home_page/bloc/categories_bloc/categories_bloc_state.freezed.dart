@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CategoriesBlocState {
   List<CategoryLightModel> get categoriesList =>
       throw _privateConstructorUsedError;
+  int get page => throw _privateConstructorUsedError;
+  bool get hasReachedEnd => throw _privateConstructorUsedError;
+  bool get isLoadingNext => throw _privateConstructorUsedError;
 
   /// Create a copy of CategoriesBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +35,11 @@ abstract class $CategoriesBlocStateCopyWith<$Res> {
           CategoriesBlocState value, $Res Function(CategoriesBlocState) then) =
       _$CategoriesBlocStateCopyWithImpl<$Res, CategoriesBlocState>;
   @useResult
-  $Res call({List<CategoryLightModel> categoriesList});
+  $Res call(
+      {List<CategoryLightModel> categoriesList,
+      int page,
+      bool hasReachedEnd,
+      bool isLoadingNext});
 }
 
 /// @nodoc
@@ -51,12 +58,27 @@ class _$CategoriesBlocStateCopyWithImpl<$Res, $Val extends CategoriesBlocState>
   @override
   $Res call({
     Object? categoriesList = null,
+    Object? page = null,
+    Object? hasReachedEnd = null,
+    Object? isLoadingNext = null,
   }) {
     return _then(_value.copyWith(
       categoriesList: null == categoriesList
           ? _value.categoriesList
           : categoriesList // ignore: cast_nullable_to_non_nullable
               as List<CategoryLightModel>,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasReachedEnd: null == hasReachedEnd
+          ? _value.hasReachedEnd
+          : hasReachedEnd // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingNext: null == isLoadingNext
+          ? _value.isLoadingNext
+          : isLoadingNext // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -69,7 +91,11 @@ abstract class _$$CategoriesBlocStateImplCopyWith<$Res>
       __$$CategoriesBlocStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<CategoryLightModel> categoriesList});
+  $Res call(
+      {List<CategoryLightModel> categoriesList,
+      int page,
+      bool hasReachedEnd,
+      bool isLoadingNext});
 }
 
 /// @nodoc
@@ -86,12 +112,27 @@ class __$$CategoriesBlocStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? categoriesList = null,
+    Object? page = null,
+    Object? hasReachedEnd = null,
+    Object? isLoadingNext = null,
   }) {
     return _then(_$CategoriesBlocStateImpl(
       categoriesList: null == categoriesList
           ? _value._categoriesList
           : categoriesList // ignore: cast_nullable_to_non_nullable
               as List<CategoryLightModel>,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasReachedEnd: null == hasReachedEnd
+          ? _value.hasReachedEnd
+          : hasReachedEnd // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingNext: null == isLoadingNext
+          ? _value.isLoadingNext
+          : isLoadingNext // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -100,7 +141,10 @@ class __$$CategoriesBlocStateImplCopyWithImpl<$Res>
 
 class _$CategoriesBlocStateImpl implements _CategoriesBlocState {
   const _$CategoriesBlocStateImpl(
-      {final List<CategoryLightModel> categoriesList = const []})
+      {final List<CategoryLightModel> categoriesList = const [],
+      this.page = 1,
+      this.hasReachedEnd = false,
+      this.isLoadingNext = false})
       : _categoriesList = categoriesList;
 
   final List<CategoryLightModel> _categoriesList;
@@ -113,8 +157,18 @@ class _$CategoriesBlocStateImpl implements _CategoriesBlocState {
   }
 
   @override
+  @JsonKey()
+  final int page;
+  @override
+  @JsonKey()
+  final bool hasReachedEnd;
+  @override
+  @JsonKey()
+  final bool isLoadingNext;
+
+  @override
   String toString() {
-    return 'CategoriesBlocState(categoriesList: $categoriesList)';
+    return 'CategoriesBlocState(categoriesList: $categoriesList, page: $page, hasReachedEnd: $hasReachedEnd, isLoadingNext: $isLoadingNext)';
   }
 
   @override
@@ -123,12 +177,21 @@ class _$CategoriesBlocStateImpl implements _CategoriesBlocState {
         (other.runtimeType == runtimeType &&
             other is _$CategoriesBlocStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._categoriesList, _categoriesList));
+                .equals(other._categoriesList, _categoriesList) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.hasReachedEnd, hasReachedEnd) ||
+                other.hasReachedEnd == hasReachedEnd) &&
+            (identical(other.isLoadingNext, isLoadingNext) ||
+                other.isLoadingNext == isLoadingNext));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_categoriesList));
+      runtimeType,
+      const DeepCollectionEquality().hash(_categoriesList),
+      page,
+      hasReachedEnd,
+      isLoadingNext);
 
   /// Create a copy of CategoriesBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -142,11 +205,19 @@ class _$CategoriesBlocStateImpl implements _CategoriesBlocState {
 
 abstract class _CategoriesBlocState implements CategoriesBlocState {
   const factory _CategoriesBlocState(
-          {final List<CategoryLightModel> categoriesList}) =
-      _$CategoriesBlocStateImpl;
+      {final List<CategoryLightModel> categoriesList,
+      final int page,
+      final bool hasReachedEnd,
+      final bool isLoadingNext}) = _$CategoriesBlocStateImpl;
 
   @override
   List<CategoryLightModel> get categoriesList;
+  @override
+  int get page;
+  @override
+  bool get hasReachedEnd;
+  @override
+  bool get isLoadingNext;
 
   /// Create a copy of CategoriesBlocState
   /// with the given fields replaced by the non-null parameter values.

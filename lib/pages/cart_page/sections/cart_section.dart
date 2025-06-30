@@ -39,9 +39,6 @@ class _CartSectionState extends State<CartSection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          SizedBox(
-            height: 80.0,
-          ),
           Container(
             decoration: BoxDecoration(
               color: Colors.white,

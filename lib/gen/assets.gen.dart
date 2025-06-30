@@ -79,6 +79,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/close_icon.svg
   String get closeIcon => 'assets/icons/close_icon.svg';
 
+  /// File path: assets/icons/count-icon-minus.svg
+  String get countIconMinus => 'assets/icons/count-icon-minus.svg';
+
+  /// File path: assets/icons/count-icon-plus.svg
+  String get countIconPlus => 'assets/icons/count-icon-plus.svg';
+
   /// File path: assets/icons/customer.svg
   String get customer => 'assets/icons/customer.svg';
 
@@ -166,6 +172,8 @@ class $AssetsIconsGen {
         cart,
         categorySellPhone,
         closeIcon,
+        countIconMinus,
+        countIconPlus,
         customer,
         exclusiveLogo,
         goals,

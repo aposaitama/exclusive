@@ -51,9 +51,9 @@ class _HomePageState extends State<HomePage> {
     context.read<PromoBloc>().add(
           LoadPromoBlocEvent(),
         );
-    context.read<CategoriesBloc>().add(
-          LoadCategoriesBlocEvent(),
-        );
+    // context.read<CategoriesBloc>().add(
+    //       LoadCategoriesBlocEvent(),
+    //     );
     context.read<FlashSalesBloc>().add(
           LoadFlashSalesProductEvent(),
         );
@@ -109,7 +109,9 @@ class _HomePageState extends State<HomePage> {
                           !bloc.state.isLoadingNext) {
                         bloc.add(
                           LoadFlashSalesProductLightModelEvent(
-                              bloc.state.page + 1, false),
+                            bloc.state.page + 1,
+                            false,
+                          ),
                         );
                       }
                     },
@@ -121,13 +123,9 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
-            BlocBuilder<CategoriesBloc, CategoriesBlocState>(
-              builder: (context, state) {
-                return CategorySection(
-                  categories: state.categoriesList,
-                );
-              },
-            ),
+            CategorySection(
+                // categories: state.categoriesList,
+                ),
             BlocBuilder<BestSellingBloc, BestSellingBlocState>(
               builder: (context, state) {
                 return BestSellingProductsSection(

@@ -8,6 +8,8 @@ part of 'routes.dart';
 
 List<RouteBase> get $appRoutes => [
       $favouriteRoute,
+      $addressBookRoute,
+      $paymentOptionsRoute,
       $rootShellRoute,
     ];
 
@@ -22,6 +24,52 @@ extension $FavouriteRouteExtension on FavouriteRoute {
 
   String get location => GoRouteData.$location(
         '/favourite',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $addressBookRoute => GoRouteData.$route(
+      path: '/address-book',
+      factory: $AddressBookRouteExtension._fromState,
+    );
+
+extension $AddressBookRouteExtension on AddressBookRoute {
+  static AddressBookRoute _fromState(GoRouterState state) =>
+      const AddressBookRoute();
+
+  String get location => GoRouteData.$location(
+        '/address-book',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $paymentOptionsRoute => GoRouteData.$route(
+      path: '/payment-options',
+      factory: $PaymentOptionsRouteExtension._fromState,
+    );
+
+extension $PaymentOptionsRouteExtension on PaymentOptionsRoute {
+  static PaymentOptionsRoute _fromState(GoRouterState state) =>
+      const PaymentOptionsRoute();
+
+  String get location => GoRouteData.$location(
+        '/payment-options',
       );
 
   void go(BuildContext context) => context.go(location);

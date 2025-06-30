@@ -26,4 +26,21 @@ class CategoriesRepository {
       rethrow;
     }
   }
+
+  Future<List<CategoryLightModel>> getCategoriesPaginated({
+    required int page,
+    required int pageSize,
+  }) async {
+    final response = await _dio.get(
+      '/categories?pagination[page]=$page&pagination[pageSize]=$pageSize&populate=categoryIcon',
+    );
+
+    if (response.isSuccess) {
+      return (response.data['data'] as List)
+          .map((json) => CategoryLightModel.fromJson(json))
+          .toList();
+    } else {
+      return [];
+    }
+  }
 }

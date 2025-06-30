@@ -88,6 +88,8 @@ class AccountPopup {
                               AccountPopupItemTile(
                                 iconPath: Assets.icons.profile,
                                 accountPopupItemName: 'Manage My Account',
+                                onItemPressed: () =>
+                                    context.go('/home/account'),
                               ),
                               AccountPopupItemTile(
                                 iconPath: Assets.icons.iconMallbag,

@@ -16,19 +16,23 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CategoriesBlocEvent {
+  int get page => throw _privateConstructorUsedError;
+  int get pageSize => throw _privateConstructorUsedError;
+  bool get refresh => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadCategories,
+    required TResult Function(int page, int pageSize, bool refresh)
+        loadCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCategories,
+    TResult? Function(int page, int pageSize, bool refresh)? loadCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCategories,
+    TResult Function(int page, int pageSize, bool refresh)? loadCategories,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +52,12 @@ mixin _$CategoriesBlocEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Create a copy of CategoriesBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $CategoriesBlocEventCopyWith<CategoriesBlocEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +65,8 @@ abstract class $CategoriesBlocEventCopyWith<$Res> {
   factory $CategoriesBlocEventCopyWith(
           CategoriesBlocEvent value, $Res Function(CategoriesBlocEvent) then) =
       _$CategoriesBlocEventCopyWithImpl<$Res, CategoriesBlocEvent>;
+  @useResult
+  $Res call({int page, int pageSize, bool refresh});
 }
 
 /// @nodoc
@@ -69,14 +81,40 @@ class _$CategoriesBlocEventCopyWithImpl<$Res, $Val extends CategoriesBlocEvent>
 
   /// Create a copy of CategoriesBlocEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? pageSize = null,
+    Object? refresh = null,
+  }) {
+    return _then(_value.copyWith(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageSize: null == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      refresh: null == refresh
+          ? _value.refresh
+          : refresh // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$LoadCategoriesBlocEventImplCopyWith<$Res> {
+abstract class _$$LoadCategoriesBlocEventImplCopyWith<$Res>
+    implements $CategoriesBlocEventCopyWith<$Res> {
   factory _$$LoadCategoriesBlocEventImplCopyWith(
           _$LoadCategoriesBlocEventImpl value,
           $Res Function(_$LoadCategoriesBlocEventImpl) then) =
       __$$LoadCategoriesBlocEventImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int page, int pageSize, bool refresh});
 }
 
 /// @nodoc
@@ -91,52 +129,95 @@ class __$$LoadCategoriesBlocEventImplCopyWithImpl<$Res>
 
   /// Create a copy of CategoriesBlocEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? pageSize = null,
+    Object? refresh = null,
+  }) {
+    return _then(_$LoadCategoriesBlocEventImpl(
+      null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == refresh
+          ? _value.refresh
+          : refresh // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$LoadCategoriesBlocEventImpl implements LoadCategoriesBlocEvent {
-  const _$LoadCategoriesBlocEventImpl();
+  const _$LoadCategoriesBlocEventImpl(this.page, this.pageSize, this.refresh);
+
+  @override
+  final int page;
+  @override
+  final int pageSize;
+  @override
+  final bool refresh;
 
   @override
   String toString() {
-    return 'CategoriesBlocEvent.loadCategories()';
+    return 'CategoriesBlocEvent.loadCategories(page: $page, pageSize: $pageSize, refresh: $refresh)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadCategoriesBlocEventImpl);
+            other is _$LoadCategoriesBlocEventImpl &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.pageSize, pageSize) ||
+                other.pageSize == pageSize) &&
+            (identical(other.refresh, refresh) || other.refresh == refresh));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, page, pageSize, refresh);
+
+  /// Create a copy of CategoriesBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadCategoriesBlocEventImplCopyWith<_$LoadCategoriesBlocEventImpl>
+      get copyWith => __$$LoadCategoriesBlocEventImplCopyWithImpl<
+          _$LoadCategoriesBlocEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadCategories,
+    required TResult Function(int page, int pageSize, bool refresh)
+        loadCategories,
   }) {
-    return loadCategories();
+    return loadCategories(page, pageSize, refresh);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadCategories,
+    TResult? Function(int page, int pageSize, bool refresh)? loadCategories,
   }) {
-    return loadCategories?.call();
+    return loadCategories?.call(page, pageSize, refresh);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadCategories,
+    TResult Function(int page, int pageSize, bool refresh)? loadCategories,
     required TResult orElse(),
   }) {
     if (loadCategories != null) {
-      return loadCategories();
+      return loadCategories(page, pageSize, refresh);
     }
     return orElse();
   }
@@ -171,5 +252,21 @@ class _$LoadCategoriesBlocEventImpl implements LoadCategoriesBlocEvent {
 }
 
 abstract class LoadCategoriesBlocEvent implements CategoriesBlocEvent {
-  const factory LoadCategoriesBlocEvent() = _$LoadCategoriesBlocEventImpl;
+  const factory LoadCategoriesBlocEvent(
+          final int page, final int pageSize, final bool refresh) =
+      _$LoadCategoriesBlocEventImpl;
+
+  @override
+  int get page;
+  @override
+  int get pageSize;
+  @override
+  bool get refresh;
+
+  /// Create a copy of CategoriesBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadCategoriesBlocEventImplCopyWith<_$LoadCategoriesBlocEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

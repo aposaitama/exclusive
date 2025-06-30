@@ -1,6 +1,8 @@
 import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/pages/about_page/about_page.dart';
 import 'package:exclusive_web/pages/account_page/account_page.dart';
+import 'package:exclusive_web/pages/account_page/address_book_page/address_book_page.dart';
+import 'package:exclusive_web/pages/account_page/payment_page/payment_page.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/login_page.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/register_page.dart';
 import 'package:exclusive_web/pages/cart_page/cart_page.dart';
@@ -44,6 +46,24 @@ class FavouriteRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) {
     return const FavouritePage();
   }
+}
+
+@TypedGoRoute<AddressBookRoute>(path: '/address-book')
+class AddressBookRoute extends GoRouteData {
+  const AddressBookRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const AddressSection();
+}
+
+@TypedGoRoute<PaymentOptionsRoute>(path: '/payment-options')
+class PaymentOptionsRoute extends GoRouteData {
+  const PaymentOptionsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const PaymentSection();
 }
 
 @TypedStatefulShellRoute<RootShellRoute>(

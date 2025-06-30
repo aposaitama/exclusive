@@ -8,6 +8,7 @@ import 'package:exclusive_web/widgets/product_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ExploreOurProductsSection extends StatefulWidget {
   final List<ProductLightModel> ourProducts;
@@ -24,6 +25,8 @@ class ExploreOurProductsSection extends StatefulWidget {
 class _ExploreOurProductsSectionState extends State<ExploreOurProductsSection> {
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    final isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: 1170.0,

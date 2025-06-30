@@ -55,7 +55,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           child: Center(
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                maxWidth: 1170.0,
+                maxWidth: 1210.0,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(

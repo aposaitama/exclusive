@@ -3,6 +3,7 @@ import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CategoryItemTile extends StatefulWidget {
   final String iconPath;
@@ -21,6 +22,9 @@ class _CategoryItemTileState extends State<CategoryItemTile> {
   bool isHover = false;
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
+    bool isTablet = responsive.isMobile || responsive.isTablet;
     return MouseRegion(
       onEnter: (event) => setState(
         () {
@@ -33,8 +37,8 @@ class _CategoryItemTileState extends State<CategoryItemTile> {
         },
       ),
       child: Container(
-        width: 170.0,
-        height: 145.0,
+        width: isMobileOrTablet ? 150.0 : 170.0,
+        height: isMobileOrTablet ? 121.0 : 145.0,
         padding: EdgeInsets.symmetric(
           vertical: 25.0,
         ),
@@ -64,7 +68,7 @@ class _CategoryItemTileState extends State<CategoryItemTile> {
             Text(
               widget.categoryTitle,
               style: AppFonts.poppingRegular.copyWith(
-                fontSize: 16.0,
+                fontSize: isMobileOrTablet ? 10.0 : 16.0,
                 color: isHover ? Colors.white : Colors.black,
               ),
             )

@@ -15,4 +15,20 @@ class CategoriesService {
       rethrow;
     }
   }
+
+  Future<List<CategoryLightModel>> getCategoriesPaginated(
+    int page,
+    int pageSize,
+  ) async {
+    try {
+      final categories = await _categoriesRepository.getCategoriesPaginated(
+        page: page,
+        pageSize: pageSize,
+      );
+
+      return categories;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

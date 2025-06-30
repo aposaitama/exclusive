@@ -10,7 +10,7 @@ import 'package:exclusive_web/pages/product_details_page/sections/product_detail
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/utils/extensions.dart';
-import 'package:exclusive_web/widgets/custom_red_button.dart';
+import 'package:exclusive_web/widgets/custom_small_red_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,7 +45,6 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 80.0,
         bottom: 140.0,
       ),
       child: SizedBox(
@@ -319,8 +318,105 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                                 height: 24.0,
                               ),
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  CustomRedButton(
+                                  Container(
+                                    height: 44.0,
+                                    width: 159.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        4.0,
+                                      ),
+                                      border: Border.all(
+                                        width: 1.5,
+                                        color: Colors.black.withValues(
+                                          alpha: 0.5,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          width: 40.0,
+                                          height: double.infinity,
+                                          decoration: BoxDecoration(
+                                            border: Border(
+                                              right: BorderSide(
+                                                width: 1.5,
+                                                color: Colors.black.withValues(
+                                                  alpha: 0.5,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              if (quantity > 1) {
+                                                setState(
+                                                  () {
+                                                    quantity--;
+                                                  },
+                                                );
+                                              }
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 6.0,
+                                              ),
+                                              child: SvgPicture.asset(
+                                                Assets.icons.countIconMinus,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Text(
+                                          quantity.toString(),
+                                          style:
+                                              AppFonts.poppingMedium.copyWith(
+                                            fontSize: 20.0,
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 40.0,
+                                          height: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.redColor,
+                                            border: Border(
+                                              left: BorderSide(
+                                                width: 1.5,
+                                                color: Colors.black.withValues(
+                                                  alpha: 0.5,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(
+                                                () {
+                                                  quantity++;
+                                                },
+                                              );
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 6.0,
+                                              ),
+                                              child: SvgPicture.asset(
+                                                Assets.icons.countIconPlus,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  CustomSmallRedButton(
                                     onButtonPressed: () =>
                                         context.read<CartBloc>().add(
                                               AddProductToCartlistEvent(
@@ -332,9 +428,6 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                                               ),
                                             ),
                                     buttonTitle: 'Buy Now',
-                                  ),
-                                  SizedBox(
-                                    width: 19.0,
                                   ),
                                   BlocBuilder<FavouriteBloc,
                                       FavouriteBlocState>(
