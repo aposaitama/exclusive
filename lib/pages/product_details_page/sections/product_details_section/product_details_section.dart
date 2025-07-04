@@ -11,6 +11,7 @@ import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/utils/extensions.dart';
 import 'package:exclusive_web/widgets/custom_small_red_button.dart';
+import 'package:exclusive_web/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,7 +28,13 @@ class ProductDetailsSection extends StatefulWidget {
 class _ProductDetailsSectionState extends State<ProductDetailsSection> {
   late ProductColorModel selectedColor;
   String? selectedSize;
+
   int quantity = 1;
+
+  double calculateProductRating() {
+    return widget.productDetailedInfo.totalRating /
+        widget.productDetailedInfo.ratingCount;
+  }
 
   @override
   void initState() {
@@ -43,6 +50,13 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
 
   @override
   Widget build(BuildContext context) {
+    final selectedSizeModel = widget.productDetailedInfo.productSizeList!
+            .where((s) => s.size == selectedSize)
+            .isNotEmpty
+        ? widget.productDetailedInfo.productSizeList!
+            .firstWhere((s) => s.size == selectedSize)
+        : null;
+
     return Padding(
       padding: const EdgeInsets.only(
         bottom: 140.0,
@@ -126,6 +140,65 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                               ),
                               SizedBox(
                                 height: 16.0,
+                              ),
+                              Row(
+                                children: [
+                                  StarRating(
+                                    rating: calculateProductRating(),
+                                    onRatingSelected: (newRating) {
+                                      // setState(
+                                      //   () {
+                                      //     _currentRating = newRating;
+                                      //   },
+                                      // );
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 8.0,
+                                  ),
+                                  Text(
+                                    '(${widget.productDetailedInfo.ratingCount} Reviews)',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 14.0,
+                                      color: Colors.black.withValues(
+                                        alpha: 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 16.0,
+                                  ),
+                                  Text(
+                                    '|',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 20.0,
+                                      color: Colors.black.withValues(
+                                        alpha: 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 16.0,
+                                  ),
+                                  ((selectedSizeModel?.isAvaliable ?? true) &&
+                                          selectedColor.isAvaliable)
+                                      ? Text(
+                                          'In Stock',
+                                          style:
+                                              AppFonts.poppingRegular.copyWith(
+                                            fontSize: 14.0,
+                                            color: AppColors.greenColor,
+                                          ),
+                                        )
+                                      : Text(
+                                          'Out of Stock',
+                                          style:
+                                              AppFonts.poppingRegular.copyWith(
+                                            fontSize: 14.0,
+                                            color: AppColors.redColor,
+                                          ),
+                                        ),
+                                ],
                               ),
                               SizedBox(
                                 height: 16.0,
@@ -317,170 +390,257 @@ class _ProductDetailsSectionState extends State<ProductDetailsSection> {
                               SizedBox(
                                 height: 24.0,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    height: 44.0,
-                                    width: 159.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                        4.0,
-                                      ),
-                                      border: Border.all(
-                                        width: 1.5,
-                                        color: Colors.black.withValues(
-                                          alpha: 0.5,
-                                        ),
-                                      ),
-                                    ),
-                                    child: Row(
+                              ((selectedSizeModel?.isAvaliable ?? true) &&
+                                      selectedColor.isAvaliable)
+                                  ? Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Container(
-                                          width: 40.0,
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            border: Border(
-                                              right: BorderSide(
-                                                width: 1.5,
-                                                color: Colors.black.withValues(
-                                                  alpha: 0.5,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              if (quantity > 1) {
-                                                setState(
-                                                  () {
-                                                    quantity--;
-                                                  },
-                                                );
-                                              }
-                                            },
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: 6.0,
-                                              ),
-                                              child: SvgPicture.asset(
-                                                Assets.icons.countIconMinus,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Text(
-                                          quantity.toString(),
-                                          style:
-                                              AppFonts.poppingMedium.copyWith(
-                                            fontSize: 20.0,
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 40.0,
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.redColor,
-                                            border: Border(
-                                              left: BorderSide(
-                                                width: 1.5,
-                                                color: Colors.black.withValues(
-                                                  alpha: 0.5,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              setState(
-                                                () {
-                                                  quantity++;
-                                                },
-                                              );
-                                            },
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: 6.0,
-                                              ),
-                                              child: SvgPicture.asset(
-                                                Assets.icons.countIconPlus,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  CustomSmallRedButton(
-                                    onButtonPressed: () =>
-                                        context.read<CartBloc>().add(
-                                              AddProductToCartlistEvent(
-                                                widget.productDetailedInfo.id
-                                                    .toString(),
-                                                selectedColor.id.toString(),
-                                                quantity,
-                                                selectedSize,
-                                              ),
-                                            ),
-                                    buttonTitle: 'Buy Now',
-                                  ),
-                                  BlocBuilder<FavouriteBloc,
-                                      FavouriteBlocState>(
-                                    builder: (context, state) {
-                                      final isFavourite =
-                                          state.productsList.any(
-                                        (product) =>
-                                            product.id.toString() ==
-                                            widget.productDetailedInfo.id
-                                                .toString(),
-                                      );
-                                      return GestureDetector(
-                                        onTap: () => !isFavourite
-                                            ? context.read<FavouriteBloc>().add(
-                                                  AddProductToWishlistEvent(
-                                                    widget
-                                                        .productDetailedInfo.id
-                                                        .toString(),
-                                                  ),
-                                                )
-                                            : context.read<FavouriteBloc>().add(
-                                                  RemoveProductFromWishlistEvent(
-                                                    widget
-                                                        .productDetailedInfo.id
-                                                        .toString(),
-                                                  ),
-                                                ),
-                                        child: Container(
-                                          width: 40.0,
-                                          height: 40.0,
+                                          height: 44.0,
+                                          width: 159.0,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(
                                               4.0,
                                             ),
                                             border: Border.all(
-                                              width: 1.0,
+                                              width: 1.5,
                                               color: Colors.black.withValues(
                                                 alpha: 0.5,
                                               ),
                                             ),
                                           ),
-                                          child: SvgPicture.asset(
-                                            isFavourite
-                                                ? Assets.icons.iconDelete
-                                                : Assets.icons.heartSmall,
-                                            fit: BoxFit.scaleDown,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                width: 40.0,
+                                                height: double.infinity,
+                                                decoration: BoxDecoration(
+                                                  border: Border(
+                                                    right: BorderSide(
+                                                      width: 1.5,
+                                                      color: Colors.black
+                                                          .withValues(
+                                                        alpha: 0.5,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    if (quantity > 1) {
+                                                      setState(
+                                                        () {
+                                                          quantity--;
+                                                        },
+                                                      );
+                                                    }
+                                                  },
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                      horizontal: 6.0,
+                                                    ),
+                                                    child: SvgPicture.asset(
+                                                      Assets
+                                                          .icons.countIconMinus,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Text(
+                                                quantity.toString(),
+                                                style: AppFonts.poppingMedium
+                                                    .copyWith(
+                                                  fontSize: 20.0,
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 40.0,
+                                                height: double.infinity,
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.redColor,
+                                                  border: Border(
+                                                    left: BorderSide(
+                                                      width: 1.5,
+                                                      color: Colors.black
+                                                          .withValues(
+                                                        alpha: 0.5,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    setState(
+                                                      () {
+                                                        quantity++;
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                      horizontal: 6.0,
+                                                    ),
+                                                    child: SvgPicture.asset(
+                                                      Assets
+                                                          .icons.countIconPlus,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      );
-                                    },
-                                  )
-                                ],
-                              )
+                                        CustomSmallRedButton(
+                                          onButtonPressed: () => context
+                                              .read<CartBloc>()
+                                              .add(
+                                                AddProductToCartlistEvent(
+                                                  widget.productDetailedInfo.id
+                                                      .toString(),
+                                                  selectedColor.id.toString(),
+                                                  quantity,
+                                                  selectedSize,
+                                                ),
+                                              ),
+                                          buttonTitle: 'Buy Now',
+                                        ),
+                                        BlocBuilder<FavouriteBloc,
+                                            FavouriteBlocState>(
+                                          builder: (context, state) {
+                                            final isFavourite =
+                                                state.productsList.any(
+                                              (product) =>
+                                                  product.id.toString() ==
+                                                  widget.productDetailedInfo.id
+                                                      .toString(),
+                                            );
+                                            return GestureDetector(
+                                              onTap: () => !isFavourite
+                                                  ? context
+                                                      .read<FavouriteBloc>()
+                                                      .add(
+                                                        AddProductToWishlistEvent(
+                                                          widget
+                                                              .productDetailedInfo
+                                                              .id
+                                                              .toString(),
+                                                        ),
+                                                      )
+                                                  : context
+                                                      .read<FavouriteBloc>()
+                                                      .add(
+                                                        RemoveProductFromWishlistEvent(
+                                                          widget
+                                                              .productDetailedInfo
+                                                              .id
+                                                              .toString(),
+                                                        ),
+                                                      ),
+                                              child: Container(
+                                                width: 40.0,
+                                                height: 40.0,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    4.0,
+                                                  ),
+                                                  border: Border.all(
+                                                    width: 1.0,
+                                                    color:
+                                                        Colors.black.withValues(
+                                                      alpha: 0.5,
+                                                    ),
+                                                  ),
+                                                ),
+                                                child: SvgPicture.asset(
+                                                  isFavourite
+                                                      ? Assets.icons.iconDelete
+                                                      : Assets.icons.heartSmall,
+                                                  fit: BoxFit.scaleDown,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        )
+                                      ],
+                                    )
+                                  : Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 2.0,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          BlocBuilder<FavouriteBloc,
+                                              FavouriteBlocState>(
+                                            builder: (context, state) {
+                                              final isFavourite =
+                                                  state.productsList.any(
+                                                (product) =>
+                                                    product.id.toString() ==
+                                                    widget
+                                                        .productDetailedInfo.id
+                                                        .toString(),
+                                              );
+                                              return GestureDetector(
+                                                onTap: () => !isFavourite
+                                                    ? context
+                                                        .read<FavouriteBloc>()
+                                                        .add(
+                                                          AddProductToWishlistEvent(
+                                                            widget
+                                                                .productDetailedInfo
+                                                                .id
+                                                                .toString(),
+                                                          ),
+                                                        )
+                                                    : context
+                                                        .read<FavouriteBloc>()
+                                                        .add(
+                                                          RemoveProductFromWishlistEvent(
+                                                            widget
+                                                                .productDetailedInfo
+                                                                .id
+                                                                .toString(),
+                                                          ),
+                                                        ),
+                                                child: Container(
+                                                  width: 40.0,
+                                                  height: 40.0,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      4.0,
+                                                    ),
+                                                    border: Border.all(
+                                                      width: 1.0,
+                                                      color: Colors.black
+                                                          .withValues(
+                                                        alpha: 0.5,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  child: SvgPicture.asset(
+                                                    isFavourite
+                                                        ? Assets
+                                                            .icons.iconDelete
+                                                        : Assets
+                                                            .icons.heartSmall,
+                                                    fit: BoxFit.scaleDown,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          )
+                                        ],
+                                      ),
+                                    )
                             ],
                           ),
                           DeliveryInformationWidget(),

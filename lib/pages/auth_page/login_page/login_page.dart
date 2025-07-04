@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_bloc.dart';
 import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_event.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/bloc/login_bloc/login_bloc.dart';
@@ -44,9 +45,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _onSignUpPressed() {
-    context.go(
-      '/sign-up',
-    );
+    SignUpRoute().go(context);
   }
 
   @override
@@ -62,9 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               context.read<AccountBloc>().add(
                     AuthenticateUserEvent(),
                   );
-              context.go(
-                '/home',
-              );
+              HomeRoute().go(context);
             } else if (state.loginStatus == LoginStatus.failed) {
               BotToast.showCustomText(
                 toastBuilder: (_) => Padding(

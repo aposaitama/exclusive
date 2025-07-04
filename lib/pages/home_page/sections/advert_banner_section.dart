@@ -63,6 +63,12 @@ class _AdvertBannerSectionState extends State<AdvertBannerSection> {
   }
 
   @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(

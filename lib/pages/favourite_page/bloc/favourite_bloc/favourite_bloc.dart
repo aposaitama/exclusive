@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:exclusive_web/di/service_locator.dart';
+import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
 import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc_state.dart';
 import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_event_bloc.dart';
 import 'package:exclusive_web/services/favourite_service/favourite_service.dart';
@@ -107,12 +108,26 @@ class FavouriteBloc extends Bloc<FavouriteBlocEvent, FavouriteBlocState> {
         errorMessage: '',
       ),
     );
+
     try {
       final productInfo = await _favouriteService.getWishlist();
+
+      List<ProductLightModel> relatedItems = [];
+
+      if (productInfo.isNotEmpty) {
+        final categoryName = await _favouriteService
+            .getCategoryItemName(productInfo.first.documentId);
+        relatedItems = await _favouriteService.getRelatedItems(
+          categoryName,
+        );
+      }
+
       emit(
         state.copyWith(
           productsList: productInfo,
+          relatedItems: relatedItems,
           loadingWishlistStatus: LoadingWishlistStatus.successfull,
+          errorMessage: '',
         ),
       );
     } catch (e) {
@@ -123,11 +138,5 @@ class FavouriteBloc extends Bloc<FavouriteBlocEvent, FavouriteBlocState> {
         ),
       );
     }
-    emit(
-      state.copyWith(
-        loadingWishlistStatus: LoadingWishlistStatus.initial,
-        errorMessage: '',
-      ),
-    );
   }
 }

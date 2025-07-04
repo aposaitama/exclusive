@@ -1,17 +1,17 @@
 import 'dart:async';
-
 import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/models/flash_sale_model/flash_sale_model.dart';
 import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/pages/home_page/widgets/count_time_widget.dart';
+import 'package:exclusive_web/repositories/general_products_repository/general_products_repository.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
-import 'package:exclusive_web/services/toast_service/toast_service.dart';
+
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:exclusive_web/widgets/product_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 class FlashSalesSection extends StatefulWidget {
   final List<ProductLightModel> products;
@@ -214,30 +214,6 @@ class _FlashSalesSectionState extends State<FlashSalesSection> {
                 ],
               ),
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.end,
-            //   children: [
-            //     SizedBox(
-            //       height: 350.0,
-            //       width: (MediaQuery.of(context).size.width / 2) + 585.0,
-            //       child: ListView.separated(
-            //         // controller: _scrollController,
-            //         scrollDirection: Axis.horizontal,
-            //         itemCount: widget.flashSalesItems.products.length,
-            //         separatorBuilder: (_, __) => const SizedBox(width: 20.0),
-            //         itemBuilder: (context, index) {
-            //           final product = widget.flashSalesItems.products[index];
-            //           return ProductItemTile(
-            //             onProductImageTap: () {
-            //               context.go('/home/product/${product.documentId}');
-            //             },
-            //             product: product,
-            //           );
-            //         },
-            //       ),
-            //     ),
-            //   ],
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -253,7 +229,8 @@ class _FlashSalesSectionState extends State<FlashSalesSection> {
                       final product = widget.products[index];
                       return ProductItemTile(
                         onProductImageTap: () {
-                          context.go('/home/product/${product.documentId}');
+                          ProductDetailsRoute(id: product.documentId)
+                              .go(context);
                         },
                         product: product,
                       );
@@ -266,6 +243,10 @@ class _FlashSalesSectionState extends State<FlashSalesSection> {
               height: 60.0,
             ),
             CustomRedButton(
+              onButtonPressed: () => ProductsRoute(
+                type: ProductSectionType.flashSale,
+                sectionName: 'Flash Sales',
+              ).go(context),
               buttonTitle: 'View All Products',
             ),
             SizedBox(

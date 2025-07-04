@@ -1,4 +1,6 @@
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
+import 'package:exclusive_web/services/toast_service/toast_service.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -122,7 +124,15 @@ class CartTotal extends StatelessWidget {
           ),
           Center(
             child: CustomRedButton(
-              onButtonPressed: () => context.go('/home/checkout'),
+              onButtonPressed: () {
+                if (totalSumm != 0.0) {
+                  CheckoutRoute().go(context);
+                } else {
+                  ToastService.showError(
+                    'You have to add some products first.',
+                  );
+                }
+              },
               buttonTitle: 'Procees to checkout',
             ),
           )

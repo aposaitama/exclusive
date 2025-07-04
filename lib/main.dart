@@ -14,6 +14,7 @@ import 'package:exclusive_web/pages/home_page/bloc/categories_bloc/categories_bl
 import 'package:exclusive_web/pages/home_page/bloc/flash_sales_bloc/flash_sales_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/our_product_bloc/our_product_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/promo_bloc/promo_bloc.dart';
+import 'package:exclusive_web/pages/home_page/bloc/search_bloc/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -66,6 +67,9 @@ void main() async {
       ),
       BlocProvider(
         create: (context) => CheckoutBloc(),
+      ),
+      BlocProvider(
+        create: (context) => SearchBloc(),
       ),
     ],
     child: const MyApp(),

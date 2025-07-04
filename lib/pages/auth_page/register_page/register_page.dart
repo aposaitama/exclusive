@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_bloc.dart';
 import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_event.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/bloc/register_bloc/register_bloc.dart';
@@ -47,9 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _onLogInPressed() {
-    context.go(
-      '/login',
-    );
+    LoginRoute().go(context);
   }
 
   @override
@@ -65,9 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
               context.read<AccountBloc>().add(
                     AuthenticateUserEvent(),
                   );
-              context.go(
-                '/home',
-              );
+              HomeRoute().go(context);
             } else if (state.status == RegisterStatus.failed) {
               BotToast.showCustomText(
                 toastBuilder: (_) => Padding(

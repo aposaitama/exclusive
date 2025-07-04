@@ -1,7 +1,9 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
+import 'package:exclusive_web/services/toast_service/toast_service.dart';
 import 'package:exclusive_web/widgets/custom_transparent_button.dart';
 import 'package:exclusive_web/widgets/product_item_tile.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +55,13 @@ class _WishlistSectionState extends State<WishlistSection> {
                 ),
               ),
               CustomTransparentButton(
+                onButtonPressed: () {
+                  if (widget.wishListProducts.isEmpty) {
+                    ToastService.showError(
+                      'Add some product to wishlist first.',
+                    );
+                  }
+                },
                 buttonTitle: 'Move All To Bag',
               )
             ],
@@ -119,9 +128,7 @@ class _WishlistSectionState extends State<WishlistSection> {
                 return ProductItemTile(
                   wishlistMode: true,
                   onProductImageTap: () {
-                    context.go(
-                      '/home/product/${product.documentId}',
-                    );
+                    ProductDetailsRoute(id: product.documentId).go(context);
                   },
                   product: product,
                 );

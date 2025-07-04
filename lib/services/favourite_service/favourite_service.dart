@@ -35,6 +35,20 @@ class FavouriteService {
     return products;
   }
 
+  Future<List<ProductLightModel>> getRelatedItems(
+    String categoryName,
+  ) async {
+    final relatedProducts = await localRepository.getRelatedItems(categoryName);
+
+    return relatedProducts;
+  }
+
+  Future<String> getCategoryItemName(String documentId) async {
+    return await localRepository.getCategoryItemName(
+      documentId,
+    );
+  }
+
   Future<void> clearWishlist() async {
     await localRepository.clearWishlist();
   }

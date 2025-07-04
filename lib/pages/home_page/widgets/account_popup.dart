@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_bloc.dart';
 import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_event.dart';
 import 'package:exclusive_web/pages/home_page/widgets/account_popup_item_tile.dart';
@@ -50,7 +51,7 @@ class AccountPopup {
                   ),
                   child: SizedBox(
                     width: 229.0,
-                    height: 176.0,
+                    height: 105.0,
                     child: Stack(
                       children: [
                         BackdropFilter(
@@ -89,15 +90,7 @@ class AccountPopup {
                                 iconPath: Assets.icons.profile,
                                 accountPopupItemName: 'Manage My Account',
                                 onItemPressed: () =>
-                                    context.go('/home/account'),
-                              ),
-                              AccountPopupItemTile(
-                                iconPath: Assets.icons.iconMallbag,
-                                accountPopupItemName: 'My Order',
-                              ),
-                              AccountPopupItemTile(
-                                iconPath: Assets.icons.iconReviews,
-                                accountPopupItemName: 'My Reviews',
+                                    AccountProfileRoute().go(context),
                               ),
                               AccountPopupItemTile(
                                 onItemPressed: () {

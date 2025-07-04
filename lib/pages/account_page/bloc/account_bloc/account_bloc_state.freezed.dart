@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AccountState {
   bool get isAuthenticated => throw _privateConstructorUsedError;
+  UserModel? get userInfo => throw _privateConstructorUsedError;
+  List<AddressModel> get userAddresses => throw _privateConstructorUsedError;
 
   /// Create a copy of AccountState
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +33,12 @@ abstract class $AccountStateCopyWith<$Res> {
           AccountState value, $Res Function(AccountState) then) =
       _$AccountStateCopyWithImpl<$Res, AccountState>;
   @useResult
-  $Res call({bool isAuthenticated});
+  $Res call(
+      {bool isAuthenticated,
+      UserModel? userInfo,
+      List<AddressModel> userAddresses});
+
+  $UserModelCopyWith<$Res>? get userInfo;
 }
 
 /// @nodoc
@@ -50,13 +57,37 @@ class _$AccountStateCopyWithImpl<$Res, $Val extends AccountState>
   @override
   $Res call({
     Object? isAuthenticated = null,
+    Object? userInfo = freezed,
+    Object? userAddresses = null,
   }) {
     return _then(_value.copyWith(
       isAuthenticated: null == isAuthenticated
           ? _value.isAuthenticated
           : isAuthenticated // ignore: cast_nullable_to_non_nullable
               as bool,
+      userInfo: freezed == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      userAddresses: null == userAddresses
+          ? _value.userAddresses
+          : userAddresses // ignore: cast_nullable_to_non_nullable
+              as List<AddressModel>,
     ) as $Val);
+  }
+
+  /// Create a copy of AccountState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res>? get userInfo {
+    if (_value.userInfo == null) {
+      return null;
+    }
+
+    return $UserModelCopyWith<$Res>(_value.userInfo!, (value) {
+      return _then(_value.copyWith(userInfo: value) as $Val);
+    });
   }
 }
 
@@ -68,7 +99,13 @@ abstract class _$$AccountStateImplCopyWith<$Res>
       __$$AccountStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isAuthenticated});
+  $Res call(
+      {bool isAuthenticated,
+      UserModel? userInfo,
+      List<AddressModel> userAddresses});
+
+  @override
+  $UserModelCopyWith<$Res>? get userInfo;
 }
 
 /// @nodoc
@@ -85,12 +122,22 @@ class __$$AccountStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isAuthenticated = null,
+    Object? userInfo = freezed,
+    Object? userAddresses = null,
   }) {
     return _then(_$AccountStateImpl(
       isAuthenticated: null == isAuthenticated
           ? _value.isAuthenticated
           : isAuthenticated // ignore: cast_nullable_to_non_nullable
               as bool,
+      userInfo: freezed == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      userAddresses: null == userAddresses
+          ? _value._userAddresses
+          : userAddresses // ignore: cast_nullable_to_non_nullable
+              as List<AddressModel>,
     ));
   }
 }
@@ -98,15 +145,29 @@ class __$$AccountStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AccountStateImpl implements _AccountState {
-  _$AccountStateImpl({this.isAuthenticated = false});
+  _$AccountStateImpl(
+      {this.isAuthenticated = false,
+      this.userInfo,
+      final List<AddressModel> userAddresses = const []})
+      : _userAddresses = userAddresses;
 
   @override
   @JsonKey()
   final bool isAuthenticated;
+  @override
+  final UserModel? userInfo;
+  final List<AddressModel> _userAddresses;
+  @override
+  @JsonKey()
+  List<AddressModel> get userAddresses {
+    if (_userAddresses is EqualUnmodifiableListView) return _userAddresses;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userAddresses);
+  }
 
   @override
   String toString() {
-    return 'AccountState(isAuthenticated: $isAuthenticated)';
+    return 'AccountState(isAuthenticated: $isAuthenticated, userInfo: $userInfo, userAddresses: $userAddresses)';
   }
 
   @override
@@ -115,11 +176,16 @@ class _$AccountStateImpl implements _AccountState {
         (other.runtimeType == runtimeType &&
             other is _$AccountStateImpl &&
             (identical(other.isAuthenticated, isAuthenticated) ||
-                other.isAuthenticated == isAuthenticated));
+                other.isAuthenticated == isAuthenticated) &&
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo) &&
+            const DeepCollectionEquality()
+                .equals(other._userAddresses, _userAddresses));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isAuthenticated);
+  int get hashCode => Object.hash(runtimeType, isAuthenticated, userInfo,
+      const DeepCollectionEquality().hash(_userAddresses));
 
   /// Create a copy of AccountState
   /// with the given fields replaced by the non-null parameter values.
@@ -131,10 +197,17 @@ class _$AccountStateImpl implements _AccountState {
 }
 
 abstract class _AccountState implements AccountState {
-  factory _AccountState({final bool isAuthenticated}) = _$AccountStateImpl;
+  factory _AccountState(
+      {final bool isAuthenticated,
+      final UserModel? userInfo,
+      final List<AddressModel> userAddresses}) = _$AccountStateImpl;
 
   @override
   bool get isAuthenticated;
+  @override
+  UserModel? get userInfo;
+  @override
+  List<AddressModel> get userAddresses;
 
   /// Create a copy of AccountState
   /// with the given fields replaced by the non-null parameter values.

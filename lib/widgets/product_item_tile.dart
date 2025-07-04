@@ -8,6 +8,7 @@ import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/utils/extensions.dart';
+import 'package:exclusive_web/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,6 +30,10 @@ class ProductItemTile extends StatefulWidget {
 }
 
 class _ProductItemTileState extends State<ProductItemTile> {
+  double calculateProductRating() {
+    return widget.product.totalRating / widget.product.ratingCount;
+  }
+
   bool openCartButton = false;
   @override
   Widget build(BuildContext context) {
@@ -256,7 +261,38 @@ class _ProductItemTileState extends State<ProductItemTile> {
                     )
                   : SizedBox.shrink(),
             ],
-          )
+          ),
+          SizedBox(
+            height: 8.0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              StarRating(
+                isHoverEnabled: false,
+                rating: calculateProductRating(),
+                onRatingSelected: (newRating) {
+                  // setState(
+                  //   () {
+                  //     _currentRating = newRating;
+                  //   },
+                  // );
+                },
+              ),
+              SizedBox(
+                width: 8.0,
+              ),
+              Text(
+                '(${widget.product.ratingCount})',
+                style: AppFonts.poppingRegular.copyWith(
+                  fontSize: 14.0,
+                  color: Colors.black.withValues(
+                    alpha: 0.5,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

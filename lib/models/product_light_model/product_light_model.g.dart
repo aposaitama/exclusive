@@ -18,6 +18,10 @@ _$ProductLightModelImpl _$$ProductLightModelImplFromJson(
       totalRating: (json['totalRating'] as num).toDouble(),
       salePercent: (json['salePercent'] as num?)?.toDouble(),
       saleCount: (json['saleCount'] as num).toInt(),
+      category: json['category'] == null
+          ? null
+          : CategoryLightModel.fromJson(
+              json['category'] as Map<String, dynamic>),
       product_colors: (json['product_colors'] as List<dynamic>)
           .map((e) => ProductColorModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -35,5 +39,6 @@ Map<String, dynamic> _$$ProductLightModelImplToJson(
       'totalRating': instance.totalRating,
       'salePercent': instance.salePercent,
       'saleCount': instance.saleCount,
+      'category': instance.category,
       'product_colors': instance.product_colors,
     };

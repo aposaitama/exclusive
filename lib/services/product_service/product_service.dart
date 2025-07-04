@@ -52,9 +52,60 @@ class ProductService {
     }
   }
 
+  Future<List<ProductLightModel>> getOurProductPaginated({
+    required int page,
+    int pageSize = 6,
+  }) async {
+    try {
+      final products = await _productRepository.fetchOurProductsPaginated(
+        page: page,
+        pageSize: pageSize,
+      );
+
+      return products;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductLightModel>> searchProducts({
+    required String query,
+    required int page,
+    int pageSize = 6,
+  }) async {
+    try {
+      final products = await _productRepository.searchProducts(
+        query: query,
+        page: page,
+        pageSize: pageSize,
+      );
+
+      return products;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<ProductLightModel>> getBestSellingProducts() async {
     try {
       final products = await _productRepository.fetchBestSellingProducts();
+
+      return products;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductLightModel>> getBestSellingProductsPaginated({
+    required int page,
+    int pageSize = 6,
+  }) async {
+    try {
+      final products =
+          await _productRepository.fetchBestSellingProductsPaginated(
+        page: page,
+        pageSize: pageSize,
+      );
 
       return products;
     } catch (e) {

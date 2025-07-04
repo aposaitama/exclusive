@@ -1,14 +1,19 @@
 import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/gen/assets.gen.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_bloc.dart';
 import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_bloc_state.dart';
 import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc.dart';
 import 'package:exclusive_web/pages/cart_page/cart_bloc/cart_bloc_state.dart';
 import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc.dart';
 import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc_state.dart';
+import 'package:exclusive_web/pages/home_page/bloc/search_bloc/search_bloc.dart';
+import 'package:exclusive_web/pages/home_page/bloc/search_bloc/search_bloc_event.dart';
+import 'package:exclusive_web/pages/home_page/bloc/search_bloc/search_bloc_state.dart';
 import 'package:exclusive_web/pages/home_page/widgets/account_popup.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/services/shared_preferences_service/shared_preferences_service.dart';
+import 'package:exclusive_web/utils/extensions.dart';
 import 'package:exclusive_web/widgets/app_bar_text_field.dart';
 import 'package:exclusive_web/widgets/nav_title_item_tile.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +31,8 @@ class CustomAppBar extends StatefulWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   final LayerLink _layerLink = LayerLink();
   final GlobalKey _avatarKey = GlobalKey();
+  OverlayEntry? _searchOverlayEntry;
+  final LayerLink _searchFieldLink = LayerLink();
 
   @override
   void initState() {
@@ -33,6 +40,116 @@ class _CustomAppBarState extends State<CustomAppBar> {
   }
 
   final TextEditingController searchController = TextEditingController();
+
+  void _showSearchPopup() {
+    final query = searchController.text.trim();
+    if (query.isEmpty) return;
+
+    context.read<SearchBloc>().add(
+          SearchProductsEvent(query),
+        );
+    _removeSearchPopup();
+
+    final overlay = Overlay.of(context);
+
+    _searchOverlayEntry = OverlayEntry(
+      builder: (context) => Stack(
+        children: [
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: () {
+                _removeSearchPopup();
+              },
+              behavior: HitTestBehavior.translucent,
+              child: Container(),
+            ),
+          ),
+          Positioned(
+            width: 245,
+            child: CompositedTransformFollower(
+              link: _searchFieldLink,
+              showWhenUnlinked: false,
+              offset: const Offset(0, 45),
+              child: Material(
+                elevation: 8,
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  padding: const EdgeInsets.only(
+                    left: 5.0,
+                    right: 5.0,
+                    top: 10.0,
+                    bottom: 10.0,
+                  ),
+                  color: Colors.white,
+                  child: BlocBuilder<SearchBloc, SearchBlocState>(
+                    builder: (context, state) {
+                      if (state.status == SearchBlocStatus.loading) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      if (state.productList.isEmpty) {
+                        return Text(
+                          'No results',
+                          style: AppFonts.poppingRegular.copyWith(
+                            fontSize: 14.0,
+                          ),
+                        );
+                      }
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: state.productList.map((product) {
+                          return MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () {
+                                _removeSearchPopup();
+                                ProductDetailsRoute(id: product.documentId)
+                                    .go(context);
+                              },
+                              child: ListTile(
+                                title: Text(
+                                  product.productName,
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                                leading: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      4.0,
+                                    ),
+                                    color: Colors.grey[300],
+                                  ),
+                                  width: 40,
+                                  height: 40,
+                                  child: Image.network(
+                                    product.product_colors.first
+                                        .mainProductImage.url
+                                        .toImageUrl(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    overlay.insert(_searchOverlayEntry!);
+  }
+
+  void _removeSearchPopup() {
+    _searchOverlayEntry?.remove();
+    _searchOverlayEntry = null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountBloc, AccountState>(
@@ -103,11 +220,32 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         ),
                         Row(
                           children: [
-                            SizedBox(
-                              width: 245.0,
-                              child: AppBarTextField(
-                                hintText: 'What are you looking for?',
-                                controller: searchController,
+                            CompositedTransformTarget(
+                              link: _searchFieldLink,
+                              child: SizedBox(
+                                width: 245.0,
+                                child: AppBarTextField(
+                                  onChanged: (value) {
+                                    final query = value.trim();
+                                    if (query.isNotEmpty) {
+                                      context
+                                          .read<SearchBloc>()
+                                          .add(SearchProductsEvent(query));
+                                      if (_searchOverlayEntry == null) {
+                                        _showSearchPopup();
+                                      }
+                                    } else {
+                                      _removeSearchPopup();
+
+                                      context
+                                          .read<SearchBloc>()
+                                          .add(const SearchProductsEvent(''));
+                                    }
+                                  },
+                                  onSearch: _showSearchPopup,
+                                  hintText: 'What are you looking for?',
+                                  controller: searchController,
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -118,9 +256,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                 int productInWishlist =
                                     state.productsList.length;
                                 return GestureDetector(
-                                  onTap: () => context.go(
-                                    '/favourite',
-                                  ),
+                                  onTap: () => FavouriteRoute().go(context),
                                   child: SizedBox(
                                     width: 32.0,
                                     height: 32.0,
@@ -165,9 +301,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                 int productInCartlist =
                                     state.productsList.length;
                                 return GestureDetector(
-                                  onTap: () => context.go(
-                                    '/home/cart',
-                                  ),
+                                  onTap: () => CartRoute().go(context),
                                   child: SizedBox(
                                     width: 32.0,
                                     height: 32.0,

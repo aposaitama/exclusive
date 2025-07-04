@@ -95,10 +95,89 @@ class ProductRepository {
     }
   }
 
+  Future<List<ProductLightModel>> fetchOurProductsPaginated({
+    required int page,
+    int pageSize = 6,
+  }) async {
+    try {
+      final url =
+          '/products?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&pagination[page]=$page&pagination[pageSize]=$pageSize&filters[isOurProduct]=true';
+
+      final response = await _dio.get(url);
+
+      if (response.isSuccess) {
+        return (response.data['data'] as List)
+            .map(
+              (json) => ProductLightModel.fromJson(
+                json as Map<String, dynamic>,
+              ),
+            )
+            .toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductLightModel>> searchProducts({
+    required String query,
+    required int page,
+    int pageSize = 6,
+  }) async {
+    try {
+      final url =
+          '/products?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&pagination[page]=$page&pagination[pageSize]=$pageSize&filters[productName][\$contains]=$query';
+
+      final response = await _dio.get(url);
+
+      if (response.isSuccess) {
+        return (response.data['data'] as List)
+            .map(
+              (json) => ProductLightModel.fromJson(
+                json as Map<String, dynamic>,
+              ),
+            )
+            .toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<ProductLightModel>> fetchBestSellingProducts() async {
     try {
       const url =
           '/products?filters[saleCount][\$gt]=0&sort[0]=saleCount:desc&populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage';
+
+      final response = await _dio.get(url);
+
+      if (response.isSuccess) {
+        return (response.data['data'] as List)
+            .map(
+              (json) => ProductLightModel.fromJson(
+                json as Map<String, dynamic>,
+              ),
+            )
+            .toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductLightModel>> fetchBestSellingProductsPaginated({
+    required int page,
+    int pageSize = 6,
+  }) async {
+    try {
+      final url =
+          '/products?filters[saleCount][\$gt]=0&sort[0]=saleCount:desc&populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&pagination[page]=$page&pagination[pageSize]=$pageSize';
 
       final response = await _dio.get(url);
 
@@ -185,11 +264,9 @@ class ProductRepository {
         queryParameters['filters[id][\$in][$i]'] = productIds[i];
       }
 
-      // Додаємо параметри для populate
       queryParameters['populate'] = 'product_colors.mainProductImage';
       queryParameters['populate[]'] = 'product_colors.galleryProductImages';
 
-      // Формуємо повний URL з параметрами
       final uri =
           Uri.parse('/products').replace(queryParameters: queryParameters);
 

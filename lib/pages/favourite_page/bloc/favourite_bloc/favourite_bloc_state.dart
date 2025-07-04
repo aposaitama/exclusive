@@ -11,6 +11,7 @@ class FavouriteBlocState with _$FavouriteBlocState {
     @Default(LoadingWishlistStatus.initial)
     LoadingWishlistStatus loadingWishlistStatus,
     @Default([]) List<ProductLightModel> productsList,
+    @Default([]) List<ProductLightModel> relatedItems,
     @Default('') String errorMessage,
   }) = _FavouriteBlocState;
 }

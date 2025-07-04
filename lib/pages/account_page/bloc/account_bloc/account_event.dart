@@ -8,7 +8,23 @@ class AccountEvent with _$AccountEvent {
 
   const factory AccountEvent.logoutUser() = LogoutUserEvent;
 
-  const factory AccountEvent.editUserData() = EditUserDataEvent;
+  const factory AccountEvent.editUserData(
+    Map<String, dynamic> data,
+  ) = EditUserDataEvent;
+
+  const factory AccountEvent.addAddress(
+    String firstName,
+    String lastName,
+    String streetAddress,
+    String city,
+    String phoneNumber,
+    String emailAddress,
+  ) = AddUserAddressEvent;
+
+  const factory AccountEvent.getAddress() = GetUserAddressEvent;
+
+  const factory AccountEvent.setDefaultAddress(String newAddressDocumentID) =
+      SetDefaultUserAddressEvent;
 
   const factory AccountEvent.authenticateUser() = AuthenticateUserEvent;
 

@@ -1,5 +1,7 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/models/cart_product_model/cart_product_model.dart';
+import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_bloc.dart';
+import 'package:exclusive_web/pages/account_page/bloc/account_bloc/account_event.dart';
 import 'package:exclusive_web/pages/checkout_page/bloc/checkout_bloc/checkout_bloc.dart';
 import 'package:exclusive_web/pages/checkout_page/bloc/checkout_bloc/checkout_bloc_event.dart';
 import 'package:exclusive_web/pages/checkout_page/bloc/checkout_bloc/checkout_bloc_state.dart';
@@ -93,6 +95,18 @@ class _CheckoutSectionState extends State<CheckoutSection> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
+      if (isCheckedToSaveAddress) {
+        context.read<AccountBloc>().add(
+              AddUserAddressEvent(
+                widget.firstNameController.text,
+                widget.companyNameController.text,
+                widget.streetAddressController.text,
+                widget.cityController.text,
+                widget.phoneNumberController.text,
+                widget.emailAddressController.text,
+              ),
+            );
+      }
       if (_selectedMethod == PaymentMethod.cash) {
         context.read<CheckoutBloc>().add(
               CheckoutWithCashEvent(

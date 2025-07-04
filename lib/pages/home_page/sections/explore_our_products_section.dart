@@ -160,9 +160,6 @@ class _ExploreOurProductsSectionState extends State<ExploreOurProductsSection> {
                 return ProductItemTile(
                     product: product,
                     onProductImageTap: () =>
-                        // context.go(
-                        //   '/home/product/${product.documentId}',
-                        // ),
                         ProductDetailsRoute(id: product.documentId)
                             .go(context));
               },
@@ -173,6 +170,10 @@ class _ExploreOurProductsSectionState extends State<ExploreOurProductsSection> {
             height: 60.0,
           ),
           CustomRedButton(
+            onButtonPressed: () => ProductsRoute(
+              type: ProductSectionType.explore,
+              sectionName: 'Our Peoducts',
+            ).go(context),
             buttonTitle: 'View All Products',
           ),
           SizedBox(

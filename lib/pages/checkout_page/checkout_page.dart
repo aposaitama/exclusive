@@ -54,7 +54,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             BlocListener<CheckoutBloc, CheckoutBlocState>(
               listener: (context, state) {
                 if (state.status == CheckoutStatus.successfull) {
-                  ToastService.showError(
+                  ToastService.showSuccess(
                     'Successfull payment',
                   );
                   HomeRoute().go(context);

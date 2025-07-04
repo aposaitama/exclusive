@@ -1,34 +1,22 @@
+import 'package:exclusive_web/pages/sections/footer_section.dart';
+import 'package:exclusive_web/resources/app_colors.dart';
+import 'package:exclusive_web/resources/app_fonts.dart';
+import 'package:exclusive_web/widgets/breadcrumbs_item.dart';
 import 'package:exclusive_web/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 
-class AccountPage extends StatefulWidget {
-  const AccountPage({super.key});
+class AccountPage extends StatelessWidget {
+  final StatefulNavigationShell navigationShell;
 
-  @override
-  State<AccountPage> createState() => _AccountPageState();
-}
+  const AccountPage({super.key, required this.navigationShell});
 
-class _AccountPageState extends State<AccountPage> {
-  int selectedIndex = 0;
-
-  final sections = [
-    Center(child: Text('My Profile Section')),
-    Center(child: Text('Address Book Section')),
-    Center(child: Text('Payment Options Section')),
-    Center(child: Text('My Wishlist Section')),
-  ];
-
-  final menuItems = [
-    'My Profile',
-    'Address Book',
-    'Payment Options',
-    'My Wishlist',
-  ];
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final appBarHeight = kToolbarHeight;
+    final items = [
+      'My Profile',
+      'Address Book',
+    ];
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -36,34 +24,71 @@ class _AccountPageState extends State<AccountPage> {
         child: Column(
           children: [
             const CustomAppBar(),
+            AutoBreadcrumbs(),
             ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1170),
+              constraints: const BoxConstraints(
+                maxWidth: 1170,
+              ),
               child: SizedBox(
-                height: 630.0,
+                height: 630,
                 child: Row(
                   children: [
-                    NavigationRail(
-                      selectedIndex: selectedIndex,
-                      onDestinationSelected: (index) {
-                        setState(() {
-                          selectedIndex = index;
-                        });
-                      },
-                      labelType: NavigationRailLabelType.all,
-                      destinations: menuItems
-                          .map((item) => NavigationRailDestination(
-                                icon: const Icon(Icons.circle_outlined),
-                                selectedIcon: const Icon(Icons.circle),
-                                label: Text(item),
-                              ))
-                          .toList(),
+                    // Ліве меню
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Manage My Account',
+                          style: AppFonts.poppingMedium.copyWith(
+                            fontSize: 16.0,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16.0,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 35.0,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: List.generate(
+                              items.length,
+                              (index) {
+                                final selected =
+                                    navigationShell.currentIndex == index;
+                                return TextButton(
+                                  onPressed: () =>
+                                      navigationShell.goBranch(index),
+                                  child: Text(
+                                    items[index],
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 16.0,
+                                      color: selected
+                                          ? AppColors.redColor
+                                          : Colors.black.withValues(
+                                              alpha: 0.5,
+                                            ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    const VerticalDivider(thickness: 1, width: 1),
-                    sections[selectedIndex],
+                    SizedBox(
+                      width: 100.0,
+                    ),
+                    // Контент обраної секції
+                    Expanded(child: navigationShell),
                   ],
                 ),
               ),
             ),
+            FooterSection(),
           ],
         ),
       ),

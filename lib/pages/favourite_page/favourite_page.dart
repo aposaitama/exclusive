@@ -1,6 +1,7 @@
 import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc.dart';
 import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_bloc_state.dart';
 import 'package:exclusive_web/pages/favourite_page/bloc/favourite_bloc/favourite_event_bloc.dart';
+import 'package:exclusive_web/pages/favourite_page/sections/related_items_section.dart';
 import 'package:exclusive_web/pages/favourite_page/sections/wishlist_section.dart';
 import 'package:exclusive_web/pages/sections/footer_section.dart';
 import 'package:exclusive_web/widgets/custom_app_bar.dart';
@@ -37,6 +38,14 @@ class _FavouritePageState extends State<FavouritePage> {
                 return WishlistSection(
                   wishListProducts:
                       state.productsList.isNotEmpty ? state.productsList : [],
+                );
+              },
+            ),
+            BlocBuilder<FavouriteBloc, FavouriteBlocState>(
+              builder: (context, state) {
+                return RelatedItemsSection(
+                  retaledItems:
+                      state.relatedItems.isNotEmpty ? state.relatedItems : [],
                 );
               },
             ),

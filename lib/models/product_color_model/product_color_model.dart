@@ -10,6 +10,7 @@ class ProductColorModel with _$ProductColorModel {
     required int id,
     String? colorCode,
     required ImageModel mainProductImage,
+    required bool isAvaliable,
     required List<ImageModel> galleryProductImages,
   }) = _ProductColorModel;
 

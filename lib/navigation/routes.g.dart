@@ -7,80 +7,8 @@ part of 'routes.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $favouriteRoute,
-      $addressBookRoute,
-      $paymentOptionsRoute,
       $rootShellRoute,
     ];
-
-RouteBase get $favouriteRoute => GoRouteData.$route(
-      path: '/favourite',
-      factory: $FavouriteRouteExtension._fromState,
-    );
-
-extension $FavouriteRouteExtension on FavouriteRoute {
-  static FavouriteRoute _fromState(GoRouterState state) =>
-      const FavouriteRoute();
-
-  String get location => GoRouteData.$location(
-        '/favourite',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $addressBookRoute => GoRouteData.$route(
-      path: '/address-book',
-      factory: $AddressBookRouteExtension._fromState,
-    );
-
-extension $AddressBookRouteExtension on AddressBookRoute {
-  static AddressBookRoute _fromState(GoRouterState state) =>
-      const AddressBookRoute();
-
-  String get location => GoRouteData.$location(
-        '/address-book',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $paymentOptionsRoute => GoRouteData.$route(
-      path: '/payment-options',
-      factory: $PaymentOptionsRouteExtension._fromState,
-    );
-
-extension $PaymentOptionsRouteExtension on PaymentOptionsRoute {
-  static PaymentOptionsRoute _fromState(GoRouterState state) =>
-      const PaymentOptionsRoute();
-
-  String get location => GoRouteData.$location(
-        '/payment-options',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
 
 RouteBase get $rootShellRoute => StatefulShellRouteData.$route(
       factory: $RootShellRouteExtension._fromState,
@@ -100,8 +28,41 @@ RouteBase get $rootShellRoute => StatefulShellRouteData.$route(
                   factory: $CheckoutRouteExtension._fromState,
                 ),
                 GoRouteData.$route(
-                  path: 'account',
-                  factory: $AccountRouteExtension._fromState,
+                  path: 'favourite',
+                  factory: $FavouriteRouteExtension._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'products',
+                  factory: $ProductsRouteExtension._fromState,
+                ),
+                StatefulShellRouteData.$route(
+                  factory: $AccountShellRouteExtension._fromState,
+                  branches: [
+                    StatefulShellBranchData.$branch(
+                      routes: [
+                        GoRouteData.$route(
+                          path: 'account/profile',
+                          factory: $AccountProfileRouteExtension._fromState,
+                        ),
+                      ],
+                    ),
+                    StatefulShellBranchData.$branch(
+                      routes: [
+                        GoRouteData.$route(
+                          path: 'account/address',
+                          factory: $AccountAddressRouteExtension._fromState,
+                        ),
+                      ],
+                    ),
+                    StatefulShellBranchData.$branch(
+                      routes: [
+                        GoRouteData.$route(
+                          path: 'account/payment',
+                          factory: $AccountPaymentRouteExtension._fromState,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 GoRouteData.$route(
                   path: 'product/:id',
@@ -198,11 +159,103 @@ extension $CheckoutRouteExtension on CheckoutRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $AccountRouteExtension on AccountRoute {
-  static AccountRoute _fromState(GoRouterState state) => const AccountRoute();
+extension $FavouriteRouteExtension on FavouriteRoute {
+  static FavouriteRoute _fromState(GoRouterState state) =>
+      const FavouriteRoute();
 
   String get location => GoRouteData.$location(
-        '/home/account',
+        '/home/favourite',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ProductsRouteExtension on ProductsRoute {
+  static ProductsRoute _fromState(GoRouterState state) => ProductsRoute(
+        type: _$ProductSectionTypeEnumMap
+            ._$fromName(state.uri.queryParameters['type']!)!,
+        sectionName: state.uri.queryParameters['section-name']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/home/products',
+        queryParams: {
+          'type': _$ProductSectionTypeEnumMap[type],
+          'section-name': sectionName,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+const _$ProductSectionTypeEnumMap = {
+  ProductSectionType.flashSale: 'flash-sale',
+  ProductSectionType.bestSelling: 'best-selling',
+  ProductSectionType.explore: 'explore',
+  ProductSectionType.justForYou: 'just-for-you',
+};
+
+extension $AccountShellRouteExtension on AccountShellRoute {
+  static AccountShellRoute _fromState(GoRouterState state) =>
+      const AccountShellRoute();
+}
+
+extension $AccountProfileRouteExtension on AccountProfileRoute {
+  static AccountProfileRoute _fromState(GoRouterState state) =>
+      const AccountProfileRoute();
+
+  String get location => GoRouteData.$location(
+        '/home/account/profile',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $AccountAddressRouteExtension on AccountAddressRoute {
+  static AccountAddressRoute _fromState(GoRouterState state) =>
+      const AccountAddressRoute();
+
+  String get location => GoRouteData.$location(
+        '/home/account/address',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $AccountPaymentRouteExtension on AccountPaymentRoute {
+  static AccountPaymentRoute _fromState(GoRouterState state) =>
+      const AccountPaymentRoute();
+
+  String get location => GoRouteData.$location(
+        '/home/account/payment',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -301,4 +354,9 @@ extension $LoginRouteExtension on LoginRoute {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+extension<T extends Enum> on Map<T, String> {
+  T? _$fromName(String? value) =>
+      entries.where((element) => element.value == value).firstOrNull?.key;
 }

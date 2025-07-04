@@ -29,6 +29,7 @@ mixin _$ProductLightModel {
   double get totalRating => throw _privateConstructorUsedError;
   double? get salePercent => throw _privateConstructorUsedError;
   int get saleCount => throw _privateConstructorUsedError;
+  CategoryLightModel? get category => throw _privateConstructorUsedError;
   List<ProductColorModel> get product_colors =>
       throw _privateConstructorUsedError;
 
@@ -58,7 +59,10 @@ abstract class $ProductLightModelCopyWith<$Res> {
       double totalRating,
       double? salePercent,
       int saleCount,
+      CategoryLightModel? category,
       List<ProductColorModel> product_colors});
+
+  $CategoryLightModelCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -85,6 +89,7 @@ class _$ProductLightModelCopyWithImpl<$Res, $Val extends ProductLightModel>
     Object? totalRating = null,
     Object? salePercent = freezed,
     Object? saleCount = null,
+    Object? category = freezed,
     Object? product_colors = null,
   }) {
     return _then(_value.copyWith(
@@ -124,11 +129,29 @@ class _$ProductLightModelCopyWithImpl<$Res, $Val extends ProductLightModel>
           ? _value.saleCount
           : saleCount // ignore: cast_nullable_to_non_nullable
               as int,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CategoryLightModel?,
       product_colors: null == product_colors
           ? _value.product_colors
           : product_colors // ignore: cast_nullable_to_non_nullable
               as List<ProductColorModel>,
     ) as $Val);
+  }
+
+  /// Create a copy of ProductLightModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryLightModelCopyWith<$Res>? get category {
+    if (_value.category == null) {
+      return null;
+    }
+
+    return $CategoryLightModelCopyWith<$Res>(_value.category!, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
   }
 }
 
@@ -150,7 +173,11 @@ abstract class _$$ProductLightModelImplCopyWith<$Res>
       double totalRating,
       double? salePercent,
       int saleCount,
+      CategoryLightModel? category,
       List<ProductColorModel> product_colors});
+
+  @override
+  $CategoryLightModelCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -175,6 +202,7 @@ class __$$ProductLightModelImplCopyWithImpl<$Res>
     Object? totalRating = null,
     Object? salePercent = freezed,
     Object? saleCount = null,
+    Object? category = freezed,
     Object? product_colors = null,
   }) {
     return _then(_$ProductLightModelImpl(
@@ -214,6 +242,10 @@ class __$$ProductLightModelImplCopyWithImpl<$Res>
           ? _value.saleCount
           : saleCount // ignore: cast_nullable_to_non_nullable
               as int,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CategoryLightModel?,
       product_colors: null == product_colors
           ? _value._product_colors
           : product_colors // ignore: cast_nullable_to_non_nullable
@@ -235,6 +267,7 @@ class _$ProductLightModelImpl implements _ProductLightModel {
       required this.totalRating,
       this.salePercent,
       required this.saleCount,
+      this.category,
       required final List<ProductColorModel> product_colors})
       : _product_colors = product_colors;
 
@@ -259,6 +292,8 @@ class _$ProductLightModelImpl implements _ProductLightModel {
   final double? salePercent;
   @override
   final int saleCount;
+  @override
+  final CategoryLightModel? category;
   final List<ProductColorModel> _product_colors;
   @override
   List<ProductColorModel> get product_colors {
@@ -269,7 +304,7 @@ class _$ProductLightModelImpl implements _ProductLightModel {
 
   @override
   String toString() {
-    return 'ProductLightModel(id: $id, documentId: $documentId, productName: $productName, productPrice: $productPrice, productOriginPrice: $productOriginPrice, ratingCount: $ratingCount, totalRating: $totalRating, salePercent: $salePercent, saleCount: $saleCount, product_colors: $product_colors)';
+    return 'ProductLightModel(id: $id, documentId: $documentId, productName: $productName, productPrice: $productPrice, productOriginPrice: $productOriginPrice, ratingCount: $ratingCount, totalRating: $totalRating, salePercent: $salePercent, saleCount: $saleCount, category: $category, product_colors: $product_colors)';
   }
 
   @override
@@ -294,6 +329,8 @@ class _$ProductLightModelImpl implements _ProductLightModel {
                 other.salePercent == salePercent) &&
             (identical(other.saleCount, saleCount) ||
                 other.saleCount == saleCount) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             const DeepCollectionEquality()
                 .equals(other._product_colors, _product_colors));
   }
@@ -311,6 +348,7 @@ class _$ProductLightModelImpl implements _ProductLightModel {
       totalRating,
       salePercent,
       saleCount,
+      category,
       const DeepCollectionEquality().hash(_product_colors));
 
   /// Create a copy of ProductLightModel
@@ -341,6 +379,7 @@ abstract class _ProductLightModel implements ProductLightModel {
           required final double totalRating,
           final double? salePercent,
           required final int saleCount,
+          final CategoryLightModel? category,
           required final List<ProductColorModel> product_colors}) =
       _$ProductLightModelImpl;
 
@@ -365,6 +404,8 @@ abstract class _ProductLightModel implements ProductLightModel {
   double? get salePercent;
   @override
   int get saleCount;
+  @override
+  CategoryLightModel? get category;
   @override
   List<ProductColorModel> get product_colors;
 

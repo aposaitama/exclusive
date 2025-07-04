@@ -99,6 +99,45 @@ class _CartSectionState extends State<CartSection> {
               ),
             ),
           ),
+          if (widget.cartProducts.isEmpty)
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 40.0,
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(
+                        alpha: 0.05,
+                      ),
+                      offset: Offset(
+                        0,
+                        1,
+                      ),
+                      blurRadius: 13.0,
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40.0,
+                    vertical: 34.0,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        'There are no products in the cart.',
+                        style: AppFonts.poppingSemiBold.copyWith(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ...widget.cartProducts.map(
             (product) => CartProductItemTile(
               onDecreaseArrowPressed: widget.onDecreaseArrowPressed,

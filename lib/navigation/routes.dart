@@ -2,7 +2,9 @@ import 'package:exclusive_web/di/service_locator.dart';
 import 'package:exclusive_web/pages/about_page/about_page.dart';
 import 'package:exclusive_web/pages/account_page/account_page.dart';
 import 'package:exclusive_web/pages/account_page/address_book_page/address_book_page.dart';
+import 'package:exclusive_web/pages/account_page/my_profile_page/my_profile_section.dart';
 import 'package:exclusive_web/pages/account_page/payment_page/payment_page.dart';
+import 'package:exclusive_web/pages/all_products_page/all_products_page.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/login_page.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/register_page.dart';
 import 'package:exclusive_web/pages/cart_page/cart_page.dart';
@@ -13,6 +15,7 @@ import 'package:exclusive_web/pages/home_page/home_page.dart';
 import 'package:exclusive_web/pages/product_details_page/bloc/product_details_bloc/product_details_bloc.dart';
 import 'package:exclusive_web/pages/product_details_page/product_details_screen.dart';
 import 'package:exclusive_web/pages/root_page/root_page.dart';
+import 'package:exclusive_web/repositories/general_products_repository/general_products_repository.dart';
 import 'package:exclusive_web/services/navigation_service/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,32 +41,61 @@ part 'routes.g.dart';
 //   }
 // }
 
-@TypedGoRoute<FavouriteRoute>(path: '/favourite')
-class FavouriteRoute extends GoRouteData {
-  const FavouriteRoute();
+// @TypedGoRoute<FavouriteRoute>(path: '/favourite')
+// class FavouriteRoute extends GoRouteData {
+//   const FavouriteRoute();
+
+//   @override
+//   Widget build(BuildContext context, GoRouterState state) {
+//     return const FavouritePage();
+//   }
+// }
+
+enum ProductSectionType {
+  flashSale,
+  bestSelling,
+  explore,
+  justForYou,
+}
+
+class AccountShellRoute extends StatefulShellRouteData {
+  const AccountShellRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const FavouritePage();
+  Widget builder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) {
+    return AccountPage(navigationShell: navigationShell);
   }
 }
 
-@TypedGoRoute<AddressBookRoute>(path: '/address-book')
-class AddressBookRoute extends GoRouteData {
-  const AddressBookRoute();
+class AccountAddressRoute extends GoRouteData {
+  const AccountAddressRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const AddressSection();
+  Widget build(BuildContext context, GoRouterState state) {
+    return const AddressSection();
+  }
 }
 
-@TypedGoRoute<PaymentOptionsRoute>(path: '/payment-options')
-class PaymentOptionsRoute extends GoRouteData {
-  const PaymentOptionsRoute();
+class AccountPaymentRoute extends GoRouteData {
+  const AccountPaymentRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const PaymentSection();
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PaymentSection();
+  }
+}
+
+class AccountProfileRoute extends GoRouteData {
+  const AccountProfileRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return MyProfileSection();
+  }
 }
 
 @TypedStatefulShellRoute<RootShellRoute>(
@@ -77,8 +109,30 @@ class PaymentOptionsRoute extends GoRouteData {
           TypedGoRoute<CheckoutRoute>(
             path: 'checkout',
           ),
-          TypedGoRoute<AccountRoute>(
-            path: 'account',
+          TypedGoRoute<FavouriteRoute>(
+            path: 'favourite',
+          ),
+          TypedGoRoute<ProductsRoute>(
+            path: 'products',
+          ),
+          TypedStatefulShellRoute<AccountShellRoute>(
+            branches: [
+              TypedStatefulShellBranch(
+                routes: [
+                  TypedGoRoute<AccountProfileRoute>(path: 'account/profile'),
+                ],
+              ),
+              TypedStatefulShellBranch(
+                routes: [
+                  TypedGoRoute<AccountAddressRoute>(path: 'account/address'),
+                ],
+              ),
+              TypedStatefulShellBranch(
+                routes: [
+                  TypedGoRoute<AccountPaymentRoute>(path: 'account/payment'),
+                ],
+              ),
+            ],
           ),
           TypedGoRoute<ProductDetailsRoute>(
             path: 'product/:id',
@@ -164,6 +218,46 @@ class CartRoute extends GoRouteData {
       const CartPage();
 }
 
+class FavouriteRoute extends GoRouteData {
+  const FavouriteRoute();
+
+  @override
+  Widget build(
+    BuildContext context,
+    GoRouterState state,
+  ) =>
+      const FavouritePage();
+}
+
+class ProductsRoute extends GoRouteData {
+  final ProductSectionType type;
+  final String sectionName;
+
+  const ProductsRoute({required this.type, required this.sectionName});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final repository = _getRepositoryFromType(type);
+    return AllProductsPage(
+      repository: repository,
+      sectionName: sectionName,
+    );
+  }
+
+  GeneralViewAllRepository _getRepositoryFromType(ProductSectionType type) {
+    switch (type) {
+      case ProductSectionType.flashSale:
+        return FlashSalesProductsRepository();
+      case ProductSectionType.bestSelling:
+        return BestSellingProductsRepository();
+      case ProductSectionType.explore:
+        return ExploreOurProductsRepository();
+      case ProductSectionType.justForYou:
+        return BestSellingProductsRepository();
+    }
+  }
+}
+
 class CheckoutRoute extends GoRouteData {
   const CheckoutRoute();
 
@@ -186,16 +280,18 @@ class ContactRoute extends GoRouteData {
       const ContactPage();
 }
 
-class AccountRoute extends GoRouteData {
-  const AccountRoute();
+// class AccountRoute extends GoRouteData {
+//   const AccountRoute();
 
-  @override
-  Widget build(
-    BuildContext context,
-    GoRouterState state,
-  ) =>
-      const AccountPage();
-}
+//   @override
+//   Widget build(
+//     BuildContext context,
+//     GoRouterState state,
+//   ) =>
+//       const AccountPage(
+
+//       );
+// }
 
 class AboutRoute extends GoRouteData {
   const AboutRoute();

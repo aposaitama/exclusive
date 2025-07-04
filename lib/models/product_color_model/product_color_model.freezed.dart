@@ -23,6 +23,7 @@ mixin _$ProductColorModel {
   int get id => throw _privateConstructorUsedError;
   String? get colorCode => throw _privateConstructorUsedError;
   ImageModel get mainProductImage => throw _privateConstructorUsedError;
+  bool get isAvaliable => throw _privateConstructorUsedError;
   List<ImageModel> get galleryProductImages =>
       throw _privateConstructorUsedError;
 
@@ -46,6 +47,7 @@ abstract class $ProductColorModelCopyWith<$Res> {
       {int id,
       String? colorCode,
       ImageModel mainProductImage,
+      bool isAvaliable,
       List<ImageModel> galleryProductImages});
 
   $ImageModelCopyWith<$Res> get mainProductImage;
@@ -69,6 +71,7 @@ class _$ProductColorModelCopyWithImpl<$Res, $Val extends ProductColorModel>
     Object? id = null,
     Object? colorCode = freezed,
     Object? mainProductImage = null,
+    Object? isAvaliable = null,
     Object? galleryProductImages = null,
   }) {
     return _then(_value.copyWith(
@@ -84,6 +87,10 @@ class _$ProductColorModelCopyWithImpl<$Res, $Val extends ProductColorModel>
           ? _value.mainProductImage
           : mainProductImage // ignore: cast_nullable_to_non_nullable
               as ImageModel,
+      isAvaliable: null == isAvaliable
+          ? _value.isAvaliable
+          : isAvaliable // ignore: cast_nullable_to_non_nullable
+              as bool,
       galleryProductImages: null == galleryProductImages
           ? _value.galleryProductImages
           : galleryProductImages // ignore: cast_nullable_to_non_nullable
@@ -114,6 +121,7 @@ abstract class _$$ProductColorModelImplCopyWith<$Res>
       {int id,
       String? colorCode,
       ImageModel mainProductImage,
+      bool isAvaliable,
       List<ImageModel> galleryProductImages});
 
   @override
@@ -136,6 +144,7 @@ class __$$ProductColorModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? colorCode = freezed,
     Object? mainProductImage = null,
+    Object? isAvaliable = null,
     Object? galleryProductImages = null,
   }) {
     return _then(_$ProductColorModelImpl(
@@ -151,6 +160,10 @@ class __$$ProductColorModelImplCopyWithImpl<$Res>
           ? _value.mainProductImage
           : mainProductImage // ignore: cast_nullable_to_non_nullable
               as ImageModel,
+      isAvaliable: null == isAvaliable
+          ? _value.isAvaliable
+          : isAvaliable // ignore: cast_nullable_to_non_nullable
+              as bool,
       galleryProductImages: null == galleryProductImages
           ? _value._galleryProductImages
           : galleryProductImages // ignore: cast_nullable_to_non_nullable
@@ -166,6 +179,7 @@ class _$ProductColorModelImpl implements _ProductColorModel {
       {required this.id,
       this.colorCode,
       required this.mainProductImage,
+      required this.isAvaliable,
       required final List<ImageModel> galleryProductImages})
       : _galleryProductImages = galleryProductImages;
 
@@ -178,6 +192,8 @@ class _$ProductColorModelImpl implements _ProductColorModel {
   final String? colorCode;
   @override
   final ImageModel mainProductImage;
+  @override
+  final bool isAvaliable;
   final List<ImageModel> _galleryProductImages;
   @override
   List<ImageModel> get galleryProductImages {
@@ -189,7 +205,7 @@ class _$ProductColorModelImpl implements _ProductColorModel {
 
   @override
   String toString() {
-    return 'ProductColorModel(id: $id, colorCode: $colorCode, mainProductImage: $mainProductImage, galleryProductImages: $galleryProductImages)';
+    return 'ProductColorModel(id: $id, colorCode: $colorCode, mainProductImage: $mainProductImage, isAvaliable: $isAvaliable, galleryProductImages: $galleryProductImages)';
   }
 
   @override
@@ -202,6 +218,8 @@ class _$ProductColorModelImpl implements _ProductColorModel {
                 other.colorCode == colorCode) &&
             (identical(other.mainProductImage, mainProductImage) ||
                 other.mainProductImage == mainProductImage) &&
+            (identical(other.isAvaliable, isAvaliable) ||
+                other.isAvaliable == isAvaliable) &&
             const DeepCollectionEquality()
                 .equals(other._galleryProductImages, _galleryProductImages));
   }
@@ -209,7 +227,7 @@ class _$ProductColorModelImpl implements _ProductColorModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, colorCode, mainProductImage,
-      const DeepCollectionEquality().hash(_galleryProductImages));
+      isAvaliable, const DeepCollectionEquality().hash(_galleryProductImages));
 
   /// Create a copy of ProductColorModel
   /// with the given fields replaced by the non-null parameter values.
@@ -233,6 +251,7 @@ abstract class _ProductColorModel implements ProductColorModel {
           {required final int id,
           final String? colorCode,
           required final ImageModel mainProductImage,
+          required final bool isAvaliable,
           required final List<ImageModel> galleryProductImages}) =
       _$ProductColorModelImpl;
 
@@ -245,6 +264,8 @@ abstract class _ProductColorModel implements ProductColorModel {
   String? get colorCode;
   @override
   ImageModel get mainProductImage;
+  @override
+  bool get isAvaliable;
   @override
   List<ImageModel> get galleryProductImages;
 

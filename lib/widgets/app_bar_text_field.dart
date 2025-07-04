@@ -8,10 +8,14 @@ import 'package:responsive_framework/responsive_framework.dart';
 class AppBarTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
+  final void Function()? onSearch;
+  final ValueChanged<String>? onChanged;
   const AppBarTextField({
     super.key,
     required this.hintText,
     required this.controller,
+    this.onSearch,
+    this.onChanged,
   });
 
   @override
@@ -21,6 +25,7 @@ class AppBarTextField extends StatelessWidget {
     );
     final mobileVersion = responsive.isTablet || responsive.isMobile;
     return TextField(
+      onChanged: onChanged,
       style: AppFonts.poppingRegular.copyWith(
         fontSize: 12.0,
         color: Colors.black.withValues(
@@ -28,11 +33,15 @@ class AppBarTextField extends StatelessWidget {
         ),
         height: 1.0,
       ),
+      onSubmitted: (_) => onSearch!(),
       controller: controller,
       decoration: InputDecoration(
-        suffixIcon: SvgPicture.asset(
-          fit: BoxFit.scaleDown,
-          Assets.icons.search,
+        suffixIcon: GestureDetector(
+          onTap: onSearch,
+          child: SvgPicture.asset(
+            fit: BoxFit.scaleDown,
+            Assets.icons.search,
+          ),
         ),
         hintText: hintText,
         hintStyle: AppFonts.poppingRegular.copyWith(

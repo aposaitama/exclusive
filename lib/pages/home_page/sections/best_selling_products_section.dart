@@ -1,4 +1,5 @@
 import 'package:exclusive_web/models/product_light_model/product_light_model.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
@@ -72,6 +73,10 @@ class _BestSellingProductsSectionState
                 ),
               ),
               CustomRedButton(
+                onButtonPressed: () => ProductsRoute(
+                  type: ProductSectionType.bestSelling,
+                  sectionName: 'Best Selling Products',
+                ).go(context),
                 buttonTitle: 'View All',
               ),
             ],
@@ -102,7 +107,8 @@ class _BestSellingProductsSectionState
                       child: ProductItemTile(
                         product: product,
                         onProductImageTap: () =>
-                            context.go('/home/product/${product.documentId}'),
+                            ProductDetailsRoute(id: product.documentId)
+                                .go(context),
                       ),
                     );
                   },

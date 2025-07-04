@@ -20,6 +20,8 @@ mixin _$FavouriteBlocState {
       throw _privateConstructorUsedError;
   List<ProductLightModel> get productsList =>
       throw _privateConstructorUsedError;
+  List<ProductLightModel> get relatedItems =>
+      throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
 
   /// Create a copy of FavouriteBlocState
@@ -38,6 +40,7 @@ abstract class $FavouriteBlocStateCopyWith<$Res> {
   $Res call(
       {LoadingWishlistStatus loadingWishlistStatus,
       List<ProductLightModel> productsList,
+      List<ProductLightModel> relatedItems,
       String errorMessage});
 }
 
@@ -58,6 +61,7 @@ class _$FavouriteBlocStateCopyWithImpl<$Res, $Val extends FavouriteBlocState>
   $Res call({
     Object? loadingWishlistStatus = null,
     Object? productsList = null,
+    Object? relatedItems = null,
     Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
@@ -68,6 +72,10 @@ class _$FavouriteBlocStateCopyWithImpl<$Res, $Val extends FavouriteBlocState>
       productsList: null == productsList
           ? _value.productsList
           : productsList // ignore: cast_nullable_to_non_nullable
+              as List<ProductLightModel>,
+      relatedItems: null == relatedItems
+          ? _value.relatedItems
+          : relatedItems // ignore: cast_nullable_to_non_nullable
               as List<ProductLightModel>,
       errorMessage: null == errorMessage
           ? _value.errorMessage
@@ -88,6 +96,7 @@ abstract class _$$FavouriteBlocStateImplCopyWith<$Res>
   $Res call(
       {LoadingWishlistStatus loadingWishlistStatus,
       List<ProductLightModel> productsList,
+      List<ProductLightModel> relatedItems,
       String errorMessage});
 }
 
@@ -106,6 +115,7 @@ class __$$FavouriteBlocStateImplCopyWithImpl<$Res>
   $Res call({
     Object? loadingWishlistStatus = null,
     Object? productsList = null,
+    Object? relatedItems = null,
     Object? errorMessage = null,
   }) {
     return _then(_$FavouriteBlocStateImpl(
@@ -116,6 +126,10 @@ class __$$FavouriteBlocStateImplCopyWithImpl<$Res>
       productsList: null == productsList
           ? _value._productsList
           : productsList // ignore: cast_nullable_to_non_nullable
+              as List<ProductLightModel>,
+      relatedItems: null == relatedItems
+          ? _value._relatedItems
+          : relatedItems // ignore: cast_nullable_to_non_nullable
               as List<ProductLightModel>,
       errorMessage: null == errorMessage
           ? _value.errorMessage
@@ -131,8 +145,10 @@ class _$FavouriteBlocStateImpl implements _FavouriteBlocState {
   const _$FavouriteBlocStateImpl(
       {this.loadingWishlistStatus = LoadingWishlistStatus.initial,
       final List<ProductLightModel> productsList = const [],
+      final List<ProductLightModel> relatedItems = const [],
       this.errorMessage = ''})
-      : _productsList = productsList;
+      : _productsList = productsList,
+        _relatedItems = relatedItems;
 
   @override
   @JsonKey()
@@ -146,13 +162,22 @@ class _$FavouriteBlocStateImpl implements _FavouriteBlocState {
     return EqualUnmodifiableListView(_productsList);
   }
 
+  final List<ProductLightModel> _relatedItems;
+  @override
+  @JsonKey()
+  List<ProductLightModel> get relatedItems {
+    if (_relatedItems is EqualUnmodifiableListView) return _relatedItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_relatedItems);
+  }
+
   @override
   @JsonKey()
   final String errorMessage;
 
   @override
   String toString() {
-    return 'FavouriteBlocState(loadingWishlistStatus: $loadingWishlistStatus, productsList: $productsList, errorMessage: $errorMessage)';
+    return 'FavouriteBlocState(loadingWishlistStatus: $loadingWishlistStatus, productsList: $productsList, relatedItems: $relatedItems, errorMessage: $errorMessage)';
   }
 
   @override
@@ -164,13 +189,19 @@ class _$FavouriteBlocStateImpl implements _FavouriteBlocState {
                 other.loadingWishlistStatus == loadingWishlistStatus) &&
             const DeepCollectionEquality()
                 .equals(other._productsList, _productsList) &&
+            const DeepCollectionEquality()
+                .equals(other._relatedItems, _relatedItems) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loadingWishlistStatus,
-      const DeepCollectionEquality().hash(_productsList), errorMessage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      loadingWishlistStatus,
+      const DeepCollectionEquality().hash(_productsList),
+      const DeepCollectionEquality().hash(_relatedItems),
+      errorMessage);
 
   /// Create a copy of FavouriteBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -186,12 +217,15 @@ abstract class _FavouriteBlocState implements FavouriteBlocState {
   const factory _FavouriteBlocState(
       {final LoadingWishlistStatus loadingWishlistStatus,
       final List<ProductLightModel> productsList,
+      final List<ProductLightModel> relatedItems,
       final String errorMessage}) = _$FavouriteBlocStateImpl;
 
   @override
   LoadingWishlistStatus get loadingWishlistStatus;
   @override
   List<ProductLightModel> get productsList;
+  @override
+  List<ProductLightModel> get relatedItems;
   @override
   String get errorMessage;
 
