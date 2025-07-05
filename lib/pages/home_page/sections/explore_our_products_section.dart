@@ -29,157 +29,162 @@ class _ExploreOurProductsSectionState extends State<ExploreOurProductsSection> {
     final isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: 1170.0,
+        maxWidth: 1210.0,
       ),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 80.0,
-          ),
-          Row(
-            children: [
-              Container(
-                width: 20.0,
-                height: 40.0,
-                decoration: BoxDecoration(
-                  color: AppColors.redColor,
-                  borderRadius: BorderRadius.circular(
-                    4.0,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 10.0,
-              ),
-              Text(
-                'Our Products',
-                style: AppFonts.poppingSemiBold.copyWith(
-                  fontSize: 16.0,
-                  color: AppColors.redColor,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Explore Our Products',
-                style: AppFonts.poppingSemiBold.copyWith(
-                  fontSize: 36.0,
-                ),
-              ),
-              Row(
-                children: [
-                  Container(
-                    width: 46.0,
-                    height: 46.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.lightGray,
-                    ),
-                    child: SvgPicture.asset(
-                      fit: BoxFit.scaleDown,
-                      Assets.icons.iconsArrowLeft,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20.0,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 80.0,
+            ),
+            Row(
+              children: [
+                Container(
+                  width: isMobileOrTablet ? 10.0 : 20.0,
+                  height: isMobileOrTablet ? 20.0 : 40.0,
+                  decoration: BoxDecoration(
+                    color: AppColors.redColor,
+                    borderRadius: BorderRadius.circular(
+                      4.0,
                     ),
                   ),
-                  SizedBox(
-                    width: 8.0,
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Text(
+                  'Our Products',
+                  style: AppFonts.poppingSemiBold.copyWith(
+                    fontSize: isMobileOrTablet ? 12.0 : 16.0,
+                    color: AppColors.redColor,
                   ),
-                  Container(
-                    width: 46.0,
-                    height: 46.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.lightGray,
-                    ),
-                    child: Transform.rotate(
-                      angle: 3.14,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Explore Our Products',
+                  style: AppFonts.poppingSemiBold.copyWith(
+                    fontSize: isMobileOrTablet ? 20.0 : 36.0,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: isMobileOrTablet ? 30.0 : 46.0,
+                      height: isMobileOrTablet ? 30.0 : 46.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.lightGray,
+                      ),
                       child: SvgPicture.asset(
                         fit: BoxFit.scaleDown,
                         Assets.icons.iconsArrowLeft,
                       ),
                     ),
-                  )
-                ],
-              )
-            ],
-          ),
-          SizedBox(
-            height: 60.0,
-          ),
-          // Row(
-          //   children: [
-          //     ProductItemTile(
-          //       iconPath: Assets.images.xbox.path,
-          //       productName: 'HAVIT HV-G92 Gamepad',
-          //       productPrice: 120.0,
-          //       productOriginPrice: 160.0,
-          //     ),
-          //     SizedBox(
-          //       width: 20.0,
-          //     ),
-          //     ProductItemTile(
-          //       iconPath: Assets.images.xbox.path,
-          //       productName: 'HAVIT HV-G92 Gamepad',
-          //       productPrice: 120.0,
-          //       productSalePercent: 40.0,
-          //     ),
-          //     SizedBox(
-          //       width: 20.0,
-          //     ),
-          //     ProductItemTile(
-          //       iconPath: Assets.images.xbox.path,
-          //       productName: 'HAVIT HV-G92 Gamepad',
-          //       productPrice: 120.0,
-          //     ),
-          //     SizedBox(
-          //       width: 20.0,
-          //     ),
-          //   ],
-          // ),
-          SizedBox(
-            height: 760.0,
-            child: GridView.builder(
-              padding: EdgeInsets.all(
-                0.0,
-              ),
-              scrollDirection: Axis.horizontal,
-              itemCount: widget.ourProducts.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 60.0,
-                crossAxisSpacing: 0.0,
-                childAspectRatio: 350 / 270,
-              ),
-              itemBuilder: (context, index) {
-                final product = widget.ourProducts[index];
-                return ProductItemTile(
-                    product: product,
-                    onProductImageTap: () =>
-                        ProductDetailsRoute(id: product.documentId)
-                            .go(context));
-              },
+                    SizedBox(
+                      width: 8.0,
+                    ),
+                    Container(
+                      width: isMobileOrTablet ? 30.0 : 46.0,
+                      height: isMobileOrTablet ? 30.0 : 46.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.lightGray,
+                      ),
+                      child: Transform.rotate(
+                        angle: 3.14,
+                        child: SvgPicture.asset(
+                          fit: BoxFit.scaleDown,
+                          Assets.icons.iconsArrowLeft,
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
             ),
-          ),
+            SizedBox(
+              height: 60.0,
+            ),
+            // Row(
+            //   children: [
+            //     ProductItemTile(
+            //       iconPath: Assets.images.xbox.path,
+            //       productName: 'HAVIT HV-G92 Gamepad',
+            //       productPrice: 120.0,
+            //       productOriginPrice: 160.0,
+            //     ),
+            //     SizedBox(
+            //       width: 20.0,
+            //     ),
+            //     ProductItemTile(
+            //       iconPath: Assets.images.xbox.path,
+            //       productName: 'HAVIT HV-G92 Gamepad',
+            //       productPrice: 120.0,
+            //       productSalePercent: 40.0,
+            //     ),
+            //     SizedBox(
+            //       width: 20.0,
+            //     ),
+            //     ProductItemTile(
+            //       iconPath: Assets.images.xbox.path,
+            //       productName: 'HAVIT HV-G92 Gamepad',
+            //       productPrice: 120.0,
+            //     ),
+            //     SizedBox(
+            //       width: 20.0,
+            //     ),
+            //   ],
+            // ),
+            SizedBox(
+              height: 760.0,
+              child: GridView.builder(
+                padding: EdgeInsets.all(
+                  0.0,
+                ),
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.ourProducts.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 60.0,
+                  crossAxisSpacing: 0.0,
+                  childAspectRatio: 350 / 270,
+                ),
+                itemBuilder: (context, index) {
+                  final product = widget.ourProducts[index];
+                  return ProductItemTile(
+                      product: product,
+                      onProductImageTap: () =>
+                          ProductDetailsRoute(id: product.documentId)
+                              .go(context));
+                },
+              ),
+            ),
 
-          SizedBox(
-            height: 60.0,
-          ),
-          CustomRedButton(
-            onButtonPressed: () => ProductsRoute(
-              type: ProductSectionType.explore,
-              sectionName: 'Our Peoducts',
-            ).go(context),
-            buttonTitle: 'View All Products',
-          ),
-          SizedBox(
-            height: 70.0,
-          ),
-        ],
+            SizedBox(
+              height: 60.0,
+            ),
+            CustomRedButton(
+              onButtonPressed: () => ProductsRoute(
+                type: ProductSectionType.explore,
+                sectionName: 'Our Peoducts',
+              ).go(context),
+              buttonTitle: 'View All Products',
+            ),
+            SizedBox(
+              height: 70.0,
+            ),
+          ],
+        ),
       ),
     );
   }

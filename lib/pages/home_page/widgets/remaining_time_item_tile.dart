@@ -1,5 +1,6 @@
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class RemainingTimeItemTile extends StatelessWidget {
   final String tileTitle;
@@ -12,9 +13,11 @@ class RemainingTimeItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return Container(
-      width: 62.0,
-      height: 62.0,
+      width: isMobileOrTablet ? 40.0 : 62.0,
+      height: isMobileOrTablet ? 40.0 : 62.0,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,
@@ -25,7 +28,7 @@ class RemainingTimeItemTile extends StatelessWidget {
           Text(
             remainingTime,
             style: AppFonts.poppingSemiBold.copyWith(
-              fontSize: 16.0,
+              fontSize: isMobileOrTablet ? 12.0 : 16.0,
               height: 1.0,
             ),
           ),
@@ -35,7 +38,7 @@ class RemainingTimeItemTile extends StatelessWidget {
           Text(
             tileTitle,
             style: AppFonts.poppingRegular.copyWith(
-              fontSize: 11.0,
+              fontSize: isMobileOrTablet ? 8.0 : 11.0,
               height: 1.0,
             ),
           ),

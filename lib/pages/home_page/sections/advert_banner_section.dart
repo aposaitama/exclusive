@@ -7,6 +7,7 @@ import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/utils/extensions.dart';
 import 'package:exclusive_web/widgets/custom_green_button.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class AdvertBannerSection extends StatefulWidget {
   final AdvertCardModel advertCardItem;
@@ -70,6 +71,8 @@ class _AdvertBannerSectionState extends State<AdvertBannerSection> {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: 1175.0,
@@ -78,12 +81,12 @@ class _AdvertBannerSectionState extends State<AdvertBannerSection> {
         decoration: BoxDecoration(
           color: Colors.black,
         ),
-        height: 500.0,
+        height: isMobileOrTablet ? 300 : 500.0,
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                right: 60.0,
+              padding: EdgeInsets.only(
+                right: isMobileOrTablet ? 10.0 : 60.0,
               ),
               child: Align(
                 alignment: Alignment.centerRight,
@@ -110,18 +113,24 @@ class _AdvertBannerSectionState extends State<AdvertBannerSection> {
                         ],
                       ),
                     ),
-                    Image.network(
-                      widget.advertCardItem.advertCardImage.url.toImageUrl(),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isMobileOrTablet ? 10.0 : 20.0,
+                        vertical: isMobileOrTablet ? 10.0 : 20.0,
+                      ),
+                      child: Image.network(
+                        widget.advertCardItem.advertCardImage.url.toImageUrl(),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                left: 56.0,
+              padding: EdgeInsets.only(
+                left: isMobileOrTablet ? 20.0 : 56.0,
                 top: 69.0,
-                bottom: 69.0,
+                bottom: isMobileOrTablet ? 20.0 : 69.0,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -134,16 +143,16 @@ class _AdvertBannerSectionState extends State<AdvertBannerSection> {
                         widget.advertCardItem.advertCardCategoryName,
                         style: AppFonts.poppingSemiBold.copyWith(
                           color: AppColors.greenColor,
-                          fontSize: 16.0,
+                          fontSize: isMobileOrTablet ? 12.0 : 16.0,
                         ),
                       ),
                       SizedBox(
-                        width: 440.0,
+                        width: isMobileOrTablet ? 200.0 : 440.0,
                         child: Text(
                           widget.advertCardItem.advertCardTitle,
                           style: AppFonts.poppingSemiBold.copyWith(
                             color: Colors.white,
-                            fontSize: 48.0,
+                            fontSize: isMobileOrTablet ? 18.0 : 48.0,
                           ),
                         ),
                       ),

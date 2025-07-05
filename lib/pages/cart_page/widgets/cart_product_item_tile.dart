@@ -5,6 +5,7 @@ import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CartProductItemTile extends StatefulWidget {
   final CartProductModel product;
@@ -27,9 +28,11 @@ class _CartProductItemTileState extends State<CartProductItemTile> {
   bool _isHovered = false;
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return Padding(
-      padding: const EdgeInsets.only(
-        top: 40.0,
+      padding: EdgeInsets.only(
+        top: isMobileOrTablet ? 10.0 : 40.0,
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -48,9 +51,9 @@ class _CartProductItemTileState extends State<CartProductItemTile> {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 40.0,
-            vertical: 24.0,
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobileOrTablet ? 10.0 : 40.0,
+            vertical: isMobileOrTablet ? 10.0 : 34.0,
           ),
           child: Row(
             children: [
@@ -66,8 +69,8 @@ class _CartProductItemTileState extends State<CartProductItemTile> {
                         () => _isHovered = false,
                       ),
                       child: SizedBox(
-                        height: 54.0,
-                        width: 54.0,
+                        height: isMobileOrTablet ? 40.0 : 54.0,
+                        width: isMobileOrTablet ? 40.0 : 54.0,
                         child: Stack(
                           children: [
                             Image.network(
@@ -103,27 +106,37 @@ class _CartProductItemTileState extends State<CartProductItemTile> {
                     SizedBox(
                       width: 20.0,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.product.productName,
-                          style: AppFonts.poppingRegular.copyWith(
-                            fontSize: 16.0,
+                    isMobileOrTablet
+                        ? widget.product.productSize?.isNotEmpty ?? false
+                            ? Text(
+                                'Size: ${widget.product.productSize!}',
+                                style: AppFonts.poppingRegular.copyWith(
+                                  fontSize: 12.0,
+                                ),
+                              )
+                            : SizedBox.shrink()
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.product.productName,
+                                style: AppFonts.poppingRegular.copyWith(
+                                  fontSize: isMobileOrTablet ? 10.0 : 16.0,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 4.0,
+                              ),
+                              if (widget.product.productSize?.isNotEmpty ??
+                                  false)
+                                Text(
+                                  'Size: ${widget.product.productSize!}',
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                            ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 4.0,
-                        ),
-                        if (widget.product.productSize?.isNotEmpty ?? false)
-                          Text(
-                            'Size: ${widget.product.productSize!}',
-                            style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 12.0,
-                            ),
-                          ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -131,7 +144,7 @@ class _CartProductItemTileState extends State<CartProductItemTile> {
                 child: Text(
                   '\$${widget.product.productPrice.toStringAsFixed(2)}',
                   style: AppFonts.poppingRegular.copyWith(
-                    fontSize: 16.0,
+                    fontSize: isMobileOrTablet ? 12.0 : 16.0,
                   ),
                 ),
               ),
@@ -139,8 +152,8 @@ class _CartProductItemTileState extends State<CartProductItemTile> {
                 child: Row(
                   children: [
                     Container(
-                      width: 72.0,
-                      height: 44.0,
+                      width: isMobileOrTablet ? 50.0 : 72.0,
+                      height: isMobileOrTablet ? 34.0 : 44.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
                           4.0,
@@ -161,7 +174,7 @@ class _CartProductItemTileState extends State<CartProductItemTile> {
                                 ? '0${widget.product.quantity.toString()}'
                                 : widget.product.quantity.toString(),
                             style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 16.0,
+                              fontSize: isMobileOrTablet ? 12.0 : 16.0,
                             ),
                           ),
                           SizedBox(
@@ -207,7 +220,7 @@ class _CartProductItemTileState extends State<CartProductItemTile> {
                 child: Text(
                   '\$${(widget.product.productPrice * widget.product.quantity).toStringAsFixed(2)}',
                   style: AppFonts.poppingRegular.copyWith(
-                    fontSize: 16.0,
+                    fontSize: isMobileOrTablet ? 12.0 : 16.0,
                   ),
                 ),
               )

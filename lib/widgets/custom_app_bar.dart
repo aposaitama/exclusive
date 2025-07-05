@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomAppBar extends StatefulWidget {
   const CustomAppBar({super.key});
@@ -150,13 +151,17 @@ class _CustomAppBarState extends State<CustomAppBar> {
     _searchOverlayEntry = null;
   }
 
+  final scaffoldKey = locator<GlobalKey<ScaffoldState>>();
+
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         return Container(
           width: double.infinity,
-          height: 94.0,
+          height: isMobileOrTablet ? 75.0 : 94.0,
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
@@ -175,193 +180,380 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 maxWidth: 1210.0,
               ),
               child: Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 16.0,
+                padding: EdgeInsets.only(
+                  bottom: isMobileOrTablet ? 4.0 : 16.0,
+                  top: 5.0,
                   left: 20.0,
                   right: 20.0,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SvgPicture.asset(
-                          Assets.icons.exclusiveLogo,
-                        ),
-                        Row(
-                          children: [
-                            NavTitleItemTile(
-                              index: 0,
-                              navTitle: 'Home',
-                            ),
-                            SizedBox(
-                              width: 48.0,
-                            ),
-                            NavTitleItemTile(
-                              index: 1,
-                              navTitle: 'Contact',
-                            ),
-                            SizedBox(
-                              width: 48.0,
-                            ),
-                            NavTitleItemTile(
-                              index: 2,
-                              navTitle: 'About',
-                            ),
-                            SizedBox(
-                              width: 48.0,
-                            ),
-                            NavTitleItemTile(
-                              index: 3,
-                              navTitle: 'Sign Up',
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            CompositedTransformTarget(
-                              link: _searchFieldLink,
-                              child: SizedBox(
-                                width: 245.0,
-                                child: AppBarTextField(
-                                  onChanged: (value) {
-                                    final query = value.trim();
-                                    if (query.isNotEmpty) {
-                                      context
-                                          .read<SearchBloc>()
-                                          .add(SearchProductsEvent(query));
-                                      if (_searchOverlayEntry == null) {
-                                        _showSearchPopup();
-                                      }
-                                    } else {
-                                      _removeSearchPopup();
-
-                                      context
-                                          .read<SearchBloc>()
-                                          .add(const SearchProductsEvent(''));
-                                    }
-                                  },
-                                  onSearch: _showSearchPopup,
-                                  hintText: 'What are you looking for?',
-                                  controller: searchController,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 24.0,
-                            ),
-                            BlocBuilder<FavouriteBloc, FavouriteBlocState>(
-                              builder: (context, state) {
-                                int productInWishlist =
-                                    state.productsList.length;
-                                return GestureDetector(
-                                  onTap: () => FavouriteRoute().go(context),
-                                  child: SizedBox(
-                                    width: 32.0,
-                                    height: 32.0,
-                                    child: Stack(
-                                      children: [
-                                        SvgPicture.asset(
-                                          Assets.icons.widhlist,
-                                        ),
-                                        if (productInWishlist > 0)
-                                          Align(
-                                            alignment: Alignment.topRight,
-                                            child: Container(
-                                              width: 16.0,
-                                              height: 16.0,
-                                              decoration: BoxDecoration(
-                                                color: Colors.red,
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  '$productInWishlist',
-                                                  style: AppFonts.poppingRegular
-                                                      .copyWith(
-                                                    fontSize: 12.0,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            SizedBox(
-                              width: 12.0,
-                            ),
-                            BlocBuilder<CartBloc, CartBlocState>(
-                              builder: (context, state) {
-                                int productInCartlist =
-                                    state.productsList.length;
-                                return GestureDetector(
-                                  onTap: () => CartRoute().go(context),
-                                  child: SizedBox(
-                                    width: 32.0,
-                                    height: 32.0,
-                                    child: Stack(
-                                      children: [
-                                        SvgPicture.asset(
-                                          Assets.icons.cart,
-                                        ),
-                                        if (productInCartlist > 0)
-                                          Align(
-                                            alignment: Alignment.topRight,
-                                            child: Container(
-                                              width: 16.0,
-                                              height: 16.0,
-                                              decoration: BoxDecoration(
-                                                color: Colors.red,
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  '$productInCartlist',
-                                                  style: AppFonts.poppingRegular
-                                                      .copyWith(
-                                                    fontSize: 12.0,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            SizedBox(
-                              width: 12.0,
-                            ),
-                            state.isAuthenticated
-                                ? CompositedTransformTarget(
-                                    link: _layerLink,
-                                    child: GestureDetector(
-                                      key: _avatarKey,
-                                      onTap: () => {
-                                        AccountPopup.showProfilePopup(
-                                          context,
-                                          _layerLink,
-                                        )
-                                      },
-                                      child: SvgPicture.asset(
-                                        Assets.icons.profile,
+                    isMobileOrTablet
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () =>
+                                        scaffoldKey.currentState?.openDrawer(),
+                                    child: SvgPicture.asset(
+                                      Assets.icons.burgerIcon,
+                                      colorFilter: ColorFilter.mode(
+                                        Colors.black,
+                                        BlendMode.srcIn,
                                       ),
                                     ),
-                                  )
-                                : SizedBox.shrink(),
-                          ],
-                        )
-                      ],
-                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Text(
+                                    'E',
+                                    style: AppFonts.poppingSemiBold.copyWith(
+                                      fontSize: 50.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                ],
+                              ),
+                              Flexible(
+                                child: ConstrainedBox(
+                                  constraints: BoxConstraints(maxWidth: 300.0),
+                                  child: CompositedTransformTarget(
+                                    link: _searchFieldLink,
+                                    child: AppBarTextField(
+                                      onChanged: (value) {
+                                        final query = value.trim();
+                                        if (query.isNotEmpty) {
+                                          context
+                                              .read<SearchBloc>()
+                                              .add(SearchProductsEvent(query));
+                                          if (_searchOverlayEntry == null) {
+                                            _showSearchPopup();
+                                          }
+                                        } else {
+                                          _removeSearchPopup();
+
+                                          context.read<SearchBloc>().add(
+                                              const SearchProductsEvent(''));
+                                        }
+                                      },
+                                      onSearch: _showSearchPopup,
+                                      hintText: 'What are you looking for?',
+                                      controller: searchController,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  BlocBuilder<FavouriteBloc,
+                                      FavouriteBlocState>(
+                                    builder: (context, state) {
+                                      int productInWishlist =
+                                          state.productsList.length;
+                                      return GestureDetector(
+                                        onTap: () =>
+                                            FavouriteRoute().go(context),
+                                        child: SizedBox(
+                                          width: 25.0,
+                                          height: 25.0,
+                                          child: Stack(
+                                            children: [
+                                              SvgPicture.asset(
+                                                Assets.icons.widhlist,
+                                              ),
+                                              if (productInWishlist > 0)
+                                                Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: Container(
+                                                    width: 12.0,
+                                                    height: 12.0,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        '$productInWishlist',
+                                                        style: AppFonts
+                                                            .poppingRegular
+                                                            .copyWith(
+                                                          fontSize: 8.0,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  BlocBuilder<CartBloc, CartBlocState>(
+                                    builder: (context, state) {
+                                      int productInCartlist =
+                                          state.productsList.length;
+                                      return GestureDetector(
+                                        onTap: () => CartRoute().go(context),
+                                        child: SizedBox(
+                                          width: 25.0,
+                                          height: 25.0,
+                                          child: Stack(
+                                            children: [
+                                              SvgPicture.asset(
+                                                Assets.icons.cart,
+                                              ),
+                                              if (productInCartlist > 0)
+                                                Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: Container(
+                                                    width: 12.0,
+                                                    height: 12.0,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        '$productInCartlist',
+                                                        style: AppFonts
+                                                            .poppingRegular
+                                                            .copyWith(
+                                                          fontSize: 9.0,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  state.isAuthenticated
+                                      ? Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 10.0,
+                                            ),
+                                            CompositedTransformTarget(
+                                              link: _layerLink,
+                                              child: GestureDetector(
+                                                key: _avatarKey,
+                                                onTap: () => {
+                                                  AccountPopup.showProfilePopup(
+                                                    context,
+                                                    _layerLink,
+                                                  )
+                                                },
+                                                child: SvgPicture.asset(
+                                                  Assets.icons.profile,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      : SizedBox.shrink(),
+                                ],
+                              ),
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SvgPicture.asset(
+                                Assets.icons.exclusiveLogo,
+                              ),
+                              Row(
+                                children: [
+                                  NavTitleItemTile(
+                                    index: 0,
+                                    navTitle: 'Home',
+                                  ),
+                                  SizedBox(
+                                    width: 48.0,
+                                  ),
+                                  NavTitleItemTile(
+                                    index: 1,
+                                    navTitle: 'Contact',
+                                  ),
+                                  SizedBox(
+                                    width: 48.0,
+                                  ),
+                                  NavTitleItemTile(
+                                    index: 2,
+                                    navTitle: 'About',
+                                  ),
+                                  SizedBox(
+                                    width: 48.0,
+                                  ),
+                                  NavTitleItemTile(
+                                    index: 3,
+                                    navTitle: 'Sign Up',
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  CompositedTransformTarget(
+                                    link: _searchFieldLink,
+                                    child: SizedBox(
+                                      width: 245.0,
+                                      child: AppBarTextField(
+                                        onChanged: (value) {
+                                          final query = value.trim();
+                                          if (query.isNotEmpty) {
+                                            context.read<SearchBloc>().add(
+                                                SearchProductsEvent(query));
+                                            if (_searchOverlayEntry == null) {
+                                              _showSearchPopup();
+                                            }
+                                          } else {
+                                            _removeSearchPopup();
+
+                                            context.read<SearchBloc>().add(
+                                                const SearchProductsEvent(''));
+                                          }
+                                        },
+                                        onSearch: _showSearchPopup,
+                                        hintText: 'What are you looking for?',
+                                        controller: searchController,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 24.0,
+                                  ),
+                                  BlocBuilder<FavouriteBloc,
+                                      FavouriteBlocState>(
+                                    builder: (context, state) {
+                                      int productInWishlist =
+                                          state.productsList.length;
+                                      return GestureDetector(
+                                        onTap: () =>
+                                            FavouriteRoute().go(context),
+                                        child: SizedBox(
+                                          width: 32.0,
+                                          height: 32.0,
+                                          child: Stack(
+                                            children: [
+                                              SvgPicture.asset(
+                                                Assets.icons.widhlist,
+                                              ),
+                                              if (productInWishlist > 0)
+                                                Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: Container(
+                                                    width: 16.0,
+                                                    height: 16.0,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        '$productInWishlist',
+                                                        style: AppFonts
+                                                            .poppingRegular
+                                                            .copyWith(
+                                                          fontSize: 12.0,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 12.0,
+                                  ),
+                                  BlocBuilder<CartBloc, CartBlocState>(
+                                    builder: (context, state) {
+                                      int productInCartlist =
+                                          state.productsList.length;
+                                      return GestureDetector(
+                                        onTap: () => CartRoute().go(context),
+                                        child: SizedBox(
+                                          width: 32.0,
+                                          height: 32.0,
+                                          child: Stack(
+                                            children: [
+                                              SvgPicture.asset(
+                                                Assets.icons.cart,
+                                              ),
+                                              if (productInCartlist > 0)
+                                                Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: Container(
+                                                    width: 16.0,
+                                                    height: 16.0,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        '$productInCartlist',
+                                                        style: AppFonts
+                                                            .poppingRegular
+                                                            .copyWith(
+                                                          fontSize: 12.0,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 12.0,
+                                  ),
+                                  state.isAuthenticated
+                                      ? CompositedTransformTarget(
+                                          link: _layerLink,
+                                          child: GestureDetector(
+                                            key: _avatarKey,
+                                            onTap: () => {
+                                              AccountPopup.showProfilePopup(
+                                                context,
+                                                _layerLink,
+                                              )
+                                            },
+                                            child: SvgPicture.asset(
+                                              Assets.icons.profile,
+                                            ),
+                                          ),
+                                        )
+                                      : SizedBox.shrink(),
+                                ],
+                              )
+                            ],
+                          ),
                   ],
                 ),
               ),

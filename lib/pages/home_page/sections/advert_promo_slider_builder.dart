@@ -8,6 +8,7 @@ import 'package:exclusive_web/utils/scroll_behavior_helper.dart';
 import 'package:exclusive_web/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class AdvertPromoSlider extends StatefulWidget {
@@ -44,12 +45,14 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: 892.0,
       ),
       child: SizedBox(
-        height: 344.0,
+        height: isMobileOrTablet ? 250.0 : 344.0,
         child: Stack(
           children: [
             Container(
@@ -85,9 +88,9 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                          left: 64.0,
-                          top: 58.0,
+                        padding: EdgeInsets.only(
+                          left: isMobileOrTablet ? 18.0 : 64.0,
+                          top: isMobileOrTablet ? 18.0 : 58.0,
                           bottom: 47.0,
                         ),
                         child: Row(
@@ -112,18 +115,19 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                                           .promoItems[index].bannerProductName,
                                       style: AppFonts.poppingSemiBold.copyWith(
                                         color: Colors.white,
-                                        fontSize: 16.0,
+                                        fontSize:
+                                            isMobileOrTablet ? 14.0 : 16.0,
                                       ),
                                     ),
                                   ],
                                 ),
                                 SizedBox(
-                                  width: 294.0,
+                                  width: isMobileOrTablet ? 180.0 : 294.0,
                                   child: Text(
                                     widget.promoItems[index].advertBannerTitle,
                                     style: AppFonts.poppingSemiBold.copyWith(
                                       color: Colors.white,
-                                      fontSize: 48.0,
+                                      fontSize: isMobileOrTablet ? 28.0 : 48.0,
                                     ),
                                   ),
                                 ),
@@ -139,11 +143,15 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                                     ),
                                     Transform.rotate(
                                       angle: 3.14,
-                                      child: SvgPicture.asset(
-                                        Assets.icons.iconsArrowLeft,
-                                        colorFilter: ColorFilter.mode(
-                                          Colors.white,
-                                          BlendMode.srcIn,
+                                      child: SizedBox(
+                                        width: isMobileOrTablet ? 16.0 : 24.0,
+                                        height: isMobileOrTablet ? 16.0 : 24.0,
+                                        child: SvgPicture.asset(
+                                          Assets.icons.iconsArrowLeft,
+                                          colorFilter: ColorFilter.mode(
+                                            Colors.white,
+                                            BlendMode.srcIn,
+                                          ),
                                         ),
                                       ),
                                     )
@@ -180,8 +188,8 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                     },
                     effect: CustomizableEffect(
                       activeDotDecoration: DotDecoration(
-                        width: 14,
-                        height: 14,
+                        width: isMobileOrTablet ? 9.0 : 14,
+                        height: isMobileOrTablet ? 9.0 : 14,
                         color: AppColors.redColor,
                         borderRadius: BorderRadius.circular(
                           7,
@@ -192,14 +200,14 @@ class _AdvertPromoSliderState extends State<AdvertPromoSlider> {
                         ),
                       ),
                       dotDecoration: DotDecoration(
-                        width: 12,
-                        height: 12,
+                        width: isMobileOrTablet ? 8.0 : 12,
+                        height: isMobileOrTablet ? 8.0 : 12,
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(
                           6,
                         ),
                       ),
-                      spacing: 11,
+                      spacing: isMobileOrTablet ? 7.0 : 11,
                     ),
                   ),
                 ),

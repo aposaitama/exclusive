@@ -1,6 +1,7 @@
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class FooterSectionItem extends StatelessWidget {
   final String title;
@@ -14,13 +15,15 @@ class FooterSectionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
           style: AppFonts.poppingMedium.copyWith(
-            fontSize: 20.0,
+            fontSize: isMobileOrTablet ? 14.0 : 20.0,
             color: Colors.white,
           ),
         ),
@@ -33,7 +36,7 @@ class FooterSectionItem extends StatelessWidget {
               child: Text(
                 entry.key,
                 style: AppFonts.poppingRegular.copyWith(
-                  fontSize: 16.0,
+                  fontSize: isMobileOrTablet ? 12.0 : 16.0,
                   color: Colors.white,
                 ),
               ),

@@ -12,6 +12,7 @@ import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:exclusive_web/widgets/product_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class FlashSalesSection extends StatefulWidget {
   final List<ProductLightModel> products;
@@ -80,138 +81,258 @@ class _FlashSalesSectionState extends State<FlashSalesSection> {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return Column(
       children: [
         Column(
           children: [
             ConstrainedBox(
               constraints: BoxConstraints(
-                maxWidth: 1170.0,
+                maxWidth: 1210.0,
               ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 20.0,
-                        height: 40.0,
-                        decoration: BoxDecoration(
-                          color: AppColors.redColor,
-                          borderRadius: BorderRadius.circular(
-                            4.0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: isMobileOrTablet ? 10.0 : 20.0,
+                          height: isMobileOrTablet ? 20.0 : 40.0,
+                          decoration: BoxDecoration(
+                            color: AppColors.redColor,
+                            borderRadius: BorderRadius.circular(
+                              4.0,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Text(
-                        'Today\'s',
-                        style: AppFonts.poppingSemiBold.copyWith(
-                          fontSize: 16.0,
-                          color: AppColors.redColor,
+                        SizedBox(
+                          width: 10.0,
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            'Flash Sales',
-                            style: AppFonts.poppingSemiBold.copyWith(
-                              fontSize: 36.0,
-                            ),
+                        Text(
+                          'Today\'s',
+                          style: AppFonts.poppingSemiBold.copyWith(
+                            fontSize: isMobileOrTablet ? 12.0 : 16.0,
+                            color: AppColors.redColor,
                           ),
-                          SizedBox(
-                            width: 80.0,
-                          ),
-                          CountTimeWidget(
-                            days: timeLeft.inDays.toString().padLeft(2, '0'),
-                            hours: (timeLeft.inHours % 24)
-                                .toString()
-                                .padLeft(2, '0'),
-                            minutes: (timeLeft.inMinutes % 60)
-                                .toString()
-                                .padLeft(2, '0'),
-                            seconds: (timeLeft.inSeconds % 60)
-                                .toString()
-                                .padLeft(2, '0'),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              final newOffset = _scrollController.offset - 300;
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    isMobileOrTablet
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Flash Sales',
+                                    style: AppFonts.poppingSemiBold.copyWith(
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  CountTimeWidget(
+                                    days: timeLeft.inDays
+                                        .toString()
+                                        .padLeft(2, '0'),
+                                    hours: (timeLeft.inHours % 24)
+                                        .toString()
+                                        .padLeft(2, '0'),
+                                    minutes: (timeLeft.inMinutes % 60)
+                                        .toString()
+                                        .padLeft(2, '0'),
+                                    seconds: (timeLeft.inSeconds % 60)
+                                        .toString()
+                                        .padLeft(2, '0'),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      final newOffset =
+                                          _scrollController.offset - 300;
 
-                              _scrollController.animateTo(
-                                newOffset < 0 ? 0 : newOffset,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeInOut,
-                              );
-                            },
-                            child: Container(
-                              width: 46.0,
-                              height: 46.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.lightGray,
-                              ),
-                              child: SvgPicture.asset(
-                                fit: BoxFit.scaleDown,
-                                Assets.icons.iconsArrowLeft,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8.0,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              widget.onLoadMoreTapped?.call();
+                                      _scrollController.animateTo(
+                                        newOffset < 0 ? 0 : newOffset,
+                                        duration:
+                                            const Duration(milliseconds: 500),
+                                        curve: Curves.easeInOut,
+                                      );
+                                    },
+                                    child: Container(
+                                      width: isMobileOrTablet ? 30.0 : 46.0,
+                                      height: isMobileOrTablet ? 30.0 : 46.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.lightGray,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: SvgPicture.asset(
+                                          fit: BoxFit.scaleDown,
+                                          Assets.icons.iconsArrowLeft,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 15.0,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      widget.onLoadMoreTapped?.call();
 
-                              Future.delayed(const Duration(milliseconds: 300),
-                                  () {
-                                _scrollController.animateTo(
-                                  _scrollController.position.maxScrollExtent,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeInOut,
-                                );
-                              });
-                            },
-                            child: Container(
-                              width: 46.0,
-                              height: 46.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.lightGray,
-                              ),
-                              child: Transform.rotate(
-                                angle: 3.14,
-                                child: SvgPicture.asset(
-                                  fit: BoxFit.scaleDown,
-                                  Assets.icons.iconsArrowLeft,
-                                ),
-                              ),
-                            ),
+                                      Future.delayed(
+                                          const Duration(milliseconds: 300),
+                                          () {
+                                        _scrollController.animateTo(
+                                          _scrollController
+                                              .position.maxScrollExtent,
+                                          duration:
+                                              const Duration(milliseconds: 500),
+                                          curve: Curves.easeInOut,
+                                        );
+                                      });
+                                    },
+                                    child: Container(
+                                      width: isMobileOrTablet ? 30.0 : 46.0,
+                                      height: isMobileOrTablet ? 30.0 : 46.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.lightGray,
+                                      ),
+                                      child: Transform.rotate(
+                                        angle: 3.14,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SvgPicture.asset(
+                                            fit: BoxFit.scaleDown,
+                                            Assets.icons.iconsArrowLeft,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
                           )
-                        ],
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 40.0,
-                  ),
-                ],
+                        : Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'Flash Sales',
+                                    style: AppFonts.poppingSemiBold.copyWith(
+                                      fontSize: isMobileOrTablet ? 20.0 : 36.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 80.0,
+                                  ),
+                                  CountTimeWidget(
+                                    days: timeLeft.inDays
+                                        .toString()
+                                        .padLeft(2, '0'),
+                                    hours: (timeLeft.inHours % 24)
+                                        .toString()
+                                        .padLeft(2, '0'),
+                                    minutes: (timeLeft.inMinutes % 60)
+                                        .toString()
+                                        .padLeft(2, '0'),
+                                    seconds: (timeLeft.inSeconds % 60)
+                                        .toString()
+                                        .padLeft(2, '0'),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      final newOffset =
+                                          _scrollController.offset - 300;
+
+                                      _scrollController.animateTo(
+                                        newOffset < 0 ? 0 : newOffset,
+                                        duration:
+                                            const Duration(milliseconds: 500),
+                                        curve: Curves.easeInOut,
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 46.0,
+                                      height: 46.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.lightGray,
+                                      ),
+                                      child: SvgPicture.asset(
+                                        fit: BoxFit.scaleDown,
+                                        Assets.icons.iconsArrowLeft,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 8.0,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      widget.onLoadMoreTapped?.call();
+
+                                      Future.delayed(
+                                          const Duration(milliseconds: 300),
+                                          () {
+                                        _scrollController.animateTo(
+                                          _scrollController
+                                              .position.maxScrollExtent,
+                                          duration:
+                                              const Duration(milliseconds: 500),
+                                          curve: Curves.easeInOut,
+                                        );
+                                      });
+                                    },
+                                    child: Container(
+                                      width: 46.0,
+                                      height: 46.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.lightGray,
+                                      ),
+                                      child: Transform.rotate(
+                                        angle: 3.14,
+                                        child: SvgPicture.asset(
+                                          fit: BoxFit.scaleDown,
+                                          Assets.icons.iconsArrowLeft,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                    SizedBox(
+                      height: 40.0,
+                    ),
+                  ],
+                ),
               ),
             ),
             Row(

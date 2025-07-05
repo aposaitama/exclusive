@@ -3,7 +3,7 @@ import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/services/toast_service/toast_service.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CartTotal extends StatelessWidget {
   final double subTotalSumm;
@@ -18,6 +18,8 @@ class CartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 24.0,
@@ -36,11 +38,11 @@ class CartTotal extends StatelessWidget {
           Text(
             'Cart Total',
             style: AppFonts.poppingMedium.copyWith(
-              fontSize: 20.0,
+              fontSize: isMobileOrTablet ? 14.0 : 20.0,
             ),
           ),
           SizedBox(
-            height: 24.0,
+            height: isMobileOrTablet ? 10.0 : 24.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,19 +50,19 @@ class CartTotal extends StatelessWidget {
               Text(
                 'Subtotal:',
                 style: AppFonts.poppingRegular.copyWith(
-                  fontSize: 16.0,
+                  fontSize: isMobileOrTablet ? 12.0 : 16.0,
                 ),
               ),
               Text(
                 '\$${subTotalSumm.toString()}',
                 style: AppFonts.poppingRegular.copyWith(
-                  fontSize: 16.0,
+                  fontSize: isMobileOrTablet ? 12.0 : 16.0,
                 ),
               )
             ],
           ),
           SizedBox(
-            height: 16.0,
+            height: isMobileOrTablet ? 10.0 : 16.0,
           ),
           Container(
             width: double.infinity,
@@ -70,7 +72,7 @@ class CartTotal extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 16.0,
+            height: isMobileOrTablet ? 10.0 : 16.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,19 +80,19 @@ class CartTotal extends StatelessWidget {
               Text(
                 'Shipping:',
                 style: AppFonts.poppingRegular.copyWith(
-                  fontSize: 16.0,
+                  fontSize: isMobileOrTablet ? 12.0 : 16.0,
                 ),
               ),
               Text(
                 shippingSumm != null ? '\$${shippingSumm.toString()}' : 'Free',
                 style: AppFonts.poppingRegular.copyWith(
-                  fontSize: 16.0,
+                  fontSize: isMobileOrTablet ? 12.0 : 16.0,
                 ),
               )
             ],
           ),
           SizedBox(
-            height: 16.0,
+            height: isMobileOrTablet ? 10.0 : 16.0,
           ),
           Container(
             width: double.infinity,
@@ -100,7 +102,7 @@ class CartTotal extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 16.0,
+            height: isMobileOrTablet ? 10.0 : 16.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,19 +110,19 @@ class CartTotal extends StatelessWidget {
               Text(
                 'Total:',
                 style: AppFonts.poppingRegular.copyWith(
-                  fontSize: 16.0,
+                  fontSize: isMobileOrTablet ? 12.0 : 16.0,
                 ),
               ),
               Text(
                 '\$${totalSumm.toString()}',
                 style: AppFonts.poppingRegular.copyWith(
-                  fontSize: 16.0,
+                  fontSize: isMobileOrTablet ? 12.0 : 16.0,
                 ),
               )
             ],
           ),
           SizedBox(
-            height: 16.0,
+            height: isMobileOrTablet ? 10.0 : 16.0,
           ),
           Center(
             child: CustomRedButton(

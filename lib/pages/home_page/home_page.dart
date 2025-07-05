@@ -96,9 +96,6 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            SizedBox(
-              height: 140.0,
-            ),
             BlocBuilder<FlashSalesBloc, FlashSalesBlocState>(
               builder: (context, state) {
                 if (state.flashSales.flashSaleDate != null) {

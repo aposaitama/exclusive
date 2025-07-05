@@ -16,6 +16,7 @@ import 'package:exclusive_web/widgets/custom_text_field_with_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 enum PaymentMethod { creditCard, cash }
 
@@ -174,363 +175,730 @@ class _CheckoutSectionState extends State<CheckoutSection> {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: 1170.0,
+        maxWidth: 12100.0,
       ),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 80.0,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    right: 115.0,
-                  ),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Billing Details',
-                          style: AppFonts.poppingMedium.copyWith(
-                            fontSize: 36.0,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 48.0,
-                        ),
-                        CustomTextFieldWithTitle(
-                          textFieldEditingController:
-                              widget.firstNameController,
-                          fieldTitle: 'First Name',
-                          isRequired: true,
-                          validator: (value) => _validateRequired(
-                            value,
-                            'First Name',
-                          ),
-                        ),
-                        SizedBox(
-                          height: 32.0,
-                        ),
-                        CustomTextFieldWithTitle(
-                          textFieldEditingController:
-                              widget.companyNameController,
-                          fieldTitle: 'Company Name',
-                          isRequired: true,
-                          validator: (value) => _validateRequired(
-                            value,
-                            'Company Name',
-                          ),
-                        ),
-                        SizedBox(
-                          height: 32.0,
-                        ),
-                        CustomTextFieldWithTitle(
-                          textFieldEditingController:
-                              widget.streetAddressController,
-                          fieldTitle: 'Street Address',
-                          isRequired: true,
-                          validator: (value) => _validateRequired(
-                            value,
-                            'Street Address',
-                          ),
-                        ),
-                        SizedBox(
-                          height: 32.0,
-                        ),
-                        CustomTextFieldWithTitle(
-                          textFieldEditingController:
-                              widget.apartmentController,
-                          fieldTitle: 'Apartment, floor, etc. (optional)',
-                        ),
-                        SizedBox(
-                          height: 32.0,
-                        ),
-                        CustomTextFieldWithTitle(
-                          textFieldEditingController: widget.cityController,
-                          fieldTitle: 'Town/City',
-                          isRequired: true,
-                          validator: (value) =>
-                              _validateRequired(value, 'Town/City'),
-                        ),
-                        SizedBox(
-                          height: 32.0,
-                        ),
-                        CustomTextFieldWithTitle(
-                          textFieldEditingController:
-                              widget.phoneNumberController,
-                          fieldTitle: 'Phone Number',
-                          isRequired: true,
-                          validator: _validatePhone,
-                        ),
-                        SizedBox(
-                          height: 32.0,
-                        ),
-                        CustomTextFieldWithTitle(
-                          textFieldEditingController:
-                              widget.emailAddressController,
-                          fieldTitle: 'Email Address',
-                          isRequired: true,
-                          validator: _validateEmail,
-                        ),
-                        SizedBox(
-                          height: 24.0,
-                        ),
-                        Row(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20.0,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: isMobileOrTablet ? 30.0 : 80.0,
+            ),
+            isMobileOrTablet
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Checkbox(
-                              value: isCheckedToSaveAddress,
-                              onChanged: (bool? value) {
-                                setState(
-                                  () {
-                                    isCheckedToSaveAddress = value ?? false;
-                                  },
-                                );
-                              },
-                              fillColor: WidgetStateProperty.resolveWith<Color>(
-                                  (states) {
-                                if (states.contains(WidgetState.selected)) {
-                                  return AppColors.redColor;
-                                }
-                                return Colors.white;
-                              }),
-                              checkColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4.0),
+                            Text(
+                              'Billing Details',
+                              style: AppFonts.poppingMedium.copyWith(
+                                fontSize: 20.0,
                               ),
                             ),
                             SizedBox(
-                              width: 8.0,
+                              height: 20.0,
                             ),
-                            Expanded(
-                              child: Text(
-                                'Save this information for faster check-out next time',
-                                style: AppFonts.poppingRegular.copyWith(
-                                  fontSize: 16.0,
-                                ),
+                            CustomTextFieldWithTitle(
+                              textFieldEditingController:
+                                  widget.firstNameController,
+                              fieldTitle: 'First Name',
+                              isRequired: true,
+                              validator: (value) => _validateRequired(
+                                value,
+                                'First Name',
                               ),
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextFieldWithTitle(
+                              textFieldEditingController:
+                                  widget.companyNameController,
+                              fieldTitle: 'Company Name',
+                              isRequired: true,
+                              validator: (value) => _validateRequired(
+                                value,
+                                'Company Name',
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextFieldWithTitle(
+                              textFieldEditingController:
+                                  widget.streetAddressController,
+                              fieldTitle: 'Street Address',
+                              isRequired: true,
+                              validator: (value) => _validateRequired(
+                                value,
+                                'Street Address',
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextFieldWithTitle(
+                              textFieldEditingController:
+                                  widget.apartmentController,
+                              fieldTitle: 'Apartment, floor, etc. (optional)',
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextFieldWithTitle(
+                              textFieldEditingController: widget.cityController,
+                              fieldTitle: 'Town/City',
+                              isRequired: true,
+                              validator: (value) =>
+                                  _validateRequired(value, 'Town/City'),
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextFieldWithTitle(
+                              textFieldEditingController:
+                                  widget.phoneNumberController,
+                              fieldTitle: 'Phone Number',
+                              isRequired: true,
+                              validator: _validatePhone,
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            CustomTextFieldWithTitle(
+                              textFieldEditingController:
+                                  widget.emailAddressController,
+                              fieldTitle: 'Email Address',
+                              isRequired: true,
+                              validator: _validateEmail,
+                            ),
+                            SizedBox(
+                              height: 18.0,
+                            ),
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: isCheckedToSaveAddress,
+                                  onChanged: (bool? value) {
+                                    setState(
+                                      () {
+                                        isCheckedToSaveAddress = value ?? false;
+                                      },
+                                    );
+                                  },
+                                  fillColor:
+                                      WidgetStateProperty.resolveWith<Color>(
+                                          (states) {
+                                    if (states.contains(WidgetState.selected)) {
+                                      return AppColors.redColor;
+                                    }
+                                    return Colors.white;
+                                  }),
+                                  checkColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8.0,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Save this information for faster check-out next time',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                )
+                              ],
                             )
                           ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 120.0,
-                    left: 60.0,
-                    right: 105.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 80.0,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ...widget.cartProducts.map(
+                              (product) => CheckoutItemTile(
+                                product: product,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Subtotal:',
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                Text(
+                                  '\$${subTotalSum.toString()}',
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 16.0,
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 16.0,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 1.0,
+                              color: Colors.black.withValues(
+                                alpha: 0.4,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Shipping:',
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                Text(
+                                  'Free',
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 16.0,
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 16.0,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 1.0,
+                              color: Colors.black.withValues(
+                                alpha: 0.4,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Total:',
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                Text(
+                                  '\$${subTotalSum.toString()}',
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 16.0,
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 16.0,
+                            ),
+                            Row(
+                              children: [
+                                Radio<PaymentMethod>(
+                                  activeColor: Colors.black,
+                                  value: PaymentMethod.creditCard,
+                                  groupValue: _selectedMethod,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedMethod = value!;
+                                    });
+                                  },
+                                ),
+                                SizedBox(
+                                  width: 16.0,
+                                ),
+                                Text(
+                                  'Bank',
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                Spacer(),
+                                Image.asset(
+                                  Assets.images.cardLogos.path,
+                                )
+                              ],
+                            ),
+                            if (_selectedMethod == PaymentMethod.creditCard)
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 30.0,
+                                ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 16.0,
+                                    ),
+                                    CustomTextField(
+                                      hintText: 'Card num.',
+                                      controller: widget.cardNumController,
+                                      inputFormatters: [maskCardNumFormatter],
+                                    ),
+                                    SizedBox(
+                                      height: 16.0,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: CustomTextField(
+                                            inputFormatters: [
+                                              maskExpDateFormatter
+                                            ],
+                                            hintText: 'Exp. date',
+                                            controller:
+                                                widget.cardExpDateController,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 16.0,
+                                        ),
+                                        Expanded(
+                                          child: CustomTextField(
+                                            hintText: 'Cvv',
+                                            controller:
+                                                widget.cardCvvController,
+                                            inputFormatters: [
+                                              maskCVVNumFormatter
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 16.0,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            Row(
+                              children: [
+                                Radio<PaymentMethod>(
+                                  activeColor: Colors.black,
+                                  value: PaymentMethod.cash,
+                                  groupValue: _selectedMethod,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedMethod = value!;
+                                    });
+                                  },
+                                ),
+                                SizedBox(
+                                  width: 16.0,
+                                ),
+                                Text(
+                                  'Cash on delivery',
+                                  style: AppFonts.poppingRegular.copyWith(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 32.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                CustomRedButton(
+                                  buttonTitle: 'Place Order',
+                                  onButtonPressed: _submitForm,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                : Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ...widget.cartProducts.map(
-                        (product) => CheckoutItemTile(
-                          product: product,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Subtotal:',
-                            style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Text(
-                            '\$${subTotalSum.toString()}',
-                            style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 16.0,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16.0,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 1.0,
-                        color: Colors.black.withValues(
-                          alpha: 0.4,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Shipping:',
-                            style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Text(
-                            'Free',
-                            style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 16.0,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16.0,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 1.0,
-                        color: Colors.black.withValues(
-                          alpha: 0.4,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Total:',
-                            style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Text(
-                            '\$${subTotalSum.toString()}',
-                            style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 16.0,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16.0,
-                      ),
-                      Row(
-                        children: [
-                          Radio<PaymentMethod>(
-                            activeColor: Colors.black,
-                            value: PaymentMethod.creditCard,
-                            groupValue: _selectedMethod,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedMethod = value!;
-                              });
-                            },
-                          ),
-                          SizedBox(
-                            width: 16.0,
-                          ),
-                          Text(
-                            'Bank',
-                            style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Spacer(),
-                          Image.asset(
-                            Assets.images.cardLogos.path,
-                          )
-                        ],
-                      ),
-                      if (_selectedMethod == PaymentMethod.creditCard)
-                        Padding(
+                      Expanded(
+                        child: Padding(
                           padding: const EdgeInsets.only(
-                            left: 30.0,
+                            right: 115.0,
+                          ),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Billing Details',
+                                  style: AppFonts.poppingMedium.copyWith(
+                                    fontSize: 36.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 48.0,
+                                ),
+                                CustomTextFieldWithTitle(
+                                  textFieldEditingController:
+                                      widget.firstNameController,
+                                  fieldTitle: 'First Name',
+                                  isRequired: true,
+                                  validator: (value) => _validateRequired(
+                                    value,
+                                    'First Name',
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 32.0,
+                                ),
+                                CustomTextFieldWithTitle(
+                                  textFieldEditingController:
+                                      widget.companyNameController,
+                                  fieldTitle: 'Company Name',
+                                  isRequired: true,
+                                  validator: (value) => _validateRequired(
+                                    value,
+                                    'Company Name',
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 32.0,
+                                ),
+                                CustomTextFieldWithTitle(
+                                  textFieldEditingController:
+                                      widget.streetAddressController,
+                                  fieldTitle: 'Street Address',
+                                  isRequired: true,
+                                  validator: (value) => _validateRequired(
+                                    value,
+                                    'Street Address',
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 32.0,
+                                ),
+                                CustomTextFieldWithTitle(
+                                  textFieldEditingController:
+                                      widget.apartmentController,
+                                  fieldTitle:
+                                      'Apartment, floor, etc. (optional)',
+                                ),
+                                SizedBox(
+                                  height: 32.0,
+                                ),
+                                CustomTextFieldWithTitle(
+                                  textFieldEditingController:
+                                      widget.cityController,
+                                  fieldTitle: 'Town/City',
+                                  isRequired: true,
+                                  validator: (value) =>
+                                      _validateRequired(value, 'Town/City'),
+                                ),
+                                SizedBox(
+                                  height: 32.0,
+                                ),
+                                CustomTextFieldWithTitle(
+                                  textFieldEditingController:
+                                      widget.phoneNumberController,
+                                  fieldTitle: 'Phone Number',
+                                  isRequired: true,
+                                  validator: _validatePhone,
+                                ),
+                                SizedBox(
+                                  height: 32.0,
+                                ),
+                                CustomTextFieldWithTitle(
+                                  textFieldEditingController:
+                                      widget.emailAddressController,
+                                  fieldTitle: 'Email Address',
+                                  isRequired: true,
+                                  validator: _validateEmail,
+                                ),
+                                SizedBox(
+                                  height: 24.0,
+                                ),
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      value: isCheckedToSaveAddress,
+                                      onChanged: (bool? value) {
+                                        setState(
+                                          () {
+                                            isCheckedToSaveAddress =
+                                                value ?? false;
+                                          },
+                                        );
+                                      },
+                                      fillColor: WidgetStateProperty
+                                          .resolveWith<Color>((states) {
+                                        if (states
+                                            .contains(WidgetState.selected)) {
+                                          return AppColors.redColor;
+                                        }
+                                        return Colors.white;
+                                      }),
+                                      checkColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 8.0,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        'Save this information for faster check-out next time',
+                                        style: AppFonts.poppingRegular.copyWith(
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 120.0,
+                            left: 60.0,
+                            right: 80.0,
                           ),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              ...widget.cartProducts.map(
+                                (product) => CheckoutItemTile(
+                                  product: product,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Subtotal:',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    '\$${subTotalSum.toString()}',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 16.0,
+                                    ),
+                                  )
+                                ],
+                              ),
                               SizedBox(
                                 height: 16.0,
                               ),
-                              CustomTextField(
-                                hintText: 'Card num.',
-                                controller: widget.cardNumController,
-                                inputFormatters: [maskCardNumFormatter],
+                              Container(
+                                width: double.infinity,
+                                height: 1.0,
+                                color: Colors.black.withValues(
+                                  alpha: 0.4,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16.0,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Shipping:',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Free',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 16.0,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 16.0,
+                              ),
+                              Container(
+                                width: double.infinity,
+                                height: 1.0,
+                                color: Colors.black.withValues(
+                                  alpha: 0.4,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16.0,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Total:',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    '\$${subTotalSum.toString()}',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 16.0,
+                                    ),
+                                  )
+                                ],
                               ),
                               SizedBox(
                                 height: 16.0,
                               ),
                               Row(
                                 children: [
-                                  Expanded(
-                                    child: CustomTextField(
-                                      inputFormatters: [maskExpDateFormatter],
-                                      hintText: 'Exp. date',
-                                      controller: widget.cardExpDateController,
-                                    ),
+                                  Radio<PaymentMethod>(
+                                    activeColor: Colors.black,
+                                    value: PaymentMethod.creditCard,
+                                    groupValue: _selectedMethod,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _selectedMethod = value!;
+                                      });
+                                    },
                                   ),
                                   SizedBox(
                                     width: 16.0,
                                   ),
-                                  Expanded(
-                                    child: CustomTextField(
-                                      hintText: 'Cvv',
-                                      controller: widget.cardCvvController,
-                                      inputFormatters: [maskCVVNumFormatter],
+                                  Text(
+                                    'Bank',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Image.asset(
+                                    Assets.images.cardLogos.path,
+                                  )
+                                ],
+                              ),
+                              if (_selectedMethod == PaymentMethod.creditCard)
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 30.0,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 16.0,
+                                      ),
+                                      CustomTextField(
+                                        hintText: 'Card num.',
+                                        controller: widget.cardNumController,
+                                        inputFormatters: [maskCardNumFormatter],
+                                      ),
+                                      SizedBox(
+                                        height: 16.0,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: CustomTextField(
+                                              inputFormatters: [
+                                                maskExpDateFormatter
+                                              ],
+                                              hintText: 'Exp. date',
+                                              controller:
+                                                  widget.cardExpDateController,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 16.0,
+                                          ),
+                                          Expanded(
+                                            child: CustomTextField(
+                                              hintText: 'Cvv',
+                                              controller:
+                                                  widget.cardCvvController,
+                                              inputFormatters: [
+                                                maskCVVNumFormatter
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 16.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              Row(
+                                children: [
+                                  Radio<PaymentMethod>(
+                                    activeColor: Colors.black,
+                                    value: PaymentMethod.cash,
+                                    groupValue: _selectedMethod,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _selectedMethod = value!;
+                                      });
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 16.0,
+                                  ),
+                                  Text(
+                                    'Cash on delivery',
+                                    style: AppFonts.poppingRegular.copyWith(
+                                      fontSize: 16.0,
                                     ),
                                   ),
                                 ],
                               ),
                               SizedBox(
-                                height: 16.0,
+                                height: 32.0,
+                              ),
+                              CustomRedButton(
+                                buttonTitle: 'Place Order',
+                                onButtonPressed: _submitForm,
                               ),
                             ],
                           ),
                         ),
-                      Row(
-                        children: [
-                          Radio<PaymentMethod>(
-                            activeColor: Colors.black,
-                            value: PaymentMethod.cash,
-                            groupValue: _selectedMethod,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedMethod = value!;
-                              });
-                            },
-                          ),
-                          SizedBox(
-                            width: 16.0,
-                          ),
-                          Text(
-                            'Cash on delivery',
-                            style: AppFonts.poppingRegular.copyWith(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 32.0,
-                      ),
-                      CustomRedButton(
-                        buttonTitle: 'Place Order',
-                        onButtonPressed: _submitForm,
                       ),
                     ],
                   ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 140.0,
-          ),
-        ],
+            SizedBox(
+              height: isMobileOrTablet ? 60.0 : 140.0,
+            ),
+          ],
+        ),
       ),
     );
   }

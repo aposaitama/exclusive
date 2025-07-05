@@ -69,7 +69,7 @@ class FooterSection extends StatelessWidget {
                             Text(
                               'Support',
                               style: AppFonts.poppingMedium.copyWith(
-                                fontSize: 20.0,
+                                fontSize: isMobileOrTablet ? 14.0 : 20.0,
                                 color: Colors.white,
                               ),
                             ),
@@ -79,7 +79,7 @@ class FooterSection extends StatelessWidget {
                             Text(
                               '111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.',
                               style: AppFonts.poppingRegular.copyWith(
-                                fontSize: 16.0,
+                                fontSize: isMobileOrTablet ? 12.0 : 16.0,
                                 color: Colors.white,
                               ),
                             ),
@@ -89,7 +89,7 @@ class FooterSection extends StatelessWidget {
                             Text(
                               'exclusive@gmail.com',
                               style: AppFonts.poppingRegular.copyWith(
-                                fontSize: 16.0,
+                                fontSize: isMobileOrTablet ? 12.0 : 16.0,
                                 color: Colors.white,
                               ),
                             ),
@@ -99,7 +99,7 @@ class FooterSection extends StatelessWidget {
                             Text(
                               '+88015-88888-9999',
                               style: AppFonts.poppingRegular.copyWith(
-                                fontSize: 16.0,
+                                fontSize: isMobileOrTablet ? 12.0 : 16.0,
                                 color: Colors.white,
                               ),
                             ),
@@ -118,12 +118,12 @@ class FooterSection extends StatelessWidget {
 
                       Text(
                         'Save \$3 with App New User Only',
-                        style: AppFonts.poppingRegular
-                            .copyWith(fontSize: 16.0, color: Colors.white),
+                        style: AppFonts.poppingRegular.copyWith(
+                            fontSize: isMobileOrTablet ? 12.0 : 16.0,
+                            color: Colors.white),
                       ),
                       const SizedBox(height: 16),
 
-                      // КНОПКИ ДОДАТКІВ
                       Row(
                         children: [
                           Image.asset(
@@ -144,7 +144,6 @@ class FooterSection extends StatelessWidget {
 
                       const SizedBox(height: 32),
 
-                      // СОЦМЕРЕЖІ
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -176,7 +175,7 @@ class FooterSection extends StatelessWidget {
                             Text(
                               'Copyright Rimel 2022. All right reserved',
                               style: AppFonts.poppingRegular.copyWith(
-                                fontSize: 16.0,
+                                fontSize: isMobileOrTablet ? 10.0 : 16.0,
                                 color: Colors.white.withValues(alpha: 0.3),
                               ),
                             ),

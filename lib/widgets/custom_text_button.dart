@@ -1,5 +1,6 @@
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomTextButton extends StatelessWidget {
   final void Function()? onButtonPressed;
@@ -9,6 +10,8 @@ class CustomTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -25,7 +28,7 @@ class CustomTextButton extends StatelessWidget {
             buttonTitle,
             style: AppFonts.poppingMedium.copyWith(
               color: Colors.white,
-              fontSize: 16.0,
+              fontSize: isMobileOrTablet ? 12.0 : 16.0,
               height: 1.4,
             ),
           ),

@@ -108,8 +108,8 @@ class _CategorySectionState extends State<CategorySection> {
                   Row(
                     children: [
                       Container(
-                        width: 20.0,
-                        height: 40.0,
+                        width: isMobileOrTablet ? 10.0 : 20.0,
+                        height: isMobileOrTablet ? 20.0 : 40.0,
                         decoration: BoxDecoration(
                           color: AppColors.redColor,
                           borderRadius: BorderRadius.circular(4.0),
@@ -121,7 +121,7 @@ class _CategorySectionState extends State<CategorySection> {
                       Text(
                         'Categories',
                         style: AppFonts.poppingSemiBold.copyWith(
-                          fontSize: 16.0,
+                          fontSize: isMobileOrTablet ? 12.0 : 16.0,
                           color: AppColors.redColor,
                         ),
                       ),

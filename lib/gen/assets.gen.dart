@@ -67,6 +67,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/apple_logo.svg
   String get appleLogo => 'assets/icons/apple_logo.svg';
 
+  /// File path: assets/icons/burger_icon.svg
+  String get burgerIcon => 'assets/icons/burger_icon.svg';
+
   /// File path: assets/icons/card_logos.svg
   String get cardLogos => 'assets/icons/card_logos.svg';
 
@@ -168,6 +171,7 @@ class $AssetsIconsGen {
         iconReturn,
         iconSecure,
         appleLogo,
+        burgerIcon,
         cardLogos,
         cart,
         categorySellPhone,

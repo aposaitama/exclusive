@@ -9,7 +9,6 @@ class DeliveryInformationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           4.0,
@@ -43,26 +42,28 @@ class DeliveryInformationWidget extends StatelessWidget {
                 SizedBox(
                   width: 16.0,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Free Delivery',
-                      style: AppFonts.poppingMedium.copyWith(
-                        fontSize: 16.0,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Free Delivery',
+                        style: AppFonts.poppingMedium.copyWith(
+                          fontSize: 16.0,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Text(
-                      'Enter your postal code for Delivery Availability',
-                      style: AppFonts.poppingMedium.copyWith(
-                        fontSize: 12.0,
-                        decoration: TextDecoration.underline,
+                      SizedBox(
+                        height: 10.0,
                       ),
-                    ),
-                  ],
+                      Text(
+                        'Enter your postal code for Delivery Availability',
+                        style: AppFonts.poppingMedium.copyWith(
+                          fontSize: 12.0,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -98,38 +99,40 @@ class DeliveryInformationWidget extends StatelessWidget {
                 SizedBox(
                   width: 16.0,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Return Delivery',
-                      style: AppFonts.poppingMedium.copyWith(
-                        fontSize: 16.0,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Return Delivery',
+                        style: AppFonts.poppingMedium.copyWith(
+                          fontSize: 16.0,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Free 30 Days Delivery Returns. ',
-                            style: AppFonts.poppingMedium.copyWith(
-                              fontSize: 12.0,
-                            ),
-                          ),
-                          TextSpan(
-                            text: 'Details',
-                            style: AppFonts.poppingMedium.copyWith(
-                              fontSize: 12.0,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ],
+                      SizedBox(
+                        height: 10.0,
                       ),
-                    ),
-                  ],
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Free 30 Days Delivery Returns. ',
+                              style: AppFonts.poppingMedium.copyWith(
+                                fontSize: 12.0,
+                              ),
+                            ),
+                            TextSpan(
+                              text: 'Details',
+                              style: AppFonts.poppingMedium.copyWith(
+                                fontSize: 12.0,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

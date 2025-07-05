@@ -1,5 +1,6 @@
 import 'package:exclusive_web/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class PromoCardItemTile extends StatelessWidget {
   final String promoCardImage;
@@ -16,6 +17,8 @@ class PromoCardItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return Container(
       decoration: BoxDecoration(
         color: Colors.black,
@@ -32,8 +35,8 @@ class PromoCardItemTile extends StatelessWidget {
           Align(
             alignment: Alignment.bottomLeft,
             child: Padding(
-              padding: const EdgeInsets.all(
-                16,
+              padding: EdgeInsets.all(
+                isMobileOrTablet ? 8.0 : 16,
               ),
               child: Align(
                 alignment: Alignment.bottomLeft,
@@ -43,8 +46,8 @@ class PromoCardItemTile extends StatelessWidget {
                   children: [
                     Text(
                       promoCardTitle,
-                      style: const TextStyle(
-                        fontSize: 20,
+                      style: TextStyle(
+                        fontSize: isMobileOrTablet ? 14.0 : 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -54,8 +57,8 @@ class PromoCardItemTile extends StatelessWidget {
                     ),
                     Text(
                       promoCardSubtitle,
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: isMobileOrTablet ? 12.0 : 14,
                         color: Colors.white70,
                       ),
                     ),
