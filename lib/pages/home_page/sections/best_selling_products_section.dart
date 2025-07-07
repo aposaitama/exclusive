@@ -99,7 +99,7 @@ class _BestSellingProductsSectionState
                     (containerWidth - totalSpacing) / itemsPerPage;
 
                 return SizedBox(
-                  height: isMobileOrTablet ? 250 : 350,
+                  height: isMobileOrTablet ? (itemWidth + 110) : 380,
                   width: containerWidth,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
@@ -110,6 +110,7 @@ class _BestSellingProductsSectionState
                       return SizedBox(
                         width: itemWidth,
                         child: ProductItemTile(
+                          sizeHeight: itemWidth,
                           product: product,
                           onProductImageTap: () =>
                               ProductDetailsRoute(id: product.documentId)

@@ -75,7 +75,7 @@ class ProductRepository {
   Future<List<ProductLightModel>> fetchOurProducts() async {
     try {
       const url =
-          '/products?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&filters[isOurProduct]=true';
+          '/products?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&filters[isOurProduct]=true&pagination[page]=1&pagination[pageSize]=8';
 
       final response = await _dio.get(url);
 
@@ -113,6 +113,70 @@ class ProductRepository {
               ),
             )
             .toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductLightModel>> fetchFilteredProductsByCategoriesPaginated({
+    required int page,
+    int pageSize = 6,
+    String? categoryName,
+  }) async {
+    try {
+      final url =
+          '/products?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&pagination[page]=$page&pagination[pageSize]=$pageSize&filters[category][categoryName][\$eq]=$categoryName';
+
+      final response = await _dio.get(url);
+
+      if (response.isSuccess) {
+        return (response.data['data'] as List)
+            .map(
+              (json) => ProductLightModel.fromJson(
+                json as Map<String, dynamic>,
+              ),
+            )
+            .toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductLightModel>> fetchFilteredProductsByDepartmentPaginated({
+    required int page,
+    int pageSize = 6,
+    String? categoryName,
+  }) async {
+    try {
+      final url =
+          '/departments?populate=categories.products&populate[]=categories.products.product_colors.galleryProductImages&populate[][]=categories.products.product_colors.mainProductImage&pagination[page]=$page&pagination[pageSize]=$pageSize&filters[departmentName][\$eq]=$categoryName';
+
+      final response = await _dio.get(url);
+
+      if (response.isSuccess) {
+        final List<ProductLightModel> result = [];
+
+        final departments = response.data['data'] as List;
+
+        for (final department in departments) {
+          final categories = (department['categories'] as List?) ?? [];
+
+          for (final category in categories) {
+            final products = (category['products'] as List?) ?? [];
+
+            for (final product in products) {
+              result.add(ProductLightModel.fromJson(product));
+            }
+          }
+        }
+
+        return result;
       } else {
         return [];
       }
@@ -281,6 +345,24 @@ class ProductRepository {
             .toList();
       } else {
         return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> fetchProductNameById(String documentId) async {
+    if (documentId.isEmpty) return '';
+
+    try {
+      final uri = Uri.parse('/products/$documentId');
+
+      final response = await _dio.get(uri.toString());
+
+      if (response.isSuccess) {
+        return response.data['data']['productName'];
+      } else {
+        return '';
       }
     } catch (e) {
       rethrow;

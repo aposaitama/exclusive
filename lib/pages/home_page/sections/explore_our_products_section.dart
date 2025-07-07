@@ -27,6 +27,8 @@ class _ExploreOurProductsSectionState extends State<ExploreOurProductsSection> {
   Widget build(BuildContext context) {
     final responsive = ResponsiveBreakpoints.of(context);
     final isMobileOrTablet = responsive.isMobile || responsive.isTablet;
+    final isMobile = responsive.isMobile;
+    final isTablet = responsive.isTablet;
     return ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: 1210.0,
@@ -76,40 +78,7 @@ class _ExploreOurProductsSectionState extends State<ExploreOurProductsSection> {
                     fontSize: isMobileOrTablet ? 20.0 : 36.0,
                   ),
                 ),
-                Row(
-                  children: [
-                    Container(
-                      width: isMobileOrTablet ? 30.0 : 46.0,
-                      height: isMobileOrTablet ? 30.0 : 46.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.lightGray,
-                      ),
-                      child: SvgPicture.asset(
-                        fit: BoxFit.scaleDown,
-                        Assets.icons.iconsArrowLeft,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 8.0,
-                    ),
-                    Container(
-                      width: isMobileOrTablet ? 30.0 : 46.0,
-                      height: isMobileOrTablet ? 30.0 : 46.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.lightGray,
-                      ),
-                      child: Transform.rotate(
-                        angle: 3.14,
-                        child: SvgPicture.asset(
-                          fit: BoxFit.scaleDown,
-                          Assets.icons.iconsArrowLeft,
-                        ),
-                      ),
-                    )
-                  ],
-                )
+                //
               ],
             ),
             SizedBox(
@@ -145,29 +114,69 @@ class _ExploreOurProductsSectionState extends State<ExploreOurProductsSection> {
             //     ),
             //   ],
             // ),
-            SizedBox(
-              height: 760.0,
-              child: GridView.builder(
-                padding: EdgeInsets.all(
-                  0.0,
-                ),
-                scrollDirection: Axis.horizontal,
-                itemCount: widget.ourProducts.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 60.0,
-                  crossAxisSpacing: 0.0,
-                  childAspectRatio: 350 / 270,
-                ),
-                itemBuilder: (context, index) {
-                  final product = widget.ourProducts[index];
-                  return ProductItemTile(
-                      product: product,
-                      onProductImageTap: () =>
+            // SizedBox(
+            //   height: 760.0,
+            //   child: GridView.builder(
+            //     padding: EdgeInsets.all(
+            //       0.0,
+            //     ),
+            //     scrollDirection: Axis.horizontal,
+            //     itemCount: widget.ourProducts.length,
+            //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            //       crossAxisCount: 2,
+            //       mainAxisSpacing: 0.0,
+            //       crossAxisSpacing: 0.0,
+            //       childAspectRatio: 350 / 270,
+            //     ),
+            //     itemBuilder: (context, index) {
+            //       final product = widget.ourProducts[index];
+            //       return ProductItemTile(
+            //         product: product,
+            //         onProductImageTap: () =>
+            //             ProductDetailsRoute(id: product.documentId).go(context),
+            //       );
+            //     },
+            //   ),
+            // ),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final screenWidth = MediaQuery.of(context).size.width;
+                final isMaxWidth = screenWidth >= 1210;
+                final containerWidth = constraints.maxWidth;
+
+                final itemsPerPage = isMobile
+                    ? 3
+                    : isTablet
+                        ? 3.5
+                        : 5;
+                final itemSpacing = 20.0;
+                final totalSpacing = itemSpacing * (itemsPerPage - 1);
+                final itemWidth =
+                    (containerWidth - totalSpacing) / itemsPerPage;
+
+                int tilesPerRow =
+                    (constraints.maxWidth / (itemWidth + 20)).floor();
+
+                return Wrap(
+                  spacing: 20.0,
+                  runSpacing: 20.0,
+                  children: widget.ourProducts.map((product) {
+                    return SizedBox(
+                      height: isMobileOrTablet ? (itemWidth + 112) : 380,
+                      width: (constraints.maxWidth - ((tilesPerRow - 1) * 20)) /
+                          tilesPerRow,
+                      child: ProductItemTile(
+                        sizeHeight: itemWidth,
+                        product: product,
+                        onProductImageTap: () {
                           ProductDetailsRoute(id: product.documentId)
-                              .go(context));
-                },
-              ),
+                              .go(context);
+                        },
+                      ),
+                    );
+                  }).toList(),
+                );
+              },
             ),
 
             SizedBox(

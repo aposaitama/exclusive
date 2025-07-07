@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class StarItem extends StatelessWidget {
   final int index;
@@ -18,6 +19,9 @@ class StarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
+
     final isFilled = index < currentRating;
 
     return MouseRegion(
@@ -28,7 +32,7 @@ class StarItem extends StatelessWidget {
         child: Icon(
           Icons.star,
           color: isFilled ? Colors.amber : Colors.grey,
-          size: 20,
+          size: isMobileOrTablet ? 13.0 : 20,
         ),
       ),
     );

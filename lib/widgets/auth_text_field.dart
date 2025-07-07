@@ -5,11 +5,13 @@ class AuthTextField extends StatefulWidget {
   final bool isObscure;
   final TextEditingController controller;
   final String hintText;
+  final TextInputType? keyboardType;
   const AuthTextField({
     super.key,
     required this.controller,
     required this.hintText,
     this.isObscure = false,
+    this.keyboardType,
   });
 
   @override
@@ -20,6 +22,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: widget.keyboardType,
       obscureText: widget.isObscure,
       style: AppFonts.poppingRegular.copyWith(
         fontSize: 16.0,

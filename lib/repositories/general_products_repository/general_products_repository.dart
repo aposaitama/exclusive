@@ -5,7 +5,8 @@ import 'package:exclusive_web/services/product_service/product_service.dart';
 abstract class GeneralViewAllRepository<T> {
   Future<List<ProductLightModel>> fetchItems({
     required int page,
-    int pageSize = 6,
+    int pageSize = 8,
+    String? categoryName,
   });
 }
 
@@ -16,7 +17,8 @@ class FlashSalesProductsRepository
   @override
   Future<List<ProductLightModel>> fetchItems({
     required int page,
-    int pageSize = 6,
+    int pageSize = 8,
+    String? categoryName,
   }) {
     return _productService.getFlashSalesProductLightModel(
       page: page,
@@ -30,7 +32,8 @@ class BestSellingProductsRepository
   @override
   Future<List<ProductLightModel>> fetchItems({
     required int page,
-    int pageSize = 6,
+    int pageSize = 8,
+    String? categoryName,
   }) {
     return _productService.getBestSellingProductsPaginated(
       page: page,
@@ -44,11 +47,44 @@ class ExploreOurProductsRepository
   @override
   Future<List<ProductLightModel>> fetchItems({
     required int page,
-    int pageSize = 6,
+    int pageSize = 8,
+    String? categoryName,
   }) async {
     return _productService.getOurProductPaginated(
       page: page,
       pageSize: pageSize,
+    );
+  }
+}
+
+class CategoriesProductsRepository
+    implements GeneralViewAllRepository<ProductLightModel> {
+  @override
+  Future<List<ProductLightModel>> fetchItems({
+    required int page,
+    int pageSize = 8,
+    String? categoryName,
+  }) async {
+    return _productService.getFilteredByCategoriesProductPaginated(
+      page: page,
+      pageSize: pageSize,
+      categoryName: categoryName ?? '',
+    );
+  }
+}
+
+class DepartmentProductsRepository
+    implements GeneralViewAllRepository<ProductLightModel> {
+  @override
+  Future<List<ProductLightModel>> fetchItems({
+    required int page,
+    int pageSize = 8,
+    String? categoryName,
+  }) async {
+    return _productService.fetchFilteredProductsByDepartmentPaginated(
+      page: page,
+      pageSize: pageSize,
+      categoryName: categoryName ?? '',
     );
   }
 }

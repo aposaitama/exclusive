@@ -104,7 +104,9 @@ class _ContactPageState extends State<ContactPage> {
           child: Column(
             children: [
               CustomAppBar(),
-              AutoBreadcrumbs(),
+              SizedBox(
+                height: isMobileOrTablet ? 20.0 : 140.0,
+              ),
               ConstrainedBox(
                 constraints: BoxConstraints(
                   maxWidth: 1170.0,

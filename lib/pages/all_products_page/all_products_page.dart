@@ -8,8 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AllProductsPage extends StatefulWidget {
   final GeneralViewAllRepository? repository;
   final String sectionName;
+  final String? categoryName;
   const AllProductsPage(
-      {super.key, this.repository, required this.sectionName});
+      {super.key,
+      this.repository,
+      required this.sectionName,
+      this.categoryName});
 
   @override
   State<AllProductsPage> createState() => _AllProductsPageState();
@@ -21,6 +25,7 @@ class _AllProductsPageState extends State<AllProductsPage> {
     return BlocProvider<AllProductsBloc>(
       create: (_) => AllProductsBloc(
         repository: widget.repository ?? FlashSalesProductsRepository(),
+        categoryName: widget.categoryName,
       )..add(
           const LoadInitialProducts(),
         ),

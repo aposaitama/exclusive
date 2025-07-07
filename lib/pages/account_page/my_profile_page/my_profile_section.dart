@@ -9,12 +9,15 @@ import 'package:exclusive_web/widgets/custom_text_field.dart';
 import 'package:exclusive_web/widgets/custom_transparent_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class MyProfileSection extends StatelessWidget {
   const MyProfileSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     final TextEditingController firstNameController = TextEditingController();
     final TextEditingController lastNameController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
@@ -25,8 +28,6 @@ class MyProfileSection extends StatelessWidget {
     final TextEditingController confirmNewPasswordController =
         TextEditingController();
     final updatedFields = <String, dynamic>{};
-
-    void saveUserInfo() {}
 
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -53,9 +54,9 @@ class MyProfileSection extends StatelessWidget {
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 80.0,
-                vertical: 40.0,
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobileOrTablet ? 20.0 : 80.0,
+                vertical: isMobileOrTablet ? 20.0 : 40.0,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +64,7 @@ class MyProfileSection extends StatelessWidget {
                   Text(
                     'Edit Your Profile',
                     style: AppFonts.poppingRegular.copyWith(
-                      fontSize: 20.0,
+                      fontSize: isMobileOrTablet ? 15.0 : 20.0,
                       color: AppColors.redColor,
                     ),
                   ),
@@ -81,7 +82,7 @@ class MyProfileSection extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 50.0,
+                        width: isMobileOrTablet ? 20.0 : 50.0,
                       ),
                       Expanded(
                         child: CustomAccountTextFiledWithTitle(
@@ -106,7 +107,7 @@ class MyProfileSection extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 50.0,
+                        width: isMobileOrTablet ? 20.0 : 50.0,
                       ),
                       Expanded(
                         child: CustomAccountTextFiledWithTitle(

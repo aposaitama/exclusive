@@ -1,5 +1,6 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/models/category_light_model/category_light_model.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/pages/home_page/bloc/categories_bloc/categories_bloc.dart';
 import 'package:exclusive_web/pages/home_page/bloc/categories_bloc/categories_bloc_event.dart';
 import 'package:exclusive_web/pages/home_page/bloc/categories_bloc/categories_bloc_state.dart';
@@ -245,10 +246,19 @@ class _CategorySectionState extends State<CategorySection> {
                                       ),
                                       child: SizedBox(
                                         width: itemWidth,
-                                        child: CategoryItemTile(
-                                          iconPath: category.categoryIcon.url
-                                              .toImageUrl(),
-                                          categoryTitle: category.categoryName,
+                                        child: GestureDetector(
+                                          onTap: () => ProductsRoute(
+                                            type: ProductSectionType.category,
+                                            sectionName:
+                                                'Filters by Category: ${category.categoryName}',
+                                            categoryName: category.categoryName,
+                                          ).go(context),
+                                          child: CategoryItemTile(
+                                            iconPath: category.categoryIcon.url
+                                                .toImageUrl(),
+                                            categoryTitle:
+                                                category.categoryName,
+                                          ),
                                         ),
                                       ),
                                     ),

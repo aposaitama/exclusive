@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final bool isRequired;
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboardType;
   const CustomTextField({
     super.key,
     required this.hintText,
@@ -17,6 +18,7 @@ class CustomTextField extends StatelessWidget {
     this.isRequired = false,
     this.validator,
     this.inputFormatters,
+    this.keyboardType,
   });
 
   @override
@@ -26,10 +28,11 @@ class CustomTextField extends StatelessWidget {
     );
     final mobileVersion = responsive.isTablet || responsive.isMobile;
     return TextFormField(
+      keyboardType: keyboardType,
       inputFormatters: inputFormatters,
       validator: validator,
       style: AppFonts.poppingRegular.copyWith(
-        fontSize: 16.0,
+        fontSize: mobileVersion ? 11.0 : 16.0,
         color: Colors.black.withValues(
           alpha: 0.5,
         ),
@@ -39,16 +42,16 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: AppFonts.poppingRegular.copyWith(
-          fontSize: 16.0,
+          fontSize: mobileVersion ? 11.0 : 16.0,
           color: Colors.black.withValues(
             alpha: 0.5,
           ),
         ),
         contentPadding: EdgeInsets.only(
-          left: 16.0,
-          right: 16.0,
-          top: 13.0,
-          bottom: 13.0,
+          left: mobileVersion ? 10.0 : 16.0,
+          right: mobileVersion ? 10.0 : 16.0,
+          top: mobileVersion ? 8.0 : 13.0,
+          bottom: mobileVersion ? 18.0 : 13.0,
         ),
         filled: true,
         fillColor: AppColors.lightGray,

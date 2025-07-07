@@ -64,6 +64,9 @@ class _RegisterPageState extends State<RegisterPage> {
               context.read<AccountBloc>().add(
                     AuthenticateUserEvent(),
                   );
+              context.read<AccountBloc>().add(
+                    GetUserDataEvent(),
+                  );
               HomeRoute().go(context);
             } else if (state.status == RegisterStatus.failed) {
               BotToast.showCustomText(
@@ -153,6 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             AuthTextField(
                               controller: emailOrPhoneNumberController,
                               hintText: 'Email or Phone Number',
+                              keyboardType: TextInputType.emailAddress,
                             ),
                             SizedBox(
                               height: 40.0,
@@ -161,6 +165,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               isObscure: true,
                               controller: passwordController,
                               hintText: 'Password',
+                              keyboardType: TextInputType.visiblePassword,
                             ),
                             SizedBox(
                               height: 40.0,

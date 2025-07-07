@@ -15,7 +15,7 @@ class AddressSection extends StatefulWidget {
 class _AddressSectionState extends State<AddressSection> {
   @override
   void initState() {
-    context.read<AccountBloc>().add(GetUserAddressEvent());
+    // context.read<AccountBloc>().add(GetUserAddressEvent());
     super.initState();
   }
 

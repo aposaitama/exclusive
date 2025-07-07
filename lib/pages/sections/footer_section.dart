@@ -11,11 +11,11 @@ class FooterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, String> accountLinks = {
-      'My Account': '/account',
-      'Login / Register': '/login',
-      'Cart': '/cart',
-      'Wishlist': '/wishlist',
-      'Shop': '/shop',
+      'My Account': '/home/account/profile',
+      'Login / Register': '/sign-up',
+      'Cart': '/home/cart',
+      'Wishlist': '/home/favourite',
+      'Shop': '/home',
     };
 
     final Map<String, String> supportLinks = {

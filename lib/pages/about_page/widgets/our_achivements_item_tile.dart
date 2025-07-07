@@ -2,6 +2,7 @@ import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class OurAchivementsItemTile extends StatelessWidget {
   final String iconPath;
@@ -18,11 +19,15 @@ class OurAchivementsItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    final bool isMobile = responsive.isMobile;
+    final bool isTablet = responsive.isTablet;
+    final bool isMobileOrTablet = isMobile || isTablet;
     return Container(
       width: 270,
       height: 230,
       padding: EdgeInsets.only(
-        top: 30.0,
+        top: isMobileOrTablet ? 10.0 : 30.0,
       ),
       decoration: BoxDecoration(
         color: isRed ? AppColors.redColor : Colors.white,
@@ -57,12 +62,12 @@ class OurAchivementsItemTile extends StatelessWidget {
             iconPath,
           ),
           SizedBox(
-            height: 24.0,
+            height: isMobileOrTablet ? 10.0 : 24.0,
           ),
           Text(
             achivementsTitle,
             style: AppFonts.poppingSemiBold.copyWith(
-              fontSize: 32.0,
+              fontSize: isMobileOrTablet ? 20.0 : 32.0,
               color: !isRed ? Colors.black : Colors.white,
             ),
           ),
@@ -70,9 +75,10 @@ class OurAchivementsItemTile extends StatelessWidget {
             height: 12.0,
           ),
           Text(
+            textAlign: TextAlign.center,
             achivementsDescription,
             style: AppFonts.poppingRegular.copyWith(
-              fontSize: 16.0,
+              fontSize: isMobileOrTablet ? 12.0 : 16.0,
               color: !isRed ? Colors.black : Colors.white,
             ),
           ),

@@ -19,7 +19,7 @@ class RootPage extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       drawer: Drawer(
-        backgroundColor: AppColors.charcoal,
+        backgroundColor: const Color.fromARGB(255, 43, 43, 43),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -68,6 +68,44 @@ class ProductService {
     }
   }
 
+  Future<List<ProductLightModel>> getFilteredByCategoriesProductPaginated({
+    required int page,
+    int pageSize = 6,
+    required String categoryName,
+  }) async {
+    try {
+      final products =
+          await _productRepository.fetchFilteredProductsByCategoriesPaginated(
+        page: page,
+        pageSize: pageSize,
+        categoryName: categoryName,
+      );
+
+      return products;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ProductLightModel>> fetchFilteredProductsByDepartmentPaginated({
+    required int page,
+    int pageSize = 6,
+    required String categoryName,
+  }) async {
+    try {
+      final products =
+          await _productRepository.fetchFilteredProductsByDepartmentPaginated(
+        page: page,
+        pageSize: pageSize,
+        categoryName: categoryName,
+      );
+
+      return products;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<ProductLightModel>> searchProducts({
     required String query,
     required int page,

@@ -4,6 +4,7 @@ import 'package:exclusive_web/pages/product_details_page/bloc/product_details_bl
 import 'package:exclusive_web/pages/product_details_page/bloc/product_details_bloc/product_details_bloc_event.dart';
 import 'package:exclusive_web/pages/product_details_page/bloc/product_details_bloc/product_details_bloc_state.dart';
 import 'package:exclusive_web/pages/product_details_page/sections/product_details_section/product_details_section.dart';
+import 'package:exclusive_web/pages/product_details_page/sections/product_details_shimmer_screen.dart';
 import 'package:exclusive_web/pages/sections/footer_section.dart';
 import 'package:exclusive_web/widgets/breadcrumbs_item.dart';
 import 'package:exclusive_web/widgets/custom_app_bar.dart';
@@ -54,9 +55,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               BlocBuilder<ProductDetailsBloc, ProductDetailsBlocState>(
                 builder: (context, state) {
                   if (state.product == null) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return ProductDetailsShimmer();
                   } else {
                     return ProductDetailsSection(
                       productDetailedInfo: state.product!,

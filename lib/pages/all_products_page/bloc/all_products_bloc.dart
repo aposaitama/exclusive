@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AllProductsBloc extends Bloc<AllProductsEvent, AllProductsState> {
   final GeneralViewAllRepository repository;
   final int pageSize;
+  final String? categoryName;
 
   int _currentPage = 1;
   bool _hasReachedEnd = false;
@@ -13,6 +14,7 @@ class AllProductsBloc extends Bloc<AllProductsEvent, AllProductsState> {
   AllProductsBloc({
     required this.repository,
     this.pageSize = 6,
+    this.categoryName,
   }) : super(AllProductsState()) {
     on<LoadInitialProducts>(_onLoadInitial);
     on<LoadMoreProducts>(_onLoadMore);
@@ -29,6 +31,7 @@ class AllProductsBloc extends Bloc<AllProductsEvent, AllProductsState> {
       final products = await repository.fetchItems(
         page: _currentPage,
         pageSize: pageSize,
+        categoryName: categoryName,
       );
 
       _hasReachedEnd = products.length < pageSize;
@@ -56,6 +59,7 @@ class AllProductsBloc extends Bloc<AllProductsEvent, AllProductsState> {
       final moreProducts = await repository.fetchItems(
         page: _currentPage,
         pageSize: pageSize,
+        categoryName: categoryName,
       );
 
       _hasReachedEnd = moreProducts.length < pageSize;

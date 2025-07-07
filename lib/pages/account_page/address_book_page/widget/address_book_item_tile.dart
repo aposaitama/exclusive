@@ -3,6 +3,7 @@ import 'package:exclusive_web/resources/app_colors.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class AddressBookItemTile extends StatelessWidget {
   final AddressModel addressItem;
@@ -12,6 +13,8 @@ class AddressBookItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
     return Padding(
       padding: const EdgeInsets.only(
         bottom: 20.0,
@@ -59,7 +62,7 @@ class AddressBookItemTile extends StatelessWidget {
                       Text(
                         addressItem.firstName,
                         style: AppFonts.poppingMedium.copyWith(
-                          fontSize: 20.0,
+                          fontSize: isMobileOrTablet ? 14.0 : 20.0,
                         ),
                       ),
                       SizedBox(
@@ -68,7 +71,7 @@ class AddressBookItemTile extends StatelessWidget {
                       Text(
                         addressItem.lastName,
                         style: AppFonts.poppingMedium.copyWith(
-                          fontSize: 20.0,
+                          fontSize: isMobileOrTablet ? 14.0 : 20.0,
                         ),
                       ),
                     ],

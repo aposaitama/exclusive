@@ -54,14 +54,6 @@ RouteBase get $rootShellRoute => StatefulShellRouteData.$route(
                         ),
                       ],
                     ),
-                    StatefulShellBranchData.$branch(
-                      routes: [
-                        GoRouteData.$route(
-                          path: 'account/payment',
-                          factory: $AccountPaymentRouteExtension._fromState,
-                        ),
-                      ],
-                    ),
                   ],
                 ),
                 GoRouteData.$route(
@@ -182,6 +174,7 @@ extension $ProductsRouteExtension on ProductsRoute {
         type: _$ProductSectionTypeEnumMap
             ._$fromName(state.uri.queryParameters['type']!)!,
         sectionName: state.uri.queryParameters['section-name']!,
+        categoryName: state.uri.queryParameters['category-name'],
       );
 
   String get location => GoRouteData.$location(
@@ -189,6 +182,7 @@ extension $ProductsRouteExtension on ProductsRoute {
         queryParams: {
           'type': _$ProductSectionTypeEnumMap[type],
           'section-name': sectionName,
+          if (categoryName != null) 'category-name': categoryName,
         },
       );
 
@@ -207,6 +201,8 @@ const _$ProductSectionTypeEnumMap = {
   ProductSectionType.bestSelling: 'best-selling',
   ProductSectionType.explore: 'explore',
   ProductSectionType.justForYou: 'just-for-you',
+  ProductSectionType.category: 'category',
+  ProductSectionType.department: 'department',
 };
 
 extension $AccountShellRouteExtension on AccountShellRoute {
@@ -238,24 +234,6 @@ extension $AccountAddressRouteExtension on AccountAddressRoute {
 
   String get location => GoRouteData.$location(
         '/home/account/address',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $AccountPaymentRouteExtension on AccountPaymentRoute {
-  static AccountPaymentRoute _fromState(GoRouterState state) =>
-      const AccountPaymentRoute();
-
-  String get location => GoRouteData.$location(
-        '/home/account/payment',
       );
 
   void go(BuildContext context) => context.go(location);

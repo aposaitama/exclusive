@@ -1,5 +1,6 @@
 import 'package:exclusive_web/gen/assets.gen.dart';
 import 'package:exclusive_web/models/advert_models/promo_slider_model/promo_slider_model.dart';
+import 'package:exclusive_web/navigation/routes.dart';
 import 'package:exclusive_web/pages/home_page/sections/advert_promo_slider_builder.dart';
 import 'package:exclusive_web/pages/home_page/widgets/category_showcase_item_tile.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class ShowcaseSection extends StatelessWidget {
     ];
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: 1175.0,
+        maxWidth: 1210.0,
       ),
       child: isMobileOrTablet
           ? Column(
@@ -82,6 +83,8 @@ class ShowcaseSection extends StatelessWidget {
           : Padding(
               padding: const EdgeInsets.only(
                 bottom: 140.0,
+                left: 20.0,
+                right: 20.0,
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -111,19 +114,32 @@ class ShowcaseSection extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: List.generate(
                               categories.length,
-                              (index) => CategoryShowcaseItemTile(
-                                categoryName: categories[index],
+                              (index) => GestureDetector(
+                                onTap: () => ProductsRoute(
+                                  type: ProductSectionType.department,
+                                  sectionName:
+                                      'Filters by Department: ${categories[index]}',
+                                  categoryName: categories[index],
+                                ).go(context),
+                                child: CategoryShowcaseItemTile(
+                                  categoryName: categories[index],
+                                ),
                               ),
                             )),
                       ),
                     ),
                   ),
-                  AdvertPromoSlider(
-                    promoItems: promoItems,
-                    advertBannerTitle: 'Up to 10% off Voucher',
-                    advertBannerImagePath: Assets.images.iosPromo.path,
-                    bannerProductIcon: Assets.images.appleLogo.path,
-                    bannerProductName: 'iPhone 14 Series',
+                  SizedBox(
+                    width: 45.0,
+                  ),
+                  Expanded(
+                    child: AdvertPromoSlider(
+                      promoItems: promoItems,
+                      advertBannerTitle: 'Up to 10% off Voucher',
+                      advertBannerImagePath: Assets.images.iosPromo.path,
+                      bannerProductIcon: Assets.images.appleLogo.path,
+                      bannerProductName: 'iPhone 14 Series',
+                    ),
                   ),
                 ],
               ),

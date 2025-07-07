@@ -13,7 +13,6 @@ import 'package:exclusive_web/widgets/custom_app_bar.dart';
 import 'package:exclusive_web/widgets/custom_red_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class LoginPage extends StatefulWidget {
@@ -61,6 +60,9 @@ class _LoginPageState extends State<LoginPage> {
               context.read<AccountBloc>().add(
                     AuthenticateUserEvent(),
                   );
+              context.read<AccountBloc>().add(
+                    GetUserDataEvent(),
+                  );
               HomeRoute().go(context);
             } else if (state.loginStatus == LoginStatus.failed) {
               BotToast.showCustomText(
@@ -99,6 +101,9 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               CustomAppBar(),
+              SizedBox(
+                height: 60.0,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -138,6 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                             AuthTextField(
                               controller: emailOrPhoneNumberController,
                               hintText: 'Email or Phone Number',
+                              keyboardType: TextInputType.emailAddress,
                             ),
                             SizedBox(
                               height: 40.0,
@@ -146,6 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                               isObscure: true,
                               controller: passwordController,
                               hintText: 'Password',
+                              keyboardType: TextInputType.visiblePassword,
                             ),
                             SizedBox(
                               height: 40.0,

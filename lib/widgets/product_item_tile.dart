@@ -12,10 +12,12 @@ import 'package:exclusive_web/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class ProductItemTile extends StatefulWidget {
   final bool wishlistMode;
   final ProductLightModel product;
+  final double? sizeHeight;
   final void Function()? onProductImageTap;
 
   const ProductItemTile({
@@ -23,6 +25,7 @@ class ProductItemTile extends StatefulWidget {
     this.onProductImageTap,
     required this.product,
     this.wishlistMode = false,
+    this.sizeHeight,
   });
 
   @override
@@ -37,8 +40,11 @@ class _ProductItemTileState extends State<ProductItemTile> {
   bool openCartButton = false;
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveBreakpoints.of(context);
+    bool isMobileOrTablet = responsive.isMobile || responsive.isTablet;
+    bool isMobile = responsive.isMobile;
     return SizedBox(
-      width: 270.0,
+      width: isMobileOrTablet ? 150.0 : 270.0,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -63,103 +69,115 @@ class _ProductItemTileState extends State<ProductItemTile> {
                   ),
                 ),
                 width: 270.0,
-                height: 250.0,
+                height: widget.sizeHeight ?? (isMobileOrTablet ? 100.0 : 270.0),
                 child: Stack(
                   children: [
                     Center(
-                      child: SizedBox(
-                        width: 190.0,
-                        height: 180.0,
-                        child: Image.network(
-                          fit: BoxFit.scaleDown,
-                          widget
-                              .product.product_colors.first.mainProductImage.url
-                              .toImageUrl(),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isMobileOrTablet ? 0.0 : 40.0,
+                          vertical: isMobileOrTablet ? 0.0 : 35.0,
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 12.0,
-                        right: 12.0,
-                      ),
-                      child: Align(
-                        alignment: Alignment.topRight,
-                        child: BlocBuilder<FavouriteBloc, FavouriteBlocState>(
-                          builder: (context, state) {
-                            final isFavourite = state.productsList.any(
-                              (product) =>
-                                  product.id.toString() ==
-                                  widget.product.id.toString(),
-                            );
-                            return GestureDetector(
-                              onTap: () => !isFavourite
-                                  ? context.read<FavouriteBloc>().add(
-                                        AddProductToWishlistEvent(
-                                          widget.product.id.toString(),
-                                        ),
-                                      )
-                                  : context.read<FavouriteBloc>().add(
-                                        RemoveProductFromWishlistEvent(
-                                          widget.product.id.toString(),
-                                        ),
-                                      ),
-                              child: Container(
-                                width: 34.0,
-                                height: 34.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                    isFavourite
-                                        ? Assets.icons.iconDelete
-                                        : Assets.icons.heartSmall,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                    widget.wishlistMode
-                        ? SizedBox.shrink()
-                        : Padding(
-                            padding: const EdgeInsets.only(
-                              top: 54.0,
-                              right: 12.0,
-                            ),
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: Container(
-                                width: 34.0,
-                                height: 34.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                    Assets.icons.quickView,
-                                  ),
-                                ),
-                              ),
-                            ),
+                        child: SizedBox(
+                          width: isMobileOrTablet
+                              ? (widget.sizeHeight ?? 90.0)
+                              : 190.0,
+                          height: isMobileOrTablet
+                              ? (widget.sizeHeight ?? 80.0)
+                              : 180.0,
+                          child: Image.network(
+                            fit: BoxFit.scaleDown,
+                            widget.product.product_colors.first.mainProductImage
+                                .url
+                                .toImageUrl(),
                           ),
-                    if (widget.product.salePercent != null)
+                        ),
+                      ),
+                    ),
+                    if (!isMobile)
                       Padding(
                         padding: const EdgeInsets.only(
                           top: 12.0,
-                          left: 12.0,
+                          right: 12.0,
+                        ),
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: BlocBuilder<FavouriteBloc, FavouriteBlocState>(
+                            builder: (context, state) {
+                              final isFavourite = state.productsList.any(
+                                (product) =>
+                                    product.id.toString() ==
+                                    widget.product.id.toString(),
+                              );
+                              return GestureDetector(
+                                onTap: () => !isFavourite
+                                    ? context.read<FavouriteBloc>().add(
+                                          AddProductToWishlistEvent(
+                                            widget.product.id.toString(),
+                                          ),
+                                        )
+                                    : context.read<FavouriteBloc>().add(
+                                          RemoveProductFromWishlistEvent(
+                                            widget.product.id.toString(),
+                                          ),
+                                        ),
+                                child: Container(
+                                  width: 34.0,
+                                  height: 34.0,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                  child: Center(
+                                    child: SvgPicture.asset(
+                                      isFavourite
+                                          ? Assets.icons.iconDelete
+                                          : Assets.icons.heartSmall,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    if (!isMobileOrTablet)
+                      widget.wishlistMode
+                          ? SizedBox.shrink()
+                          : Padding(
+                              padding: const EdgeInsets.only(
+                                top: 54.0,
+                                right: 12.0,
+                              ),
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: Container(
+                                  width: 34.0,
+                                  height: 34.0,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                  child: Center(
+                                    child: SvgPicture.asset(
+                                      Assets.icons.quickView,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    if (widget.product.salePercent != null)
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: isMobile ? 4.0 : 12.0,
+                          left: isMobile ? 4.0 : 12.0,
                         ),
                         child: Align(
                           alignment: Alignment.topLeft,
                           child: Container(
                             padding: EdgeInsets.symmetric(
-                              horizontal: 12.0,
-                              vertical: 4.0,
+                              horizontal: isMobile ? 4.0 : 12.0,
+                              vertical: 2.0,
                             ),
                             decoration: BoxDecoration(
                               color: AppColors.redColor,
@@ -171,8 +189,8 @@ class _ProductItemTileState extends State<ProductItemTile> {
                               '-${widget.product.salePercent.toString()}%',
                               style: AppFonts.poppingRegular.copyWith(
                                 color: Colors.white,
-                                fontSize: 12.0,
-                                height: 1.5,
+                                fontSize: isMobile ? 9.0 : 12.0,
+                                height: isMobile ? 1.0 : 1.5,
                               ),
                             ),
                           ),
@@ -233,35 +251,94 @@ class _ProductItemTileState extends State<ProductItemTile> {
           Text(
             widget.product.productName,
             style: AppFonts.poppingMedium.copyWith(
-              fontSize: 16.0,
+              fontSize: isMobileOrTablet ? 12.0 : 16.0,
             ),
           ),
           SizedBox(
             height: 8.0,
           ),
-          Row(
-            children: [
-              Text(
-                '\$${widget.product.productPrice.toString()}',
-                style: AppFonts.poppingMedium.copyWith(
-                  fontSize: 16.0,
-                  color: AppColors.redColor,
-                ),
-              ),
-              SizedBox(
-                width: 12.0,
-              ),
-              widget.product.productOriginPrice != null
-                  ? Text(
-                      '\$${widget.product.productOriginPrice.toString()}',
+          isMobileOrTablet
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        widget.product.productOriginPrice != null
+                            ? Text(
+                                '\$${widget.product.productOriginPrice.toString()}',
+                                style: AppFonts.poppingMedium.copyWith(
+                                    fontSize: isMobileOrTablet ? 11.0 : 16.0,
+                                    color: AppColors.charcoal,
+                                    decoration: TextDecoration.lineThrough),
+                              )
+                            : SizedBox.shrink(),
+                        SizedBox(
+                          height: 2.0,
+                        ),
+                        Text(
+                          '\$${widget.product.productPrice.toString()}',
+                          style: AppFonts.poppingMedium.copyWith(
+                            fontSize: isMobileOrTablet ? 11.0 : 16.0,
+                            color: AppColors.redColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (isMobileOrTablet)
+                      GestureDetector(
+                        onTap: () => context.read<CartBloc>().add(
+                              AddProductToCartlistEvent(
+                                widget.product.id.toString(),
+                                widget.product.product_colors.first.id
+                                    .toString(),
+                                1,
+                                null,
+                              ),
+                            ),
+                        child: Container(
+                          width: 18.0,
+                          height: 18.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                          ),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Icon(
+                                size: 18.0,
+                                Icons.shopping_cart,
+                                color: const Color.fromARGB(255, 6, 86, 38),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                  ],
+                )
+              : Row(
+                  children: [
+                    Text(
+                      '\$${widget.product.productPrice.toString()}',
                       style: AppFonts.poppingMedium.copyWith(
-                          fontSize: 16.0,
-                          color: AppColors.charcoal,
-                          decoration: TextDecoration.lineThrough),
-                    )
-                  : SizedBox.shrink(),
-            ],
-          ),
+                        fontSize: isMobileOrTablet ? 11.0 : 16.0,
+                        color: AppColors.redColor,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12.0,
+                    ),
+                    widget.product.productOriginPrice != null
+                        ? Text(
+                            '\$${widget.product.productOriginPrice.toString()}',
+                            style: AppFonts.poppingMedium.copyWith(
+                                fontSize: isMobileOrTablet ? 11.0 : 16.0,
+                                color: AppColors.charcoal,
+                                decoration: TextDecoration.lineThrough),
+                          )
+                        : SizedBox.shrink(),
+                  ],
+                ),
           SizedBox(
             height: 8.0,
           ),
@@ -279,18 +356,23 @@ class _ProductItemTileState extends State<ProductItemTile> {
                   // );
                 },
               ),
-              SizedBox(
-                width: 8.0,
-              ),
-              Text(
-                '(${widget.product.ratingCount})',
-                style: AppFonts.poppingRegular.copyWith(
-                  fontSize: 14.0,
-                  color: Colors.black.withValues(
-                    alpha: 0.5,
-                  ),
+              if (!isMobile)
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 8.0,
+                    ),
+                    Text(
+                      '(${widget.product.ratingCount})',
+                      style: AppFonts.poppingRegular.copyWith(
+                        fontSize: 14.0,
+                        color: Colors.black.withValues(
+                          alpha: 0.5,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
             ],
           ),
         ],

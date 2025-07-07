@@ -3,7 +3,7 @@ import 'package:exclusive_web/pages/about_page/about_page.dart';
 import 'package:exclusive_web/pages/account_page/account_page.dart';
 import 'package:exclusive_web/pages/account_page/address_book_page/address_book_page.dart';
 import 'package:exclusive_web/pages/account_page/my_profile_page/my_profile_section.dart';
-import 'package:exclusive_web/pages/account_page/payment_page/payment_page.dart';
+
 import 'package:exclusive_web/pages/all_products_page/all_products_page.dart';
 import 'package:exclusive_web/pages/auth_page/login_page/login_page.dart';
 import 'package:exclusive_web/pages/auth_page/register_page/register_page.dart';
@@ -56,6 +56,8 @@ enum ProductSectionType {
   bestSelling,
   explore,
   justForYou,
+  category,
+  department,
 }
 
 class AccountShellRoute extends StatefulShellRouteData {
@@ -77,15 +79,6 @@ class AccountAddressRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const AddressSection();
-  }
-}
-
-class AccountPaymentRoute extends GoRouteData {
-  const AccountPaymentRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const PaymentSection();
   }
 }
 
@@ -125,11 +118,6 @@ class AccountProfileRoute extends GoRouteData {
               TypedStatefulShellBranch(
                 routes: [
                   TypedGoRoute<AccountAddressRoute>(path: 'account/address'),
-                ],
-              ),
-              TypedStatefulShellBranch(
-                routes: [
-                  TypedGoRoute<AccountPaymentRoute>(path: 'account/payment'),
                 ],
               ),
             ],
@@ -232,8 +220,13 @@ class FavouriteRoute extends GoRouteData {
 class ProductsRoute extends GoRouteData {
   final ProductSectionType type;
   final String sectionName;
+  final String? categoryName;
 
-  const ProductsRoute({required this.type, required this.sectionName});
+  const ProductsRoute({
+    required this.type,
+    required this.sectionName,
+    this.categoryName,
+  });
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -241,6 +234,7 @@ class ProductsRoute extends GoRouteData {
     return AllProductsPage(
       repository: repository,
       sectionName: sectionName,
+      categoryName: categoryName,
     );
   }
 
@@ -254,6 +248,10 @@ class ProductsRoute extends GoRouteData {
         return ExploreOurProductsRepository();
       case ProductSectionType.justForYou:
         return BestSellingProductsRepository();
+      case ProductSectionType.category:
+        return CategoriesProductsRepository();
+      case ProductSectionType.department:
+        return DepartmentProductsRepository();
     }
   }
 }
