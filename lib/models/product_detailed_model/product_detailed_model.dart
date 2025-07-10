@@ -19,6 +19,7 @@ class ProductDetailedModel with _$ProductDetailedModel {
     required int saleCount,
     required List<ProductColorModel> product_colors,
     List<ProductSizeModel>? productSizeList,
+    required List<ProductReviewsModel> reviews,
   }) = _ProductDetailedModel;
 
   factory ProductDetailedModel.fromJson(Map<String, dynamic> json) =>
@@ -34,4 +35,17 @@ class ProductSizeModel with _$ProductSizeModel {
 
   factory ProductSizeModel.fromJson(Map<String, dynamic> json) =>
       _$ProductSizeModelFromJson(json);
+}
+
+@freezed
+class ProductReviewsModel with _$ProductReviewsModel {
+  const factory ProductReviewsModel({
+    required String userName,
+    required String reviewText,
+    required String userID,
+    required double rating,
+  }) = _ProductReviewsModel;
+
+  factory ProductReviewsModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductReviewsModelFromJson(json);
 }

@@ -84,7 +84,7 @@ class _RelatedItemsSectionState extends State<RelatedItemsSection> {
                         (containerWidth - totalSpacing) / itemsPerPage;
 
                     return SizedBox(
-                      height: isMobileOrTablet ? 250 : 350,
+                      height: isMobileOrTablet ? 250 : 370,
                       width: containerWidth,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,

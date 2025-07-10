@@ -10,11 +10,14 @@ import 'package:exclusive_web/pages/auth_page/register_page/register_page.dart';
 import 'package:exclusive_web/pages/cart_page/cart_page.dart';
 import 'package:exclusive_web/pages/checkout_page/checkout_page.dart';
 import 'package:exclusive_web/pages/contact_page/contact_page.dart';
+import 'package:exclusive_web/pages/faq/faq_page.dart';
 import 'package:exclusive_web/pages/favourite_page/favourite_page.dart';
 import 'package:exclusive_web/pages/home_page/home_page.dart';
+import 'package:exclusive_web/pages/privacy_page/privacy_page.dart';
 import 'package:exclusive_web/pages/product_details_page/bloc/product_details_bloc/product_details_bloc.dart';
 import 'package:exclusive_web/pages/product_details_page/product_details_screen.dart';
 import 'package:exclusive_web/pages/root_page/root_page.dart';
+import 'package:exclusive_web/pages/terns_of_use/terns_of_user_page.dart';
 import 'package:exclusive_web/repositories/general_products_repository/general_products_repository.dart';
 import 'package:exclusive_web/services/navigation_service/navigation_service.dart';
 import 'package:flutter/material.dart';
@@ -107,6 +110,15 @@ class AccountProfileRoute extends GoRouteData {
           ),
           TypedGoRoute<ProductsRoute>(
             path: 'products',
+          ),
+          TypedGoRoute<PrivacyRoute>(
+            path: 'privacy_policy',
+          ),
+          TypedGoRoute<TernOfUseRoute>(
+            path: 'terns_of_use',
+          ),
+          TypedGoRoute<FaqRoute>(
+            path: 'faq',
           ),
           TypedStatefulShellRoute<AccountShellRoute>(
             branches: [
@@ -217,6 +229,17 @@ class FavouriteRoute extends GoRouteData {
       const FavouritePage();
 }
 
+class FaqRoute extends GoRouteData {
+  const FaqRoute();
+
+  @override
+  Widget build(
+    BuildContext context,
+    GoRouterState state,
+  ) =>
+      const FaqPage();
+}
+
 class ProductsRoute extends GoRouteData {
   final ProductSectionType type;
   final String sectionName;
@@ -254,6 +277,28 @@ class ProductsRoute extends GoRouteData {
         return DepartmentProductsRepository();
     }
   }
+}
+
+class PrivacyRoute extends GoRouteData {
+  const PrivacyRoute();
+
+  @override
+  Widget build(
+    BuildContext context,
+    GoRouterState state,
+  ) =>
+      const PrivacyPolicyPage();
+}
+
+class TernOfUseRoute extends GoRouteData {
+  const TernOfUseRoute();
+
+  @override
+  Widget build(
+    BuildContext context,
+    GoRouterState state,
+  ) =>
+      const TernsOfUsePage();
 }
 
 class CheckoutRoute extends GoRouteData {

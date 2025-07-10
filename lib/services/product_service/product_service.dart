@@ -165,6 +165,24 @@ class ProductService {
     }
   }
 
+  Future<void> changeProductRating(
+    String productId,
+    int ratingCount,
+    double rating,
+  ) async {
+    try {
+      final product = await _productRepository.changeProductRating(
+        productId,
+        ratingCount,
+        rating,
+      );
+
+      return product;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<ProductLightModel>> getProductsById(
       List<String> productsID) async {
     try {

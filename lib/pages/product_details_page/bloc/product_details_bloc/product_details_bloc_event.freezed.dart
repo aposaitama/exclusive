@@ -16,44 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ProductDetailsBlocEvent {
-  String get productId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String productId) loadInfo,
+    required TResult Function(double rating) changeRating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String productId)? loadInfo,
+    TResult? Function(double rating)? changeRating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String productId)? loadInfo,
+    TResult Function(double rating)? changeRating,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadDetailedProductInfoEvent value) loadInfo,
+    required TResult Function(ChangeProductRatingEvent value) changeRating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadDetailedProductInfoEvent value)? loadInfo,
+    TResult? Function(ChangeProductRatingEvent value)? changeRating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadDetailedProductInfoEvent value)? loadInfo,
+    TResult Function(ChangeProductRatingEvent value)? changeRating,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of ProductDetailsBlocEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ProductDetailsBlocEventCopyWith<ProductDetailsBlocEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -62,8 +61,6 @@ abstract class $ProductDetailsBlocEventCopyWith<$Res> {
   factory $ProductDetailsBlocEventCopyWith(ProductDetailsBlocEvent value,
           $Res Function(ProductDetailsBlocEvent) then) =
       _$ProductDetailsBlocEventCopyWithImpl<$Res, ProductDetailsBlocEvent>;
-  @useResult
-  $Res call({String productId});
 }
 
 /// @nodoc
@@ -79,28 +76,14 @@ class _$ProductDetailsBlocEventCopyWithImpl<$Res,
 
   /// Create a copy of ProductDetailsBlocEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? productId = null,
-  }) {
-    return _then(_value.copyWith(
-      productId: null == productId
-          ? _value.productId
-          : productId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$LoadDetailedProductInfoEventImplCopyWith<$Res>
-    implements $ProductDetailsBlocEventCopyWith<$Res> {
+abstract class _$$LoadDetailedProductInfoEventImplCopyWith<$Res> {
   factory _$$LoadDetailedProductInfoEventImplCopyWith(
           _$LoadDetailedProductInfoEventImpl value,
           $Res Function(_$LoadDetailedProductInfoEventImpl) then) =
       __$$LoadDetailedProductInfoEventImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String productId});
 }
@@ -171,6 +154,7 @@ class _$LoadDetailedProductInfoEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String productId) loadInfo,
+    required TResult Function(double rating) changeRating,
   }) {
     return loadInfo(productId);
   }
@@ -179,6 +163,7 @@ class _$LoadDetailedProductInfoEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String productId)? loadInfo,
+    TResult? Function(double rating)? changeRating,
   }) {
     return loadInfo?.call(productId);
   }
@@ -187,6 +172,7 @@ class _$LoadDetailedProductInfoEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String productId)? loadInfo,
+    TResult Function(double rating)? changeRating,
     required TResult orElse(),
   }) {
     if (loadInfo != null) {
@@ -199,6 +185,7 @@ class _$LoadDetailedProductInfoEventImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadDetailedProductInfoEvent value) loadInfo,
+    required TResult Function(ChangeProductRatingEvent value) changeRating,
   }) {
     return loadInfo(this);
   }
@@ -207,6 +194,7 @@ class _$LoadDetailedProductInfoEventImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadDetailedProductInfoEvent value)? loadInfo,
+    TResult? Function(ChangeProductRatingEvent value)? changeRating,
   }) {
     return loadInfo?.call(this);
   }
@@ -215,6 +203,7 @@ class _$LoadDetailedProductInfoEventImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadDetailedProductInfoEvent value)? loadInfo,
+    TResult Function(ChangeProductRatingEvent value)? changeRating,
     required TResult orElse(),
   }) {
     if (loadInfo != null) {
@@ -228,14 +217,157 @@ abstract class LoadDetailedProductInfoEvent implements ProductDetailsBlocEvent {
   const factory LoadDetailedProductInfoEvent(final String productId) =
       _$LoadDetailedProductInfoEventImpl;
 
-  @override
   String get productId;
 
   /// Create a copy of ProductDetailsBlocEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadDetailedProductInfoEventImplCopyWith<
           _$LoadDetailedProductInfoEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChangeProductRatingEventImplCopyWith<$Res> {
+  factory _$$ChangeProductRatingEventImplCopyWith(
+          _$ChangeProductRatingEventImpl value,
+          $Res Function(_$ChangeProductRatingEventImpl) then) =
+      __$$ChangeProductRatingEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({double rating});
+}
+
+/// @nodoc
+class __$$ChangeProductRatingEventImplCopyWithImpl<$Res>
+    extends _$ProductDetailsBlocEventCopyWithImpl<$Res,
+        _$ChangeProductRatingEventImpl>
+    implements _$$ChangeProductRatingEventImplCopyWith<$Res> {
+  __$$ChangeProductRatingEventImplCopyWithImpl(
+      _$ChangeProductRatingEventImpl _value,
+      $Res Function(_$ChangeProductRatingEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProductDetailsBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rating = null,
+  }) {
+    return _then(_$ChangeProductRatingEventImpl(
+      null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChangeProductRatingEventImpl implements ChangeProductRatingEvent {
+  const _$ChangeProductRatingEventImpl(this.rating);
+
+  @override
+  final double rating;
+
+  @override
+  String toString() {
+    return 'ProductDetailsBlocEvent.changeRating(rating: $rating)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeProductRatingEventImpl &&
+            (identical(other.rating, rating) || other.rating == rating));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, rating);
+
+  /// Create a copy of ProductDetailsBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangeProductRatingEventImplCopyWith<_$ChangeProductRatingEventImpl>
+      get copyWith => __$$ChangeProductRatingEventImplCopyWithImpl<
+          _$ChangeProductRatingEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String productId) loadInfo,
+    required TResult Function(double rating) changeRating,
+  }) {
+    return changeRating(rating);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String productId)? loadInfo,
+    TResult? Function(double rating)? changeRating,
+  }) {
+    return changeRating?.call(rating);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String productId)? loadInfo,
+    TResult Function(double rating)? changeRating,
+    required TResult orElse(),
+  }) {
+    if (changeRating != null) {
+      return changeRating(rating);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadDetailedProductInfoEvent value) loadInfo,
+    required TResult Function(ChangeProductRatingEvent value) changeRating,
+  }) {
+    return changeRating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadDetailedProductInfoEvent value)? loadInfo,
+    TResult? Function(ChangeProductRatingEvent value)? changeRating,
+  }) {
+    return changeRating?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadDetailedProductInfoEvent value)? loadInfo,
+    TResult Function(ChangeProductRatingEvent value)? changeRating,
+    required TResult orElse(),
+  }) {
+    if (changeRating != null) {
+      return changeRating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChangeProductRatingEvent implements ProductDetailsBlocEvent {
+  const factory ChangeProductRatingEvent(final double rating) =
+      _$ChangeProductRatingEventImpl;
+
+  double get rating;
+
+  /// Create a copy of ProductDetailsBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChangeProductRatingEventImplCopyWith<_$ChangeProductRatingEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

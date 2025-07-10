@@ -16,6 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AccountState {
+  CreateReviewStatus get createReviewStatus =>
+      throw _privateConstructorUsedError;
   bool get isAuthenticated => throw _privateConstructorUsedError;
   UserModel? get userInfo => throw _privateConstructorUsedError;
   List<AddressModel> get userAddresses => throw _privateConstructorUsedError;
@@ -34,7 +36,8 @@ abstract class $AccountStateCopyWith<$Res> {
       _$AccountStateCopyWithImpl<$Res, AccountState>;
   @useResult
   $Res call(
-      {bool isAuthenticated,
+      {CreateReviewStatus createReviewStatus,
+      bool isAuthenticated,
       UserModel? userInfo,
       List<AddressModel> userAddresses});
 
@@ -56,11 +59,16 @@ class _$AccountStateCopyWithImpl<$Res, $Val extends AccountState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? createReviewStatus = null,
     Object? isAuthenticated = null,
     Object? userInfo = freezed,
     Object? userAddresses = null,
   }) {
     return _then(_value.copyWith(
+      createReviewStatus: null == createReviewStatus
+          ? _value.createReviewStatus
+          : createReviewStatus // ignore: cast_nullable_to_non_nullable
+              as CreateReviewStatus,
       isAuthenticated: null == isAuthenticated
           ? _value.isAuthenticated
           : isAuthenticated // ignore: cast_nullable_to_non_nullable
@@ -100,7 +108,8 @@ abstract class _$$AccountStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isAuthenticated,
+      {CreateReviewStatus createReviewStatus,
+      bool isAuthenticated,
       UserModel? userInfo,
       List<AddressModel> userAddresses});
 
@@ -121,11 +130,16 @@ class __$$AccountStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? createReviewStatus = null,
     Object? isAuthenticated = null,
     Object? userInfo = freezed,
     Object? userAddresses = null,
   }) {
     return _then(_$AccountStateImpl(
+      createReviewStatus: null == createReviewStatus
+          ? _value.createReviewStatus
+          : createReviewStatus // ignore: cast_nullable_to_non_nullable
+              as CreateReviewStatus,
       isAuthenticated: null == isAuthenticated
           ? _value.isAuthenticated
           : isAuthenticated // ignore: cast_nullable_to_non_nullable
@@ -146,11 +160,15 @@ class __$$AccountStateImplCopyWithImpl<$Res>
 
 class _$AccountStateImpl implements _AccountState {
   _$AccountStateImpl(
-      {this.isAuthenticated = false,
+      {this.createReviewStatus = CreateReviewStatus.initial,
+      this.isAuthenticated = false,
       this.userInfo,
       final List<AddressModel> userAddresses = const []})
       : _userAddresses = userAddresses;
 
+  @override
+  @JsonKey()
+  final CreateReviewStatus createReviewStatus;
   @override
   @JsonKey()
   final bool isAuthenticated;
@@ -167,7 +185,7 @@ class _$AccountStateImpl implements _AccountState {
 
   @override
   String toString() {
-    return 'AccountState(isAuthenticated: $isAuthenticated, userInfo: $userInfo, userAddresses: $userAddresses)';
+    return 'AccountState(createReviewStatus: $createReviewStatus, isAuthenticated: $isAuthenticated, userInfo: $userInfo, userAddresses: $userAddresses)';
   }
 
   @override
@@ -175,6 +193,8 @@ class _$AccountStateImpl implements _AccountState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AccountStateImpl &&
+            (identical(other.createReviewStatus, createReviewStatus) ||
+                other.createReviewStatus == createReviewStatus) &&
             (identical(other.isAuthenticated, isAuthenticated) ||
                 other.isAuthenticated == isAuthenticated) &&
             (identical(other.userInfo, userInfo) ||
@@ -184,7 +204,11 @@ class _$AccountStateImpl implements _AccountState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isAuthenticated, userInfo,
+  int get hashCode => Object.hash(
+      runtimeType,
+      createReviewStatus,
+      isAuthenticated,
+      userInfo,
       const DeepCollectionEquality().hash(_userAddresses));
 
   /// Create a copy of AccountState
@@ -198,10 +222,13 @@ class _$AccountStateImpl implements _AccountState {
 
 abstract class _AccountState implements AccountState {
   factory _AccountState(
-      {final bool isAuthenticated,
+      {final CreateReviewStatus createReviewStatus,
+      final bool isAuthenticated,
       final UserModel? userInfo,
       final List<AddressModel> userAddresses}) = _$AccountStateImpl;
 
+  @override
+  CreateReviewStatus get createReviewStatus;
   @override
   bool get isAuthenticated;
   @override

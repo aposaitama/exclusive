@@ -32,6 +32,7 @@ mixin _$ProductLightModel {
   CategoryLightModel? get category => throw _privateConstructorUsedError;
   List<ProductColorModel> get product_colors =>
       throw _privateConstructorUsedError;
+  List<ProductReviewsModel>? get reviews => throw _privateConstructorUsedError;
 
   /// Serializes this ProductLightModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -60,7 +61,8 @@ abstract class $ProductLightModelCopyWith<$Res> {
       double? salePercent,
       int saleCount,
       CategoryLightModel? category,
-      List<ProductColorModel> product_colors});
+      List<ProductColorModel> product_colors,
+      List<ProductReviewsModel>? reviews});
 
   $CategoryLightModelCopyWith<$Res>? get category;
 }
@@ -91,6 +93,7 @@ class _$ProductLightModelCopyWithImpl<$Res, $Val extends ProductLightModel>
     Object? saleCount = null,
     Object? category = freezed,
     Object? product_colors = null,
+    Object? reviews = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -137,6 +140,10 @@ class _$ProductLightModelCopyWithImpl<$Res, $Val extends ProductLightModel>
           ? _value.product_colors
           : product_colors // ignore: cast_nullable_to_non_nullable
               as List<ProductColorModel>,
+      reviews: freezed == reviews
+          ? _value.reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<ProductReviewsModel>?,
     ) as $Val);
   }
 
@@ -174,7 +181,8 @@ abstract class _$$ProductLightModelImplCopyWith<$Res>
       double? salePercent,
       int saleCount,
       CategoryLightModel? category,
-      List<ProductColorModel> product_colors});
+      List<ProductColorModel> product_colors,
+      List<ProductReviewsModel>? reviews});
 
   @override
   $CategoryLightModelCopyWith<$Res>? get category;
@@ -204,6 +212,7 @@ class __$$ProductLightModelImplCopyWithImpl<$Res>
     Object? saleCount = null,
     Object? category = freezed,
     Object? product_colors = null,
+    Object? reviews = freezed,
   }) {
     return _then(_$ProductLightModelImpl(
       id: null == id
@@ -250,6 +259,10 @@ class __$$ProductLightModelImplCopyWithImpl<$Res>
           ? _value._product_colors
           : product_colors // ignore: cast_nullable_to_non_nullable
               as List<ProductColorModel>,
+      reviews: freezed == reviews
+          ? _value._reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<ProductReviewsModel>?,
     ));
   }
 }
@@ -268,8 +281,10 @@ class _$ProductLightModelImpl implements _ProductLightModel {
       this.salePercent,
       required this.saleCount,
       this.category,
-      required final List<ProductColorModel> product_colors})
-      : _product_colors = product_colors;
+      required final List<ProductColorModel> product_colors,
+      final List<ProductReviewsModel>? reviews})
+      : _product_colors = product_colors,
+        _reviews = reviews;
 
   factory _$ProductLightModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductLightModelImplFromJson(json);
@@ -302,9 +317,19 @@ class _$ProductLightModelImpl implements _ProductLightModel {
     return EqualUnmodifiableListView(_product_colors);
   }
 
+  final List<ProductReviewsModel>? _reviews;
+  @override
+  List<ProductReviewsModel>? get reviews {
+    final value = _reviews;
+    if (value == null) return null;
+    if (_reviews is EqualUnmodifiableListView) return _reviews;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'ProductLightModel(id: $id, documentId: $documentId, productName: $productName, productPrice: $productPrice, productOriginPrice: $productOriginPrice, ratingCount: $ratingCount, totalRating: $totalRating, salePercent: $salePercent, saleCount: $saleCount, category: $category, product_colors: $product_colors)';
+    return 'ProductLightModel(id: $id, documentId: $documentId, productName: $productName, productPrice: $productPrice, productOriginPrice: $productOriginPrice, ratingCount: $ratingCount, totalRating: $totalRating, salePercent: $salePercent, saleCount: $saleCount, category: $category, product_colors: $product_colors, reviews: $reviews)';
   }
 
   @override
@@ -332,7 +357,8 @@ class _$ProductLightModelImpl implements _ProductLightModel {
             (identical(other.category, category) ||
                 other.category == category) &&
             const DeepCollectionEquality()
-                .equals(other._product_colors, _product_colors));
+                .equals(other._product_colors, _product_colors) &&
+            const DeepCollectionEquality().equals(other._reviews, _reviews));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -349,7 +375,8 @@ class _$ProductLightModelImpl implements _ProductLightModel {
       salePercent,
       saleCount,
       category,
-      const DeepCollectionEquality().hash(_product_colors));
+      const DeepCollectionEquality().hash(_product_colors),
+      const DeepCollectionEquality().hash(_reviews));
 
   /// Create a copy of ProductLightModel
   /// with the given fields replaced by the non-null parameter values.
@@ -370,18 +397,18 @@ class _$ProductLightModelImpl implements _ProductLightModel {
 
 abstract class _ProductLightModel implements ProductLightModel {
   const factory _ProductLightModel(
-          {required final int id,
-          required final String documentId,
-          required final String productName,
-          required final double productPrice,
-          final double? productOriginPrice,
-          required final int ratingCount,
-          required final double totalRating,
-          final double? salePercent,
-          required final int saleCount,
-          final CategoryLightModel? category,
-          required final List<ProductColorModel> product_colors}) =
-      _$ProductLightModelImpl;
+      {required final int id,
+      required final String documentId,
+      required final String productName,
+      required final double productPrice,
+      final double? productOriginPrice,
+      required final int ratingCount,
+      required final double totalRating,
+      final double? salePercent,
+      required final int saleCount,
+      final CategoryLightModel? category,
+      required final List<ProductColorModel> product_colors,
+      final List<ProductReviewsModel>? reviews}) = _$ProductLightModelImpl;
 
   factory _ProductLightModel.fromJson(Map<String, dynamic> json) =
       _$ProductLightModelImpl.fromJson;
@@ -408,6 +435,8 @@ abstract class _ProductLightModel implements ProductLightModel {
   CategoryLightModel? get category;
   @override
   List<ProductColorModel> get product_colors;
+  @override
+  List<ProductReviewsModel>? get reviews;
 
   /// Create a copy of ProductLightModel
   /// with the given fields replaced by the non-null parameter values.

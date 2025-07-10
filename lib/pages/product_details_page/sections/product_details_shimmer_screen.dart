@@ -1,7 +1,6 @@
 import 'package:exclusive_web/pages/product_details_page/sections/product_details_section/widgets/shimmer_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:shimmer/shimmer.dart';
 
 class ProductDetailsShimmer extends StatelessWidget {
   const ProductDetailsShimmer({super.key});

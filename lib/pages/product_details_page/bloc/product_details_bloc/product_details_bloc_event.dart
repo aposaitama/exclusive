@@ -7,4 +7,7 @@ class ProductDetailsBlocEvent with _$ProductDetailsBlocEvent {
   const factory ProductDetailsBlocEvent.loadInfo(
     String productId,
   ) = LoadDetailedProductInfoEvent;
+  const factory ProductDetailsBlocEvent.changeRating(
+    double rating,
+  ) = ChangeProductRatingEvent;
 }

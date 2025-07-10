@@ -34,7 +34,16 @@ class ProductItemTile extends StatefulWidget {
 
 class _ProductItemTileState extends State<ProductItemTile> {
   double calculateProductRating() {
-    return widget.product.totalRating / widget.product.ratingCount;
+    if (widget.product.reviews == null || widget.product.reviews!.isEmpty) {
+      return 0.0;
+    }
+
+    final totalRating = widget.product.reviews!.fold<double>(
+      0.0,
+      (sum, review) => sum + review.rating,
+    );
+
+    return totalRating / widget.product.reviews!.length;
   }
 
   bool openCartButton = false;
@@ -346,15 +355,13 @@ class _ProductItemTileState extends State<ProductItemTile> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               StarRating(
+                productDocumentID: widget.product.documentId,
+                previusRating: widget.product.totalRating,
+                previusCount: widget.product.ratingCount,
+                productID: widget.product.id.toString(),
                 isHoverEnabled: false,
                 rating: calculateProductRating(),
-                onRatingSelected: (newRating) {
-                  // setState(
-                  //   () {
-                  //     _currentRating = newRating;
-                  //   },
-                  // );
-                },
+                onRatingSelected: (newRating) {},
               ),
               if (!isMobile)
                 Row(
@@ -363,7 +370,7 @@ class _ProductItemTileState extends State<ProductItemTile> {
                       width: 8.0,
                     ),
                     Text(
-                      '(${widget.product.ratingCount})',
+                      '(${widget.product.reviews?.length ?? 0})',
                       style: AppFonts.poppingRegular.copyWith(
                         fontSize: 14.0,
                         color: Colors.black.withValues(

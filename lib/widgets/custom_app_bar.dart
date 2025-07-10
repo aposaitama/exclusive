@@ -12,14 +12,12 @@ import 'package:exclusive_web/pages/home_page/bloc/search_bloc/search_bloc_event
 import 'package:exclusive_web/pages/home_page/bloc/search_bloc/search_bloc_state.dart';
 import 'package:exclusive_web/pages/home_page/widgets/account_popup.dart';
 import 'package:exclusive_web/resources/app_fonts.dart';
-import 'package:exclusive_web/services/shared_preferences_service/shared_preferences_service.dart';
 import 'package:exclusive_web/utils/extensions.dart';
 import 'package:exclusive_web/widgets/app_bar_text_field.dart';
 import 'package:exclusive_web/widgets/nav_title_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomAppBar extends StatefulWidget {

@@ -8,10 +8,12 @@ class CustomAccountTextFiledWithTitle extends StatelessWidget {
   final TextEditingController textFieldEditingController;
   final String fieldTitle;
   final String hint;
+  final int? maxLines;
 
   final String? Function(String?)? validator;
   const CustomAccountTextFiledWithTitle(
       {super.key,
+      this.maxLines = 1,
       required this.textFieldEditingController,
       required this.fieldTitle,
       this.validator,
@@ -34,6 +36,7 @@ class CustomAccountTextFiledWithTitle extends StatelessWidget {
           height: 8.0,
         ),
         CustomTextField(
+          maxLines: maxLines,
           validator: validator,
           hintText: hint,
           controller: textFieldEditingController,

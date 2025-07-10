@@ -31,13 +31,16 @@ class FooterSectionItem extends StatelessWidget {
         ...items.entries.map(
           (entry) => Padding(
             padding: const EdgeInsets.only(bottom: 12.0),
-            child: GestureDetector(
-              onTap: () => context.go(entry.value),
-              child: Text(
-                entry.key,
-                style: AppFonts.poppingRegular.copyWith(
-                  fontSize: isMobileOrTablet ? 12.0 : 16.0,
-                  color: Colors.white,
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () => context.go(entry.value),
+                child: Text(
+                  entry.key,
+                  style: AppFonts.poppingRegular.copyWith(
+                    fontSize: isMobileOrTablet ? 12.0 : 16.0,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

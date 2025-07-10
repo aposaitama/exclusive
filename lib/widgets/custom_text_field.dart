@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
+  final int? maxLines;
   const CustomTextField({
     super.key,
     required this.hintText,
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.inputFormatters,
     this.keyboardType,
+    this.maxLines = 1,
   });
 
   @override
@@ -28,6 +30,7 @@ class CustomTextField extends StatelessWidget {
     );
     final mobileVersion = responsive.isTablet || responsive.isMobile;
     return TextFormField(
+      maxLines: maxLines,
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
       validator: validator,

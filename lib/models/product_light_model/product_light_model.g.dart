@@ -25,6 +25,9 @@ _$ProductLightModelImpl _$$ProductLightModelImplFromJson(
       product_colors: (json['product_colors'] as List<dynamic>)
           .map((e) => ProductColorModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      reviews: (json['reviews'] as List<dynamic>?)
+          ?.map((e) => ProductReviewsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$ProductLightModelImplToJson(
@@ -41,4 +44,5 @@ Map<String, dynamic> _$$ProductLightModelImplToJson(
       'saleCount': instance.saleCount,
       'category': instance.category,
       'product_colors': instance.product_colors,
+      'reviews': instance.reviews,
     };

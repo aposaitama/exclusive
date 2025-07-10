@@ -4,7 +4,7 @@ import 'routes.dart';
 
 class AppRouter {
   GoRouter createRouter() => GoRouter(
-        initialLocation: '/home',
+        initialLocation: '/home/terns_of_use',
         routes: $appRoutes,
       );
 }

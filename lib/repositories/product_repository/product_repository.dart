@@ -49,7 +49,7 @@ class ProductRepository {
   }) async {
     try {
       const url =
-          '/products?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&filters[isOnFleshSales]=true';
+          '/products?populate=reviews&populate[]=product_colors.galleryProductImages&populate[][]=product_colors.mainProductImage&filters[isOnFleshSales]=true';
 
       final response = await _dio.get(url, queryParameters: {
         'pagination[page]': page,
@@ -57,6 +57,14 @@ class ProductRepository {
       });
 
       if (response.isSuccess) {
+        final result = (response.data['data'] as List)
+            .map(
+              (json) => ProductLightModel.fromJson(
+                json as Map<String, dynamic>,
+              ),
+            )
+            .toList();
+        print(result);
         return (response.data['data'] as List)
             .map(
               (json) => ProductLightModel.fromJson(
@@ -75,7 +83,7 @@ class ProductRepository {
   Future<List<ProductLightModel>> fetchOurProducts() async {
     try {
       const url =
-          '/products?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&filters[isOurProduct]=true&pagination[page]=1&pagination[pageSize]=8';
+          '/products?populate=reviews&populate[]=product_colors.galleryProductImages&populate[][]=product_colors.mainProductImage&filters[isOurProduct]=true&pagination[page]=1&pagination[pageSize]=8';
 
       final response = await _dio.get(url);
 
@@ -101,7 +109,7 @@ class ProductRepository {
   }) async {
     try {
       final url =
-          '/products?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&pagination[page]=$page&pagination[pageSize]=$pageSize&filters[isOurProduct]=true';
+          '/products?filters[isOurProduct]=true&populate[]=product_colors.galleryProductImages&populate[][]=product_colors.mainProductImage&pagination[page]=$page&pagination[pageSize]=$pageSize&populate=reviews';
 
       final response = await _dio.get(url);
 
@@ -155,7 +163,7 @@ class ProductRepository {
   }) async {
     try {
       final url =
-          '/departments?populate=categories.products&populate[]=categories.products.product_colors.galleryProductImages&populate[][]=categories.products.product_colors.mainProductImage&pagination[page]=$page&pagination[pageSize]=$pageSize&filters[departmentName][\$eq]=$categoryName';
+          '/departments?populate=categories.products&populate[]=categories.products.reviews&populate[][]=categories.products.product_colors.galleryProductImages&populate[][][]=categories.products.product_colors.mainProductImage&pagination[page]=$page&pagination[pageSize]=$pageSize&filters[departmentName][\$eq]=$categoryName';
 
       final response = await _dio.get(url);
 
@@ -215,7 +223,7 @@ class ProductRepository {
   Future<List<ProductLightModel>> fetchBestSellingProducts() async {
     try {
       const url =
-          '/products?filters[saleCount][\$gt]=0&sort[0]=saleCount:desc&populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage';
+          '/products?filters[saleCount][\$gt]=0&sort[0]=saleCount:desc&populate=reviews&populate[]=product_colors.galleryProductImages&populate[][]=product_colors.mainProductImage';
 
       final response = await _dio.get(url);
 
@@ -241,7 +249,7 @@ class ProductRepository {
   }) async {
     try {
       final url =
-          '/products?filters[saleCount][\$gt]=0&sort[0]=saleCount:desc&populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&pagination[page]=$page&pagination[pageSize]=$pageSize';
+          '/products?populate=reviews&populate[]=product_colors.galleryProductImages&populate[][]=product_colors.mainProductImage&filters[saleCount][\$gt]=0&sort[0]=saleCount:desc&pagination[page]=$page&pagination[pageSize]=$pageSize';
 
       final response = await _dio.get(url);
 
@@ -266,7 +274,7 @@ class ProductRepository {
   ) async {
     try {
       final url =
-          '/products/$productId?populate[product_colors][populate]=galleryProductImages&populate[product_colors][populate]=mainProductImage&populate=productSizeList';
+          '/products/$productId?populate=productSizeList&populate[]=reviews&populate[][]=product_colors.galleryProductImages&populate[][][]=product_colors.mainProductImage';
 
       final response = await _dio.get(url);
 
@@ -284,6 +292,22 @@ class ProductRepository {
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future<void> changeProductRating(
+    String productId,
+    int ratingCount,
+    double totalRating,
+  ) async {
+    await _dio.patch(
+      '/products/$productId',
+      data: {
+        "data": {
+          "ratingCount": ratingCount,
+          "totalRating": totalRating,
+        }
+      },
+    );
   }
 
   Future<ProductLightModel?> fetchConcreteProductById(String productId) async {
@@ -327,9 +351,9 @@ class ProductRepository {
       for (int i = 0; i < productIds.length; i++) {
         queryParameters['filters[id][\$in][$i]'] = productIds[i];
       }
-
-      queryParameters['populate'] = 'product_colors.mainProductImage';
-      queryParameters['populate[]'] = 'product_colors.galleryProductImages';
+      queryParameters['populate'] = 'reviews';
+      queryParameters['populate[]'] = 'product_colors.mainProductImage';
+      queryParameters['populate[][]'] = 'product_colors.galleryProductImages';
 
       final uri =
           Uri.parse('/products').replace(queryParameters: queryParameters);

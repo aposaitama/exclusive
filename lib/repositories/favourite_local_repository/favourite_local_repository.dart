@@ -40,7 +40,7 @@ class FavouriteLocalRepository {
   ) async {
     try {
       final response = await _dio.get(
-        '/products?populate[]=product_colors.mainProductImage&populate[][]=product_colors.galleryProductImages&filters[category][categoryName][\$eq]=$categoryName&pagination[limit]=4',
+        '/products?populate=reviews&populate[]=product_colors.mainProductImage&populate[][]=product_colors.galleryProductImages&filters[category][categoryName][\$eq]=$categoryName&pagination[limit]=4',
       );
 
       if (response.isSuccess) {

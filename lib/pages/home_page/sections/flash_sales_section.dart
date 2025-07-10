@@ -365,6 +365,7 @@ class _FlashSalesSectionState extends State<FlashSalesSection> {
                           width:
                               (MediaQuery.of(context).size.width / 2) + 585.0,
                           child: ListView.separated(
+                            physics: NeverScrollableScrollPhysics(),
                             controller: _scrollController,
                             scrollDirection: Axis.horizontal,
                             itemCount: widget.products.length,

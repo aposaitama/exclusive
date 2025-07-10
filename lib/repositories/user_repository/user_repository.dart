@@ -82,6 +82,27 @@ class UserRepository {
     }
   }
 
+  Future<void> createUserReview(
+    String productID,
+    String reviewText,
+    String userName,
+    String userID,
+    double rating,
+  ) async {
+    await _dio.post(
+      '/reviews',
+      data: {
+        "data": {
+          "product": productID,
+          "userName": userName,
+          "reviewText": reviewText,
+          "userID": userID,
+          "rating": rating,
+        }
+      },
+    );
+  }
+
   Future<List<AddressModel>> getUserAddreses(
     String userID,
   ) async {

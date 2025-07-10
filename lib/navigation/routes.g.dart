@@ -35,6 +35,18 @@ RouteBase get $rootShellRoute => StatefulShellRouteData.$route(
                   path: 'products',
                   factory: $ProductsRouteExtension._fromState,
                 ),
+                GoRouteData.$route(
+                  path: 'privacy_policy',
+                  factory: $PrivacyRouteExtension._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'terns_of_use',
+                  factory: $TernOfUseRouteExtension._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'faq',
+                  factory: $FaqRouteExtension._fromState,
+                ),
                 StatefulShellRouteData.$route(
                   factory: $AccountShellRouteExtension._fromState,
                   branches: [
@@ -204,6 +216,58 @@ const _$ProductSectionTypeEnumMap = {
   ProductSectionType.category: 'category',
   ProductSectionType.department: 'department',
 };
+
+extension $PrivacyRouteExtension on PrivacyRoute {
+  static PrivacyRoute _fromState(GoRouterState state) => const PrivacyRoute();
+
+  String get location => GoRouteData.$location(
+        '/home/privacy_policy',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $TernOfUseRouteExtension on TernOfUseRoute {
+  static TernOfUseRoute _fromState(GoRouterState state) =>
+      const TernOfUseRoute();
+
+  String get location => GoRouteData.$location(
+        '/home/terns_of_use',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $FaqRouteExtension on FaqRoute {
+  static FaqRoute _fromState(GoRouterState state) => const FaqRoute();
+
+  String get location => GoRouteData.$location(
+        '/home/faq',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
 
 extension $AccountShellRouteExtension on AccountShellRoute {
   static AccountShellRoute _fromState(GoRouterState state) =>

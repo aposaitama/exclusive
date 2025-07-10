@@ -210,6 +210,14 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Privacy-policy-01-1.png
+  AssetGenImage get privacyPolicy011 =>
+      const AssetGenImage('assets/images/Privacy-policy-01-1.png');
+
+  /// File path: assets/images/Terms-of-Service-.jpg
+  AssetGenImage get termsOfService =>
+      const AssetGenImage('assets/images/Terms-of-Service-.jpg');
+
   /// File path: assets/images/apple_logo.png
   AssetGenImage get appleLogo =>
       const AssetGenImage('assets/images/apple_logo.png');
@@ -217,6 +225,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/auth_side.png
   AssetGenImage get authSide =>
       const AssetGenImage('assets/images/auth_side.png');
+
+  /// File path: assets/images/blog5eaaa5cb18719_nativemsg-faq.jpg
+  AssetGenImage get blog5eaaa5cb18719NativemsgFaq =>
+      const AssetGenImage('assets/images/blog5eaaa5cb18719_nativemsg-faq.jpg');
 
   /// File path: assets/images/card_logos.png
   AssetGenImage get cardLogos =>
@@ -266,8 +278,11 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        privacyPolicy011,
+        termsOfService,
         appleLogo,
         authSide,
+        blog5eaaa5cb18719NativemsgFaq,
         cardLogos,
         downloadAppstore,
         downloadpPlay,

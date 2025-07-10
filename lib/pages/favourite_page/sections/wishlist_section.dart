@@ -114,10 +114,9 @@ class _WishlistSectionState extends State<WishlistSection> {
             height: 60.0,
           ),
           SizedBox(
-            height: 350.0,
+            height: 370.0,
             width: (MediaQuery.of(context).size.width / 2) + 585.0,
             child: ListView.separated(
-              // controller: _scrollController,
               scrollDirection: Axis.horizontal,
               itemCount: widget.wishListProducts.length,
               separatorBuilder: (_, __) => const SizedBox(

@@ -33,6 +33,15 @@ mixin _$AccountEvent {
     required TResult Function(String newAddressDocumentID) setDefaultAddress,
     required TResult Function() authenticateUser,
     required TResult Function() clearState,
+    required TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)
+        createProductReview,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +56,15 @@ mixin _$AccountEvent {
     TResult? Function(String newAddressDocumentID)? setDefaultAddress,
     TResult? Function()? authenticateUser,
     TResult? Function()? clearState,
+    TResult? Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +79,15 @@ mixin _$AccountEvent {
     TResult Function(String newAddressDocumentID)? setDefaultAddress,
     TResult Function()? authenticateUser,
     TResult Function()? clearState,
+    TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -75,6 +102,7 @@ mixin _$AccountEvent {
         setDefaultAddress,
     required TResult Function(AuthenticateUserEvent value) authenticateUser,
     required TResult Function(ClearAccountStateEvent value) clearState,
+    required TResult Function(CreateReviewEvent value) createProductReview,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +115,7 @@ mixin _$AccountEvent {
     TResult? Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult? Function(AuthenticateUserEvent value)? authenticateUser,
     TResult? Function(ClearAccountStateEvent value)? clearState,
+    TResult? Function(CreateReviewEvent value)? createProductReview,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -99,6 +128,7 @@ mixin _$AccountEvent {
     TResult Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult Function(AuthenticateUserEvent value)? authenticateUser,
     TResult Function(ClearAccountStateEvent value)? clearState,
+    TResult Function(CreateReviewEvent value)? createProductReview,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -181,6 +211,15 @@ class _$GetUserDataEventImpl implements GetUserDataEvent {
     required TResult Function(String newAddressDocumentID) setDefaultAddress,
     required TResult Function() authenticateUser,
     required TResult Function() clearState,
+    required TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)
+        createProductReview,
   }) {
     return getUserData();
   }
@@ -198,6 +237,15 @@ class _$GetUserDataEventImpl implements GetUserDataEvent {
     TResult? Function(String newAddressDocumentID)? setDefaultAddress,
     TResult? Function()? authenticateUser,
     TResult? Function()? clearState,
+    TResult? Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
   }) {
     return getUserData?.call();
   }
@@ -215,6 +263,15 @@ class _$GetUserDataEventImpl implements GetUserDataEvent {
     TResult Function(String newAddressDocumentID)? setDefaultAddress,
     TResult Function()? authenticateUser,
     TResult Function()? clearState,
+    TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
     required TResult orElse(),
   }) {
     if (getUserData != null) {
@@ -235,6 +292,7 @@ class _$GetUserDataEventImpl implements GetUserDataEvent {
         setDefaultAddress,
     required TResult Function(AuthenticateUserEvent value) authenticateUser,
     required TResult Function(ClearAccountStateEvent value) clearState,
+    required TResult Function(CreateReviewEvent value) createProductReview,
   }) {
     return getUserData(this);
   }
@@ -250,6 +308,7 @@ class _$GetUserDataEventImpl implements GetUserDataEvent {
     TResult? Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult? Function(AuthenticateUserEvent value)? authenticateUser,
     TResult? Function(ClearAccountStateEvent value)? clearState,
+    TResult? Function(CreateReviewEvent value)? createProductReview,
   }) {
     return getUserData?.call(this);
   }
@@ -265,6 +324,7 @@ class _$GetUserDataEventImpl implements GetUserDataEvent {
     TResult Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult Function(AuthenticateUserEvent value)? authenticateUser,
     TResult Function(ClearAccountStateEvent value)? clearState,
+    TResult Function(CreateReviewEvent value)? createProductReview,
     required TResult orElse(),
   }) {
     if (getUserData != null) {
@@ -334,6 +394,15 @@ class _$LogoutUserEventImpl implements LogoutUserEvent {
     required TResult Function(String newAddressDocumentID) setDefaultAddress,
     required TResult Function() authenticateUser,
     required TResult Function() clearState,
+    required TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)
+        createProductReview,
   }) {
     return logoutUser();
   }
@@ -351,6 +420,15 @@ class _$LogoutUserEventImpl implements LogoutUserEvent {
     TResult? Function(String newAddressDocumentID)? setDefaultAddress,
     TResult? Function()? authenticateUser,
     TResult? Function()? clearState,
+    TResult? Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
   }) {
     return logoutUser?.call();
   }
@@ -368,6 +446,15 @@ class _$LogoutUserEventImpl implements LogoutUserEvent {
     TResult Function(String newAddressDocumentID)? setDefaultAddress,
     TResult Function()? authenticateUser,
     TResult Function()? clearState,
+    TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
     required TResult orElse(),
   }) {
     if (logoutUser != null) {
@@ -388,6 +475,7 @@ class _$LogoutUserEventImpl implements LogoutUserEvent {
         setDefaultAddress,
     required TResult Function(AuthenticateUserEvent value) authenticateUser,
     required TResult Function(ClearAccountStateEvent value) clearState,
+    required TResult Function(CreateReviewEvent value) createProductReview,
   }) {
     return logoutUser(this);
   }
@@ -403,6 +491,7 @@ class _$LogoutUserEventImpl implements LogoutUserEvent {
     TResult? Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult? Function(AuthenticateUserEvent value)? authenticateUser,
     TResult? Function(ClearAccountStateEvent value)? clearState,
+    TResult? Function(CreateReviewEvent value)? createProductReview,
   }) {
     return logoutUser?.call(this);
   }
@@ -418,6 +507,7 @@ class _$LogoutUserEventImpl implements LogoutUserEvent {
     TResult Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult Function(AuthenticateUserEvent value)? authenticateUser,
     TResult Function(ClearAccountStateEvent value)? clearState,
+    TResult Function(CreateReviewEvent value)? createProductReview,
     required TResult orElse(),
   }) {
     if (logoutUser != null) {
@@ -521,6 +611,15 @@ class _$EditUserDataEventImpl implements EditUserDataEvent {
     required TResult Function(String newAddressDocumentID) setDefaultAddress,
     required TResult Function() authenticateUser,
     required TResult Function() clearState,
+    required TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)
+        createProductReview,
   }) {
     return editUserData(data);
   }
@@ -538,6 +637,15 @@ class _$EditUserDataEventImpl implements EditUserDataEvent {
     TResult? Function(String newAddressDocumentID)? setDefaultAddress,
     TResult? Function()? authenticateUser,
     TResult? Function()? clearState,
+    TResult? Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
   }) {
     return editUserData?.call(data);
   }
@@ -555,6 +663,15 @@ class _$EditUserDataEventImpl implements EditUserDataEvent {
     TResult Function(String newAddressDocumentID)? setDefaultAddress,
     TResult Function()? authenticateUser,
     TResult Function()? clearState,
+    TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
     required TResult orElse(),
   }) {
     if (editUserData != null) {
@@ -575,6 +692,7 @@ class _$EditUserDataEventImpl implements EditUserDataEvent {
         setDefaultAddress,
     required TResult Function(AuthenticateUserEvent value) authenticateUser,
     required TResult Function(ClearAccountStateEvent value) clearState,
+    required TResult Function(CreateReviewEvent value) createProductReview,
   }) {
     return editUserData(this);
   }
@@ -590,6 +708,7 @@ class _$EditUserDataEventImpl implements EditUserDataEvent {
     TResult? Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult? Function(AuthenticateUserEvent value)? authenticateUser,
     TResult? Function(ClearAccountStateEvent value)? clearState,
+    TResult? Function(CreateReviewEvent value)? createProductReview,
   }) {
     return editUserData?.call(this);
   }
@@ -605,6 +724,7 @@ class _$EditUserDataEventImpl implements EditUserDataEvent {
     TResult Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult Function(AuthenticateUserEvent value)? authenticateUser,
     TResult Function(ClearAccountStateEvent value)? clearState,
+    TResult Function(CreateReviewEvent value)? createProductReview,
     required TResult orElse(),
   }) {
     if (editUserData != null) {
@@ -764,6 +884,15 @@ class _$AddUserAddressEventImpl implements AddUserAddressEvent {
     required TResult Function(String newAddressDocumentID) setDefaultAddress,
     required TResult Function() authenticateUser,
     required TResult Function() clearState,
+    required TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)
+        createProductReview,
   }) {
     return addAddress(
         firstName, lastName, streetAddress, city, phoneNumber, emailAddress);
@@ -782,6 +911,15 @@ class _$AddUserAddressEventImpl implements AddUserAddressEvent {
     TResult? Function(String newAddressDocumentID)? setDefaultAddress,
     TResult? Function()? authenticateUser,
     TResult? Function()? clearState,
+    TResult? Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
   }) {
     return addAddress?.call(
         firstName, lastName, streetAddress, city, phoneNumber, emailAddress);
@@ -800,6 +938,15 @@ class _$AddUserAddressEventImpl implements AddUserAddressEvent {
     TResult Function(String newAddressDocumentID)? setDefaultAddress,
     TResult Function()? authenticateUser,
     TResult Function()? clearState,
+    TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
     required TResult orElse(),
   }) {
     if (addAddress != null) {
@@ -821,6 +968,7 @@ class _$AddUserAddressEventImpl implements AddUserAddressEvent {
         setDefaultAddress,
     required TResult Function(AuthenticateUserEvent value) authenticateUser,
     required TResult Function(ClearAccountStateEvent value) clearState,
+    required TResult Function(CreateReviewEvent value) createProductReview,
   }) {
     return addAddress(this);
   }
@@ -836,6 +984,7 @@ class _$AddUserAddressEventImpl implements AddUserAddressEvent {
     TResult? Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult? Function(AuthenticateUserEvent value)? authenticateUser,
     TResult? Function(ClearAccountStateEvent value)? clearState,
+    TResult? Function(CreateReviewEvent value)? createProductReview,
   }) {
     return addAddress?.call(this);
   }
@@ -851,6 +1000,7 @@ class _$AddUserAddressEventImpl implements AddUserAddressEvent {
     TResult Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult Function(AuthenticateUserEvent value)? authenticateUser,
     TResult Function(ClearAccountStateEvent value)? clearState,
+    TResult Function(CreateReviewEvent value)? createProductReview,
     required TResult orElse(),
   }) {
     if (addAddress != null) {
@@ -940,6 +1090,15 @@ class _$GetUserAddressEventImpl implements GetUserAddressEvent {
     required TResult Function(String newAddressDocumentID) setDefaultAddress,
     required TResult Function() authenticateUser,
     required TResult Function() clearState,
+    required TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)
+        createProductReview,
   }) {
     return getAddress();
   }
@@ -957,6 +1116,15 @@ class _$GetUserAddressEventImpl implements GetUserAddressEvent {
     TResult? Function(String newAddressDocumentID)? setDefaultAddress,
     TResult? Function()? authenticateUser,
     TResult? Function()? clearState,
+    TResult? Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
   }) {
     return getAddress?.call();
   }
@@ -974,6 +1142,15 @@ class _$GetUserAddressEventImpl implements GetUserAddressEvent {
     TResult Function(String newAddressDocumentID)? setDefaultAddress,
     TResult Function()? authenticateUser,
     TResult Function()? clearState,
+    TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
     required TResult orElse(),
   }) {
     if (getAddress != null) {
@@ -994,6 +1171,7 @@ class _$GetUserAddressEventImpl implements GetUserAddressEvent {
         setDefaultAddress,
     required TResult Function(AuthenticateUserEvent value) authenticateUser,
     required TResult Function(ClearAccountStateEvent value) clearState,
+    required TResult Function(CreateReviewEvent value) createProductReview,
   }) {
     return getAddress(this);
   }
@@ -1009,6 +1187,7 @@ class _$GetUserAddressEventImpl implements GetUserAddressEvent {
     TResult? Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult? Function(AuthenticateUserEvent value)? authenticateUser,
     TResult? Function(ClearAccountStateEvent value)? clearState,
+    TResult? Function(CreateReviewEvent value)? createProductReview,
   }) {
     return getAddress?.call(this);
   }
@@ -1024,6 +1203,7 @@ class _$GetUserAddressEventImpl implements GetUserAddressEvent {
     TResult Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult Function(AuthenticateUserEvent value)? authenticateUser,
     TResult Function(ClearAccountStateEvent value)? clearState,
+    TResult Function(CreateReviewEvent value)? createProductReview,
     required TResult orElse(),
   }) {
     if (getAddress != null) {
@@ -1124,6 +1304,15 @@ class _$SetDefaultUserAddressEventImpl implements SetDefaultUserAddressEvent {
     required TResult Function(String newAddressDocumentID) setDefaultAddress,
     required TResult Function() authenticateUser,
     required TResult Function() clearState,
+    required TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)
+        createProductReview,
   }) {
     return setDefaultAddress(newAddressDocumentID);
   }
@@ -1141,6 +1330,15 @@ class _$SetDefaultUserAddressEventImpl implements SetDefaultUserAddressEvent {
     TResult? Function(String newAddressDocumentID)? setDefaultAddress,
     TResult? Function()? authenticateUser,
     TResult? Function()? clearState,
+    TResult? Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
   }) {
     return setDefaultAddress?.call(newAddressDocumentID);
   }
@@ -1158,6 +1356,15 @@ class _$SetDefaultUserAddressEventImpl implements SetDefaultUserAddressEvent {
     TResult Function(String newAddressDocumentID)? setDefaultAddress,
     TResult Function()? authenticateUser,
     TResult Function()? clearState,
+    TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
     required TResult orElse(),
   }) {
     if (setDefaultAddress != null) {
@@ -1178,6 +1385,7 @@ class _$SetDefaultUserAddressEventImpl implements SetDefaultUserAddressEvent {
         setDefaultAddress,
     required TResult Function(AuthenticateUserEvent value) authenticateUser,
     required TResult Function(ClearAccountStateEvent value) clearState,
+    required TResult Function(CreateReviewEvent value) createProductReview,
   }) {
     return setDefaultAddress(this);
   }
@@ -1193,6 +1401,7 @@ class _$SetDefaultUserAddressEventImpl implements SetDefaultUserAddressEvent {
     TResult? Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult? Function(AuthenticateUserEvent value)? authenticateUser,
     TResult? Function(ClearAccountStateEvent value)? clearState,
+    TResult? Function(CreateReviewEvent value)? createProductReview,
   }) {
     return setDefaultAddress?.call(this);
   }
@@ -1208,6 +1417,7 @@ class _$SetDefaultUserAddressEventImpl implements SetDefaultUserAddressEvent {
     TResult Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult Function(AuthenticateUserEvent value)? authenticateUser,
     TResult Function(ClearAccountStateEvent value)? clearState,
+    TResult Function(CreateReviewEvent value)? createProductReview,
     required TResult orElse(),
   }) {
     if (setDefaultAddress != null) {
@@ -1288,6 +1498,15 @@ class _$AuthenticateUserEventImpl implements AuthenticateUserEvent {
     required TResult Function(String newAddressDocumentID) setDefaultAddress,
     required TResult Function() authenticateUser,
     required TResult Function() clearState,
+    required TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)
+        createProductReview,
   }) {
     return authenticateUser();
   }
@@ -1305,6 +1524,15 @@ class _$AuthenticateUserEventImpl implements AuthenticateUserEvent {
     TResult? Function(String newAddressDocumentID)? setDefaultAddress,
     TResult? Function()? authenticateUser,
     TResult? Function()? clearState,
+    TResult? Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
   }) {
     return authenticateUser?.call();
   }
@@ -1322,6 +1550,15 @@ class _$AuthenticateUserEventImpl implements AuthenticateUserEvent {
     TResult Function(String newAddressDocumentID)? setDefaultAddress,
     TResult Function()? authenticateUser,
     TResult Function()? clearState,
+    TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
     required TResult orElse(),
   }) {
     if (authenticateUser != null) {
@@ -1342,6 +1579,7 @@ class _$AuthenticateUserEventImpl implements AuthenticateUserEvent {
         setDefaultAddress,
     required TResult Function(AuthenticateUserEvent value) authenticateUser,
     required TResult Function(ClearAccountStateEvent value) clearState,
+    required TResult Function(CreateReviewEvent value) createProductReview,
   }) {
     return authenticateUser(this);
   }
@@ -1357,6 +1595,7 @@ class _$AuthenticateUserEventImpl implements AuthenticateUserEvent {
     TResult? Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult? Function(AuthenticateUserEvent value)? authenticateUser,
     TResult? Function(ClearAccountStateEvent value)? clearState,
+    TResult? Function(CreateReviewEvent value)? createProductReview,
   }) {
     return authenticateUser?.call(this);
   }
@@ -1372,6 +1611,7 @@ class _$AuthenticateUserEventImpl implements AuthenticateUserEvent {
     TResult Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult Function(AuthenticateUserEvent value)? authenticateUser,
     TResult Function(ClearAccountStateEvent value)? clearState,
+    TResult Function(CreateReviewEvent value)? createProductReview,
     required TResult orElse(),
   }) {
     if (authenticateUser != null) {
@@ -1444,6 +1684,15 @@ class _$ClearAccountStateEventImpl implements ClearAccountStateEvent {
     required TResult Function(String newAddressDocumentID) setDefaultAddress,
     required TResult Function() authenticateUser,
     required TResult Function() clearState,
+    required TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)
+        createProductReview,
   }) {
     return clearState();
   }
@@ -1461,6 +1710,15 @@ class _$ClearAccountStateEventImpl implements ClearAccountStateEvent {
     TResult? Function(String newAddressDocumentID)? setDefaultAddress,
     TResult? Function()? authenticateUser,
     TResult? Function()? clearState,
+    TResult? Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
   }) {
     return clearState?.call();
   }
@@ -1478,6 +1736,15 @@ class _$ClearAccountStateEventImpl implements ClearAccountStateEvent {
     TResult Function(String newAddressDocumentID)? setDefaultAddress,
     TResult Function()? authenticateUser,
     TResult Function()? clearState,
+    TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
     required TResult orElse(),
   }) {
     if (clearState != null) {
@@ -1498,6 +1765,7 @@ class _$ClearAccountStateEventImpl implements ClearAccountStateEvent {
         setDefaultAddress,
     required TResult Function(AuthenticateUserEvent value) authenticateUser,
     required TResult Function(ClearAccountStateEvent value) clearState,
+    required TResult Function(CreateReviewEvent value) createProductReview,
   }) {
     return clearState(this);
   }
@@ -1513,6 +1781,7 @@ class _$ClearAccountStateEventImpl implements ClearAccountStateEvent {
     TResult? Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult? Function(AuthenticateUserEvent value)? authenticateUser,
     TResult? Function(ClearAccountStateEvent value)? clearState,
+    TResult? Function(CreateReviewEvent value)? createProductReview,
   }) {
     return clearState?.call(this);
   }
@@ -1528,6 +1797,7 @@ class _$ClearAccountStateEventImpl implements ClearAccountStateEvent {
     TResult Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
     TResult Function(AuthenticateUserEvent value)? authenticateUser,
     TResult Function(ClearAccountStateEvent value)? clearState,
+    TResult Function(CreateReviewEvent value)? createProductReview,
     required TResult orElse(),
   }) {
     if (clearState != null) {
@@ -1539,4 +1809,308 @@ class _$ClearAccountStateEventImpl implements ClearAccountStateEvent {
 
 abstract class ClearAccountStateEvent implements AccountEvent {
   const factory ClearAccountStateEvent() = _$ClearAccountStateEventImpl;
+}
+
+/// @nodoc
+abstract class _$$CreateReviewEventImplCopyWith<$Res> {
+  factory _$$CreateReviewEventImplCopyWith(_$CreateReviewEventImpl value,
+          $Res Function(_$CreateReviewEventImpl) then) =
+      __$$CreateReviewEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String productDocumentID,
+      String productID,
+      String reviewText,
+      String userName,
+      double rating,
+      double previusRating,
+      int previusRatingCount});
+}
+
+/// @nodoc
+class __$$CreateReviewEventImplCopyWithImpl<$Res>
+    extends _$AccountEventCopyWithImpl<$Res, _$CreateReviewEventImpl>
+    implements _$$CreateReviewEventImplCopyWith<$Res> {
+  __$$CreateReviewEventImplCopyWithImpl(_$CreateReviewEventImpl _value,
+      $Res Function(_$CreateReviewEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AccountEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? productDocumentID = null,
+    Object? productID = null,
+    Object? reviewText = null,
+    Object? userName = null,
+    Object? rating = null,
+    Object? previusRating = null,
+    Object? previusRatingCount = null,
+  }) {
+    return _then(_$CreateReviewEventImpl(
+      null == productDocumentID
+          ? _value.productDocumentID
+          : productDocumentID // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == productID
+          ? _value.productID
+          : productID // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == reviewText
+          ? _value.reviewText
+          : reviewText // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      null == previusRating
+          ? _value.previusRating
+          : previusRating // ignore: cast_nullable_to_non_nullable
+              as double,
+      null == previusRatingCount
+          ? _value.previusRatingCount
+          : previusRatingCount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreateReviewEventImpl implements CreateReviewEvent {
+  const _$CreateReviewEventImpl(
+      this.productDocumentID,
+      this.productID,
+      this.reviewText,
+      this.userName,
+      this.rating,
+      this.previusRating,
+      this.previusRatingCount);
+
+  @override
+  final String productDocumentID;
+  @override
+  final String productID;
+  @override
+  final String reviewText;
+  @override
+  final String userName;
+  @override
+  final double rating;
+  @override
+  final double previusRating;
+  @override
+  final int previusRatingCount;
+
+  @override
+  String toString() {
+    return 'AccountEvent.createProductReview(productDocumentID: $productDocumentID, productID: $productID, reviewText: $reviewText, userName: $userName, rating: $rating, previusRating: $previusRating, previusRatingCount: $previusRatingCount)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateReviewEventImpl &&
+            (identical(other.productDocumentID, productDocumentID) ||
+                other.productDocumentID == productDocumentID) &&
+            (identical(other.productID, productID) ||
+                other.productID == productID) &&
+            (identical(other.reviewText, reviewText) ||
+                other.reviewText == reviewText) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.previusRating, previusRating) ||
+                other.previusRating == previusRating) &&
+            (identical(other.previusRatingCount, previusRatingCount) ||
+                other.previusRatingCount == previusRatingCount));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, productDocumentID, productID,
+      reviewText, userName, rating, previusRating, previusRatingCount);
+
+  /// Create a copy of AccountEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateReviewEventImplCopyWith<_$CreateReviewEventImpl> get copyWith =>
+      __$$CreateReviewEventImplCopyWithImpl<_$CreateReviewEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getUserData,
+    required TResult Function() logoutUser,
+    required TResult Function(Map<String, dynamic> data) editUserData,
+    required TResult Function(
+            String firstName,
+            String lastName,
+            String streetAddress,
+            String city,
+            String phoneNumber,
+            String emailAddress)
+        addAddress,
+    required TResult Function() getAddress,
+    required TResult Function(String newAddressDocumentID) setDefaultAddress,
+    required TResult Function() authenticateUser,
+    required TResult Function() clearState,
+    required TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)
+        createProductReview,
+  }) {
+    return createProductReview(productDocumentID, productID, reviewText,
+        userName, rating, previusRating, previusRatingCount);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getUserData,
+    TResult? Function()? logoutUser,
+    TResult? Function(Map<String, dynamic> data)? editUserData,
+    TResult? Function(String firstName, String lastName, String streetAddress,
+            String city, String phoneNumber, String emailAddress)?
+        addAddress,
+    TResult? Function()? getAddress,
+    TResult? Function(String newAddressDocumentID)? setDefaultAddress,
+    TResult? Function()? authenticateUser,
+    TResult? Function()? clearState,
+    TResult? Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
+  }) {
+    return createProductReview?.call(productDocumentID, productID, reviewText,
+        userName, rating, previusRating, previusRatingCount);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getUserData,
+    TResult Function()? logoutUser,
+    TResult Function(Map<String, dynamic> data)? editUserData,
+    TResult Function(String firstName, String lastName, String streetAddress,
+            String city, String phoneNumber, String emailAddress)?
+        addAddress,
+    TResult Function()? getAddress,
+    TResult Function(String newAddressDocumentID)? setDefaultAddress,
+    TResult Function()? authenticateUser,
+    TResult Function()? clearState,
+    TResult Function(
+            String productDocumentID,
+            String productID,
+            String reviewText,
+            String userName,
+            double rating,
+            double previusRating,
+            int previusRatingCount)?
+        createProductReview,
+    required TResult orElse(),
+  }) {
+    if (createProductReview != null) {
+      return createProductReview(productDocumentID, productID, reviewText,
+          userName, rating, previusRating, previusRatingCount);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetUserDataEvent value) getUserData,
+    required TResult Function(LogoutUserEvent value) logoutUser,
+    required TResult Function(EditUserDataEvent value) editUserData,
+    required TResult Function(AddUserAddressEvent value) addAddress,
+    required TResult Function(GetUserAddressEvent value) getAddress,
+    required TResult Function(SetDefaultUserAddressEvent value)
+        setDefaultAddress,
+    required TResult Function(AuthenticateUserEvent value) authenticateUser,
+    required TResult Function(ClearAccountStateEvent value) clearState,
+    required TResult Function(CreateReviewEvent value) createProductReview,
+  }) {
+    return createProductReview(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetUserDataEvent value)? getUserData,
+    TResult? Function(LogoutUserEvent value)? logoutUser,
+    TResult? Function(EditUserDataEvent value)? editUserData,
+    TResult? Function(AddUserAddressEvent value)? addAddress,
+    TResult? Function(GetUserAddressEvent value)? getAddress,
+    TResult? Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
+    TResult? Function(AuthenticateUserEvent value)? authenticateUser,
+    TResult? Function(ClearAccountStateEvent value)? clearState,
+    TResult? Function(CreateReviewEvent value)? createProductReview,
+  }) {
+    return createProductReview?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetUserDataEvent value)? getUserData,
+    TResult Function(LogoutUserEvent value)? logoutUser,
+    TResult Function(EditUserDataEvent value)? editUserData,
+    TResult Function(AddUserAddressEvent value)? addAddress,
+    TResult Function(GetUserAddressEvent value)? getAddress,
+    TResult Function(SetDefaultUserAddressEvent value)? setDefaultAddress,
+    TResult Function(AuthenticateUserEvent value)? authenticateUser,
+    TResult Function(ClearAccountStateEvent value)? clearState,
+    TResult Function(CreateReviewEvent value)? createProductReview,
+    required TResult orElse(),
+  }) {
+    if (createProductReview != null) {
+      return createProductReview(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CreateReviewEvent implements AccountEvent {
+  const factory CreateReviewEvent(
+      final String productDocumentID,
+      final String productID,
+      final String reviewText,
+      final String userName,
+      final double rating,
+      final double previusRating,
+      final int previusRatingCount) = _$CreateReviewEventImpl;
+
+  String get productDocumentID;
+  String get productID;
+  String get reviewText;
+  String get userName;
+  double get rating;
+  double get previusRating;
+  int get previusRatingCount;
+
+  /// Create a copy of AccountEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreateReviewEventImplCopyWith<_$CreateReviewEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

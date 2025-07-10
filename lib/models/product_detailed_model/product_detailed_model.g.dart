@@ -25,6 +25,9 @@ _$ProductDetailedModelImpl _$$ProductDetailedModelImplFromJson(
       productSizeList: (json['productSizeList'] as List<dynamic>?)
           ?.map((e) => ProductSizeModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      reviews: (json['reviews'] as List<dynamic>)
+          .map((e) => ProductReviewsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$ProductDetailedModelImplToJson(
@@ -42,6 +45,7 @@ Map<String, dynamic> _$$ProductDetailedModelImplToJson(
       'saleCount': instance.saleCount,
       'product_colors': instance.product_colors,
       'productSizeList': instance.productSizeList,
+      'reviews': instance.reviews,
     };
 
 _$ProductSizeModelImpl _$$ProductSizeModelImplFromJson(
@@ -56,4 +60,22 @@ Map<String, dynamic> _$$ProductSizeModelImplToJson(
     <String, dynamic>{
       'size': instance.size,
       'isAvaliable': instance.isAvaliable,
+    };
+
+_$ProductReviewsModelImpl _$$ProductReviewsModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ProductReviewsModelImpl(
+      userName: json['userName'] as String,
+      reviewText: json['reviewText'] as String,
+      userID: json['userID'] as String,
+      rating: (json['rating'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$$ProductReviewsModelImplToJson(
+        _$ProductReviewsModelImpl instance) =>
+    <String, dynamic>{
+      'userName': instance.userName,
+      'reviewText': instance.reviewText,
+      'userID': instance.userID,
+      'rating': instance.rating,
     };

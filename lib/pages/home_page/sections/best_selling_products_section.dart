@@ -102,6 +102,7 @@ class _BestSellingProductsSectionState
                   height: isMobileOrTablet ? (itemWidth + 110) : 380,
                   width: containerWidth,
                   child: ListView.separated(
+                    physics: NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: widget.bestSellingProducts.length,
                     separatorBuilder: (_, __) => SizedBox(width: itemSpacing),

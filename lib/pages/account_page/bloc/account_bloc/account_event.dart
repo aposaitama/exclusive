@@ -29,4 +29,13 @@ class AccountEvent with _$AccountEvent {
   const factory AccountEvent.authenticateUser() = AuthenticateUserEvent;
 
   const factory AccountEvent.clearState() = ClearAccountStateEvent;
+  const factory AccountEvent.createProductReview(
+    String productDocumentID,
+    String productID,
+    String reviewText,
+    String userName,
+    double rating,
+    double previusRating,
+    int previusRatingCount,
+  ) = CreateReviewEvent;
 }

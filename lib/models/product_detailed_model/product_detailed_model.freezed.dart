@@ -34,6 +34,7 @@ mixin _$ProductDetailedModel {
       throw _privateConstructorUsedError;
   List<ProductSizeModel>? get productSizeList =>
       throw _privateConstructorUsedError;
+  List<ProductReviewsModel> get reviews => throw _privateConstructorUsedError;
 
   /// Serializes this ProductDetailedModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -63,7 +64,8 @@ abstract class $ProductDetailedModelCopyWith<$Res> {
       double? salePercent,
       int saleCount,
       List<ProductColorModel> product_colors,
-      List<ProductSizeModel>? productSizeList});
+      List<ProductSizeModel>? productSizeList,
+      List<ProductReviewsModel> reviews});
 }
 
 /// @nodoc
@@ -94,6 +96,7 @@ class _$ProductDetailedModelCopyWithImpl<$Res,
     Object? saleCount = null,
     Object? product_colors = null,
     Object? productSizeList = freezed,
+    Object? reviews = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -144,6 +147,10 @@ class _$ProductDetailedModelCopyWithImpl<$Res,
           ? _value.productSizeList
           : productSizeList // ignore: cast_nullable_to_non_nullable
               as List<ProductSizeModel>?,
+      reviews: null == reviews
+          ? _value.reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<ProductReviewsModel>,
     ) as $Val);
   }
 }
@@ -168,7 +175,8 @@ abstract class _$$ProductDetailedModelImplCopyWith<$Res>
       double? salePercent,
       int saleCount,
       List<ProductColorModel> product_colors,
-      List<ProductSizeModel>? productSizeList});
+      List<ProductSizeModel>? productSizeList,
+      List<ProductReviewsModel> reviews});
 }
 
 /// @nodoc
@@ -196,6 +204,7 @@ class __$$ProductDetailedModelImplCopyWithImpl<$Res>
     Object? saleCount = null,
     Object? product_colors = null,
     Object? productSizeList = freezed,
+    Object? reviews = null,
   }) {
     return _then(_$ProductDetailedModelImpl(
       id: null == id
@@ -246,6 +255,10 @@ class __$$ProductDetailedModelImplCopyWithImpl<$Res>
           ? _value._productSizeList
           : productSizeList // ignore: cast_nullable_to_non_nullable
               as List<ProductSizeModel>?,
+      reviews: null == reviews
+          ? _value._reviews
+          : reviews // ignore: cast_nullable_to_non_nullable
+              as List<ProductReviewsModel>,
     ));
   }
 }
@@ -265,9 +278,11 @@ class _$ProductDetailedModelImpl implements _ProductDetailedModel {
       this.salePercent,
       required this.saleCount,
       required final List<ProductColorModel> product_colors,
-      final List<ProductSizeModel>? productSizeList})
+      final List<ProductSizeModel>? productSizeList,
+      required final List<ProductReviewsModel> reviews})
       : _product_colors = product_colors,
-        _productSizeList = productSizeList;
+        _productSizeList = productSizeList,
+        _reviews = reviews;
 
   factory _$ProductDetailedModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductDetailedModelImplFromJson(json);
@@ -310,9 +325,17 @@ class _$ProductDetailedModelImpl implements _ProductDetailedModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<ProductReviewsModel> _reviews;
+  @override
+  List<ProductReviewsModel> get reviews {
+    if (_reviews is EqualUnmodifiableListView) return _reviews;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reviews);
+  }
+
   @override
   String toString() {
-    return 'ProductDetailedModel(id: $id, documentId: $documentId, productName: $productName, productDescription: $productDescription, productPrice: $productPrice, productOriginPrice: $productOriginPrice, ratingCount: $ratingCount, totalRating: $totalRating, salePercent: $salePercent, saleCount: $saleCount, product_colors: $product_colors, productSizeList: $productSizeList)';
+    return 'ProductDetailedModel(id: $id, documentId: $documentId, productName: $productName, productDescription: $productDescription, productPrice: $productPrice, productOriginPrice: $productOriginPrice, ratingCount: $ratingCount, totalRating: $totalRating, salePercent: $salePercent, saleCount: $saleCount, product_colors: $product_colors, productSizeList: $productSizeList, reviews: $reviews)';
   }
 
   @override
@@ -342,7 +365,8 @@ class _$ProductDetailedModelImpl implements _ProductDetailedModel {
             const DeepCollectionEquality()
                 .equals(other._product_colors, _product_colors) &&
             const DeepCollectionEquality()
-                .equals(other._productSizeList, _productSizeList));
+                .equals(other._productSizeList, _productSizeList) &&
+            const DeepCollectionEquality().equals(other._reviews, _reviews));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -360,7 +384,8 @@ class _$ProductDetailedModelImpl implements _ProductDetailedModel {
       salePercent,
       saleCount,
       const DeepCollectionEquality().hash(_product_colors),
-      const DeepCollectionEquality().hash(_productSizeList));
+      const DeepCollectionEquality().hash(_productSizeList),
+      const DeepCollectionEquality().hash(_reviews));
 
   /// Create a copy of ProductDetailedModel
   /// with the given fields replaced by the non-null parameter values.
@@ -393,7 +418,8 @@ abstract class _ProductDetailedModel implements ProductDetailedModel {
           final double? salePercent,
           required final int saleCount,
           required final List<ProductColorModel> product_colors,
-          final List<ProductSizeModel>? productSizeList}) =
+          final List<ProductSizeModel>? productSizeList,
+          required final List<ProductReviewsModel> reviews}) =
       _$ProductDetailedModelImpl;
 
   factory _ProductDetailedModel.fromJson(Map<String, dynamic> json) =
@@ -423,6 +449,8 @@ abstract class _ProductDetailedModel implements ProductDetailedModel {
   List<ProductColorModel> get product_colors;
   @override
   List<ProductSizeModel>? get productSizeList;
+  @override
+  List<ProductReviewsModel> get reviews;
 
   /// Create a copy of ProductDetailedModel
   /// with the given fields replaced by the non-null parameter values.
@@ -598,5 +626,214 @@ abstract class _ProductSizeModel implements ProductSizeModel {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProductSizeModelImplCopyWith<_$ProductSizeModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ProductReviewsModel _$ProductReviewsModelFromJson(Map<String, dynamic> json) {
+  return _ProductReviewsModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ProductReviewsModel {
+  String get userName => throw _privateConstructorUsedError;
+  String get reviewText => throw _privateConstructorUsedError;
+  String get userID => throw _privateConstructorUsedError;
+  double get rating => throw _privateConstructorUsedError;
+
+  /// Serializes this ProductReviewsModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of ProductReviewsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ProductReviewsModelCopyWith<ProductReviewsModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProductReviewsModelCopyWith<$Res> {
+  factory $ProductReviewsModelCopyWith(
+          ProductReviewsModel value, $Res Function(ProductReviewsModel) then) =
+      _$ProductReviewsModelCopyWithImpl<$Res, ProductReviewsModel>;
+  @useResult
+  $Res call({String userName, String reviewText, String userID, double rating});
+}
+
+/// @nodoc
+class _$ProductReviewsModelCopyWithImpl<$Res, $Val extends ProductReviewsModel>
+    implements $ProductReviewsModelCopyWith<$Res> {
+  _$ProductReviewsModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ProductReviewsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userName = null,
+    Object? reviewText = null,
+    Object? userID = null,
+    Object? rating = null,
+  }) {
+    return _then(_value.copyWith(
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      reviewText: null == reviewText
+          ? _value.reviewText
+          : reviewText // ignore: cast_nullable_to_non_nullable
+              as String,
+      userID: null == userID
+          ? _value.userID
+          : userID // ignore: cast_nullable_to_non_nullable
+              as String,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ProductReviewsModelImplCopyWith<$Res>
+    implements $ProductReviewsModelCopyWith<$Res> {
+  factory _$$ProductReviewsModelImplCopyWith(_$ProductReviewsModelImpl value,
+          $Res Function(_$ProductReviewsModelImpl) then) =
+      __$$ProductReviewsModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String userName, String reviewText, String userID, double rating});
+}
+
+/// @nodoc
+class __$$ProductReviewsModelImplCopyWithImpl<$Res>
+    extends _$ProductReviewsModelCopyWithImpl<$Res, _$ProductReviewsModelImpl>
+    implements _$$ProductReviewsModelImplCopyWith<$Res> {
+  __$$ProductReviewsModelImplCopyWithImpl(_$ProductReviewsModelImpl _value,
+      $Res Function(_$ProductReviewsModelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProductReviewsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userName = null,
+    Object? reviewText = null,
+    Object? userID = null,
+    Object? rating = null,
+  }) {
+    return _then(_$ProductReviewsModelImpl(
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      reviewText: null == reviewText
+          ? _value.reviewText
+          : reviewText // ignore: cast_nullable_to_non_nullable
+              as String,
+      userID: null == userID
+          ? _value.userID
+          : userID // ignore: cast_nullable_to_non_nullable
+              as String,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ProductReviewsModelImpl implements _ProductReviewsModel {
+  const _$ProductReviewsModelImpl(
+      {required this.userName,
+      required this.reviewText,
+      required this.userID,
+      required this.rating});
+
+  factory _$ProductReviewsModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductReviewsModelImplFromJson(json);
+
+  @override
+  final String userName;
+  @override
+  final String reviewText;
+  @override
+  final String userID;
+  @override
+  final double rating;
+
+  @override
+  String toString() {
+    return 'ProductReviewsModel(userName: $userName, reviewText: $reviewText, userID: $userID, rating: $rating)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProductReviewsModelImpl &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
+            (identical(other.reviewText, reviewText) ||
+                other.reviewText == reviewText) &&
+            (identical(other.userID, userID) || other.userID == userID) &&
+            (identical(other.rating, rating) || other.rating == rating));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, userName, reviewText, userID, rating);
+
+  /// Create a copy of ProductReviewsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProductReviewsModelImplCopyWith<_$ProductReviewsModelImpl> get copyWith =>
+      __$$ProductReviewsModelImplCopyWithImpl<_$ProductReviewsModelImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ProductReviewsModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ProductReviewsModel implements ProductReviewsModel {
+  const factory _ProductReviewsModel(
+      {required final String userName,
+      required final String reviewText,
+      required final String userID,
+      required final double rating}) = _$ProductReviewsModelImpl;
+
+  factory _ProductReviewsModel.fromJson(Map<String, dynamic> json) =
+      _$ProductReviewsModelImpl.fromJson;
+
+  @override
+  String get userName;
+  @override
+  String get reviewText;
+  @override
+  String get userID;
+  @override
+  double get rating;
+
+  /// Create a copy of ProductReviewsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProductReviewsModelImplCopyWith<_$ProductReviewsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

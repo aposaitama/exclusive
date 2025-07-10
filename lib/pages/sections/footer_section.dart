@@ -20,9 +20,9 @@ class FooterSection extends StatelessWidget {
 
     final Map<String, String> supportLinks = {
       'Contact': '/contact',
-      'FAQ': '/faq',
-      'Terms Of Use': '/terms',
-      'Privacy Policy': '/privacy',
+      'FAQ': '/home/faq',
+      'Terms Of Use': '/home/terns_of_use',
+      'Privacy Policy': '/home/privacy_policy',
     };
 
     final responsive = ResponsiveBreakpoints.of(context);
@@ -251,122 +251,16 @@ class FooterSection extends StatelessWidget {
                           ),
                           SizedBox(
                             width: 130.0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Account',
-                                  style: AppFonts.poppingMedium.copyWith(
-                                    fontSize: 20.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 24.0,
-                                ),
-                                Text(
-                                  'My Account',
-                                  style: AppFonts.poppingRegular.copyWith(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16.0,
-                                ),
-                                Text(
-                                  'Login / Register',
-                                  style: AppFonts.poppingRegular.copyWith(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16.0,
-                                ),
-                                Text(
-                                  'Cart',
-                                  style: AppFonts.poppingRegular.copyWith(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16.0,
-                                ),
-                                Text(
-                                  'Wishlist',
-                                  style: AppFonts.poppingRegular.copyWith(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16.0,
-                                ),
-                                Text(
-                                  'Shop',
-                                  style: AppFonts.poppingRegular.copyWith(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                            child: FooterSectionItem(
+                              title: 'Account',
+                              items: accountLinks,
                             ),
                           ),
                           SizedBox(
                             width: 115.0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Quick Link',
-                                  style: AppFonts.poppingMedium.copyWith(
-                                    fontSize: 20.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 24.0,
-                                ),
-                                Text(
-                                  'Privacy Policy',
-                                  style: AppFonts.poppingRegular.copyWith(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16.0,
-                                ),
-                                Text(
-                                  'Terms Of Use',
-                                  style: AppFonts.poppingRegular.copyWith(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16.0,
-                                ),
-                                Text(
-                                  'FAQ',
-                                  style: AppFonts.poppingRegular.copyWith(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16.0,
-                                ),
-                                Text(
-                                  'Contact',
-                                  style: AppFonts.poppingRegular.copyWith(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                            child: FooterSectionItem(
+                              title: 'Quick Link',
+                              items: supportLinks,
                             ),
                           ),
                           SizedBox(

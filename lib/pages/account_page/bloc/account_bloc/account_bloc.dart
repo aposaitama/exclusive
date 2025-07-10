@@ -17,6 +17,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<AddUserAddressEvent>(_addAddress);
     on<GetUserAddressEvent>(_getAddress);
     on<SetDefaultUserAddressEvent>(_setDefaultAddress);
+    on<CreateReviewEvent>(_createReview);
   }
 
   Future<void> _getUserData(
@@ -80,6 +81,41 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           ),
         );
       }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> _createReview(
+    CreateReviewEvent event,
+    Emitter<AccountState> emit,
+  ) async {
+    try {
+      if (state.userInfo == null) {
+        emit(
+          state.copyWith(
+            createReviewStatus: CreateReviewStatus.failure,
+          ),
+        );
+        emit(
+          state.copyWith(
+            createReviewStatus: CreateReviewStatus.initial,
+          ),
+        );
+        return;
+      }
+      await _userService.createReview(
+        event.productDocumentID,
+        event.productID,
+        event.reviewText,
+        event.userName,
+        state.userInfo!.id.toString(),
+        event.rating,
+        event.previusRating,
+        event.previusRatingCount,
+      );
+      emit(state.copyWith(createReviewStatus: CreateReviewStatus.success));
+      emit(state.copyWith(createReviewStatus: CreateReviewStatus.initial));
     } catch (e) {
       rethrow;
     }
